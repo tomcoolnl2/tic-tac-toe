@@ -1,13 +1,19 @@
 import styles from './app.module.scss';
-import NxWelcome from './nx-welcome';
 
 export function App() {
   return (
-    <>
-      <NxWelcome title="app" />
-      <div />
-    </>
-  );
+    <h1>Hello World</h1>
+  )
 }
 
-export default App;
+
+// const WINNING_POSITIONS = [
+//   [1, 1, 1, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 1, 1, 1, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 1, 1, 1],
+//   [1, 0, 0, 1, 0, 0, 1, 0, 0],
+//   [0, 1, 0, 0, 1, 0, 0, 1, 0],
+//   [0, 0, 1, 0, 0, 1, 0, 0, 1],
+//   [1, 0, 0, 0, 1, 0, 0, 0, 1],
+//   [0, 0, 1, 0, 1, 0, 1, 0, 0]
+// ];
