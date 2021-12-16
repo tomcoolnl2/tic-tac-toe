@@ -47,6 +47,7 @@ body {
 }
 
 .container {
+  background-color: var(--beta);
   margin: 5em;
   padding: 5em;
   border-radius: 15px;
@@ -63,7 +64,6 @@ body {
   }
 
   p {
-    color: var(--color-text);
     grid-area: content;
     font-size: 1.1em;
     line-height: 1.8em;
@@ -101,7 +101,7 @@ label:after {
 }
 
 input:checked + label {
-  background: var(--color-headings);
+  background: var(--alpha);
 }
 
 input:checked + label:after {
