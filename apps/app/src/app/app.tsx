@@ -2,7 +2,8 @@
 import { useEffect, useRef } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import { detectPrefersColorScheme } from '../helpers/browser'
-import styles from './app.module.scss';
+import { Toggle } from '../components/toggle/toggle'
+import styles from './app.module.scss'
 
 
 export enum Theme {
@@ -37,10 +38,7 @@ export function App() {
   return (
     <main className={styles['container']}>
       <h1>Tic tac toe</h1>
-      <div className={styles['toggle-container']}>
-        <input type='checkbox' id='switch' name='theme' onChange={handleToggleTheme} checked={theme === Theme.DARK} />
-        <label htmlFor='switch'>Toggle</label>
-      </div>
+      <Toggle checked={theme === Theme.DARK} onChangeHandler={handleToggleTheme} />
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
     </main>
   )
