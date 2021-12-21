@@ -1,6 +1,6 @@
 
 import { render } from '@testing-library/react'
-import { Toggle, ToggleProps } from '../toggle/toggle'
+import { Toggle, Props as ToggleProps } from '../toggle/toggle'
 
 
 describe('Toggle', () => {
