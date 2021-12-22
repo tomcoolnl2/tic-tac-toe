@@ -1,5 +1,5 @@
 
-import { useState, useEffect, MouseEvent } from 'react'
+import { useState, useEffect } from 'react'
 
 export enum GameState {
     CREATED,
@@ -8,15 +8,13 @@ export enum GameState {
 }
 
 type Player = 0 | 1
-type BitBoardCell = 0x0 | 0x1
-type BitBoard = BitBoardCell[]
 
 export interface TicTacToe {
     gameStatus: GameState
     playersBoard: string[]
     player: string
     winner: string | null
-    handleClick: (event: MouseEvent, index: number) => void
+    handleClick: (index: number) => void
     handleStart: (playerNames: string[]) => void
     handleRestart: () => void
 }
@@ -30,12 +28,10 @@ function insertMove<T>(board: T[], index: number, value: T): T[] {
     clone.splice(index, 1, value)
     return clone
 }
-var msk = 0x100 >> 0;
-console.log(msk)
 
 export function useTicTacToe(): TicTacToe {
 
-    const [ bitBoards, setBitBoards] = useState<[BitBoard, BitBoard]>([createBoard(0x0), createBoard(0x0)])
+    const [ bitBoards, setBitBoards] = useState<[number, number]>([0x0, 0x0])
     const [ playersBoard, setPlayersBoard ] = useState<string[]>(createBoard(''))
     const [ currentPlayer, setCurrentPlayer ] = useState<Player>(0)
     const [ winnerName, setWinnerName ] = useState<string | null>(null)
@@ -96,9 +92,9 @@ export function useTicTacToe(): TicTacToe {
 
     }, [playersBoard, gameStatus])
 
-    const handleClick = (event: MouseEvent, index: number): void => {
-        const value = 'XO'[currentPlayer as number]
-        const updatedBoard = insertMove(playersBoard, index, value)
+    const handleClick = (cellIndex: number): void => {
+        const cellValue = 'XO'[currentPlayer as number]
+        const updatedBoard = insertMove(playersBoard, cellIndex, cellValue)
         setPlayersBoard(updatedBoard)
         setCurrentPlayer((currentPlayer ^ 1) as Player)
     }
@@ -125,3 +121,82 @@ export function useTicTacToe(): TicTacToe {
         handleStart
     }
 }
+
+
+
+// /**
+//  *  1 1 1   0 0 0   0 0 0   1 0 0   0 1 0   0 0 1   1 0 0   0 0 1
+//  *  0 0 0   1 1 1   0 0 0   1 0 0   0 1 0   0 0 1   0 1 0   0 1 0
+//  *  0 0 0   0 0 0   1 1 1   1 0 0   0 1 0   0 0 1   0 0 1   1 0 0
+//  *  0x1C0   0x038   0x007   0x124   0x092   0x049   0x111   0x054
+//  */
+//  const solutions: number[] = [0x1C0, 0x038, 0x007, 0x124, 0x092, 0x049, 0x111, 0x054]
+
+//  let board: [number, number] = [0x0, 0x0]
+//  let player: 0 | 1 = 0
+ 
+//  const cells: HTMLButtonElement[] = Array.from(document.querySelectorAll('.cell'))
+//  cells.forEach(cell => cell.addEventListener('click', () => move(cell)))
+ 
+//  const newGame = (): void => {
+//    board = [0x0, 0x0]
+//    player = 0
+//    cells.forEach(cell => cell.innerHTML = '')
+//  }
+ 
+//  const toHexString = (n: number): string => `0x${n.toString(16)}`
+//  const toBinString = (n: number): string => `0b${(n >>> 0).toString(2)}`
+ 
+//  const log = ([ boardX, boardO ]: [number, number]): void => {
+//    console.table({
+//      dec: [boardX, boardO],
+//      hex: [toHexString(boardX), toHexString(boardO)],
+//      bin: [toBinString(boardX), toBinString(boardO)]
+//    })
+//  }
+ 
+//  const move = (cell: HTMLButtonElement): void => {
+   
+//    const decToBitMask = 0x100 // 256
+   
+//    /**
+//     *  0-8 decimal to a bitwise 256-1 grid representation
+//     *
+//     *  0   1   2    >>    256 128  64   
+//     *  3   4   5    >>     32  16   8   
+//     *  6   7   8    >>      4   2   1   
+//     */
+//    const mask = decToBitMask >> parseInt(cell.value, 10)
+   
+//    // X and O are represented by a single number and tested by every 
+//    // mask that tests the binary representation of that number to the hex masks (solutions) provided
+//    let [boardX, boardO] = board
+   
+//    // prevent double selecting of cells by checking if either board will change
+//    if (!((boardX | boardO) & mask)) {
+     
+//      const playerSign: 'X' | 'O' = 'XO'[player]
+//      cell.innerHTML = playerSign
+     
+//      board[player] |= mask; // add bits to current players' bitboard
+//      ([boardX, boardO] = board) // re-destructure
+ 
+//      const weHaveAWinner = solutions.some(mask => (board[player] & mask) === mask)
+     
+//      if (weHaveAWinner) {
+//        alert(playerSign + ' has won!')
+//        newGame()
+//      }
+//      else if((boardX | boardO) === 0x1ff /*511*/) {
+//        alert('This is a draw!')
+//        newGame()
+//      }
+//      else {
+//        player ^= 1 // switch turns
+//      }
+//    }
+   
+//    log(board)
+//  }
+ 
+//  newGame()

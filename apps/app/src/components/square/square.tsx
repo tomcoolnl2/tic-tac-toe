@@ -1,18 +1,18 @@
 
 
-import { FC, MouseEvent } from 'react'
+import { FC } from 'react'
 import styles from './square.module.scss'
 
 
 export interface Props {
     index: number
     value: string
-    handleClick: (event: MouseEvent, index: number) => void
+    handleClick: (index: number) => void
 }
 
 export const Square: FC<Props> = ({ index, value, handleClick }) => {
     return (
-        <button className={styles.square} onClick={(event) => handleClick(event, index)}>
+        <button className={styles.square} onClick={() => handleClick(index)}>
             {value}
         </button>
     )
