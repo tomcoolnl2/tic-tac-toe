@@ -1,11 +1,5 @@
 
-/**
- * [ ] fix duplicate 'winner' variable issues
- * [ ] make use of 2 bitBoards to flip 0's and 1s
- */
-
 import { useState, useEffect, MouseEvent } from 'react'
-// import { GameState, Player } from '@tic-tac-toe/models'
 
 export enum GameState {
     CREATED,
@@ -14,7 +8,6 @@ export enum GameState {
 }
 
 type Player = 0 | 1
-enum PlayerBoardCell { X = 'X', O = 'O', EMPTY = '' }
 type BitBoardCell = 0x0 | 0x1
 type BitBoard = BitBoardCell[]
 
@@ -37,11 +30,13 @@ function insertMove<T>(board: T[], index: number, value: T): T[] {
     clone.splice(index, 1, value)
     return clone
 }
+var msk = 0x100 >> 0;
+console.log(msk)
 
 export function useTicTacToe(): TicTacToe {
 
     const [ bitBoards, setBitBoards] = useState<[BitBoard, BitBoard]>([createBoard(0x0), createBoard(0x0)])
-    const [ playersBoard, setPlayersBoard ] = useState<string[]>(createBoard(PlayerBoardCell.EMPTY))
+    const [ playersBoard, setPlayersBoard ] = useState<string[]>(createBoard(''))
     const [ currentPlayer, setCurrentPlayer ] = useState<Player>(0)
     const [ winnerName, setWinnerName ] = useState<string | null>(null)
     const [ gameStatus, setGameStatus ] = useState<GameState>(GameState.CREATED)
@@ -49,31 +44,18 @@ export function useTicTacToe(): TicTacToe {
 
     useEffect(() => {
 
-        if (gameStatus !== GameState.STARTED) return
-
-        // const binMasks = [
-        //     '111000000',
-        //     '000111000',
-        //     '000000111',
-        //     '100100100',
-        //     '010010010',
-        //     '001001001',
-        //     '100010001',
-        //     '001010100'
-        // ]
+        if (gameStatus !== GameState.STARTED) {
+            return
+        }
 
         /**
-         * https://stackoverflow.com/questions/38557608/better-way-to-check-against-an-array
-         * 
          *  1 1 1   0 0 0   0 0 0   1 0 0   0 1 0   0 0 1   1 0 0   0 0 1
          *  0 0 0   1 1 1   0 0 0   1 0 0   0 1 0   0 0 1   0 1 0   0 1 0
          *  0 0 0   0 0 0   1 1 1   1 0 0   0 1 0   0 0 1   0 0 1   1 0 0
          *  0x1C0   0x038   0x007   0x124   0x092   0x049   0x111   0x054
          */
-
-        // const hexMasks = [0x1C0, 0x038, 0x007, 0x124, 0x092, 0x049, 0x111, 0x054]
+        const hexMasks = [0x1C0, 0x038, 0x007, 0x124, 0x092, 0x049, 0x111, 0x054]
         // const decMasks = [448, 56, 7, 292, 146, 73, 273, 84]
-        
         
         const winningPositions = [
             // horizontals
@@ -97,11 +79,11 @@ export function useTicTacToe(): TicTacToe {
         
             const boardValuesToCkeck = winningPositions[winningPositionsIndex].map(index => playersBoard[index])
 
-            const checkingValue = boardValuesToCkeck[0] as PlayerBoardCell
+            const checkingValue = boardValuesToCkeck[0] as 'X' | 'O' | ''
             const isFinished = boardValuesToCkeck.every(value => checkingValue && value === checkingValue)
             
             if (isFinished) {
-                winningPlayer = checkingValue === PlayerBoardCell.X ? 0 : 1
+                winningPlayer = checkingValue === 'X' ? 0 : 1
                 setWinnerName(playerNames[winningPlayer])
                 setGameStatus(GameState.FINISHED)
                 return
@@ -115,14 +97,9 @@ export function useTicTacToe(): TicTacToe {
     }, [playersBoard, gameStatus])
 
     const handleClick = (event: MouseEvent, index: number): void => {
-
-        console.log(event, index)
-
         const value = 'XO'[currentPlayer as number]
         const updatedBoard = insertMove(playersBoard, index, value)
-        console.log('updatedBoard',updatedBoard)
         setPlayersBoard(updatedBoard)
-
         setCurrentPlayer((currentPlayer ^ 1) as Player)
     }
 
@@ -141,28 +118,10 @@ export function useTicTacToe(): TicTacToe {
     return {
         playersBoard,
         gameStatus,
-        player: playerNames[currentPlayer!],
+        player: playerNames[currentPlayer],
         winner: winnerName,
         handleClick,
         handleRestart,
         handleStart
     }
 }
-
-
-// var bitBoards = [0b000000000, 0b000000000]; // X bits, O bits
-
-// var lookupTable = [
-//     0b111000000,
-//     0b000111000,
-//     0b000000111,
-//     0b100100100,
-//     0b010010010,
-//     0b001001001,
-//     0b100010001,
-//     0b001010100
-// ];
-
-// function hasWon(gridArray, lines, playerTurn) {
-//     return lines.some(line => (line & gridArray[playerTurn]) == line);
-// }
