@@ -4,14 +4,6 @@ import { AppStore } from '@tic-tac-toe/core';
 import * as TTTModel from '@tic-tac-toe/model';
 import * as TTTUI from '@tic-tac-toe/ui';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
-import {
-	ErrorScreen,
-	GameScreen,
-	SettingsScreen,
-	ReloadModalScreen,
-	GameOverModalScreen,
-} from './screens';
-import { Modal } from './components';
 
 export const App: React.FC = () => {
 	const [appState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.AppState>(
@@ -110,16 +102,16 @@ export const App: React.FC = () => {
 	}, [closeModalValidator]);
 
 	return (
-		<>
+		<TTTUI.Theme>
 			<div className={`screen ${appState.appScreen}`}>
 				<div
 					className={`screen-inner ${
 						useLanscapeDesign ? 'landscape' : ''
 					}`}
 				>
-					<TTTUI.ErrorBoundary fallback={<ErrorScreen />}>
+					<TTTUI.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
 						<div className="screen-front">
-							<SettingsScreen
+							<TTTUI.SettingsScreen
 								playerSymbol={appState.playerSymbol}
 								selectedDifficultySetting={
 									appState.intelligenceLevel
@@ -134,7 +126,7 @@ export const App: React.FC = () => {
 							/>
 						</div>
 						<div className="screen-back">
-							<GameScreen
+							<TTTUI.GameScreen
 								handleReloadDialog={handleReloadDialog}
 								useLanscapeDesign={useLanscapeDesign}
 							/>
@@ -143,17 +135,17 @@ export const App: React.FC = () => {
 				</div>
 			</div>
 			{appState.appModalScreen !== null && (
-				<Modal>
+				<TTTUI.Modal>
 					{appState.appModalScreen ===
 						TTTModel.AppModalScreen.RELOAD && (
-						<ReloadModalScreen
+						<TTTUI.ReloadModalScreen
 							handleRestartGame={handleRestartGame}
 							closeModalScreen={closeModalScreen}
 						/>
 					)}
 					{appState.appModalScreen ===
 						TTTModel.AppModalScreen.GAME_OVER && (
-						<GameOverModalScreen
+						<TTTUI.GameOverModalScreen
 							gameState={appState.gameState}
 							playerSymbol={appState.playerSymbol}
 							cpuSymbol={appState.cpuSymbol}
@@ -161,8 +153,8 @@ export const App: React.FC = () => {
 							handleNextRound={handleNextRound}
 						/>
 					)}
-				</Modal>
+				</TTTUI.Modal>
 			)}
-		</>
+		</TTTUI.Theme>
 	);
 };

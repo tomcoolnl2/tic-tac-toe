@@ -1,0 +1,22 @@
+@use '../../../theme/utils' as utils;
+
+.turn-indicator {
+    position: relative;
+    padding-left: 35px;
+    cursor: default;
+    width: 130px;
+
+    > .avatar {
+        position: absolute;
+        left: 10px;
+        top: 8px;
+    }
+}
+
+.button.turn-indicator-x {
+    box-shadow: utils.generate-box-shadow($color: var(--teal-surf));
+}
+
+.button.turn-indicator-o {
+    box-shadow: utils.generate-box-shadow($color: var(--bronze-amber));
+}

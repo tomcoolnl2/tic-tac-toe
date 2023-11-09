@@ -1,0 +1,40 @@
+@use '../../../theme/utils' as utils;
+
+
+$avatar-color: var(--emerald-forest);
+
+.cell {
+    border-radius: 4px;
+    font-size: 46px;
+    aspect-ratio: 1;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    min-width: 90px;
+    box-shadow: utils.generate-box-shadow($size: 5px, $color: var(--dusk-blue));
+    background-color: $avatar-color;
+    transition: background-color .3s, box-shadow .3s;
+
+    &[disabled] {
+        cursor: default;
+    }
+  
+    &.invert {
+        .avatar-x::before, .avatar-x::after {
+            background-color: $avatar-color;
+        }
+        .avatar-o::after {
+            border: 13px solid $avatar-color;
+        }
+    }
+  
+    &.invert-x {
+        background-color: var(--aqua-glow);
+        box-shadow: utils.generate-box-shadow($color: var(--teal-surf));
+    }
+  
+    &.invert-o {
+        background-color: var(--sunshine-gold);
+        box-shadow: utils.generate-box-shadow($color: var(--bronze-amber));
+    }
+}
