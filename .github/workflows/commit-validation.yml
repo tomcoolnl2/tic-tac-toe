@@ -4,6 +4,8 @@ on:
     push:
         branches-ignore:
             - main # Ignore the main branch, adjust as needed
+    pull_request:
+        types: [opened, synchronize]
 
 jobs:
     validate-commit-message:
@@ -12,5 +14,6 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-            - name: Validate Commit message
+
+            - name: Validate Commit Message
               uses: webiny/action-conventional-commits@v1.1.0
