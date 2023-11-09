@@ -1,5 +1,5 @@
 import React from 'react';
-import * as ArenaUI from '@tic-tac-toe/ui';
+import { Divider, Grid } from '@tic-tac-toe/ui';
 import { Button } from '../components';
 
 interface Props {
@@ -14,15 +14,15 @@ export const ReloadModalScreen: React.FC<Props> = ({
 	return (
 		<>
 			<h1>Restart Game?</h1>
-			<ArenaUI.Divider margin="vertical-l" />
-			<ArenaUI.Grid cols={2} colGap="l">
+			<Divider margin="vertical-l" />
+			<Grid cols={2} colGap="l">
 				<Button variant="light" onClick={closeModalScreen}>
 					No, Cancel
 				</Button>
 				<Button variant="secondary" onClick={handleRestartGame}>
 					Yes, Restart
 				</Button>
-			</ArenaUI.Grid>
+			</Grid>
 		</>
 	);
 };

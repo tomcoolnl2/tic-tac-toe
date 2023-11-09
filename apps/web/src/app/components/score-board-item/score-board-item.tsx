@@ -1,5 +1,5 @@
-import * as ArenaUI from '@tic-tac-toe/ui';
-import { PlayerSymbol } from '../../core/model';
+import { Grid } from '@tic-tac-toe/ui';
+import { PlayerSymbol } from '@tic-tac-toe/model';
 import './score-board-item.scss';
 
 export interface Props {
@@ -34,12 +34,12 @@ export const ScoreBoardItem: React.FC<Props> = ({
 			break;
 	}
 	return (
-		<ArenaUI.Grid rowGap="s" className={`score-board-item ${className}`}>
+		<Grid rowGap="s" className={`score-board-item ${className}`}>
 			<small>
 				{symbol !== null ? <b>{symbol}</b> : null}
 				{text}
 			</small>
 			<h3>{score}</h3>
-		</ArenaUI.Grid>
+		</Grid>
 	);
 };

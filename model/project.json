@@ -1,0 +1,23 @@
+{
+	"name": "model",
+	"$schema": "../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "model/src",
+	"projectType": "library",
+	"targets": {
+		"build": {
+			"executor": "@nx/vite:build",
+			"outputs": ["{options.outputPath}"],
+			"options": {
+				"outputPath": "dist/model"
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": ["model/**/*.ts", "model/package.json"]
+			}
+		}
+	},
+	"tags": []
+}

@@ -1,6 +1,6 @@
 import React from 'react';
-import * as ArenaUI from '@tic-tac-toe/ui';
-import { GameState, PlayerSymbol } from '../core/model';
+import { GameState, PlayerSymbol } from '@tic-tac-toe/model';
+import * as TTTUI from '@tic-tac-toe/ui';
 import { GameOver, Button } from '../components';
 
 interface Props {
@@ -20,7 +20,7 @@ export const GameOverModalScreen: React.FC<Props> = ({
 }) => {
 	let title = 'Takes the round';
 	let subtitle = '';
-	let avatar: PlayerSymbol = null;
+	let avatar: PlayerSymbol | null = null;
 	let className = '';
 
 	switch (gameState) {
@@ -49,15 +49,15 @@ export const GameOverModalScreen: React.FC<Props> = ({
 				avatar={avatar}
 				className={className}
 			/>
-			<ArenaUI.Divider margin="vertical-l" />
-			<ArenaUI.Grid cols={2} colGap="l">
+			<TTTUI.Divider margin="vertical-l" />
+			<TTTUI.Grid cols={2} colGap="l">
 				<Button variant="light" onClick={handleRestartGame}>
 					Quit
 				</Button>
 				<Button variant="secondary" onClick={handleNextRound}>
 					Next Round
 				</Button>
-			</ArenaUI.Grid>
+			</TTTUI.Grid>
 		</>
 	);
 };

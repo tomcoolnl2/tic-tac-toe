@@ -1,7 +1,7 @@
 import React from 'react';
-import * as ArenaUI from '@tic-tac-toe/ui';
-import { AppState } from '../core/model';
-import { AppStore } from '../core/store-manager';
+import { AppStore } from '@tic-tac-toe/core';
+import { AppState } from '@tic-tac-toe/model';
+import { Hooks, Grid, GridItem } from '@tic-tac-toe/ui';
 import {
 	AppLogo,
 	Cell,
@@ -19,40 +19,38 @@ export const GameScreen: React.FC<Props> = ({
 	useLanscapeDesign,
 	handleReloadDialog,
 }) => {
-	const [appState] = ArenaUI.Hooks.useBehaviorSubjectState<AppState>(
-		AppStore.state$
-	);
+	const [appState] = Hooks.useBehaviorSubjectState<AppState>(AppStore.state$);
 	const { scores, playerSymbol, cpuSymbol, currentPlayer, solutionCells } =
 		appState;
 
 	return (
-		<ArenaUI.Grid
+		<Grid
 			cols={useLanscapeDesign ? 3 : 1}
 			rowGap="l"
 			colGap={useLanscapeDesign ? 'l' : 'm'}
 		>
-			<ArenaUI.GridItem>
-				<ArenaUI.Grid
+			<GridItem>
+				<Grid
 					colGap="m"
 					rowGap="l"
 					cols={useLanscapeDesign ? 1 : '1fr auto 1fr'}
 				>
-					<ArenaUI.GridItem>
+					<GridItem>
 						<AppLogo />
-					</ArenaUI.GridItem>
-					<ArenaUI.GridItem>
+					</GridItem>
+					<GridItem>
 						<TurnIndicator
 							playerSymbol={playerSymbol}
 							currentPlayer={currentPlayer}
 						/>
-					</ArenaUI.GridItem>
-					<ArenaUI.GridItem placeSelf="flex-end">
+					</GridItem>
+					<GridItem placeSelf="flex-end">
 						<ReloadButton handleReloadDialog={handleReloadDialog} />
-					</ArenaUI.GridItem>
-				</ArenaUI.Grid>
-			</ArenaUI.GridItem>
-			<ArenaUI.GridItem>
-				<ArenaUI.Grid cols={3} colGap="m" rowGap="m" className="board">
+					</GridItem>
+				</Grid>
+			</GridItem>
+			<GridItem>
+				<Grid cols={3} colGap="m" rowGap="m" className="board">
 					{appState.boardState.map((type, i) => (
 						<Cell
 							key={i}
@@ -64,14 +62,10 @@ export const GameScreen: React.FC<Props> = ({
 							}
 						/>
 					))}
-				</ArenaUI.Grid>
-			</ArenaUI.GridItem>
-			<ArenaUI.GridItem>
-				<ArenaUI.Grid
-					cols={useLanscapeDesign ? 1 : 3}
-					colGap="m"
-					rowGap="m"
-				>
+				</Grid>
+			</GridItem>
+			<GridItem>
+				<Grid cols={useLanscapeDesign ? 1 : 3} colGap="m" rowGap="m">
 					{scores.map((score, i) => {
 						return (
 							<ScoreBoardItem
@@ -83,8 +77,8 @@ export const GameScreen: React.FC<Props> = ({
 							/>
 						);
 					})}
-				</ArenaUI.Grid>
-			</ArenaUI.GridItem>
-		</ArenaUI.Grid>
+				</Grid>
+			</GridItem>
+		</Grid>
 	);
 };
