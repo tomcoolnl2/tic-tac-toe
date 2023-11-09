@@ -17,11 +17,11 @@ export const ScoreBoardItem: React.FC<Props> = ({
 }) => {
 	let text = '';
 	let className = '';
-	let symbol = '';
+	let symbol: string | null = null;
 	switch (index) {
 		case 0:
 			symbol = ['X', 'O'][playerSymbol];
-			text = `${symbol} (You)`;
+			text = ` (You)`;
 			className = 'score-board-item-' + symbol.toLowerCase();
 			break;
 		case 1:
@@ -29,13 +29,16 @@ export const ScoreBoardItem: React.FC<Props> = ({
 			break;
 		case 2:
 			symbol = ['X', 'O'][cpuSymbol];
-			text = `${symbol} (cpu)`;
+			text = ` (cpu)`;
 			className = 'score-board-item-' + symbol.toLowerCase();
 			break;
 	}
 	return (
 		<ArenaUI.Grid rowGap="s" className={`score-board-item ${className}`}>
-			<small>{text}</small>
+			<small>
+				{symbol !== null ? <b>{symbol}</b> : null}
+				{text}
+			</small>
 			<h3>{score}</h3>
 		</ArenaUI.Grid>
 	);
