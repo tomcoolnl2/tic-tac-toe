@@ -15,7 +15,9 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
+			"@tic-tac-toe/core": ["core/src/index.ts"],
 			"@tic-tac-toe/debug": ["debug/src/index.ts"],
+			"@tic-tac-toe/model": ["model/src/index.ts"],
 			"@tic-tac-toe/ui": ["ui/src/index.ts"]
 		}
 	},

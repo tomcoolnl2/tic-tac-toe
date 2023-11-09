@@ -1,6 +1,6 @@
 import React from 'react';
-import * as ArenaUI from '@tic-tac-toe/ui';
-import { IntelligenceLevel } from '../../core/model';
+import { IntelligenceLevel } from '@tic-tac-toe/model';
+import * as TTTUI from '@tic-tac-toe/ui';
 import './choose-difficulty.scss';
 
 export interface Props {
@@ -15,12 +15,12 @@ export const ChooseDifficulty: React.FC<Props> = ({
 	handleDifficultySettingsChange,
 }) => {
 	return (
-		<ArenaUI.FlexBox
+		<TTTUI.FlexBox
 			direction="column"
 			alignItems="center"
 			className="choose-difficulty"
 		>
-			<ArenaUI.FlexBox>
+			<TTTUI.FlexBox>
 				{Object.values(IntelligenceLevel)
 					.reverse()
 					.map((level) => (
@@ -36,9 +36,9 @@ export const ChooseDifficulty: React.FC<Props> = ({
 							<label htmlFor={level} title={level} />
 						</React.Fragment>
 					))}
-			</ArenaUI.FlexBox>
-			<ArenaUI.Divider invisible margin="vertical-s" />
+			</TTTUI.FlexBox>
+			<TTTUI.Divider invisible margin="vertical-s" />
 			<sup>{selectedDifficultySetting}</sup>
-		</ArenaUI.FlexBox>
+		</TTTUI.FlexBox>
 	);
 };

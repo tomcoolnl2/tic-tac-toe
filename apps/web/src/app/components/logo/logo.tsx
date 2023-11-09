@@ -1,12 +1,12 @@
-import * as ArenaUI from '@tic-tac-toe/ui';
+import { FlexBox } from '@tic-tac-toe/ui';
+import { PlayerSymbol } from '@tic-tac-toe/model';
 import { Avatar } from '../';
-import { PlayerSymbol } from '../../core/model';
 
 export const AppLogo: React.FC = () => {
 	return (
-		<ArenaUI.FlexBox className="logo" spacing="s">
+		<FlexBox className="logo" spacing="s">
 			<Avatar size="m" type={PlayerSymbol.X} />
 			<Avatar size="m" type={PlayerSymbol.O} />
-		</ArenaUI.FlexBox>
+		</FlexBox>
 	);
 };

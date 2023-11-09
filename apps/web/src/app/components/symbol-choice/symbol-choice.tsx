@@ -1,6 +1,6 @@
 import React from 'react';
-import * as ArenaUI from '@tic-tac-toe/ui';
-import { PlayerSymbol } from '../../core/model';
+import { PlayerSymbol } from '@tic-tac-toe/model';
+import * as TTTUI from '@tic-tac-toe/ui';
 import { Avatar } from '../avatar/avatar';
 import './symbol-choice.scss';
 
@@ -24,8 +24,8 @@ export const SymbolChoice: React.FC<Props> = ({
 				type="checkbox"
 			/>
 			<span className="choose-player-toggle"></span>
-			<ArenaUI.Grid cols={2} className="choose-player-symbols">
-				<ArenaUI.GridItem placeSelf="center">
+			<TTTUI.Grid cols={2} className="choose-player-symbols">
+				<TTTUI.GridItem placeSelf="center">
 					<Avatar
 						type={PlayerSymbol.X}
 						size="m"
@@ -33,8 +33,8 @@ export const SymbolChoice: React.FC<Props> = ({
 							playerSymbol === PlayerSymbol.X ? 'dark' : 'light'
 						}
 					/>
-				</ArenaUI.GridItem>
-				<ArenaUI.GridItem placeSelf="center">
+				</TTTUI.GridItem>
+				<TTTUI.GridItem placeSelf="center">
 					<Avatar
 						type={PlayerSymbol.O}
 						size="m"
@@ -42,8 +42,8 @@ export const SymbolChoice: React.FC<Props> = ({
 							playerSymbol === PlayerSymbol.O ? 'dark' : 'light'
 						}
 					/>
-				</ArenaUI.GridItem>
-			</ArenaUI.Grid>
+				</TTTUI.GridItem>
+			</TTTUI.Grid>
 		</label>
 	);
 };

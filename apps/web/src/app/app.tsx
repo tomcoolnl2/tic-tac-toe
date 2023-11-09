@@ -1,8 +1,9 @@
 import React from 'react';
 import * as Rx from 'rxjs';
-import * as ArenaUI from '@tic-tac-toe/ui';
+import { AppStore } from '@tic-tac-toe/core';
+import * as TTTModel from '@tic-tac-toe/model';
+import * as TTTUI from '@tic-tac-toe/ui';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
-import { AppStore } from './core/store-manager';
 import {
 	ErrorScreen,
 	GameScreen,
@@ -10,40 +11,32 @@ import {
 	ReloadModalScreen,
 	GameOverModalScreen,
 } from './screens';
-import {
-	AppModalScreen,
-	AppScreen,
-	AppState,
-	GameState,
-	IntelligenceLevel,
-	PlayerSymbol,
-} from './core/model';
 import { Modal } from './components';
 
 export const App: React.FC = () => {
-	const [appState] = ArenaUI.Hooks.useBehaviorSubjectState<AppState>(
+	const [appState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.AppState>(
 		AppStore.state$
 	);
-	const orientation = ArenaUI.Hooks.useScreenOrientation();
+	const orientation = TTTUI.Hooks.useScreenOrientation();
 
 	React.useEffect(() => {
 		isDevEnvironment() && console.log('appState', appState);
 	}, [appState]);
 
 	const handleStartGame = React.useCallback(() => {
-		// when player chooses ) it means the CPU should make the first move
+		// when player chooses O it means the CPU should make the first move
 		// TODO move into GameEngine in it's own method
 		let updatedAppState = {};
-		if (appState.playerSymbol === PlayerSymbol.O) {
-			updatedAppState = AppStore.gameEngine.takeFirstTurn({
+		if (appState.playerSymbol === TTTModel.PlayerSymbol.O) {
+			updatedAppState = AppStore.gameEngine!.takeFirstTurn({
 				...appState,
 			});
 		}
 		AppStore.nextState({
 			...appState,
 			...updatedAppState,
-			appScreen: AppScreen.GAME,
-			gameState: GameState.PLAYING,
+			appScreen: TTTModel.AppScreen.GAME,
+			gameState: TTTModel.GameState.PLAYING,
 		});
 	}, [appState]);
 
@@ -54,7 +47,7 @@ export const App: React.FC = () => {
 	const handleReloadDialog = React.useCallback(() => {
 		AppStore.nextState({
 			...appState,
-			appModalScreen: AppModalScreen.RELOAD,
+			appModalScreen: TTTModel.AppModalScreen.RELOAD,
 		});
 	}, [appState]);
 
@@ -80,14 +73,17 @@ export const App: React.FC = () => {
 			const value = (event.target as HTMLInputElement).value;
 			AppStore.nextState({
 				...appState,
-				intelligenceLevel: value as IntelligenceLevel,
+				intelligenceLevel: value as TTTModel.IntelligenceLevel,
 			});
 		},
 		[appState]
 	);
 
 	const closeModalScreen = React.useCallback(() => {
-		AppStore.nextState({ ...appState, appModalScreen: null });
+		AppStore.nextState({
+			...appState,
+			appModalScreen: null,
+		});
 	}, [appState]);
 
 	const useLanscapeDesign = React.useMemo(() => {
@@ -95,7 +91,7 @@ export const App: React.FC = () => {
 	}, [orientation]);
 
 	const closeModalValidator = React.useCallback(() => {
-		if (appState.appModalScreen !== AppModalScreen.GAME_OVER) {
+		if (appState.appModalScreen !== TTTModel.AppModalScreen.GAME_OVER) {
 			closeModalScreen();
 		}
 	}, [appState, closeModalScreen]);
@@ -121,7 +117,7 @@ export const App: React.FC = () => {
 						useLanscapeDesign ? 'landscape' : ''
 					}`}
 				>
-					<ArenaUI.ErrorBoundary fallback={<ErrorScreen />}>
+					<TTTUI.ErrorBoundary fallback={<ErrorScreen />}>
 						<div className="screen-front">
 							<SettingsScreen
 								playerSymbol={appState.playerSymbol}
@@ -143,18 +139,20 @@ export const App: React.FC = () => {
 								useLanscapeDesign={useLanscapeDesign}
 							/>
 						</div>
-					</ArenaUI.ErrorBoundary>
+					</TTTUI.ErrorBoundary>
 				</div>
 			</div>
 			{appState.appModalScreen !== null && (
 				<Modal>
-					{appState.appModalScreen === AppModalScreen.RELOAD && (
+					{appState.appModalScreen ===
+						TTTModel.AppModalScreen.RELOAD && (
 						<ReloadModalScreen
 							handleRestartGame={handleRestartGame}
 							closeModalScreen={closeModalScreen}
 						/>
 					)}
-					{appState.appModalScreen === AppModalScreen.GAME_OVER && (
+					{appState.appModalScreen ===
+						TTTModel.AppModalScreen.GAME_OVER && (
 						<GameOverModalScreen
 							gameState={appState.gameState}
 							playerSymbol={appState.playerSymbol}

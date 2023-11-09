@@ -1,6 +1,6 @@
 import React from 'react';
-import * as ArenaUI from '@tic-tac-toe/ui';
-import { PlayerSymbol } from '../../core/model';
+import { PlayerSymbol } from '@tic-tac-toe/model';
+import * as TTTUI from '@tic-tac-toe/ui';
 import { Avatar } from '../';
 import './game-over.scss';
 
@@ -18,15 +18,15 @@ export const GameOver: React.FC<Props> = ({
 	className,
 }) => {
 	return (
-		<ArenaUI.FlexBox
+		<TTTUI.FlexBox
 			className="game-over"
 			direction="column"
 			alignItems="center"
 		>
 			<sub>{subtitle}</sub>
-			<ArenaUI.Divider margin="vertical" />
+			<TTTUI.Divider margin="vertical" />
 			{avatar !== null ? <Avatar type={avatar} size="l" /> : null}
 			<h2 className={`text-player-${className}`}>{title}</h2>
-		</ArenaUI.FlexBox>
+		</TTTUI.FlexBox>
 	);
 };
