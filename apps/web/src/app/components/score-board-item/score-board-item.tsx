@@ -39,6 +39,7 @@ export const ScoreBoardItem: React.FC<Props> = ({
 				{symbol !== null ? <b>{symbol}</b> : null}
 				{text}
 			</small>
+
 			<h3>{score}</h3>
 		</ArenaUI.Grid>
 	);
