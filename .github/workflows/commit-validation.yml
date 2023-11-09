@@ -1,0 +1,19 @@
+name: Validate Commit Messages
+
+on:
+    push:
+        branches-ignore:
+            - main # Ignore the main branch, adjust as needed
+
+jobs:
+    validate-commit-message:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Check commit messages
+              if: ${{ github.ref != 'refs/heads/main' }} # Skip validation on the main branch
+              run: |
+                  git log --oneline ${{ github.event.before }}..${{ github.sha }} | grep -E '^(revert: )?(feat|fix|docs|style|refactor|perf|test|chore)(\(.+\))?: .{1,100}$' || exit 1
