@@ -12,8 +12,5 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-
-            - name: Check commit messages
-              if: ${{ github.ref != 'refs/heads/main' }} # Skip validation on the main branch
-              run: |
-                  git log --oneline ${{ github.event.before }}..${{ github.sha }} | grep -E '^(revert: )?(feat|fix|docs|style|refactor|perf|test|chore)(\(.+\))?: .{1,100}$' || exit 1
+            - name: Validate Commit message
+              uses: webiny/action-conventional-commits@v1.1.0
