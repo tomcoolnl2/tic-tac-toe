@@ -1,0 +1,27 @@
+
+.game-over {
+    position: relative;
+
+    .text-player-x {
+        color: var(--aqua-glow);
+    }
+    
+    .text-player-o {
+        color: var(--sunshine-gold);
+    }
+    
+    .text-light {
+        color: var(--misty-sky);
+    }
+    
+    .text-player-o, .text-player-x {
+        padding-left: 50px;
+    }
+    
+    .avatar {
+        position: absolute;
+        left: 0;
+        top: 30px;
+    }
+}
+

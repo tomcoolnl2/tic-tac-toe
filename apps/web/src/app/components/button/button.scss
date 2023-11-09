@@ -1,0 +1,44 @@
+@use '../../theme/utils' as utils;
+
+.button {
+    position: relative;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    color: var(--dusk-blue);
+    background-color: var(--aqua-glow);
+    border-radius: 4px;
+    padding: 12px 10px 8px;
+    box-shadow: utils.generate-box-shadow($color: var(--teal-surf));
+    width: 100%;
+
+    // &.primary {}
+
+    &.button-secondary {
+        background-color: var(--sunshine-gold);
+        box-shadow: utils.generate-box-shadow($color: var(--bronze-amber));
+    }
+
+    &.button-dark {
+        color: var(--misty-sky);
+        background: var(--emerald-forest);
+        box-shadow: utils.generate-box-shadow($color: var(--dusk-blue));
+    }
+
+    &.button-light {
+        background-color: var(--misty-sky);
+        box-shadow: utils.generate-box-shadow($color: var(--steel-shadow));
+    }
+
+    &[disabled] {
+        cursor: not-allowed;
+        opacity: .8;
+    }
+
+    > i {
+        font-size: 18px;
+        position: absolute;
+        transform: translate(5px, -3px);
+    }
+}

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GameOver component snapshot test 1`] = `
+<div>
+  <div
+    class="flex-box direction-column justify-content-flex-start align-items-center game-over"
+  >
+    <sub>
+      subtitle
+    </sub>
+    <hr
+      class="divider full-width horizontal margin-vertical"
+    />
+    <span
+      class="avatar avatar-x avatar-size-l"
+    />
+    <h2
+      class="text-player-x"
+    >
+      test title
+    </h2>
+  </div>
+</div>
+`;

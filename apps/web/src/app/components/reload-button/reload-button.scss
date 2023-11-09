@@ -1,0 +1,12 @@
+.icon-reload {
+    position: relative;
+    width: 35px;
+    aspect-ratio: 1;
+
+    & > i {
+        font-size: 25px;
+        inset: 6px;
+        color: var(--emerald-forest);
+        transform: none;
+    }
+}

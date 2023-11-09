@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cell component snapshot test should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="cell invert invert-x"
+    data-index="0"
+    data-testid="cell-0"
+    disabled=""
+    value="0"
+  >
+    <span
+      class="avatar avatar-x avatar-size-xl"
+    />
+  </button>
+</DocumentFragment>
+`;

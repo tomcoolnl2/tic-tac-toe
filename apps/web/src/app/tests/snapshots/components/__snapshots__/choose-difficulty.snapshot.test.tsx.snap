@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChooseDifficulty component snapshot test should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex-box direction-column justify-content-flex-start align-items-center choose-difficulty"
+  >
+    <div
+      class="flex-box direction-row justify-content-flex-start align-items-flex-start"
+    >
+      <input
+        id="master"
+        name="level"
+        type="radio"
+        value="master"
+      />
+      <label
+        for="master"
+        title="master"
+      />
+      <input
+        id="novice"
+        name="level"
+        type="radio"
+        value="novice"
+      />
+      <label
+        for="novice"
+        title="novice"
+      />
+      <input
+        checked=""
+        id="bieber"
+        name="level"
+        type="radio"
+        value="bieber"
+      />
+      <label
+        for="bieber"
+        title="bieber"
+      />
+    </div>
+    <hr
+      class="divider full-width horizontal margin-vertical-s invisible"
+    />
+    <sup>
+      bieber
+    </sup>
+  </div>
+</DocumentFragment>
+`;
