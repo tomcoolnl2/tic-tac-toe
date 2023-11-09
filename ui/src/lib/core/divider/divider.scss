@@ -1,0 +1,97 @@
+.divider {
+    margin: 0;
+    border-style: solid;
+    border-color: var(--color-Grey10);
+}
+
+.divider.invisible {
+    border: none;
+}
+
+/* Orientation: Horizontal */
+.divider.horizontal {
+    border-bottom: 1px;
+}
+
+.divider.inset.horizontal {
+    margin-left: 36px;
+}
+
+/* Needs to specify left and right only (and not margin: 0 36px) in order for the .margin-top and .margin-bottom classes to work correctly */
+.divider.middle.horizontal {
+    margin-left: 36px;
+    margin-right: 36px;
+}
+
+/* Orientation: Vertical */
+.divider.vertical {
+    border-right-width: 1px;
+    border-bottom: none;
+    border-top: none;
+    border-left: none;
+    width: 1px;
+    display: inline-block;
+}
+
+.divider.inset.vertical {
+    margin-top: 36px;
+}
+
+/* Needs to specify left and right only (and not margin: 36px 0) in order for the .margin-left and .margin-right classes to work correctly */
+.divider.middle.vertical {
+    margin-top: 36px;
+    margin-bottom: 36px;
+}
+
+/* Margins */
+.divider.margin-top {
+    margin-top: 10px;
+}
+
+.divider.margin-bottom {
+    margin-bottom: 10px;
+}
+
+.divider.margin-left {
+    margin-left: 10px;
+}
+
+.divider.margin-right {
+    margin-right: 10px;
+}
+
+.divider.margin-vertical {
+    margin: 10px 0;
+}
+
+.divider.margin-vertical-l {
+    margin: 20px 0;
+}
+
+.divider.margin-horizontal {
+    margin: 0 10px;
+}
+
+.divider.margin-top-s {
+    margin-top: 5px;
+}
+
+.divider.margin-bottom-s {
+    margin-bottom: 5px;
+}
+
+.divider.margin-left-s {
+    margin-left: 5px;
+}
+
+.divider.margin-right-s {
+    margin-right: 5px;
+}
+
+.divider.margin-vertical-s {
+    margin: 5px 0;
+}
+
+.divider.margin-horizontal-s {
+    margin: 0 5px;
+}

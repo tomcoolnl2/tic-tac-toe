@@ -1,0 +1,35 @@
+
+.choose-difficulty {
+    direction: rtl;
+    background-color: var(--dusk-blue);
+    width: 100%;
+    padding: 10px 0;
+
+    & [type=radio] { 
+        display: none;
+
+        &:checked ~ label {
+            &::before {
+                color: var(--sunshine-gold);
+            }
+        }
+    }
+
+    & label {
+        cursor: pointer;
+        
+        &::before {
+            color: var(--misty-sky);
+            font-family: FontAwesome;
+            font-size: 1.4em;
+            content: '\f005';
+            padding: 0 5px;
+            transition: color .3s;
+        }
+        
+        &:hover::before,
+        &:hover ~ label::before {
+            color: var(--bronze-amber) !important;
+        }
+    }
+}

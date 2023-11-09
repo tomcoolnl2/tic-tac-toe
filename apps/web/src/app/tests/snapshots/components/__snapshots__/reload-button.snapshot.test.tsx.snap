@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReloadButton component snapshot test should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="button button-light icon-reload"
+  >
+    <i
+      class="icon-repeat"
+    />
+  </button>
+</DocumentFragment>
+`;

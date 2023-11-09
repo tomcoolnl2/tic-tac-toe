@@ -1,0 +1,32 @@
+
+$animation-speed: .7s;
+
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes slide-down {
+    0% { top: -5%; }
+    100% {  top: 0%; }
+}
+
+.modal-backdrop {
+    animation: fade-in $animation-speed;
+    position: absolute;
+    inset: 0;
+    background-color: rgba(black, .4);
+}
+
+.modal-background {
+    animation: slide-down $animation-speed;
+    background-color: var(--emerald-forest);
+    height: 200px;
+    width: 100%;
+}
+
+.modal-content {
+    padding: 20px 0;
+    width: 360px;
+    height: 100%;
+}

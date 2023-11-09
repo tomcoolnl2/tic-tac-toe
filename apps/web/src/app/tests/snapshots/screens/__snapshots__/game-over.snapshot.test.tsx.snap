@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GameOverModalScreen screen component snapshot test should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex-box direction-column justify-content-flex-start align-items-center game-over"
+  >
+    <sub>
+      You've won!
+    </sub>
+    <hr
+      class="divider full-width horizontal margin-vertical"
+    />
+    <span
+      class="avatar avatar-x avatar-size-l"
+    />
+    <h2
+      class="text-player-x"
+    >
+      Takes the round
+    </h2>
+  </div>
+  <hr
+    class="divider full-width horizontal margin-vertical-l"
+  />
+  <div
+    class="container cols-2 col-gap-l"
+    style="--row-height: 1fr; --col-width: 1fr;"
+  >
+    <button
+      class="button button-light"
+    >
+      Quit
+    </button>
+    <button
+      class="button button-secondary"
+    >
+      Next Round
+    </button>
+  </div>
+</DocumentFragment>
+`;

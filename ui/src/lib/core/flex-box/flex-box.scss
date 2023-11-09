@@ -1,0 +1,277 @@
+.flex-box {
+    display: flex;
+    box-sizing: border-box;
+    flex-grow: 0;
+    position: relative;
+}
+
+.spacing-s {
+    row-gap: 2px;
+    column-gap: 2px;
+}
+
+.spacing-m {
+    row-gap: 4px;
+    column-gap: 4px;
+}
+
+.spacing-l {
+    row-gap: 8px;
+    column-gap: 8px;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+/* Flex direction */
+.direction-row {
+    flex-direction: row;
+}
+
+.direction-column {
+    flex-direction: column;
+}
+
+.direction.row-reverse {
+    flex-direction: row-reverse;
+}
+
+.direction.column-reverse {
+    flex-direction: column-reverse;
+}
+
+/* Justify content */
+.justify-content-flex-start {
+    justify-content: flex-start;
+}
+
+.justify-content-flex-end {
+    justify-content: flex-end;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.justify-content-space-evenly {
+    justify-content: space-evenly;
+}
+
+.justify-content-space-between {
+    justify-content: space-between;
+}
+
+.justify-content-space-around {
+    justify-content: space-around;
+}
+
+/* Align items */
+.align-items-flex-start {
+    align-items: flex-start;
+}
+
+.align-items-flex-end {
+    align-items: flex-end;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+/* TODO: Why are vars var(--cancun-theme-breakpoints-xs) not processed correctly here? */
+/* @media only screen and (min-width: var(--cancun-theme-breakpoints-xs)) { */
+@media only screen and (min-width: 0) {
+    .item.xs-1 {
+        flex-basis: calc(100% * (1 / 12));
+    }
+    .item.xs-2 {
+        flex-basis: calc(100% * (2 / 12));
+    }
+    .item.xs-3 {
+        flex-basis: calc(100% * (3 / 12));
+    }
+    .item.xs-4 {
+        flex-basis: calc(100% * (4 / 12));
+    }
+    .item.xs-5 {
+        flex-basis: calc(100% * (5 / 12));
+    }
+    .item.xs-6 {
+        flex-basis: calc(100% * (6 / 12));
+    }
+    .item.xs-7 {
+        flex-basis: calc(100% * (7 / 12));
+    }
+    .item.xs-8 {
+        flex-basis: calc(100% * (8 / 12));
+    }
+    .item.xs-9 {
+        flex-basis: calc(100% * (9 / 12));
+    }
+    .item.xs-10 {
+        flex-basis: calc(100% * (10 / 12));
+    }
+    .item.xs-11 {
+        flex-basis: calc(100% * (11 / 12));
+    }
+    .item.xs-12 {
+        flex-basis: calc(100% * (12 / 12));
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .item.s-1 {
+        flex-basis: calc(100% * (1 / 12));
+    }
+    .item.s-2 {
+        flex-basis: calc(100% * (2 / 12));
+    }
+    .item.s-3 {
+        flex-basis: calc(100% * (3 / 12));
+    }
+    .item.s-4 {
+        flex-basis: calc(100% * (4 / 12));
+    }
+    .item.s-5 {
+        flex-basis: calc(100% * (5 / 12));
+    }
+    .item.s-6 {
+        flex-basis: calc(100% * (6 / 12));
+    }
+    .item.s-7 {
+        flex-basis: calc(100% * (7 / 12));
+    }
+    .item.s-8 {
+        flex-basis: calc(100% * (8 / 12));
+    }
+    .item.s-9 {
+        flex-basis: calc(100% * (9 / 12));
+    }
+    .item.s-10 {
+        flex-basis: calc(100% * (10 / 12));
+    }
+    .item.s-11 {
+        flex-basis: calc(100% * (11 / 12));
+    }
+    .item.s-12 {
+        flex-basis: calc(100% * (12 / 12));
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .item.m-1 {
+        flex-basis: calc(100% * (1 / 12));
+    }
+    .item.m-2 {
+        flex-basis: calc(100% * (2 / 12));
+    }
+    .item.m-3 {
+        flex-basis: calc(100% * (3 / 12));
+    }
+    .item.m-4 {
+        flex-basis: calc(100% * (4 / 12));
+    }
+    .item.m-5 {
+        flex-basis: calc(100% * (5 / 12));
+    }
+    .item.m-6 {
+        flex-basis: calc(100% * (6 / 12));
+    }
+    .item.m-7 {
+        flex-basis: calc(100% * (7 / 12));
+    }
+    .item.m-8 {
+        flex-basis: calc(100% * (8 / 12));
+    }
+    .item.m-9 {
+        flex-basis: calc(100% * (9 / 12));
+    }
+    .item.m-10 {
+        flex-basis: calc(100% * (10 / 12));
+    }
+    .item.m-11 {
+        flex-basis: calc(100% * (11 / 12));
+    }
+    .item.m-12 {
+        flex-basis: calc(100% * (12 / 12));
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .item.l-1 {
+        flex-basis: calc(100% * (1 / 12));
+    }
+    .item.l-2 {
+        flex-basis: calc(100% * (2 / 12));
+    }
+    .item.l-3 {
+        flex-basis: calc(100% * (3 / 12));
+    }
+    .item.l-4 {
+        flex-basis: calc(100% * (4 / 12));
+    }
+    .item.l-5 {
+        flex-basis: calc(100% * (5 / 12));
+    }
+    .item.l-6 {
+        flex-basis: calc(100% * (6 / 12));
+    }
+    .item.l-7 {
+        flex-basis: calc(100% * (7 / 12));
+    }
+    .item.l-8 {
+        flex-basis: calc(100% * (8 / 12));
+    }
+    .item.l-9 {
+        flex-basis: calc(100% * (9 / 12));
+    }
+    .item.l-10 {
+        flex-basis: calc(100% * (10 / 12));
+    }
+    .item.l-11 {
+        flex-basis: calc(100% * (11 / 12));
+    }
+    .item.l-12 {
+        flex-basis: calc(100% * (12 / 12));
+    }
+}
+
+@media only screen and (min-width: 1536px) {
+    .item.xl-1 {
+        flex-basis: calc(100% * (1 / 12));
+    }
+    .item.xl-2 {
+        flex-basis: calc(100% * (2 / 12));
+    }
+    .item.xl-3 {
+        flex-basis: calc(100% * (3 / 12));
+    }
+    .item.xl-4 {
+        flex-basis: calc(100% * (4 / 12));
+    }
+    .item.xl-5 {
+        flex-basis: calc(100% * (5 / 12));
+    }
+    .item.xl-6 {
+        flex-basis: calc(100% * (6 / 12));
+    }
+    .item.xl-7 {
+        flex-basis: calc(100% * (7 / 12));
+    }
+    .item.xl-8 {
+        flex-basis: calc(100% * (8 / 12));
+    }
+    .item.xl-9 {
+        flex-basis: calc(100% * (9 / 12));
+    }
+    .item.xl-10 {
+        flex-basis: calc(100% * (10 / 12));
+    }
+    .item.xl-11 {
+        flex-basis: calc(100% * (11 / 12));
+    }
+    .item.xl-12 {
+        flex-basis: calc(100% * (12 / 12));
+    }
+}

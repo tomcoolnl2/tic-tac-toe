@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScoreBoardItem component snapshot test 1`] = `
+<div>
+  <div
+    class="container row-gap-s score-board-item "
+    style="--row-height: 1fr; --col-width: 1fr;"
+  >
+    <small>
+      ties
+    </small>
+    <h3>
+      1
+    </h3>
+  </div>
+</div>
+`;

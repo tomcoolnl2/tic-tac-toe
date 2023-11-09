@@ -1,0 +1,4 @@
+
+@function generate-box-shadow($size: 3px, $color) {
+    @return 0 #{$size} 0 -1px #{$color};
+}

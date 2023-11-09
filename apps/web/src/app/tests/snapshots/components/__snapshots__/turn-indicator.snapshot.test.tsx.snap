@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TurnIndicator component snapshot test should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="button button-dark turn-indicator turn-indicator-undefined"
+    disabled=""
+  >
+    <span
+      class="avatar avatar-o avatar-size-s avatar-variant-light"
+    />
+    Your Turn
+  </button>
+</DocumentFragment>
+`;
