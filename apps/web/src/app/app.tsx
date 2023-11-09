@@ -2,7 +2,6 @@ import React from 'react';
 import * as Rx from 'rxjs';
 import * as ArenaUI from '@tic-tac-toe/ui';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
-import { ErrorBoundary } from './error/error-boundry';
 import { AppStore } from './core/store-manager';
 import {
 	ErrorScreen,
@@ -19,7 +18,6 @@ import {
 	IntelligenceLevel,
 	PlayerSymbol,
 } from './core/model';
-import { GameEngine } from './core/game-engine';
 import { Modal } from './components';
 
 export const App: React.FC = () => {
@@ -123,7 +121,7 @@ export const App: React.FC = () => {
 						useLanscapeDesign ? 'landscape' : ''
 					}`}
 				>
-					<ErrorBoundary fallback={<ErrorScreen />}>
+					<ArenaUI.ErrorBoundary fallback={<ErrorScreen />}>
 						<div className="screen-front">
 							<SettingsScreen
 								playerSymbol={appState.playerSymbol}
@@ -145,7 +143,7 @@ export const App: React.FC = () => {
 								useLanscapeDesign={useLanscapeDesign}
 							/>
 						</div>
-					</ErrorBoundary>
+					</ArenaUI.ErrorBoundary>
 				</div>
 			</div>
 			{appState.appModalScreen !== null && (
