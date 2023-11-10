@@ -1,14 +1,12 @@
-
-import { GameEngine } from '../../../core/game-engine';
-import { AppState, GameState, PlayerSymbol } from '../../../core/model';
-import { AppStore } from '../../../core/store-manager';
-
+import { AppState, GameState, PlayerSymbol } from '@tic-tac-toe/model';
+import { GameEngine } from '../lib/game-engine';
+import { AppStore } from '../lib/store-manager';
 
 let gameEngine: GameEngine;
 let appState: AppState;
 
 beforeEach(() => {
-	appState = AppStore.initialState
+	appState = AppStore.initialState;
 	gameEngine = new GameEngine();
 });
 
@@ -21,9 +19,9 @@ describe('GameEngine - determineWinner', () => {
 		const isWinner = gameEngine.determineWinner(appState);
 		// Assert
 		expect(typeof isWinner).toBe('number');
-  	});
+	});
 
-  	it('should correctly determine no winner', () => {
+	it('should correctly determine no winner', () => {
 		// Prepare
 		appState.bitBoards = [0x0, 0x0]; // No winning combination for any player
 		appState.boardState = [0, 0, 0, null, null, null, null, null, null];
@@ -44,9 +42,9 @@ describe('GameEngine - determineDraw', () => {
 		// Assert
 		expect(isDraw).toBe(true);
 	});
-  
+
 	it('should correctly determine no draw', () => {
-	  	// Prepare
+		// Prepare
 		appState.bitBoards = [0b000000101, 0b000000010];
 		// Act
 		const isDraw = gameEngine.determineDraw(appState);
@@ -71,7 +69,7 @@ describe('GameEngine - determineDraw', () => {
 		// Assert
 		expect(updatedGameState.currentPlayer).toBe(1); // Player O's turn after Player X's move
 	});
-	
+
 	it('should not switch turns after an invalid player move', () => {
 		// Prepare
 		const cellIndex = 0;
@@ -88,16 +86,22 @@ describe('GameEngine - determineDraw', () => {
 		// Make the first valid move to occupy the cell
 		const updatedGameState = gameEngine.update(appState, cellIndex);
 		// Attempt to make another move on the same cell (invalid move)
-		const invalidMoveGameState = gameEngine.update(updatedGameState, cellIndex);
+		const invalidMoveGameState = gameEngine.update(
+			updatedGameState,
+			cellIndex
+		);
 		// Assert
 		expect(invalidMoveGameState).toEqual(updatedGameState);
 	});
-	
+
 	it('should not update the game state for an invalid move on an out-of-bounds cell', () => {
 		// Prepare
 		const invalidCellIndex = -1; // Cell index out of bounds (negative)
 		// Act
-		const invalidMoveGameState = gameEngine.update(appState, invalidCellIndex);
+		const invalidMoveGameState = gameEngine.update(
+			appState,
+			invalidCellIndex
+		);
 		// Assert
 		expect(invalidMoveGameState).toEqual(appState);
 	});
