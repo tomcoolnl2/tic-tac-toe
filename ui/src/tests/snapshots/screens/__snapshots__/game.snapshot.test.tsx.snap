@@ -118,7 +118,10 @@ exports[`GameScreen screen component snapshot test should match the snapshot 1`]
           style="--row-height: 1fr; --col-width: 1fr;"
         >
           <small>
-            X (You)
+            <b>
+              X
+            </b>
+             (You)
           </small>
           <h3>
             0
@@ -140,7 +143,10 @@ exports[`GameScreen screen component snapshot test should match the snapshot 1`]
           style="--row-height: 1fr; --col-width: 1fr;"
         >
           <small>
-            O (cpu)
+            <b>
+              O
+            </b>
+             (cpu)
           </small>
           <h3>
             0

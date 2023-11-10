@@ -85,6 +85,7 @@ exports[`SettingsScreen screen component snapshot test should match the snapshot
           title="novice"
         />
         <input
+          checked=""
           id="bieber"
           name="level"
           type="radio"
@@ -98,7 +99,9 @@ exports[`SettingsScreen screen component snapshot test should match the snapshot
       <hr
         class="divider full-width horizontal margin-vertical-s invisible"
       />
-      <sup />
+      <sup>
+        bieber
+      </sup>
     </div>
     <hr
       class="divider full-width horizontal margin-vertical-l invisible"

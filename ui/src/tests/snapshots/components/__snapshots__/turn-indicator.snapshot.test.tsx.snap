@@ -3,11 +3,11 @@
 exports[`TurnIndicator component snapshot test should match the snapshot 1`] = `
 <DocumentFragment>
   <button
-    class="button button-dark turn-indicator turn-indicator-undefined"
+    class="button button-dark turn-indicator turn-indicator-x"
     disabled=""
   >
     <span
-      class="avatar avatar-o avatar-size-s avatar-variant-light"
+      class="avatar avatar-x avatar-size-s avatar-variant-light"
     />
     Your Turn
   </button>
