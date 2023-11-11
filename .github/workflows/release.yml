@@ -25,6 +25,10 @@ jobs:
             - name: Install dependencies
               run: yarn install
 
+            - name: Debug GitHub Token
+              run: |
+                  echo "GitHub Token: ${{ secrets.GH_TOKEN }}"
+
             - name: Apply Versioning
               run: npx semantic-release
               env:
