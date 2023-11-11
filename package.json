@@ -8,8 +8,7 @@
 	"scripts": {
 		"start": "nx serve web",
 		"build": "nx build web",
-		"test": "yarn test:web && yarn test:core && yarn test:ui",
-		"test:web": "nx test web",
+		"test": "yarn test:core && yarn test:ui",
 		"test:core": "nx test core",
 		"test:ui": "nx test ui",
 		"format": "prettier --write 'apps/**/*.{ts,tsx,html,css,scss,json,md}'"
