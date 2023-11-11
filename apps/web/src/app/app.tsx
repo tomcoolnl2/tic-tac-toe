@@ -17,7 +17,6 @@ export const App: React.FC = () => {
 
 	const handleStartGame = React.useCallback(() => {
 		// when player chooses O it means the CPU should make the first move
-		// TODO move into GameEngine in it's own method
 		let updatedAppState = {};
 		if (appState.playerSymbol === TTTModel.PlayerSymbol.O) {
 			updatedAppState = AppStore.gameEngine!.takeFirstTurn({

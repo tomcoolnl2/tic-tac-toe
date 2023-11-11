@@ -1,4 +1,293 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App component snapshot test > should match the snapshot 1`] = `
+<DocumentFragment>
+  <main>
+    <div
+      class="screen settings"
+    >
+      <div
+        class="screen-inner "
+      >
+        <div
+          class="screen-front"
+        >
+          <div
+            class="flex-box direction-column justify-content-flex-start align-items-center"
+          >
+            <div
+              class="flex-box direction-row justify-content-flex-start align-items-flex-start spacing-s logo"
+            >
+              <span
+                class="avatar avatar-x avatar-size-m"
+              />
+              <span
+                class="avatar avatar-o avatar-size-m"
+              />
+            </div>
+            <hr
+              class="divider full-width horizontal margin-vertical-l invisible"
+            />
+            <span>
+              Pic Player 1's Mark
+            </span>
+            <label
+              class="choose-player"
+              for="choose-player"
+            >
+              <input
+                id="choose-player"
+                type="checkbox"
+              />
+              <span
+                class="choose-player-toggle"
+              />
+              <div
+                class="container cols-2 choose-player-symbols"
+                style="--row-height: 1fr; --col-width: 1fr;"
+              >
+                <div
+                  style="place-self: center;"
+                >
+                  <span
+                    class="avatar avatar-x avatar-size-m avatar-variant-dark"
+                  />
+                </div>
+                <div
+                  style="place-self: center;"
+                >
+                  <span
+                    class="avatar avatar-o avatar-size-m avatar-variant-light"
+                  />
+                </div>
+              </div>
+            </label>
+            <sub>
+              Remember, X goes first
+            </sub>
+            <hr
+              class="divider full-width horizontal margin-vertical-l invisible"
+            />
+            <div
+              class="flex-box direction-column justify-content-flex-start align-items-center choose-difficulty"
+            >
+              <div
+                class="flex-box direction-row justify-content-flex-start align-items-flex-start"
+              >
+                <input
+                  id="master"
+                  name="level"
+                  type="radio"
+                  value="master"
+                />
+                <label
+                  for="master"
+                  title="master"
+                />
+                <input
+                  id="novice"
+                  name="level"
+                  type="radio"
+                  value="novice"
+                />
+                <label
+                  for="novice"
+                  title="novice"
+                />
+                <input
+                  checked=""
+                  id="bieber"
+                  name="level"
+                  type="radio"
+                  value="bieber"
+                />
+                <label
+                  for="bieber"
+                  title="bieber"
+                />
+              </div>
+              <hr
+                class="divider full-width horizontal margin-vertical-s invisible"
+              />
+              <sup>
+                bieber
+              </sup>
+            </div>
+            <hr
+              class="divider full-width horizontal margin-vertical-l invisible"
+            />
+            <button
+              class="button button-secondary"
+            >
+              Start game 
+              <i
+                class="icon-play-sign"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          class="screen-back"
+        >
+          <div
+            class="container cols-1 col-gap-m row-gap-l"
+            style="--row-height: 1fr; --col-width: 1fr;"
+          >
+            <div>
+              <div
+                class="container col-gap-m row-gap-l"
+                style="--row-height: 1fr; --col-width: 1fr; grid-template-columns: 1fr auto 1fr;"
+              >
+                <div>
+                  <div
+                    class="flex-box direction-row justify-content-flex-start align-items-flex-start spacing-s logo"
+                  >
+                    <span
+                      class="avatar avatar-x avatar-size-m"
+                    />
+                    <span
+                      class="avatar avatar-o avatar-size-m"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <button
+                    class="button button-dark turn-indicator turn-indicator-x"
+                    disabled=""
+                  >
+                    <span
+                      class="avatar avatar-x avatar-size-s avatar-variant-light"
+                    />
+                    Your Turn
+                  </button>
+                </div>
+                <div
+                  style="place-self: flex-end;"
+                >
+                  <button
+                    class="button button-light icon-reload"
+                  >
+                    <i
+                      class="icon-repeat"
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                class="container cols-3 col-gap-m row-gap-m board"
+                style="--row-height: 1fr; --col-width: 1fr;"
+              >
+                <button
+                  class="cell "
+                  data-index="0"
+                  data-testid="cell-0"
+                  value="0"
+                />
+                <button
+                  class="cell "
+                  data-index="1"
+                  data-testid="cell-1"
+                  value="1"
+                />
+                <button
+                  class="cell "
+                  data-index="2"
+                  data-testid="cell-2"
+                  value="2"
+                />
+                <button
+                  class="cell "
+                  data-index="3"
+                  data-testid="cell-3"
+                  value="3"
+                />
+                <button
+                  class="cell "
+                  data-index="4"
+                  data-testid="cell-4"
+                  value="4"
+                />
+                <button
+                  class="cell "
+                  data-index="5"
+                  data-testid="cell-5"
+                  value="5"
+                />
+                <button
+                  class="cell "
+                  data-index="6"
+                  data-testid="cell-6"
+                  value="6"
+                />
+                <button
+                  class="cell "
+                  data-index="7"
+                  data-testid="cell-7"
+                  value="7"
+                />
+                <button
+                  class="cell "
+                  data-index="8"
+                  data-testid="cell-8"
+                  value="8"
+                />
+              </div>
+            </div>
+            <div>
+              <div
+                class="container cols-3 col-gap-m row-gap-m"
+                style="--row-height: 1fr; --col-width: 1fr;"
+              >
+                <div
+                  class="container row-gap-s score-board-item score-board-item-x"
+                  style="--row-height: 1fr; --col-width: 1fr;"
+                >
+                  <small>
+                    <b>
+                      X
+                    </b>
+                     (You)
+                  </small>
+                  <h3>
+                    0
+                  </h3>
+                </div>
+                <div
+                  class="container row-gap-s score-board-item "
+                  style="--row-height: 1fr; --col-width: 1fr;"
+                >
+                  <small>
+                    ties
+                  </small>
+                  <h3>
+                    0
+                  </h3>
+                </div>
+                <div
+                  class="container row-gap-s score-board-item score-board-item-o"
+                  style="--row-height: 1fr; --col-width: 1fr;"
+                >
+                  <small>
+                    <b>
+                      O
+                    </b>
+                     (cpu)
+                  </small>
+                  <h3>
+                    0
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</DocumentFragment>
+`;
 
 exports[`App component snapshot test should match the snapshot 1`] = `
 <DocumentFragment>
