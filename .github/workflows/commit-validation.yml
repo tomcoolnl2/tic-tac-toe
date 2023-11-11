@@ -23,19 +23,8 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout code
-              uses: actions/checkout@v2
-
-            - name: Set up Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 18.17.0
-
-            - name: Install Yarn
-              run: npm install -g yarn
-
-            - name: Install dependencies
-              run: yarn install
+            - name: Setup Node and Yarn
+              uses: ./shared/node-yarn.yml
 
             - name: Run Jest tests
               run: yarn test
