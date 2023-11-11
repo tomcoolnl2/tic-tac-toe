@@ -9,6 +9,7 @@ on:
 
 jobs:
     validate-commit-message:
+        name: Validate commit message
         runs-on: ubuntu-latest
 
         steps:
@@ -19,11 +20,24 @@ jobs:
               uses: webiny/action-conventional-commits@v1.1.0
 
     run-tests:
+        name: Run Tests
         needs: validate-commit-message
         runs-on: ubuntu-latest
 
         steps:
-            - uses: ./shared/steps.yml
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Setup NodeJS
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 18.17.0
+
+            - name: Install Yarn
+              run: npm install -g yarn
+
+            - name: Install dependencies
+              run: yarn install
 
             - name: Run Jest tests
               run: yarn test
