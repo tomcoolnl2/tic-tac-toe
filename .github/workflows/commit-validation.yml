@@ -1,11 +1,11 @@
-name: Validate Commit Messages
+name: CI
 
 on:
-    push:
-        branches-ignore:
-            - main # Ignore the main branch, adjust as needed
     pull_request:
         types: [opened, synchronize]
+    push:
+        branches:
+            - main
 
 jobs:
     validate-commit-message:
@@ -17,3 +17,31 @@ jobs:
 
             - name: Validate Commit Message
               uses: webiny/action-conventional-commits@v1.1.0
+
+    run-tests:
+        needs: validate-commit-message
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 18.17.0
+
+            - name: Install Yarn
+              run: npm install -g yarn
+
+            - name: Install dependencies
+              run: yarn install
+
+            - name: Run Jest tests
+              run: yarn test
+
+            - name: Save test results
+              uses: actions/upload-artifact@v2
+              with:
+                  name: test-results
+                  path: ./coverage
