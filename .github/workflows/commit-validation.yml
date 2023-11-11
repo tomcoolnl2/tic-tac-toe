@@ -23,8 +23,7 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Setup Node and Yarn
-              uses: ./shared/node-yarn.yml
+            - uses: ./shared/steps.yml
 
             - name: Run Jest tests
               run: yarn test
