@@ -1,7 +1,6 @@
-
+import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
-import { AppLogo } from '../../../components';
-
+import { AppLogo } from '../../../lib/components';
 
 describe('AppLogo component unit test', () => {
 	it('should render two Avatar components with correct props', () => {

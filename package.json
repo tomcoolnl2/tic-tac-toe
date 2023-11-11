@@ -7,13 +7,17 @@
 	},
 	"scripts": {
 		"start": "nx serve web",
-		"build": "nx build",
-		"test": "nx test",
+		"build": "nx build web",
+		"test": "yarn test:web && yarn test:core && yarn test:ui",
+		"test:web": "nx test web",
+		"test:core": "nx test core",
+		"test:ui": "nx test ui",
 		"format": "prettier --write 'apps/**/*.{ts,tsx,html,css,scss,json,md}'"
 	},
 	"private": true,
 	"dependencies": {
 		"@swc/helpers": "0.5.2",
+		"classnames": "^2.3.2",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"tslib": "^2.3.0"
@@ -37,6 +41,7 @@
 		"@types/node": "18.14.2",
 		"@types/react": "18.2.33",
 		"@types/react-dom": "18.2.14",
+		"@types/testing-library__jest-dom": "^6.0.0",
 		"@typescript-eslint/eslint-plugin": "5.60.1",
 		"@typescript-eslint/parser": "5.60.1",
 		"@vitejs/plugin-react": "4.0.0",
