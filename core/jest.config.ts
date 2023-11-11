@@ -2,7 +2,7 @@
 export default {
 	displayName: 'core',
 	preset: '../jest.preset.js',
-	testEnvironment: 'node',
+	testEnvironment: 'jsdom',
 	transform: {
 		'^.+\\.[tj]s$': [
 			'ts-jest',

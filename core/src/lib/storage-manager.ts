@@ -15,7 +15,7 @@ export class StateStorage {
 	 * @param storage - The storage implementation to use (e.g., sessionStorage).
 	 */
 	constructor(storage?: Storage) {
-		this.storage = storage || sessionStorage;
+		this.storage = storage || window.sessionStorage;
 	}
 
 	/**
