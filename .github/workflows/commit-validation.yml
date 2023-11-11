@@ -9,6 +9,7 @@ on:
 
 jobs:
     validate-commit-message:
+        name: Validate commit message
         runs-on: ubuntu-latest
 
         steps:
@@ -19,6 +20,7 @@ jobs:
               uses: webiny/action-conventional-commits@v1.1.0
 
     run-tests:
+        name: Run Tests
         needs: validate-commit-message
         runs-on: ubuntu-latest
 

@@ -7,6 +7,7 @@ on:
 
 jobs:
     release:
+        name: Release
         runs-on: ubuntu-latest
 
         steps:
@@ -24,7 +25,7 @@ jobs:
             - name: Install dependencies
               run: yarn install
 
-            - name: Release
+            - name: Apply Versioning
               run: npx semantic-release
               env:
                   GH_TOKEN: ${{ secrets.GH_TOKEN }}
