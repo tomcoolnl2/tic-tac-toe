@@ -19,6 +19,16 @@ jobs:
             - name: Validate Commit Message
               uses: webiny/action-conventional-commits@v1.1.0
 
+    log-env-variable:
+        name: Log Env Variable
+        runs-on: ubuntu-latest
+        steps:
+            - name: Log Environment Variable
+              env:
+                  USERNAME: ${{ secrets.VITE_USERNAME }}
+              run: |
+                  echo "username: $USERNAME"
+
     run-tests:
         name: Run Tests
         needs: validate-commit-message

@@ -5,6 +5,8 @@ import * as TTTModel from '@tic-tac-toe/model';
 import * as TTTUI from '@tic-tac-toe/ui';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
 
+console.log('username: ', import.meta.env.VITE_USERNAME);
+
 export const App: React.FC = () => {
 	const [appState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.AppState>(
 		AppStore.state$
