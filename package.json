@@ -3,6 +3,9 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"private": true,
+	"repository": {
+		"url": "https://github.com/tomcoolnl2/tic-tac-toe"
+	},
 	"engines": {
 		"node": ">= 18.17.0"
 	},
