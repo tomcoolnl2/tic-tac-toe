@@ -19,16 +19,16 @@ jobs:
             - name: Validate Commit Message
               uses: webiny/action-conventional-commits@v1.1.0
 
-    log-env-variable:
-        name: Log Env Variable
-        runs-on: ubuntu-latest
-        environment: development
-        steps:
-            - name: Log Environment Variable
-              env:
-                  USERNAME: ${{ vars.VITE_USERNAME }}
-              run: |
-                  echo "username: $USERNAME"
+    # log-env-variable:
+    #     name: Log Env Variable
+    #     runs-on: ubuntu-latest
+    #     environment: development
+    #     steps:
+    #         - name: Log Environment Variable
+    #           env:
+    #               USERNAME: ${{ vars.VITE_USERNAME }}
+    #           run: |
+    #               echo "username: $USERNAME"
 
     run-tests:
         name: Run Tests
