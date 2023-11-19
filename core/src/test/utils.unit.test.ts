@@ -1,6 +1,5 @@
-// Import the function to be tested
 import { BoardState } from '@tic-tac-toe/model';
-import { delay, getNullIndices, getRandomNullIndex } from '../utils';
+import { delay, getNullIndices, getRandomNullIndex } from '../lib/utils';
 
 describe('"delay" function', () => {
 	// Test case for default delay (500ms)

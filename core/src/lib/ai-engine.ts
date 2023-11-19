@@ -1,5 +1,5 @@
 import * as TTTModel from '@tic-tac-toe/model';
-import { delay, getNullIndices, getRandomNullIndex } from '../utils';
+import { delay, getNullIndices, getRandomNullIndex } from './utils';
 import { GameEngine } from './game-engine';
 
 /**
@@ -9,9 +9,10 @@ export class AIEngine {
 	/**
 	 * Checks if the current player can win with their next move.
 	 * @param {AppState} appState - The current state of the game.
+	 * * @param {PlayerSymbol} player - The player to see if it's score is a winning one on a next move
 	 * @returns {number} The cellIndex for winning on the next move, otherwise -1.
 	 */
-	private isWinningNextMove(
+	public isWinningNextMove(
 		appState: TTTModel.AppState,
 		player: TTTModel.PlayerSymbol
 	): number {
