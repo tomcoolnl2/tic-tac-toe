@@ -1,6 +1,11 @@
-import * as TTTModel from '@tic-tac-toe/model';
+import { AppState, PlayerSymbol } from '@tic-tac-toe/model';
 
-export const delay = (ms = 500): Promise<void> => {
+/**
+ * Delays the execution asynchronously for a specified duration.
+ * @param {number} [ms=500] - The duration in milliseconds to delay the execution.
+ * @returns {Promise<void>} - A promise that resolves after the specified delay.
+ */
+export const delay = (ms = 500) => {
 	return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
@@ -10,14 +15,10 @@ export const delay = (ms = 500): Promise<void> => {
  * @returns {number[]} An array of indices representing null (empty) cells.
  */
 export const getNullIndices = (
-	boardState: TTTModel.AppState['boardState']
+	boardState: AppState['boardState']
 ): number[] => {
 	return boardState.reduce(
-		(
-			indices: number[],
-			value: TTTModel.PlayerSymbol | null,
-			index: number
-		) => {
+		(indices: number[], value: PlayerSymbol | null, index: number) => {
 			if (value === null) {
 				indices.push(index);
 			}
@@ -33,7 +34,7 @@ export const getNullIndices = (
  * @returns A random null index or null if none is available.
  */
 export const getRandomNullIndex = (
-	boardState: TTTModel.AppState['boardState']
+	boardState: AppState['boardState']
 ): number | null => {
 	const nullIndices = getNullIndices(boardState);
 
