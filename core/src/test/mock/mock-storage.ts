@@ -1,29 +1,28 @@
-
+/* istanbul ignore next */
 export class MockStorage implements Storage {
-    
-    private store: { [key: string]: string } = {};
+	private store: { [key: string]: string } = {};
 
-    get length(): number {
-        return Object.keys(this.store).length;
-    }
+	get length(): number {
+		return Object.keys(this.store).length;
+	}
 
-    clear(): void {
-        this.store = {};
-    }
+	clear(): void {
+		this.store = {};
+	}
 
-    getItem(key: string): string | null {
-        return this.store[key] || null;
-    }
+	getItem(key: string): string | null {
+		return this.store[key] || null;
+	}
 
-    key(index: number): string | null {
-        return Object.keys(this.store)[index] || null;
-    }
+	key(index: number): string | null {
+		return Object.keys(this.store)[index] || null;
+	}
 
-    setItem(key: string, value: string): void {
-        this.store[key] = value;
-    }
+	setItem(key: string, value: string): void {
+		this.store[key] = value;
+	}
 
-    removeItem(key: string): void {
-        delete this.store[key];
-    }
+	removeItem(key: string): void {
+		delete this.store[key];
+	}
 }
