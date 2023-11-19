@@ -1,7 +1,5 @@
 name: CI
 
-concurrency: production
-
 on:
     pull_request:
         types: [opened, synchronize]
@@ -24,7 +22,8 @@ jobs:
     log-env-variable:
         name: Log Env Variable
         runs-on: ubuntu-latest
-        environment: production
+        environment:
+            name: development
         steps:
             - name: Log Environment Variable
               env:
