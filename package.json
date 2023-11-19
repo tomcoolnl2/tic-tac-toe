@@ -10,8 +10,11 @@
 		"start": "nx serve web",
 		"build": "nx build web",
 		"test": "yarn test:core && yarn test:ui",
+		"test:coverage": "yarn test:core:coverage & yarn test:ui:coverage",
 		"test:core": "nx test core --collectCoverage --verbose",
+		"test:core:coverage": "yarn test:core && npx serve ./coverage/core -p 2100",
 		"test:ui": "nx test ui --collectCoverage --verbose",
+		"test:ui:coverage": "yarn test:ui && npx serve ./coverage/ui -p 2200",
 		"storybook": "nx run ui:storybook",
 		"format": "prettier --write 'apps/**/*.{ts,tsx,html,css,scss,json,md}'"
 	},
