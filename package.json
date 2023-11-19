@@ -9,8 +9,8 @@
 	"scripts": {
 		"start": "nx serve web",
 		"build": "nx build web",
-		"test": "yarn test:core:coverage & yarn test:ui:coverage",
-		"test:coverage": "yarn test:core && yarn test:ui",
+		"test": "yarn test:core && yarn test:ui",
+		"test:coverage": "yarn test:core:coverage & yarn test:ui:coverage",
 		"test:core": "nx test core --collectCoverage --verbose",
 		"test:core:coverage": "yarn test:core && npx serve ./coverage/core -p 2100",
 		"test:ui": "nx test ui --collectCoverage --verbose",
