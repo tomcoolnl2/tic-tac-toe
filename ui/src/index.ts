@@ -1,4 +1,4 @@
-export { Theme } from './theme/theme';
+export { Theme } from './lib/theme/theme';
 export * from './lib/core';
 export * from './lib/components';
 export * from './lib/screens';
