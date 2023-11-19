@@ -1,6 +1,6 @@
 import { PlayerSymbol } from '@tic-tac-toe/model';
 import { FlexBox } from '../../core';
-import { Avatar } from '..';
+import { Avatar } from '../';
 
 export const AppLogo: React.FC = () => {
 	return (
