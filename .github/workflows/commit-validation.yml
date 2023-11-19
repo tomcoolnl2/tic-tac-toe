@@ -22,12 +22,11 @@ jobs:
     log-env-variable:
         name: Log Env Variable
         runs-on: ubuntu-latest
-        environment:
-            name: development
+        environment: development
         steps:
             - name: Log Environment Variable
               env:
-                  USERNAME: ${{ secrets.VITE_USERNAME }}
+                  USERNAME: ${{ vars.VITE_USERNAME }}
               run: |
                   echo "username: $USERNAME"
 
