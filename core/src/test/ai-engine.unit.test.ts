@@ -1,7 +1,7 @@
 import { AppState, IntelligenceLevel, PlayerSymbol } from '@tic-tac-toe/model';
 import { AppStore } from '../lib/store-manager';
 import { AIEngine } from '../lib/ai-engine';
-import { getRandomNullIndex } from '../utils';
+import { getRandomNullIndex } from '../lib/utils';
 
 describe('AIEngine', () => {
 	const appState: AppState = {

@@ -1,5 +1,5 @@
 import * as TTTModel from '@tic-tac-toe/model';
-import { getRandomNullIndex } from '../utils';
+import { getRandomNullIndex } from './utils';
 
 /**
  * The GameEngine class is responsible for managing the game logic.
