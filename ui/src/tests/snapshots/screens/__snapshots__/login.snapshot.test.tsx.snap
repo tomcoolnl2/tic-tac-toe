@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginScreen screen component snapshot test should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex-box direction-column justify-content-flex-start align-items-center"
+  >
+    <div
+      class="flex-box direction-row justify-content-flex-start align-items-flex-start spacing-s logo"
+    >
+      <span
+        class="avatar avatar-x avatar-size-m"
+      />
+      <span
+        class="avatar avatar-o avatar-size-m"
+      />
+    </div>
+    <hr
+      class="divider full-width horizontal margin-vertical invisible"
+    />
+    <hr
+      class="divider full-width horizontal margin-vertical-l invisible"
+    />
+    <span>
+      Login
+    </span>
+    <hr
+      class="divider full-width horizontal margin-vertical invisible"
+    />
+    <form
+      autocomplete="off"
+      novalidate=""
+    >
+      <input
+        autocomplete="off"
+        disabled=""
+        id="username"
+        name="username"
+        type="text"
+        value=""
+      />
+      <hr
+        class="divider full-width horizontal margin-vertical invisible"
+      />
+      <input
+        autocomplete="off"
+        id="password"
+        name="password"
+        type="password"
+        value=""
+      />
+      <hr
+        class="divider full-width horizontal margin-vertical invisible"
+      />
+      <button
+        class="button button-primary"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;

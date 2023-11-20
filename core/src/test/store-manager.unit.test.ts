@@ -30,6 +30,7 @@ beforeEach(() => {
 	userState = {
 		name: '',
 		avatar: PlayerSymbol.X,
+		loggedIn: false,
 	};
 
 	store = AppStore;

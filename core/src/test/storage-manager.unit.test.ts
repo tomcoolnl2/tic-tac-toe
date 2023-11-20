@@ -78,7 +78,7 @@ describe('StateStorage', () => {
 
 	it('should set the user in storage', () => {
 		// Prepare
-		const user = { name: 'John', avatar: PlayerSymbol.X };
+		const user = { name: 'John', avatar: PlayerSymbol.X, loggedIn: true };
 		// Act
 		stateStorage.user = user;
 		const storedUser = mockStorage.getItem('ttt:user');

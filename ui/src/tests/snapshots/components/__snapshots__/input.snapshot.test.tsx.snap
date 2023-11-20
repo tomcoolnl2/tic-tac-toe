@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input component password snapshot test 1`] = `
+<div>
+  <input
+    autocomplete="off"
+    id="password"
+    name="password"
+    type="password"
+    value="pwd"
+  />
+</div>
+`;
+
+exports[`Input component snapshot test 1`] = `
+<div>
+  <input
+    autocomplete="off"
+    id="username"
+    name="username"
+    type="text"
+    value="test"
+  />
+</div>
+`;

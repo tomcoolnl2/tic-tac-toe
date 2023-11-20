@@ -53,6 +53,7 @@ class Store {
 		return {
 			name: '',
 			avatar: TTTModel.PlayerSymbol.X,
+			loggedIn: false,
 		};
 	}
 
