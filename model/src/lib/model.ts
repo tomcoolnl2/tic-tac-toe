@@ -1,3 +1,8 @@
+export interface User {
+	name: string;
+	avatar: PlayerSymbol;
+	loggedIn: boolean;
+}
 export interface AppState {
 	appScreen: AppScreen;
 	appModalScreen: AppModalScreen | null;
@@ -13,6 +18,7 @@ export interface AppState {
 }
 
 export enum AppScreen {
+	LOGIN = 'login',
 	SETTINGS = 'settings',
 	GAME = 'game',
 }
@@ -20,11 +26,6 @@ export enum AppScreen {
 export enum AppModalScreen {
 	GAME_OVER = 'game-over',
 	RELOAD = 'reload',
-}
-
-export interface User {
-	name: string;
-	avatar: PlayerSymbol;
 }
 
 export enum PlayerSymbol {

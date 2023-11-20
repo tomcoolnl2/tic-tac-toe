@@ -1,0 +1,13 @@
+
+form {
+    width: 100%;
+}
+
+.error-message {
+    opacity: 0.8;
+    border-radius: 4px;
+    text-align: center;
+    border: 2px solid red;
+    padding: 10px;
+    background: rgba(255,0,0,.2)
+}

@@ -2,20 +2,38 @@ import React from 'react';
 import * as Rx from 'rxjs';
 import { AppStore } from '@tic-tac-toe/core';
 import * as TTTModel from '@tic-tac-toe/model';
-
 import * as TTTUI from '@tic-tac-toe/ui';
-
 import { isDevEnvironment } from '@tic-tac-toe/debug';
 
 export const App: React.FC = () => {
+	const orientation = TTTUI.Hooks.useScreenOrientation();
+
 	const [appState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.AppState>(
 		AppStore.state$
 	);
-	const orientation = TTTUI.Hooks.useScreenOrientation();
+
+	const [userState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.User>(
+		AppStore.user$
+	);
 
 	React.useEffect(() => {
-		isDevEnvironment() && console.log('appState', appState);
-	}, [appState]);
+		if (isDevEnvironment()) {
+			console.info('userState', userState);
+			console.info('appState', appState);
+		}
+	}, [appState, userState]);
+
+	// When a user is not logged in,
+	// show the login form
+	React.useEffect(() => {
+		if (!userState.loggedIn) {
+			AppStore.nextState({
+				...AppStore.initialState,
+				appScreen: TTTModel.AppScreen.LOGIN,
+				gameState: TTTModel.GameState.PREPLAY,
+			});
+		}
+	}, [userState]);
 
 	const handleStartGame = React.useCallback(() => {
 		// when player chooses O it means the CPU should make the first move
@@ -112,19 +130,26 @@ export const App: React.FC = () => {
 				>
 					<TTTUI.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
 						<div className="screen-front">
-							<TTTUI.SettingsScreen
-								playerSymbol={appState.playerSymbol}
-								selectedDifficultySetting={
-									appState.intelligenceLevel
-								}
-								handleDifficultySettingsChange={
-									handleDifficultySettingsChange
-								}
-								handleSymbolChoiceChange={
-									handleSymbolChoiceChange
-								}
-								handleStartGame={handleStartGame}
-							/>
+							{appState.appScreen ===
+								TTTModel.AppScreen.LOGIN && (
+								<TTTUI.LoginScreen></TTTUI.LoginScreen>
+							)}
+							{appState.appScreen ===
+								TTTModel.AppScreen.SETTINGS && (
+								<TTTUI.SettingsScreen
+									playerSymbol={appState.playerSymbol}
+									selectedDifficultySetting={
+										appState.intelligenceLevel
+									}
+									handleDifficultySettingsChange={
+										handleDifficultySettingsChange
+									}
+									handleSymbolChoiceChange={
+										handleSymbolChoiceChange
+									}
+									handleStartGame={handleStartGame}
+								/>
+							)}
 						</div>
 						<div className="screen-back">
 							<TTTUI.GameScreen

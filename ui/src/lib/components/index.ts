@@ -4,6 +4,7 @@ export { Button } from './button/button';
 export { Cell } from './cell/cell';
 export { ChooseDifficulty } from './choose-difficulty/choose-difficulty';
 export { GameOver } from './game-over/game-over';
+export { Input } from './input/input';
 export { Modal } from './modal/modal';
 export { ReloadButton } from './reload-button/reload-button';
 export { ScoreBoardItem } from './score-board-item/score-board-item';
