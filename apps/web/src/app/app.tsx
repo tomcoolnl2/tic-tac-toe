@@ -2,7 +2,9 @@ import React from 'react';
 import * as Rx from 'rxjs';
 import { AppStore } from '@tic-tac-toe/core';
 import * as TTTModel from '@tic-tac-toe/model';
+
 import * as TTTUI from '@tic-tac-toe/ui';
+
 import { isDevEnvironment } from '@tic-tac-toe/debug';
 
 export const App: React.FC = () => {
