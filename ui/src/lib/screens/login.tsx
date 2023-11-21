@@ -4,11 +4,7 @@ import { AppStore } from '@tic-tac-toe/core';
 import { Divider, FlexBox } from '../core';
 import { AppLogo, Button, Input } from '../components';
 
-interface Props {
-	test?: boolean;
-}
-
-export const LoginScreen: React.FC<Props> = () => {
+export const LoginScreen: React.FC = () => {
 	const [username, pwd] = React.useMemo(() => {
 		return [VITE_USERNAME, VITE_USERPWD];
 	}, []);
