@@ -20,9 +20,7 @@
 			"@tic-tac-toe/debug": ["debug/src/index.ts"],
 			"@tic-tac-toe/model": ["model/src/index.ts"],
 			"@tic-tac-toe/ui": ["ui/src/index.ts"]
-		},
-		"typeRoots": ["../node_modules/@types", "./types/index.d.ts"],
-		"esModuleInterop": true
+		}
 	},
 	"exclude": ["node_modules", "tmp"]
 }
