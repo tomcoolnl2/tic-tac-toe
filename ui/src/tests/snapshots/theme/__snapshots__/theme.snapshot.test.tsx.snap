@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Theme screen component snapshot test should match the snapshot 1`] = `
+<DocumentFragment>
+  <main>
+    <div />
+  </main>
+</DocumentFragment>
+`;
