@@ -1,0 +1,11 @@
+{
+	"configurations": [
+		{
+			"name": "Debug Desktop App",
+			"type": "node",
+			"request": "attach",
+			"port": 5858,
+			"skipFiles": ["<node_internals>/**"]
+		}
+	]
+}

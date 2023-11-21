@@ -10,7 +10,6 @@
 		"node": ">= 18.17.0"
 	},
 	"scripts": {
-		"start": "nx serve",
 		"start:web": "nx serve web",
 		"start:desktop": "yarn start:web & nx serve desktop",
 		"build": "nx build web",

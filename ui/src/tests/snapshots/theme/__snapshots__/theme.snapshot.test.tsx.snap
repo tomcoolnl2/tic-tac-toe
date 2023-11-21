@@ -2,7 +2,9 @@
 
 exports[`Theme screen component snapshot test should match the snapshot 1`] = `
 <DocumentFragment>
-  <main>
+  <main
+    class="web"
+  >
     <div />
   </main>
 </DocumentFragment>
