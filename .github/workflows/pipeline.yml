@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 
 on:
     pull_request:
@@ -46,16 +46,27 @@ jobs:
                   name: test-results
                   path: ./coverage
 
-    store-status:
-        name: Run Tests
+    release:
+        name: Release
         needs: validate-commit-message
         runs-on: ubuntu-latest
+        if: github.ref == 'refs/heads/main'
         steps:
-            - name: Store validation status
-              run: echo "success" > validation_status.txt
+            - name: Checkout code
+              uses: actions/checkout@v2
 
-            - name: Upload validation status
-              uses: actions/upload-artifact@v2
+            - name: Setup NodeJS
+              uses: actions/setup-node@v4
               with:
-                  name: validation-status
-                  path: validation_status.txt
+                  node-version: 18.17.0
+
+            - name: Install Yarn
+              run: npm install -g yarn
+
+            - name: Install dependencies
+              run: yarn install
+
+            - name: Apply Versioning
+              run: npx semantic-release
+              env:
+                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
