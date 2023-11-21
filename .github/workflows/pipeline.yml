@@ -22,7 +22,6 @@ jobs:
         name: Run Tests
         needs: validate-commit-message
         runs-on: ubuntu-latest
-        if: github.event_name != 'pull_request'
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
@@ -49,9 +48,9 @@ jobs:
 
     release:
         name: Release
-        needs: run-tests
+        needs: validate-commit-message
         runs-on: ubuntu-latest
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
@@ -59,4 +58,15 @@ jobs:
             - name: Setup NodeJS
               uses: actions/setup-node@v4
               with:
-                  node-version: 18.17.
+                  node-version: 18.17.0
+
+            - name: Install Yarn
+              run: npm install -g yarn
+
+            - name: Install dependencies
+              run: yarn install
+
+            - name: Apply Versioning
+              run: npx semantic-release
+              env:
+                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
