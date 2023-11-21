@@ -17,7 +17,7 @@ jobs:
         name: Release
         runs-on: ubuntu-latest
         environment: development
-        if: github.event_name == 'workflow_run' && github.event.workflow_run.event == 'completed' && github.event.workflow_run.workflow == 'Commit Validation' || github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event.workflow_run.conclusion == 'success'
 
         steps:
             - name: Checkout code

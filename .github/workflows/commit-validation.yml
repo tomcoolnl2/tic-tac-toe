@@ -51,5 +51,11 @@ jobs:
         needs: validate-commit-message
         runs-on: ubuntu-latest
         steps:
-            - name: Store Validation Status
-              run: echo 'validation-successful' > validation-status.txt
+            - name: Store validation status
+              run: echo "success" > validation_status.txt
+
+            - name: Upload validation status
+              uses: actions/upload-artifact@v2
+              with:
+                  name: validation-status
+                  path: validation_status.txt
