@@ -9,3 +9,7 @@ input {
         cursor: not-allowed;
     }
 }
+
+[data-lastpass-icon-root] {
+    display: none !important;
+}
