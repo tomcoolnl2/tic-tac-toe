@@ -9,11 +9,11 @@
 }
 
 body {
-    background: var(--emerald-forest);
+    background: var(--background-color-secondary);
     font-family: Arial, Helvetica, sans-serif;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: var(--misty-sky);
+    color: var(--light-primary);
     width: 100vw;
     height: 100vh; 
     overflow: hidden;
@@ -22,7 +22,7 @@ body {
 }
 
 sub {
-    color: var(--misty-sky);
+    color: var(--light-primary);
 }
 
 .screen {
@@ -31,7 +31,7 @@ sub {
 }
 
 .screen-inner {
-    background: var(--midnight-blue);
+    background: var(--background-color-primary);
     border-radius: 8px;
     position: relative;
     width: 340px;

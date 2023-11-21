@@ -14,7 +14,7 @@
 }
 
 .button.turn-indicator-x {
-    box-shadow: utils.generate-box-shadow($color: var(--teal-surf));
+    box-shadow: utils.generate-box-shadow($color: var(--theme-secondary));
 }
 
 .button.turn-indicator-o {

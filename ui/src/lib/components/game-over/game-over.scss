@@ -3,7 +3,7 @@
     position: relative;
 
     .text-player-x {
-        color: var(--aqua-glow);
+        color: var(--theme-primary);
     }
     
     .text-player-o {
@@ -11,7 +11,7 @@
     }
     
     .text-light {
-        color: var(--misty-sky);
+        color: var(--light-primary);
     }
     
     .text-player-o, .text-player-x {

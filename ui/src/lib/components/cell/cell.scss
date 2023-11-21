@@ -1,7 +1,7 @@
 @use '../../theme/utils' as utils;
 
 
-$avatar-color: var(--emerald-forest);
+$avatar-color: var(--background-color-secondary);
 
 .cell {
     border-radius: 4px;
@@ -11,7 +11,7 @@ $avatar-color: var(--emerald-forest);
     display: grid;
     place-items: center;
     min-width: 90px;
-    box-shadow: utils.generate-box-shadow($size: 5px, $color: var(--dusk-blue));
+    box-shadow: utils.generate-box-shadow($size: 5px, $color: var(--background-color-tertiary));
     background-color: $avatar-color;
     transition: background-color .3s, box-shadow .3s;
 
@@ -29,8 +29,8 @@ $avatar-color: var(--emerald-forest);
     }
   
     &.invert-x {
-        background-color: var(--aqua-glow);
-        box-shadow: utils.generate-box-shadow($color: var(--teal-surf));
+        background-color: var(--theme-primary);
+        box-shadow: utils.generate-box-shadow($color: var(--theme-secondary));
     }
   
     &.invert-o {
