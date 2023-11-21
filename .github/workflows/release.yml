@@ -1,6 +1,10 @@
 name: Release
 
 on:
+    workflow_run:
+        workflows: ['Commit Validation']
+        types:
+            - completed
     push:
         branches:
             - 'main'
@@ -11,9 +15,9 @@ permissions:
 jobs:
     release:
         name: Release
-        needs: commit-validation
         runs-on: ubuntu-latest
         environment: development
+        if: github.event_name == 'workflow_run' && github.event.workflow_run.event == 'completed' && github.event.workflow_run.workflow == 'Commit Validation' || github.event_name == 'push' && github.ref == 'refs/heads/main'
 
         steps:
             - name: Checkout code
