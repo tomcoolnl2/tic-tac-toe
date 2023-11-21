@@ -1,7 +1,7 @@
 
 .choose-difficulty {
     direction: rtl;
-    background-color: var(--dusk-blue);
+    background-color: var(--background-color-tertiary);
     width: 100%;
     padding: 10px 0;
 
@@ -19,7 +19,7 @@
         cursor: pointer;
         
         &::before {
-            color: var(--misty-sky);
+            color: var(--light-primary);
             font-family: FontAwesome;
             font-size: 1.4em;
             content: '\f005';

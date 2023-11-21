@@ -1,7 +1,7 @@
 .choose-player {
     position: relative;
-    background-color: var(--dusk-blue);
-    border: 5px solid var(--dusk-blue);
+    background-color: var(--background-color-tertiary);
+    border: 5px solid var(--background-color-tertiary);
     border-radius: 4px;
     cursor: pointer;
     display: block;
@@ -15,7 +15,7 @@
 
     > .choose-player-toggle {
         position: absolute;
-        background-color: var(--misty-sky);
+        background-color: var(--light-primary);
         display: block;
         width: 50%;
         height: 100%;

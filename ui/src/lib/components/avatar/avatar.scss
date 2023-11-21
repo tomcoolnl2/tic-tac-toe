@@ -30,7 +30,7 @@
 .avatar-x {
     &::before,
     &::after {
-        background-color: var(--aqua-glow);
+        background-color: var(--theme-primary);
         width: 25%;
         height: 100%;
         border-radius: 3px;
@@ -71,27 +71,27 @@
 .avatar-x.avatar-variant-dark {
     &::before,
     &::after {
-        background-color: var(--dusk-blue);
+        background-color: var(--background-color-tertiary);
     }
 }
 
 .avatar-o.avatar-variant-dark {
     &::before,
     &::after {
-        border-color: var(--dusk-blue);
+        border-color: var(--background-color-tertiary);
     }
 }
 
 .avatar-x.avatar-variant-light {
     &::before,
     &::after {
-        background-color: var(--misty-sky);
+        background-color: var(--light-primary);
     }
 }
 
 .avatar-o.avatar-variant-light {
     &::before,
     &::after {
-        border-color: var(--misty-sky);
+        border-color: var(--light-primary);
     }
 }

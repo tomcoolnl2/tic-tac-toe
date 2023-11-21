@@ -20,7 +20,7 @@ $animation-speed: .7s;
 
 .modal-background {
     animation: slide-down $animation-speed;
-    background-color: var(--emerald-forest);
+    background-color: var(--background-color-secondary);
     height: 200px;
     width: 100%;
 }
