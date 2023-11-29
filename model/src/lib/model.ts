@@ -3,6 +3,7 @@ export interface User {
 	avatar: PlayerSymbol;
 	loggedIn: boolean;
 }
+
 export interface AppState {
 	appScreen: AppScreen;
 	appModalScreen: AppModalScreen | null;
