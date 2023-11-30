@@ -21,8 +21,8 @@ export class AppController {
 
 	@Post('login')
 	login(@Body('pwd') pwd: string): User {
-		Logger.log(pwd);
-		if (pwd === this.configService.get('VITE_USERPWD')) {
+		const validPwd = this.configService.get('VITE_USERPWD');
+		if (pwd === validPwd) {
 			return {
 				name: this.configService.get('VITE_USERNAME'),
 				avatar: PlayerSymbol.X,

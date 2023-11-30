@@ -2,6 +2,7 @@ import './input.scss';
 
 export interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 	name?: string;
+	testId?: string;
 }
 
 export const Input: React.FC<Props> = ({
@@ -11,6 +12,7 @@ export const Input: React.FC<Props> = ({
 	disabled,
 	value,
 	onChange,
+	testId,
 }) => {
 	return (
 		<input
@@ -21,6 +23,7 @@ export const Input: React.FC<Props> = ({
 			value={value}
 			autoComplete="off"
 			onChange={onChange}
+			data-testid={testId}
 		/>
 	);
 };

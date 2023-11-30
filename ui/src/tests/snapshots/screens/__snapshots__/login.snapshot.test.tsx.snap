@@ -29,10 +29,12 @@ exports[`LoginScreen screen component snapshot test should match the snapshot 1`
     />
     <form
       autocomplete="off"
+      class="login-form"
       novalidate=""
     >
       <input
         autocomplete="off"
+        data-testid="username"
         disabled=""
         id="username"
         name="username"
@@ -44,6 +46,7 @@ exports[`LoginScreen screen component snapshot test should match the snapshot 1`
       />
       <input
         autocomplete="off"
+        data-testid="password"
         id="password"
         name="password"
         type="password"
@@ -54,6 +57,7 @@ exports[`LoginScreen screen component snapshot test should match the snapshot 1`
       />
       <button
         class="button button-primary"
+        data-testid="submit"
       >
         Login
       </button>

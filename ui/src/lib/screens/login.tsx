@@ -22,9 +22,6 @@ export const LoginScreen: React.FC = () => {
 			name && setUserName(name);
 		};
 		fetchUserName();
-		return () => {
-			controller.abort();
-		};
 	}, []);
 
 	const handlePwdChange = React.useCallback(
@@ -58,9 +55,9 @@ export const LoginScreen: React.FC = () => {
 							signal,
 						}
 					);
-					const data = await response.json();
 
 					if (!response.ok) {
+						const data = await response.json();
 						setPwdError(true);
 						setPwdErrorMsg(data.message);
 					} else {
@@ -80,14 +77,20 @@ export const LoginScreen: React.FC = () => {
 			<Divider invisible margin="vertical-l" />
 			<span>Login</span>
 			<Divider invisible margin="vertical" />
-			<form noValidate autoComplete="off">
-				<Input id="username" disabled value={userName} />
+			<form className="login-form" noValidate autoComplete="off">
+				<Input
+					id="username"
+					disabled
+					value={userName}
+					testId="username"
+				/>
 				<Divider invisible margin="vertical" />
 				<Input
 					type="password"
 					id="password"
 					value={pwdValue}
 					onChange={(value) => handlePwdChange(value)}
+					testId="password"
 				/>
 				<Divider invisible margin="vertical" />
 				{pwdError ? (
@@ -102,6 +105,7 @@ export const LoginScreen: React.FC = () => {
 					variant="primary"
 					onClick={handleLoginSubmit}
 					disabled={pwdError}
+					testId="submit"
 				>
 					Login
 				</Button>
