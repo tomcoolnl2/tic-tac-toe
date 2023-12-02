@@ -12,12 +12,12 @@ import {
 } from '../components';
 
 interface Props {
-	useLanscapeDesign: boolean;
+	useLandscapeDesign: boolean;
 	handleReloadDialog: () => void;
 }
 
 export const GameScreen: React.FC<Props> = ({
-	useLanscapeDesign,
+	useLandscapeDesign,
 	handleReloadDialog,
 }) => {
 	const [appState] = Hooks.useBehaviorSubjectState<AppState>(AppStore.state$);
@@ -26,15 +26,15 @@ export const GameScreen: React.FC<Props> = ({
 
 	return (
 		<Grid
-			cols={useLanscapeDesign ? 3 : 1}
+			cols={useLandscapeDesign ? 3 : 1}
 			rowGap="l"
-			colGap={useLanscapeDesign ? 'l' : 'm'}
+			colGap={useLandscapeDesign ? 'l' : 'm'}
 		>
 			<GridItem>
 				<Grid
 					colGap="m"
 					rowGap="l"
-					cols={useLanscapeDesign ? 1 : '1fr auto 1fr'}
+					cols={useLandscapeDesign ? 1 : '1fr auto 1fr'}
 				>
 					<GridItem>
 						<AppLogo />
@@ -66,7 +66,7 @@ export const GameScreen: React.FC<Props> = ({
 				</Grid>
 			</GridItem>
 			<GridItem>
-				<Grid cols={useLanscapeDesign ? 1 : 3} colGap="m" rowGap="m">
+				<Grid cols={useLandscapeDesign ? 1 : 3} colGap="m" rowGap="m">
 					{scores.map((score, i) => {
 						return (
 							<ScoreBoardItem
