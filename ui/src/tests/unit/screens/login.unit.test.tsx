@@ -17,7 +17,12 @@ describe('LoginScreen component', () => {
 		let getByTestId;
 		await act(async () => {
 			const { getByTestId: renderedGetByTestId } = render(
-				<LoginScreen />
+				<LoginScreen
+					userName={'testUserName'}
+					authError={null}
+					handleSubmit={jest.fn()}
+					setAuthError={jest.fn()}
+				/>
 			);
 			getByTestId = renderedGetByTestId;
 		});
@@ -35,7 +40,12 @@ describe('LoginScreen component', () => {
 		let getByTestId;
 		await act(async () => {
 			const { getByTestId: renderedGetByTestId } = render(
-				<LoginScreen />
+				<LoginScreen
+					userName={'testUserName'}
+					authError={null}
+					handleSubmit={jest.fn()}
+					setAuthError={jest.fn()}
+				/>
 			);
 			getByTestId = renderedGetByTestId;
 		});
@@ -43,32 +53,5 @@ describe('LoginScreen component', () => {
 		fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
 
 		expect(passwordInput).toHaveValue('testPassword');
-	});
-
-	it('fetches username and sets state', async () => {
-		const mockResponse = { name: 'TestUser' };
-		fetchMock.mockResponseOnce(JSON.stringify(mockResponse));
-
-		let getByTestId;
-		await act(async () => {
-			const { getByTestId: renderedGetByTestId } = render(
-				<LoginScreen />
-			);
-			getByTestId = renderedGetByTestId;
-		});
-
-		// Wait for the fetch call to be made
-		await waitFor(() => {
-			expect(fetchMock).toHaveBeenCalledWith(
-				'http://localhost:3000/api-login/username',
-				expect.anything()
-			);
-		});
-
-		// Wait for the component to update after fetching
-		await waitFor(() => {
-			const usernameElement = getByTestId!('username');
-			expect(usernameElement).toHaveValue('TestUser');
-		});
 	});
 });

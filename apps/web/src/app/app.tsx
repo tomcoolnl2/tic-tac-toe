@@ -9,9 +9,12 @@ import { isDevEnvironment } from '@tic-tac-toe/debug';
 import { AppStore } from '@tic-tac-toe/core';
 import * as TTTModel from '@tic-tac-toe/model';
 import * as TTTUI from '@tic-tac-toe/ui';
+import { AuthError, fetchUserName, login } from '../api/auth';
 
 export const App: React.FC = () => {
 	const [appContent, setAppContent] = React.useState<unknown>(null);
+	const [userName, setUserName] = React.useState<string>('');
+	const [authError, setAuthError] = React.useState<Error | null>(null);
 	const orientation = TTTUI.Hooks.useScreenOrientation();
 
 	const [appState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.AppState>(
@@ -21,6 +24,17 @@ export const App: React.FC = () => {
 	const [userState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.User>(
 		AppStore.user$
 	);
+
+	React.useEffect(() => {
+		fetchUserName().then((name) => {
+			if (name instanceof AuthError) {
+				setAuthError(name);
+			}
+			if (typeof name === 'string') {
+				setUserName(name);
+			}
+		});
+	}, []);
 
 	React.useEffect(() => {
 		if (isDevEnvironment()) {
@@ -63,6 +77,24 @@ export const App: React.FC = () => {
 			gameState: TTTModel.GameState.PLAYING,
 		});
 	}, [appState]);
+
+	const handleLoginSuccess = React.useCallback(() => {
+		AppStore.nextState({
+			...appState,
+			appScreen: TTTModel.AppScreen.SETTINGS,
+		});
+	}, [appState]);
+
+	const handleLogin = React.useCallback(
+		(pwd: string) => {
+			login(pwd, handleLoginSuccess).then((data) => {
+				if (data instanceof AuthError) {
+					setAuthError(data);
+				}
+			});
+		},
+		[handleLoginSuccess]
+	);
 
 	const handleRestartGame = React.useCallback(() => {
 		AppStore.nextState(AppStore.initialState);
@@ -181,7 +213,12 @@ export const App: React.FC = () => {
 							)}
 							{appState.appScreen ===
 								TTTModel.AppScreen.LOGIN && (
-								<TTTUI.LoginScreen />
+								<TTTUI.LoginScreen
+									userName={userName}
+									authError={authError}
+									handleSubmit={handleLogin}
+									setAuthError={setAuthError}
+								/>
 							)}
 							{appState.appScreen ===
 								TTTModel.AppScreen.SETTINGS && (
