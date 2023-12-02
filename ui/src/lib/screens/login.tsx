@@ -18,7 +18,8 @@ export const LoginScreen: React.FC = () => {
 				'http://localhost:3000/api-login/username',
 				{ signal }
 			);
-			const { name }: Partial<User> = await response.json();
+			const json = await response.json();
+			const { name }: Partial<User> = json;
 			name && setUserName(name);
 		};
 		fetchUserName();
