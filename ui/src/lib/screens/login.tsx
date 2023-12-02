@@ -83,8 +83,6 @@ export const LoginScreen: React.FC = () => {
 	return (
 		<BaseScreen>
 			<Divider invisible margin="vertical-l" />
-			<span>Loading</span>
-			<Divider invisible margin="vertical" />
 			<span>Login</span>
 			<Divider invisible margin="vertical" />
 

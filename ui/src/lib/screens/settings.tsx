@@ -26,8 +26,6 @@ export const SettingsScreen: React.FC<Props> = ({
 	return (
 		<BaseScreen>
 			<Divider invisible margin="vertical-l" />
-			<span>Loading</span>
-			<Divider invisible margin="vertical" />
 			<span>Pic Player 1's Mark</span>
 			<SymbolChoice
 				playerSymbol={playerSymbol}
