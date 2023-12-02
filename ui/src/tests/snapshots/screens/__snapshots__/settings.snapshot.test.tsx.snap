@@ -16,7 +16,16 @@ exports[`SettingsScreen screen component snapshot test should match the snapshot
       />
     </div>
     <hr
+      class="divider full-width horizontal margin-vertical invisible"
+    />
+    <hr
       class="divider full-width horizontal margin-vertical-l invisible"
+    />
+    <span>
+      Loading
+    </span>
+    <hr
+      class="divider full-width horizontal margin-vertical invisible"
     />
     <span>
       Pic Player 1's Mark

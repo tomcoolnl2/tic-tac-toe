@@ -1,7 +1,8 @@
 import React from 'react';
 import { IntelligenceLevel, PlayerSymbol } from '@tic-tac-toe/model';
-import { Divider, FlexBox } from '../core';
-import { AppLogo, Button, ChooseDifficulty, SymbolChoice } from '../components';
+import { Divider } from '../core';
+import { Button, ChooseDifficulty, SymbolChoice } from '../components';
+import { BaseScreen } from './base/base';
 
 interface Props {
 	playerSymbol: PlayerSymbol;
@@ -23,9 +24,10 @@ export const SettingsScreen: React.FC<Props> = ({
 	handleStartGame,
 }) => {
 	return (
-		<FlexBox direction="column" alignItems="center">
-			<AppLogo />
+		<BaseScreen>
 			<Divider invisible margin="vertical-l" />
+			<span>Loading</span>
+			<Divider invisible margin="vertical" />
 			<span>Pic Player 1's Mark</span>
 			<SymbolChoice
 				playerSymbol={playerSymbol}
@@ -41,6 +43,6 @@ export const SettingsScreen: React.FC<Props> = ({
 			<Button variant="secondary" onClick={handleStartGame}>
 				Start game <i className="icon-play-sign"></i>
 			</Button>
-		</FlexBox>
+		</BaseScreen>
 	);
 };

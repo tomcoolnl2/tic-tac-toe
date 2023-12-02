@@ -19,6 +19,7 @@ export interface AppState {
 }
 
 export enum AppScreen {
+	LOADING = 'loading',
 	LOGIN = 'login',
 	SETTINGS = 'settings',
 	GAME = 'game',

@@ -11,6 +11,7 @@ import * as TTTModel from '@tic-tac-toe/model';
 import * as TTTUI from '@tic-tac-toe/ui';
 
 export const App: React.FC = () => {
+	const [appContent, setAppContent] = React.useState<unknown>(null);
 	const orientation = TTTUI.Hooks.useScreenOrientation();
 
 	const [appState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.AppState>(
@@ -28,17 +29,24 @@ export const App: React.FC = () => {
 		}
 	}, [appState, userState]);
 
-	// When a user is not logged in,
-	// show the login form
+	// First we check if content is loaded,
+	// Then we check if a user is not logged in
 	React.useEffect(() => {
-		if (!userState.loggedIn) {
-			AppStore.nextState({
-				...AppStore.initialState,
-				appScreen: TTTModel.AppScreen.LOGIN,
-				gameState: TTTModel.GameState.PREPLAY,
-			});
+		let appScreen: TTTModel.AppScreen;
+		if (appContent === null) {
+			appScreen = TTTModel.AppScreen.LOADING;
+		} else if (!userState.loggedIn) {
+			appScreen = TTTModel.AppScreen.LOGIN;
+		} else {
+			appScreen = TTTModel.AppScreen.SETTINGS;
 		}
-	}, [userState]);
+
+		AppStore.nextState({
+			...AppStore.initialState,
+			appScreen,
+			gameState: TTTModel.GameState.PREPLAY,
+		});
+	}, [appContent, userState]);
 
 	const handleStartGame = React.useCallback(() => {
 		// when player chooses O it means the CPU should make the first move
@@ -150,7 +158,9 @@ export const App: React.FC = () => {
 				if (errors) {
 					console.error(errors);
 				} else {
-					document.title = data.localizedProperties.appTitle;
+					const { localizedProperties } = data;
+					setAppContent(localizedProperties);
+					document.title = localizedProperties.appTitle;
 				}
 			});
 	}, []);
@@ -166,8 +176,12 @@ export const App: React.FC = () => {
 					<TTTUI.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
 						<div className="screen-front">
 							{appState.appScreen ===
+								TTTModel.AppScreen.LOADING && (
+								<TTTUI.LoadingScreen />
+							)}
+							{appState.appScreen ===
 								TTTModel.AppScreen.LOGIN && (
-								<TTTUI.LoginScreen></TTTUI.LoginScreen>
+								<TTTUI.LoginScreen />
 							)}
 							{appState.appScreen ===
 								TTTModel.AppScreen.SETTINGS && (

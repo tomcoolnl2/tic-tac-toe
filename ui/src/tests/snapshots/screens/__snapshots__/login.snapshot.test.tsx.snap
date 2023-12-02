@@ -22,6 +22,12 @@ exports[`LoginScreen screen component snapshot test should match the snapshot 1`
       class="divider full-width horizontal margin-vertical-l invisible"
     />
     <span>
+      Loading
+    </span>
+    <hr
+      class="divider full-width horizontal margin-vertical invisible"
+    />
+    <span>
       Login
     </span>
     <hr

@@ -1,10 +1,16 @@
 import React from 'react';
-import { User } from '@tic-tac-toe/model';
+import * as TTTModel from '@tic-tac-toe/model';
 import { AppStore } from '@tic-tac-toe/core';
-import { Divider, FlexBox } from '../core';
-import { AppLogo, Button, Input } from '../components';
+import { useBehaviorSubjectState } from '../hooks';
+import { Divider } from '../core';
+import { Button, Input } from '../components';
+import { BaseScreen } from './base/base';
 
 export const LoginScreen: React.FC = () => {
+	const [appState] = useBehaviorSubjectState<TTTModel.AppState>(
+		AppStore.state$
+	);
+
 	const [userName, setUserName] = React.useState<string>('');
 	const [pwdValue, setPwdValue] = React.useState<string>('');
 	const [pwdError, setPwdError] = React.useState<boolean>(false);
@@ -19,7 +25,7 @@ export const LoginScreen: React.FC = () => {
 				{ signal }
 			);
 			const json = await response.json();
-			const { name }: Partial<User> = json;
+			const { name }: Partial<TTTModel.User> = json;
 			name && setUserName(name);
 		};
 		fetchUserName();
@@ -62,22 +68,26 @@ export const LoginScreen: React.FC = () => {
 						setPwdError(true);
 						setPwdErrorMsg(data.message);
 					} else {
-						AppStore.resetState();
+						AppStore.nextState({
+							...appState,
+							appScreen: TTTModel.AppScreen.SETTINGS,
+						});
 					}
 				};
 				login();
 			}
 		},
-		[pwdValue]
+		[appState, pwdValue]
 	);
 
 	return (
-		<FlexBox direction="column" alignItems="center">
-			<AppLogo />
-			<Divider invisible margin="vertical" />
+		<BaseScreen>
 			<Divider invisible margin="vertical-l" />
+			<span>Loading</span>
+			<Divider invisible margin="vertical" />
 			<span>Login</span>
 			<Divider invisible margin="vertical" />
+
 			<form className="login-form" noValidate autoComplete="off">
 				<Input
 					id="username"
@@ -111,6 +121,6 @@ export const LoginScreen: React.FC = () => {
 					Login
 				</Button>
 			</form>
-		</FlexBox>
+		</BaseScreen>
 	);
 };

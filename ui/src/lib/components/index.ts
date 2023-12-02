@@ -8,5 +8,6 @@ export { Input } from './input/input';
 export { Modal } from './modal/modal';
 export { ReloadButton } from './reload-button/reload-button';
 export { ScoreBoardItem } from './score-board-item/score-board-item';
+export { Spinner } from './spinner/spinner';
 export { SymbolChoice } from './symbol-choice/symbol-choice';
 export { TurnIndicator } from './turn-indicator/turn-indicator';

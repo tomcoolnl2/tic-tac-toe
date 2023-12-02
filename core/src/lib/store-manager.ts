@@ -1,9 +1,9 @@
 import * as Rx from 'rxjs';
 import * as React from 'react';
 import * as TTTModel from '@tic-tac-toe/model';
+import { AIEngine } from './ai-engine';
 import { GameEngine } from './game-engine';
 import { StateStorage } from './storage-manager';
-import { AIEngine } from './ai-engine';
 
 /**
  * Represents the main application state manager.
@@ -62,7 +62,7 @@ class Store {
 	 */
 	public get initialState(): TTTModel.AppState {
 		return {
-			appScreen: TTTModel.AppScreen.SETTINGS,
+			appScreen: TTTModel.AppScreen.LOADING,
 			appModalScreen: null,
 			intelligenceLevel: TTTModel.IntelligenceLevel.BIEBER,
 			bitBoards: [0x0, 0x0],

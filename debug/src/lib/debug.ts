@@ -1,7 +1,7 @@
 import * as Rx from 'rxjs';
 
 export function isDevEnvironment() {
-	return import.meta.env.NODE_ENV === 'development';
+	return import.meta.env.DEV;
 }
 
 export function isProdEnvironment() {

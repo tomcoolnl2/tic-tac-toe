@@ -14,7 +14,7 @@ let userState: User;
 
 beforeEach(() => {
 	appState = {
-		appScreen: AppScreen.SETTINGS,
+		appScreen: AppScreen.LOADING,
 		appModalScreen: null,
 		intelligenceLevel: IntelligenceLevel.BIEBER,
 		bitBoards: [0x0, 0x0],
@@ -46,7 +46,7 @@ describe('StateStorage', () => {
 	test('State updates correctly and updates storage', async () => {
 		// Prepare
 		const newState: AppState = {
-			appScreen: AppScreen.GAME,
+			appScreen: AppScreen.LOADING,
 			appModalScreen: null,
 			intelligenceLevel: IntelligenceLevel.NOVICE,
 			bitBoards: [0x1, 0x2],

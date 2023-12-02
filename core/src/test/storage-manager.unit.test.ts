@@ -17,7 +17,7 @@ beforeEach(() => {
 	stateStorage = new StateStorage(mockStorage);
 
 	appState = {
-		appScreen: AppScreen.SETTINGS,
+		appScreen: AppScreen.LOADING,
 		appModalScreen: null,
 		intelligenceLevel: IntelligenceLevel.BIEBER,
 		bitBoards: [0x0, 0x0],

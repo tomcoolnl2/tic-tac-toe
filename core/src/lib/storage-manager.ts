@@ -36,11 +36,14 @@ export class StateStorage {
 	}
 
 	/**
-	 * Stores the application state in storage.
+	 * Stores the application state in storage.m Resets the AppScreen to Loading to enable checks on page reload.
 	 * @param state - The application state to store.
 	 */
 	public set state(state: TTTModel.AppState) {
-		this.toStorage<TTTModel.AppState>('state', state);
+		this.toStorage<TTTModel.AppState>('state', {
+			...state,
+			appScreen: TTTModel.AppScreen.LOADING,
+		});
 	}
 
 	/**
