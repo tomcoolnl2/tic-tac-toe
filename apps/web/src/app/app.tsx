@@ -1,5 +1,10 @@
 import React from 'react';
 import * as Rx from 'rxjs';
+import {
+	VITE_CF_SPACE_ID,
+	VITE_CF_CONTENT_DELIVERY_API_ACCESS_TOKEN,
+	VITE_CF_LOCALIZED_PROPERTIES_ID,
+} from '@tic-tac-toe/constants';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
 import { AppStore } from '@tic-tac-toe/core';
 import * as TTTModel from '@tic-tac-toe/model';
@@ -97,7 +102,7 @@ export const App: React.FC = () => {
 		});
 	}, [appState]);
 
-	const useLanscapeDesign = React.useMemo(() => {
+	const useLandscapeDesign = React.useMemo(() => {
 		return orientation?.startsWith('landscape') && 'ontouchstart' in window;
 	}, [orientation]);
 
@@ -120,12 +125,42 @@ export const App: React.FC = () => {
 		};
 	}, [closeModalValidator]);
 
+	React.useEffect(() => {
+		const query = `
+			query {
+				localizedProperties(id: "${VITE_CF_LOCALIZED_PROPERTIES_ID}") {
+					appTitle
+				}
+			}
+		`;
+
+		fetch(
+			`https://graphql.contentful.com/content/v1/spaces/${VITE_CF_SPACE_ID}/`,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${VITE_CF_CONTENT_DELIVERY_API_ACCESS_TOKEN}`,
+				},
+				body: JSON.stringify({ query }),
+			}
+		)
+			.then((response) => response.json())
+			.then(({ data, errors }) => {
+				if (errors) {
+					console.error(errors);
+				} else {
+					document.title = data.localizedProperties.appTitle;
+				}
+			});
+	}, []);
+
 	return (
 		<TTTUI.Theme>
 			<div className={`screen ${appState.appScreen}`}>
 				<div
 					className={`screen-inner ${
-						useLanscapeDesign ? 'landscape' : ''
+						useLandscapeDesign ? 'landscape' : ''
 					}`}
 				>
 					<TTTUI.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
@@ -154,7 +189,7 @@ export const App: React.FC = () => {
 						<div className="screen-back">
 							<TTTUI.GameScreen
 								handleReloadDialog={handleReloadDialog}
-								useLanscapeDesign={useLanscapeDesign}
+								useLandscapeDesign={useLandscapeDesign}
 							/>
 						</div>
 					</TTTUI.ErrorBoundary>

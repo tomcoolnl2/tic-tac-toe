@@ -44,27 +44,27 @@ jobs:
                   name: test-results
                   path: ./coverage
 
-    release:
-        name: Release
-        needs: run-tests
-        runs-on: ubuntu-latest
-        if: github.ref == 'refs/heads/main'
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v2
+    # release:
+    #     name: Release
+    #     needs: run-tests
+    #     runs-on: ubuntu-latest
+    #     if: github.ref == 'refs/heads/main'
+    #     steps:
+    #         - name: Checkout code
+    #           uses: actions/checkout@v2
 
-            - name: Setup NodeJS
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 18.17.0
+    #         - name: Setup NodeJS
+    #           uses: actions/setup-node@v4
+    #           with:
+    #               node-version: 18.17.0
 
-            - name: Install Yarn
-              run: npm install -g yarn
+    #         - name: Install Yarn
+    #           run: npm install -g yarn
 
-            - name: Install dependencies
-              run: yarn install
+    #         - name: Install dependencies
+    #           run: yarn install
 
-            - name: Apply Versioning
-              run: npx semantic-release
-              env:
-                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    #         - name: Apply Versioning
+    #           run: npx semantic-release
+    #           env:
+    #               GH_TOKEN: ${{ secrets.GH_TOKEN }}
