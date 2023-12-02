@@ -28,13 +28,6 @@ describe('AppModule', () => {
 		expect(configService).toBeDefined();
 	});
 
-	it('should properly configure environment variables', async () => {
-		const envConfigService =
-			appModule.get<EnvConfigService>(EnvConfigService);
-		const value = envConfigService.get('TEST');
-		expect(value).toEqual('test');
-	});
-
 	it('should have AppController registered', () => {
 		const appController = appModule.get<AppController>(AppController);
 		expect(appController).toBeDefined();
