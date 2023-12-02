@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LoginScreen screen component snapshot test should match the snapshot 1`] = `
-<DocumentFragment>
+<div>
   <div
     class="flex-box direction-column justify-content-flex-start align-items-center"
   >
@@ -29,21 +29,24 @@ exports[`LoginScreen screen component snapshot test should match the snapshot 1`
     />
     <form
       autocomplete="off"
+      class="login-form"
       novalidate=""
     >
       <input
         autocomplete="off"
+        data-testid="username"
         disabled=""
         id="username"
         name="username"
         type="text"
-        value=""
+        value="TestUser"
       />
       <hr
         class="divider full-width horizontal margin-vertical invisible"
       />
       <input
         autocomplete="off"
+        data-testid="password"
         id="password"
         name="password"
         type="password"
@@ -54,10 +57,11 @@ exports[`LoginScreen screen component snapshot test should match the snapshot 1`
       />
       <button
         class="button button-primary"
+        data-testid="submit"
       >
         Login
       </button>
     </form>
   </div>
-</DocumentFragment>
+</div>
 `;

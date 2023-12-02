@@ -1,0 +1,57 @@
+{
+	"name": "api-login",
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "apps/api-login/src",
+	"projectType": "application",
+	"targets": {
+		"build": {
+			"executor": "@nx/webpack:webpack",
+			"outputs": ["{options.outputPath}"],
+			"defaultConfiguration": "production",
+			"options": {
+				"target": "node",
+				"compiler": "tsc",
+				"outputPath": "dist/apps/api-login",
+				"main": "apps/api-login/src/main.ts",
+				"tsConfig": "apps/api-login/tsconfig.app.json",
+				"assets": ["apps/api-login/src/assets"],
+				"isolatedConfig": true,
+				"webpackConfig": "apps/api-login/webpack.config.js"
+			},
+			"configurations": {
+				"development": {},
+				"production": {}
+			}
+		},
+		"serve": {
+			"executor": "@nx/js:node",
+			"defaultConfiguration": "development",
+			"options": {
+				"buildTarget": "api-login:build"
+			},
+			"configurations": {
+				"development": {
+					"buildTarget": "api-login:build:development"
+				},
+				"production": {
+					"buildTarget": "api-login:build:production"
+				}
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": ["apps/api-login/**/*.ts"]
+			}
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "apps/api-login/jest.config.ts"
+			}
+		}
+	},
+	"tags": []
+}
