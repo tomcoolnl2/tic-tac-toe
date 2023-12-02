@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingScreen screen component snapshot test should match the snapshot 1`] = `
+<div>
+  <div
+    class="flex-box direction-column justify-content-flex-start align-items-center"
+  >
+    <div
+      class="flex-box direction-row justify-content-flex-start align-items-flex-start spacing-s logo"
+    >
+      <span
+        class="avatar avatar-x avatar-size-m"
+      />
+      <span
+        class="avatar avatar-o avatar-size-m"
+      />
+    </div>
+    <hr
+      class="divider full-width horizontal margin-vertical invisible"
+    />
+    <hr
+      class="divider full-width horizontal margin-vertical-l invisible"
+    />
+    <hr
+      class="divider full-width horizontal margin-vertical-l invisible"
+    />
+    <hr
+      class="divider full-width horizontal margin-vertical-l invisible"
+    />
+    <div
+      class="spinner"
+    />
+  </div>
+</div>
+`;
