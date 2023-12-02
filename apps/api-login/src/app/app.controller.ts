@@ -5,7 +5,6 @@ import {
 	Post,
 	HttpException,
 	HttpStatus,
-	Logger,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { User, PlayerSymbol } from '@tic-tac-toe/model';
@@ -16,7 +15,15 @@ export class AppController {
 
 	@Get('username')
 	getUserName(): Partial<User> {
-		return { name: this.configService.get('VITE_USERNAME') };
+		const name: string = this.configService.get('VITE_USERNAME');
+		if (name) {
+			return { name };
+		} else {
+			throw new HttpException(
+				`Couldn't find username`,
+				HttpStatus.NOT_FOUND
+			);
+		}
 	}
 
 	@Post('login')
