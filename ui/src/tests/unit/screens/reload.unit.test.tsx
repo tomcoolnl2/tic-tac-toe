@@ -3,18 +3,24 @@ import { render, fireEvent } from '@testing-library/react';
 import { ReloadModalScreen } from '../../../lib/screens';
 
 describe('ReloadModalScreen component', () => {
+	const content = {
+		cta1: 'No, Cancel',
+		cta2: 'Yes, Restart',
+		title: 'Restart game?',
+	};
 	it('should render the component correctly', () => {
 		const handleRestartGame = jest.fn();
 		const closeModalScreen = jest.fn();
 
 		const { getByText } = render(
 			<ReloadModalScreen
+				content={content}
 				handleRestartGame={handleRestartGame}
 				closeModalScreen={closeModalScreen}
 			/>
 		);
 
-		expect(getByText('Restart Game?')).toBeInTheDocument();
+		expect(getByText('Restart game?')).toBeInTheDocument();
 		expect(getByText('No, Cancel')).toBeInTheDocument();
 		expect(getByText('Yes, Restart')).toBeInTheDocument();
 	});
@@ -25,6 +31,7 @@ describe('ReloadModalScreen component', () => {
 
 		const { getByText } = render(
 			<ReloadModalScreen
+				content={content}
 				handleRestartGame={handleRestartGame}
 				closeModalScreen={closeModalScreen}
 			/>
@@ -43,6 +50,7 @@ describe('ReloadModalScreen component', () => {
 
 		const { getByText } = render(
 			<ReloadModalScreen
+				content={content}
 				handleRestartGame={handleRestartGame}
 				closeModalScreen={closeModalScreen}
 			/>

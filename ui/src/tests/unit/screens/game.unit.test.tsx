@@ -1,15 +1,23 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent } from '@testing-library/react';
 import { GameScreen } from '../../../lib/screens';
+import { AppGameContent } from '@tic-tac-toe/model';
 
 describe('GameScreen component', () => {
+	const content: AppGameContent = {
+		intelligenceLevel: ['Bieber', 'Novice', 'Master'],
+		turnIndicator: ['Your turn', "CPU's Turn"],
+		scoreBoard: ['You', 'Ties', 'CPU'],
+	};
+
 	it('should render the component correctly', () => {
-		const useLanscapeDesign = true;
+		const useLandscapeDesign = true;
 		const handleReloadDialog = jest.fn();
 
 		const { container } = render(
 			<GameScreen
-				useLanscapeDesign={useLanscapeDesign}
+				content={content}
+				useLandscapeDesign={useLandscapeDesign}
 				handleReloadDialog={handleReloadDialog}
 			/>
 		);
@@ -24,12 +32,13 @@ describe('GameScreen component', () => {
 	});
 
 	it('should call handleReloadDialog when reload button is clicked', () => {
-		const useLanscapeDesign = true;
+		const useLandscapeDesign = true;
 		const handleReloadDialog = jest.fn();
 
 		const { container } = render(
 			<GameScreen
-				useLanscapeDesign={useLanscapeDesign}
+				content={content}
+				useLandscapeDesign={useLandscapeDesign}
 				handleReloadDialog={handleReloadDialog}
 			/>
 		);

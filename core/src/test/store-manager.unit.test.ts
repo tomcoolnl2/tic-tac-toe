@@ -16,7 +16,7 @@ beforeEach(() => {
 	appState = {
 		appScreen: AppScreen.LOADING,
 		appModalScreen: null,
-		intelligenceLevel: IntelligenceLevel.BIEBER,
+		intelligenceLevel: IntelligenceLevel.EASY,
 		bitBoards: [0x0, 0x0],
 		boardState: Array.from({ length: 9 }, () => null),
 		currentPlayer: PlayerSymbol.X,
@@ -48,7 +48,7 @@ describe('StateStorage', () => {
 		const newState: AppState = {
 			appScreen: AppScreen.LOADING,
 			appModalScreen: null,
-			intelligenceLevel: IntelligenceLevel.NOVICE,
+			intelligenceLevel: IntelligenceLevel.MEDIUM,
 			bitBoards: [0x1, 0x2],
 			boardState: [
 				PlayerSymbol.X,

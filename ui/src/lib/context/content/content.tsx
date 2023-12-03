@@ -1,21 +1,27 @@
 import React from 'react';
-import { Content, ContentAction, ContentState } from './model';
+import {
+	AppContentState,
+	AppContentAction,
+	AppContent,
+} from '@tic-tac-toe/model';
 import { fetchContentfulData } from './api';
 
-const initialContentContext: ContentState = {
+const initialContentContext: AppContentState = {
 	content: null,
 	isContentLoading: false,
 	contentError: null,
 };
 
-const ContentContext = React.createContext<ContentState>(initialContentContext);
+const ContentContext = React.createContext<AppContentState>(
+	initialContentContext
+);
 
 export const useContentContext = () => React.useContext(ContentContext);
 
 const contentReducer = (
-	state: ContentState,
-	action: ContentAction
-): ContentState => {
+	state: AppContentState,
+	action: AppContentAction
+): AppContentState => {
 	switch (action.type) {
 		case 'FETCH_START':
 			return {
@@ -52,7 +58,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({
 		const fetchDataFromApi = async () => {
 			dispatch({ type: 'FETCH_START' });
 			try {
-				const content: Content = await fetchContentfulData();
+				const content: AppContent = await fetchContentfulData();
 				dispatch({ type: 'FETCH_SUCCESS', payload: content });
 			} catch (error: unknown) {
 				dispatch({

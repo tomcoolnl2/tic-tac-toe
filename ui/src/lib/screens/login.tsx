@@ -1,9 +1,11 @@
 import React from 'react';
+import { AppScreenContent } from '@tic-tac-toe/model';
 import { Divider } from '../core';
 import { Button, Input } from '../components';
 import { BaseScreen } from './base/base';
 
 interface Props {
+	content: AppScreenContent;
 	userName: string;
 	authError: Error | null;
 	setAuthError: (error: Error) => void;
@@ -11,6 +13,7 @@ interface Props {
 }
 
 export const LoginScreen: React.FC<Props> = ({
+	content,
 	userName,
 	authError,
 	setAuthError,
@@ -33,18 +36,18 @@ export const LoginScreen: React.FC<Props> = ({
 		(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 			event.preventDefault();
 			if (pwd === '') {
-				setAuthError(new Error('Please provide a password...'));
+				setAuthError(new Error(content.errors?.emptyPwd || ''));
 			} else {
 				handleSubmit(pwd);
 			}
 		},
-		[pwd, handleSubmit, setAuthError]
+		[pwd, setAuthError, content, handleSubmit]
 	);
 
 	return (
 		<BaseScreen>
 			<Divider invisible margin="vertical-l" />
-			<span>Login</span>
+			<span>{content.title}</span>
 			<Divider invisible margin="vertical" />
 			<form className="login-form" noValidate autoComplete="off">
 				<Input
@@ -75,7 +78,7 @@ export const LoginScreen: React.FC<Props> = ({
 					onClick={handleLoginSubmit}
 					testId="submit"
 				>
-					Login
+					{content.cta1}
 				</Button>
 			</form>
 		</BaseScreen>

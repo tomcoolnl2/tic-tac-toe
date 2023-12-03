@@ -7,7 +7,7 @@ import {
 
 describe('ChooseDifficulty Component', () => {
 	const handleDifficultySettingsChange = jest.fn();
-	const selectedDifficultySetting = IntelligenceLevel.BIEBER;
+	const selectedDifficultySetting = IntelligenceLevel.EASY;
 
 	const props: Props = {
 		selectedDifficultySetting,
@@ -16,22 +16,22 @@ describe('ChooseDifficulty Component', () => {
 
 	it('should render radio inputs with correct settings', () => {
 		const { getByDisplayValue } = render(<ChooseDifficulty {...props} />);
-		const radio1 = getByDisplayValue('bieber') as HTMLInputElement;
+		const radio1 = getByDisplayValue('EASY') as HTMLInputElement;
 		expect(radio1.checked).toBe(true);
-		const radio2 = getByDisplayValue('novice') as HTMLInputElement;
+		const radio2 = getByDisplayValue('MEDIUM') as HTMLInputElement;
 		expect(radio2.checked).toBe(false);
 	});
 
 	it('should call handleDifficultySettingsChange on radio input change', () => {
 		// Prepare
 		const { getByDisplayValue } = render(<ChooseDifficulty {...props} />);
-		const radio = getByDisplayValue('master') as HTMLInputElement;
+		const radio = getByDisplayValue('HARD') as HTMLInputElement;
 		// Act
 		fireEvent.click(radio);
 		// Assert
 		expect(handleDifficultySettingsChange).toHaveBeenCalled();
 		const eventValue =
 			handleDifficultySettingsChange.mock.calls[0][0].target.value;
-		expect(eventValue).toBe('master');
+		expect(eventValue).toBe('HARD');
 	});
 });

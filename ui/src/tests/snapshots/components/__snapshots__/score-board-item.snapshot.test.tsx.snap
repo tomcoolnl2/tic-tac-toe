@@ -7,7 +7,7 @@ exports[`ScoreBoardItem component snapshot test 1`] = `
     style="--row-height: 1fr; --col-width: 1fr;"
   >
     <small>
-      ties
+      Ties
     </small>
     <h3>
       1

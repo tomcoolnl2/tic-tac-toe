@@ -35,11 +35,11 @@ export class AIEngine {
 	}
 
 	/**
-	 * AI strategy for the Intelligence Level "BIEBER."
+	 * AI strategy for the Intelligence Level "EASY."
 	 * @param appState - The current application state.
 	 * @returns A number representing the selected index.
 	 */
-	private [TTTModel.IntelligenceLevel.BIEBER](
+	private [TTTModel.IntelligenceLevel.EASY](
 		appState: TTTModel.AppState
 	): number {
 		return getRandomNullIndex(appState.boardState) ?? 0;
@@ -82,7 +82,7 @@ export class AIEngine {
 	 * @param appState - The current application state.
 	 * @returns A Promise that resolves to void.
 	 */
-	private [TTTModel.IntelligenceLevel.NOVICE](
+	private [TTTModel.IntelligenceLevel.MEDIUM](
 		appState: TTTModel.AppState
 	): number {
 		let cellIndex = this.isWinningNextMove(appState, appState.playerSymbol);
@@ -98,7 +98,7 @@ export class AIEngine {
 	 * and actively play for winning its self
 	 * @param appState - The current application state.
 	 */
-	private [TTTModel.IntelligenceLevel.MASTER](
+	private [TTTModel.IntelligenceLevel.HARD](
 		appState: TTTModel.AppState
 	): number {
 		let cellIndex: number;

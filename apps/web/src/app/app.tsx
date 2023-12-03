@@ -26,6 +26,9 @@ export const App: React.FC = () => {
 	);
 
 	React.useEffect(() => {
+		if (isDevEnvironment()) {
+			console.info('appContent', appContent);
+		}
 		if (appContent?.appTitle) {
 			document.title = appContent.appTitle;
 		}
@@ -132,7 +135,7 @@ export const App: React.FC = () => {
 
 	const handleDifficultySettingsChange = React.useCallback(
 		(event: React.ChangeEvent<HTMLInputElement>) => {
-			const value = (event.target as HTMLInputElement).value;
+			const value = event.target.value;
 			AppStore.nextState({
 				...appState,
 				intelligenceLevel: value as TTTModel.IntelligenceLevel,
@@ -185,46 +188,54 @@ export const App: React.FC = () => {
 								TTTModel.AppScreen.LOADING && (
 								<TTTUI.LoadingScreen />
 							)}
-							{appState.appScreen ===
-								TTTModel.AppScreen.LOGIN && (
-								<TTTUI.LoginScreen
-									userName={userName}
-									authError={authError}
-									handleSubmit={handleLogin}
-									setAuthError={setAuthError}
-								/>
-							)}
-							{appState.appScreen ===
-								TTTModel.AppScreen.SETTINGS && (
-								<TTTUI.SettingsScreen
-									playerSymbol={appState.playerSymbol}
-									selectedDifficultySetting={
-										appState.intelligenceLevel
-									}
-									handleDifficultySettingsChange={
-										handleDifficultySettingsChange
-									}
-									handleSymbolChoiceChange={
-										handleSymbolChoiceChange
-									}
-									handleStartGame={handleStartGame}
-								/>
-							)}
+							{appContent &&
+								appState.appScreen ===
+									TTTModel.AppScreen.LOGIN && (
+									<TTTUI.LoginScreen
+										content={appContent.loginScreen}
+										userName={userName}
+										authError={authError}
+										handleSubmit={handleLogin}
+										setAuthError={setAuthError}
+									/>
+								)}
+							{appContent &&
+								appState.appScreen ===
+									TTTModel.AppScreen.SETTINGS && (
+									<TTTUI.SettingsScreen
+										content={appContent.settingsScreen}
+										playerSymbol={appState.playerSymbol}
+										selectedDifficultySetting={
+											appState.intelligenceLevel
+										}
+										handleDifficultySettingsChange={
+											handleDifficultySettingsChange
+										}
+										handleSymbolChoiceChange={
+											handleSymbolChoiceChange
+										}
+										handleStartGame={handleStartGame}
+									/>
+								)}
 						</div>
 						<div className="screen-back">
-							<TTTUI.GameScreen
-								handleReloadDialog={handleReloadDialog}
-								useLandscapeDesign={useLandscapeDesign}
-							/>
+							{appContent && (
+								<TTTUI.GameScreen
+									content={appContent.gameScreen}
+									handleReloadDialog={handleReloadDialog}
+									useLandscapeDesign={useLandscapeDesign}
+								/>
+							)}
 						</div>
 					</TTTUI.ErrorBoundary>
 				</div>
 			</div>
-			{appState.appModalScreen !== null && (
+			{appContent && appState.appModalScreen !== null && (
 				<TTTUI.Modal>
 					{appState.appModalScreen ===
 						TTTModel.AppModalScreen.RELOAD && (
 						<TTTUI.ReloadModalScreen
+							content={appContent.restartModal}
 							handleRestartGame={handleRestartGame}
 							closeModalScreen={closeModalScreen}
 						/>
@@ -232,6 +243,7 @@ export const App: React.FC = () => {
 					{appState.appModalScreen ===
 						TTTModel.AppModalScreen.GAME_OVER && (
 						<TTTUI.GameOverModalScreen
+							content={appContent.gameOverModal}
 							gameState={appState.gameState}
 							playerSymbol={appState.playerSymbol}
 							cpuSymbol={appState.cpuSymbol}

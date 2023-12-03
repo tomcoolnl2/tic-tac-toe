@@ -6,6 +6,7 @@ describe('TurnIndicator component snapshot test', () => {
 	it('should match the snapshot', () => {
 		const { asFragment } = render(
 			<TurnIndicator
+				content={['Your turn', "CPU's Turn"]}
 				playerSymbol={PlayerSymbol.X}
 				currentPlayer={PlayerSymbol.X}
 			/>

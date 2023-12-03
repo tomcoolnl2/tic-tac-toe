@@ -6,7 +6,7 @@ import { getRandomNullIndex } from '../lib/utils';
 describe('AIEngine', () => {
 	const appState: AppState = {
 		...AppStore.initialState,
-		intelligenceLevel: IntelligenceLevel.BIEBER,
+		intelligenceLevel: IntelligenceLevel.EASY,
 		boardState: [
 			null,
 			PlayerSymbol.X,
@@ -21,7 +21,7 @@ describe('AIEngine', () => {
 	};
 
 	describe('update method', () => {
-		it('should return a random null index for BIEBER intelligence level', async () => {
+		it('should return a random null index for EASY intelligence level', async () => {
 			const aiEngine = new AIEngine();
 			const result = await aiEngine.update(appState);
 			expect(result).toBeLessThanOrEqual(8);
@@ -30,20 +30,20 @@ describe('AIEngine', () => {
 		// it('should log a message for NOVICE intelligence level', async () => {
 		// 	const aiEngine = new AIEngine();
 		// 	const spyConsoleLog = jest.spyOn(console, 'log');
-		// 	appState.intelligenceLevel = IntelligenceLevel.NOVICE;
+		// 	appState.intelligenceLevel = IntelligenceLevel.MEDIUM;
 		// 	await aiEngine.update(appState);
 		// 	expect(spyConsoleLog).toHaveBeenCalledWith(
-		// 		'This is Method ' + IntelligenceLevel.NOVICE
+		// 		'This is Method ' + IntelligenceLevel.MEDIUM
 		// 	);
 		// });
 
 		// it('should log a message for MASTER intelligence level', async () => {
 		// 	const aiEngine = new AIEngine();
 		// 	const spyConsoleLog = jest.spyOn(console, 'log');
-		// 	appState.intelligenceLevel = IntelligenceLevel.MASTER;
+		// 	appState.intelligenceLevel = IntelligenceLevel.HARD;
 		// 	await aiEngine.update(appState);
 		// 	expect(spyConsoleLog).toHaveBeenCalledWith(
-		// 		'This is Method ' + IntelligenceLevel.MASTER
+		// 		'This is Method ' + IntelligenceLevel.HARD
 		// 	);
 		// });
 	});

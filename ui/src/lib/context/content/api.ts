@@ -1,19 +1,24 @@
+import { AppContent } from '@tic-tac-toe/model';
 import {
 	VITE_CF_SPACE_ID,
 	VITE_CF_LOCALIZED_PROPERTIES_ID,
 	VITE_CF_CONTENT_DELIVERY_API_ACCESS_TOKEN,
 } from '@tic-tac-toe/constants';
-import { Content } from './model';
 
 const query = `
     query {
         localizedProperties(id: "${VITE_CF_LOCALIZED_PROPERTIES_ID}") {
             appTitle
+            loginScreen
+            settingsScreen
+            gameScreen
+            restartModal
+            gameOverModal
         }
     }
 `;
 
-export const fetchContentfulData = async (): Promise<Content> => {
+export const fetchContentfulData = async (): Promise<AppContent> => {
 	try {
 		const url = `https://graphql.contentful.com/content/v1/spaces/${VITE_CF_SPACE_ID}/`;
 		const response = await fetch(url, {
@@ -25,7 +30,6 @@ export const fetchContentfulData = async (): Promise<Content> => {
 			body: JSON.stringify({ query }),
 		});
 		if (!response.ok) {
-			// TODO use contentfull message in a custom error
 			throw new Error('Network response was not ok.');
 		}
 		const json = await response.json();

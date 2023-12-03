@@ -7,6 +7,7 @@ describe('TurnIndicator component', () => {
 	it('should render the component correctly', () => {
 		const { container } = render(
 			<TurnIndicator
+				content={['Your turn', "CPU's Turn"]}
 				currentPlayer={PlayerSymbol.X}
 				playerSymbol={PlayerSymbol.X}
 			/>
@@ -25,16 +26,18 @@ describe('TurnIndicator component', () => {
 	it('should render the components text correctly as Player X', () => {
 		const { container } = render(
 			<TurnIndicator
+				content={['Your turn', "CPU's Turn"]}
 				currentPlayer={PlayerSymbol.X}
 				playerSymbol={PlayerSymbol.X}
 			/>
 		);
-		expect(container.textContent).toContain('Your Turn');
+		expect(container.textContent).toContain('Your turn');
 	});
 
 	it('should render the components text correctly as Player O', () => {
 		const { container } = render(
 			<TurnIndicator
+				content={['Your turn', "CPU's Turn"]}
 				currentPlayer={PlayerSymbol.X}
 				playerSymbol={PlayerSymbol.O}
 			/>

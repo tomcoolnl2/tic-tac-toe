@@ -9,7 +9,7 @@ exports[`TurnIndicator component snapshot test should match the snapshot 1`] = `
     <span
       class="avatar avatar-x avatar-size-s avatar-variant-light"
     />
-    Your Turn
+    Your turn
   </button>
 </DocumentFragment>
 `;
