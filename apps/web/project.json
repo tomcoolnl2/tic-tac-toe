@@ -6,7 +6,9 @@
 	"targets": {
 		"build": {
 			"executor": "@nx/vite:build",
-			"outputs": ["{options.outputPath}"],
+			"outputs": [
+				"{options.outputPath}"
+			],
 			"defaultConfiguration": "production",
 			"options": {
 				"outputPath": "dist/apps/web"
@@ -54,18 +56,30 @@
 			}
 		},
 		"test": {
-			"executor": "@nx/vite:test",
-			"outputs": ["{options.reportsDirectory}"],
+			"executor": "@nx/jest:jest",
+			"outputs": [
+				"{workspaceRoot}/coverage/{projectRoot}"
+			],
 			"options": {
-				"passWithNoTests": true,
-				"reportsDirectory": "../../coverage/apps/web"
+				"jestConfig": "apps/web/jest.config.ts",
+				"passWithNoTests": true
+			},
+			"configurations": {
+				"ci": {
+					"ci": true,
+					"codeCoverage": true
+				}
 			}
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
+			"outputs": [
+				"{options.outputFile}"
+			],
 			"options": {
-				"lintFilePatterns": ["apps/web/**/*.{ts,tsx,js,jsx}"]
+				"lintFilePatterns": [
+					"apps/web/**/*.{ts,tsx,js,jsx}"
+				]
 			}
 		},
 		"serve-static": {

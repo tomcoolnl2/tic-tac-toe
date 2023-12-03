@@ -24,18 +24,6 @@
 		"src/**/*.jsx",
 		"src/**/*.ts",
 		"src/**/*.tsx",
-		"src/main.tsx",
-		"../../ui/src/lib/components/logo/logo.stories.tsx",
-		"../../ui/src/lib/components/avatar/avatar.stories.tsx",
-		"../../ui/src/lib/components/button/button.stories.tsx",
-		"../../ui/src/lib/decorators/index.ts",
-		"../../ui/src/lib/decorators/withContainer.tsx",
-		"../../ui/src/lib/components/cell/cell.stories.tsx",
-		"../../ui/src/lib/components/choose-difficulty/choose-difficulty.stories.tsx",
-		"../../ui/src/lib/components/modal/modal.stories.tsx",
-		"../../ui/src/lib/components/reload-button/reload-button.stories.tsx",
-		"../../ui/src/lib/components/score-board-item/score-board-item.stories.tsx",
-		"../../ui/src/lib/components/symbol-choice/symbol-choice.stories.tsx",
-		"../../ui/src/lib/components/turn-indicator/turn-indicator.stories.tsx"
+		"src/main.tsx"
 	]
 }

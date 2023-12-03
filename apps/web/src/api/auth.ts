@@ -12,18 +12,11 @@ export class AuthError extends Error {
 	 * @param {string} message - The error message.
 	 * @param {number} status - The status code associated with the error.
 	 */
-	constructor(message: string, public status: number = 418) {
+	constructor(message: string, public status: number = 500) {
 		super(message);
 		this.name = this.constructor.name;
+		this.message = `${this.status}: ${message}`;
 		Object.setPrototypeOf(this, AuthError.prototype);
-	}
-
-	/**
-	 * Get the formatted error message including status code.
-	 * @returns {string} The formatted error message.
-	 */
-	override get message(): string {
-		return `${this.status}: ${super.message}`;
 	}
 }
 
