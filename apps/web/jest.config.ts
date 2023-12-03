@@ -1,8 +1,8 @@
 /* eslint-disable */
 export default {
-	displayName: 'desktop',
+	displayName: 'web',
 	preset: '../../jest.preset.js',
-	testEnvironment: 'node',
+	testEnvironment: 'jsdom',
 	transform: {
 		'^.+\\.[tj]s$': [
 			'ts-jest',
@@ -10,5 +10,5 @@ export default {
 		],
 	},
 	moduleFileExtensions: ['ts', 'js', 'html'],
-	coverageDirectory: '../../../coverage/apps/desktop',
+	coverageDirectory: '../../coverage/apps/web',
 };
