@@ -5,6 +5,7 @@ export interface User {
 }
 
 export interface AppState {
+	language: Locale;
 	appScreen: AppScreen;
 	appModalScreen: AppModalScreen | null;
 	intelligenceLevel: IntelligenceLevel;
@@ -18,6 +19,10 @@ export interface AppState {
 	scores: [number, number, number];
 }
 
+export enum Locale {
+	EN = 'en-US',
+	CN = 'zh-CN',
+}
 export enum AppScreen {
 	LOADING = 'loading',
 	LOGIN = 'login',

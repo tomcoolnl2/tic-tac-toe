@@ -1,13 +1,21 @@
+import { Locale } from './model';
+
 export type AppContentAction =
 	| { type: 'FETCH_START' }
 	| { type: 'FETCH_SUCCESS'; payload: AppContent }
-	| { type: 'FETCH_ERROR'; payload: Error };
+	| { type: 'FETCH_ERROR'; payload: Error }
+	| { type: 'SET_LANGUAGE'; payload: Locale };
 
 export interface AppContentState {
 	content: AppContent | null;
 	isContentLoading: boolean;
 	contentError: Error | null;
+	locale: Locale;
 }
+
+export type AppContentStateWithLanguageSelector = AppContentState & {
+	setLanguage: (locale: Locale) => void;
+};
 
 export interface AppContent {
 	appTitle: string;

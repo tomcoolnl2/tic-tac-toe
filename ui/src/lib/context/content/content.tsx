@@ -1,8 +1,10 @@
 import React from 'react';
 import {
+	type AppContentStateWithLanguageSelector,
 	AppContentState,
 	AppContentAction,
 	AppContent,
+	Locale,
 } from '@tic-tac-toe/model';
 import { fetchContentfulData } from './api';
 
@@ -10,13 +12,18 @@ const initialContentContext: AppContentState = {
 	content: null,
 	isContentLoading: false,
 	contentError: null,
+	locale: Locale.EN,
 };
 
 const ContentContext = React.createContext<AppContentState>(
 	initialContentContext
 );
 
-export const useContentContext = () => React.useContext(ContentContext);
+export const useContentContext = () => {
+	return React.useContext(
+		ContentContext
+	) as AppContentStateWithLanguageSelector;
+};
 
 const contentReducer = (
 	state: AppContentState,
@@ -41,6 +48,11 @@ const contentReducer = (
 				isContentLoading: false,
 				contentError: action.payload,
 			};
+		case 'SET_LANGUAGE':
+			return {
+				...state,
+				locale: action.payload,
+			};
 		default:
 			return state;
 	}
@@ -54,11 +66,17 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({
 		initialContentContext
 	);
 
+	const setLanguage = React.useCallback((locale: Locale): void => {
+		dispatch({ type: 'SET_LANGUAGE', payload: locale });
+	}, []);
+
 	React.useEffect(() => {
 		const fetchDataFromApi = async () => {
 			dispatch({ type: 'FETCH_START' });
 			try {
-				const content: AppContent = await fetchContentfulData();
+				const content: AppContent = await fetchContentfulData(
+					contentState.locale
+				);
 				dispatch({ type: 'FETCH_SUCCESS', payload: content });
 			} catch (error: unknown) {
 				dispatch({
@@ -68,10 +86,15 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({
 			}
 		};
 		fetchDataFromApi();
-	}, []);
+	}, [contentState.locale]);
+
+	const contextValue: AppContentStateWithLanguageSelector = {
+		...contentState,
+		setLanguage,
+	};
 
 	return (
-		<ContentContext.Provider value={contentState}>
+		<ContentContext.Provider value={contextValue}>
 			{children}
 		</ContentContext.Provider>
 	);

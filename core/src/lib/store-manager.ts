@@ -62,6 +62,7 @@ class Store {
 	 */
 	public get initialState(): TTTModel.AppState {
 		return {
+			language: TTTModel.Locale.EN,
 			appScreen: TTTModel.AppScreen.LOADING,
 			appModalScreen: null,
 			intelligenceLevel: TTTModel.IntelligenceLevel.EASY,
@@ -103,6 +104,15 @@ class Store {
 	public nextState(newState: TTTModel.AppState): void {
 		this.state$.next(newState);
 		this.storage!.state = newState;
+	}
+
+	/**
+	 * Updates the application user state and stores it.
+	 * @param newState - The new application user state.
+	 */
+	public nextUserState(newState: TTTModel.User): void {
+		this.user$.next(newState);
+		this.storage!.user = newState;
 	}
 
 	/**

@@ -15,6 +15,8 @@ export const App: React.FC = () => {
 		content: appContent,
 		isContentLoading,
 		contentError,
+		locale,
+		setLanguage,
 	} = TTTUI.Context.useContentContext();
 
 	const [appState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.AppState>(
@@ -67,9 +69,10 @@ export const App: React.FC = () => {
 		AppStore.nextState({
 			...AppStore.initialState,
 			appScreen,
+			language: appState.language,
 			gameState: TTTModel.GameState.PREPLAY,
 		});
-	}, [isContentLoading, userState]);
+	}, [isContentLoading, userState, appState.language]);
 
 	const handleStartGame = React.useCallback(() => {
 		// when player chooses O it means the CPU should make the first move
@@ -87,12 +90,16 @@ export const App: React.FC = () => {
 		});
 	}, [appState]);
 
-	const handleLoginSuccess = React.useCallback(() => {
-		AppStore.nextState({
-			...appState,
-			appScreen: TTTModel.AppScreen.SETTINGS,
-		});
-	}, [appState]);
+	const handleLoginSuccess = React.useCallback(
+		(user: TTTModel.User) => {
+			AppStore.nextUserState(user);
+			AppStore.nextState({
+				...appState,
+				appScreen: TTTModel.AppScreen.SETTINGS,
+			});
+		},
+		[appState]
+	);
 
 	const handleLogin = React.useCallback(
 		(pwd: string) => {
@@ -142,6 +149,15 @@ export const App: React.FC = () => {
 			});
 		},
 		[appState]
+	);
+
+	const handleLanguageChange = React.useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>) => {
+			const language = event.target.value as TTTModel.Locale;
+			setLanguage(language);
+			AppStore.nextState({ ...appState, language });
+		},
+		[appState, setLanguage]
 	);
 
 	const closeModalScreen = React.useCallback(() => {
@@ -227,6 +243,10 @@ export const App: React.FC = () => {
 								/>
 							)}
 						</div>
+						<TTTUI.LanguageSelector
+							selectedLanguage={locale}
+							setSelectedLanguage={handleLanguageChange}
+						/>
 					</TTTUI.ErrorBoundary>
 				</div>
 			</div>
