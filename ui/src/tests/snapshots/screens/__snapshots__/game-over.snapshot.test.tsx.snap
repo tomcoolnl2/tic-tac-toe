@@ -35,7 +35,7 @@ exports[`GameOverModalScreen screen component snapshot test should match the sna
     <button
       class="button button-secondary"
     >
-      Next Round
+      Next round
     </button>
   </div>
 </DocumentFragment>

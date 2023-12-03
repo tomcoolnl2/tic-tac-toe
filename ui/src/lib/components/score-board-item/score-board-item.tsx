@@ -3,6 +3,7 @@ import { Grid } from '../../core';
 import './score-board-item.scss';
 
 export interface Props {
+	content: [string, string, string];
 	score: number;
 	playerSymbol: PlayerSymbol;
 	cpuSymbol: PlayerSymbol;
@@ -10,6 +11,7 @@ export interface Props {
 }
 
 export const ScoreBoardItem: React.FC<Props> = ({
+	content,
 	score,
 	playerSymbol,
 	cpuSymbol,
@@ -21,15 +23,15 @@ export const ScoreBoardItem: React.FC<Props> = ({
 	switch (index) {
 		case 0:
 			symbol = ['X', 'O'][playerSymbol];
-			text = ` (You)`;
+			text = ` (${content[0]})`;
 			className = 'score-board-item-' + symbol.toLowerCase();
 			break;
 		case 1:
-			text = 'ties';
+			text = content[1];
 			break;
 		case 2:
 			symbol = ['X', 'O'][cpuSymbol];
-			text = ` (cpu)`;
+			text = ` (${content[2]})`;
 			className = 'score-board-item-' + symbol.toLowerCase();
 			break;
 	}

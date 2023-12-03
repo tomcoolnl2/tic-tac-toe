@@ -19,7 +19,7 @@ beforeEach(() => {
 	appState = {
 		appScreen: AppScreen.LOADING,
 		appModalScreen: null,
-		intelligenceLevel: IntelligenceLevel.BIEBER,
+		intelligenceLevel: IntelligenceLevel.EASY,
 		bitBoards: [0x0, 0x0],
 		boardState: Array.from({ length: 9 }, () => null),
 		currentPlayer: 0,

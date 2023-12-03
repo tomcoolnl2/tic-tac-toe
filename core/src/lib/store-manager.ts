@@ -64,7 +64,7 @@ class Store {
 		return {
 			appScreen: TTTModel.AppScreen.LOADING,
 			appModalScreen: null,
-			intelligenceLevel: TTTModel.IntelligenceLevel.BIEBER,
+			intelligenceLevel: TTTModel.IntelligenceLevel.EASY,
 			bitBoards: [0x0, 0x0],
 			boardState: Array.from({ length: 9 }, () => null),
 			currentPlayer: 0,

@@ -1,9 +1,10 @@
 import React from 'react';
-import { GameState, PlayerSymbol } from '@tic-tac-toe/model';
+import { AppScreenContent, GameState, PlayerSymbol } from '@tic-tac-toe/model';
 import { Divider, Grid } from '../core';
 import { GameOver, Button } from '../components';
 
 interface Props {
+	content: AppScreenContent;
 	gameState: GameState;
 	playerSymbol: PlayerSymbol;
 	cpuSymbol: PlayerSymbol;
@@ -12,31 +13,32 @@ interface Props {
 }
 
 export const GameOverModalScreen: React.FC<Props> = ({
+	content,
 	playerSymbol,
 	cpuSymbol,
 	gameState,
 	handleRestartGame,
 	handleNextRound,
 }) => {
-	let title = 'Takes the round';
+	let title = content.title[0];
 	let subtitle = '';
 	let avatar: PlayerSymbol | null = null;
 	let className = '';
 
 	switch (gameState) {
 		case GameState.WIN:
-			subtitle = "You've won!";
+			subtitle = content.subtitle?.[0] || '';
 			avatar = playerSymbol;
 			className = ['x', 'o'][playerSymbol];
 			break;
 		case GameState.LOST:
-			subtitle = "You've lost!";
+			subtitle = content.subtitle?.[1] || '';
 			avatar = cpuSymbol;
 			className = ['x', 'o'][cpuSymbol];
 			break;
 		case GameState.DRAW:
-			title = 'No one wins...';
-			subtitle = "It's a draw!";
+			title = content.title[1];
+			subtitle = content.subtitle?.[2] || '';
 			className = 'text-light';
 			break;
 	}
@@ -52,10 +54,10 @@ export const GameOverModalScreen: React.FC<Props> = ({
 			<Divider margin="vertical-l" />
 			<Grid cols={2} colGap="l">
 				<Button variant="light" onClick={handleRestartGame}>
-					Quit
+					{content.cta1}
 				</Button>
 				<Button variant="secondary" onClick={handleNextRound}>
-					Next Round
+					{content.cta2}
 				</Button>
 			</Grid>
 		</>

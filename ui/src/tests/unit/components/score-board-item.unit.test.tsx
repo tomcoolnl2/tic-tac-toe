@@ -10,6 +10,7 @@ describe('ScoreBoardItem component unit test', () => {
 			playerSymbol: PlayerSymbol.X,
 			cpuSymbol: PlayerSymbol.O,
 			index: 0,
+			content: ['You', 'Ties', 'CPU'] as [string, string, string],
 		};
 
 		const { getByText } = render(<ScoreBoardItem {...props} />);
@@ -27,6 +28,7 @@ describe('ScoreBoardItem component unit test', () => {
 			playerSymbol: PlayerSymbol.X,
 			cpuSymbol: PlayerSymbol.O,
 			index: 1,
+			content: ['You', 'Ties', 'CPU'] as [string, string, string],
 		};
 
 		const { getByText } = render(<ScoreBoardItem {...props} />);
@@ -44,6 +46,7 @@ describe('ScoreBoardItem component unit test', () => {
 			playerSymbol: PlayerSymbol.X,
 			cpuSymbol: PlayerSymbol.O,
 			index: 2,
+			content: ['You', 'Ties', 'CPU'] as [string, string, string],
 		};
 
 		const { getByText } = render(<ScoreBoardItem {...props} />);
@@ -61,6 +64,7 @@ describe('ScoreBoardItem component unit test', () => {
 			playerSymbol: PlayerSymbol.X,
 			cpuSymbol: PlayerSymbol.O,
 			index: 0,
+			content: ['You', 'Ties', 'CPU'] as [string, string, string],
 		};
 
 		const { container } = render(<ScoreBoardItem {...props} />);
@@ -74,6 +78,7 @@ describe('ScoreBoardItem component unit test', () => {
 			playerSymbol: PlayerSymbol.X,
 			cpuSymbol: PlayerSymbol.O,
 			index: 2,
+			content: ['You', 'Ties', 'CPU'] as [string, string, string],
 		};
 
 		const { container } = render(<ScoreBoardItem {...props} />);

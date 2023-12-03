@@ -36,9 +36,9 @@ export enum PlayerSymbol {
 }
 
 export enum IntelligenceLevel {
-	BIEBER = 'bieber',
-	NOVICE = 'novice',
-	MASTER = 'master',
+	EASY = 'EASY',
+	MEDIUM = 'MEDIUM',
+	HARD = 'HARD',
 }
 
 export enum GameState {

@@ -3,11 +3,13 @@ import { Avatar, Button } from '..';
 import './turn-indicator.scss';
 
 export interface Props {
+	content: [string, string];
 	playerSymbol: PlayerSymbol;
 	currentPlayer: PlayerSymbol;
 }
 
 export const TurnIndicator: React.FC<Props> = ({
+	content,
 	playerSymbol,
 	currentPlayer,
 }) => {
@@ -19,7 +21,7 @@ export const TurnIndicator: React.FC<Props> = ({
 			className={`turn-indicator turn-indicator-${className}`}
 		>
 			<Avatar type={currentPlayer} size={'s'} variant="light" />
-			{currentPlayer === playerSymbol ? 'Your Turn' : "CPU's Turn"}
+			{content[Number(currentPlayer !== playerSymbol)]}
 		</Button>
 	);
 };

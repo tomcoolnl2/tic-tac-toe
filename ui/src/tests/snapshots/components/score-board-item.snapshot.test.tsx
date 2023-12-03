@@ -7,6 +7,7 @@ test('ScoreBoardItem component snapshot test', () => {
 		<ScoreBoardItem
 			index={1}
 			score={1}
+			content={['You', 'Ties', 'CPU']}
 			playerSymbol={PlayerSymbol.O}
 			cpuSymbol={PlayerSymbol.X}
 		/>

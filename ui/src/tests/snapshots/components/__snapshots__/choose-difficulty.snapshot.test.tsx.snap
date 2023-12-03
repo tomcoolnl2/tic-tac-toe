@@ -9,43 +9,41 @@ exports[`ChooseDifficulty component snapshot test should match the snapshot 1`] 
       class="flex-box direction-row justify-content-flex-start align-items-flex-start"
     >
       <input
-        id="master"
+        id="HARD"
         name="level"
         type="radio"
-        value="master"
+        value="HARD"
       />
       <label
-        for="master"
-        title="master"
+        for="HARD"
+        title="HARD"
       />
       <input
-        id="novice"
+        id="MEDIUM"
         name="level"
         type="radio"
-        value="novice"
+        value="MEDIUM"
       />
       <label
-        for="novice"
-        title="novice"
+        for="MEDIUM"
+        title="MEDIUM"
       />
       <input
         checked=""
-        id="bieber"
+        id="EASY"
         name="level"
         type="radio"
-        value="bieber"
+        value="EASY"
       />
       <label
-        for="bieber"
-        title="bieber"
+        for="EASY"
+        title="EASY"
       />
     </div>
     <hr
       class="divider full-width horizontal margin-vertical-s invisible"
     />
-    <sup>
-      bieber
-    </sup>
+    <sup />
   </div>
 </DocumentFragment>
 `;

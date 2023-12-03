@@ -6,6 +6,13 @@ import { LoginScreen } from '../../../lib/screens';
 fetchMock.enableMocks();
 
 describe('LoginScreen screen component snapshot test', () => {
+	const content = {
+		cta1: 'Login',
+		title: 'Login',
+		errors: {
+			emptyPwd: 'Please provide a password...',
+		},
+	};
 	beforeEach(() => {
 		fetchMock.resetMocks();
 	});
@@ -16,7 +23,15 @@ describe('LoginScreen screen component snapshot test', () => {
 
 		let container;
 		await act(async () => {
-			const { container: renderedContainer } = render(<LoginScreen />);
+			const { container: renderedContainer } = render(
+				<LoginScreen
+					content={content}
+					userName="TestUser"
+					authError={null}
+					setAuthError={jest.fn()}
+					handleSubmit={jest.fn()}
+				/>
+			);
 			container = renderedContainer;
 		});
 		expect(container).toMatchSnapshot();

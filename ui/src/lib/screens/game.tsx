@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppStore } from '@tic-tac-toe/core';
-import { AppState } from '@tic-tac-toe/model';
+import { AppGameContent, AppState } from '@tic-tac-toe/model';
 import { Grid, GridItem } from '../core';
 import * as Hooks from '../hooks';
 import {
@@ -12,11 +12,13 @@ import {
 } from '../components';
 
 interface Props {
+	content: AppGameContent;
 	useLandscapeDesign: boolean;
 	handleReloadDialog: () => void;
 }
 
 export const GameScreen: React.FC<Props> = ({
+	content,
 	useLandscapeDesign,
 	handleReloadDialog,
 }) => {
@@ -41,6 +43,7 @@ export const GameScreen: React.FC<Props> = ({
 					</GridItem>
 					<GridItem>
 						<TurnIndicator
+							content={content.turnIndicator}
 							playerSymbol={playerSymbol}
 							currentPlayer={currentPlayer}
 						/>
@@ -71,6 +74,7 @@ export const GameScreen: React.FC<Props> = ({
 						return (
 							<ScoreBoardItem
 								key={i}
+								content={content.scoreBoard}
 								score={score}
 								index={i}
 								playerSymbol={playerSymbol}

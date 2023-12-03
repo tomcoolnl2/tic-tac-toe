@@ -31,7 +31,7 @@ exports[`GameScreen screen component snapshot test should match the snapshot 1`]
             <span
               class="avatar avatar-x avatar-size-s avatar-variant-light"
             />
-            Your Turn
+            Your turn
           </button>
         </div>
         <div
@@ -132,7 +132,7 @@ exports[`GameScreen screen component snapshot test should match the snapshot 1`]
           style="--row-height: 1fr; --col-width: 1fr;"
         >
           <small>
-            ties
+            Ties
           </small>
           <h3>
             0
@@ -146,7 +146,7 @@ exports[`GameScreen screen component snapshot test should match the snapshot 1`]
             <b>
               O
             </b>
-             (cpu)
+             (CPU)
           </small>
           <h3>
             0

@@ -4,6 +4,13 @@ import { GameState, PlayerSymbol } from '@tic-tac-toe/model';
 import { GameOverModalScreen } from '../../../lib/screens';
 
 describe('GameOverModalScreen component', () => {
+	const content = {
+		title: ['Takes the round', 'No one wins...'],
+		subtitle: ["You've won!", "You've lost!", "It's a draw!"],
+		cta1: 'Quit',
+		cta2: 'Next round',
+	};
+
 	it('should render the component correctly when gameState is WIN', () => {
 		const playerSymbol = PlayerSymbol.X;
 		const cpuSymbol = PlayerSymbol.O;
@@ -13,6 +20,7 @@ describe('GameOverModalScreen component', () => {
 
 		const { getByText } = render(
 			<GameOverModalScreen
+				content={content}
 				playerSymbol={playerSymbol}
 				cpuSymbol={cpuSymbol}
 				gameState={gameState}
@@ -24,7 +32,7 @@ describe('GameOverModalScreen component', () => {
 		expect(getByText('Takes the round')).toBeInTheDocument();
 		expect(getByText("You've won!")).toBeInTheDocument();
 		expect(getByText('Quit')).toBeInTheDocument();
-		expect(getByText('Next Round')).toBeInTheDocument();
+		expect(getByText('Next round')).toBeInTheDocument();
 	});
 
 	it('should render the component correctly when gameState is LOST', () => {
@@ -36,6 +44,7 @@ describe('GameOverModalScreen component', () => {
 
 		const { getByText } = render(
 			<GameOverModalScreen
+				content={content}
 				playerSymbol={playerSymbol}
 				cpuSymbol={cpuSymbol}
 				gameState={gameState}
@@ -47,7 +56,7 @@ describe('GameOverModalScreen component', () => {
 		expect(getByText('Takes the round')).toBeInTheDocument();
 		expect(getByText("You've lost!")).toBeInTheDocument();
 		expect(getByText('Quit')).toBeInTheDocument();
-		expect(getByText('Next Round')).toBeInTheDocument();
+		expect(getByText('Next round')).toBeInTheDocument();
 	});
 
 	it('should render the component correctly when gameState is DRAW', () => {
@@ -59,6 +68,7 @@ describe('GameOverModalScreen component', () => {
 
 		const { getByText } = render(
 			<GameOverModalScreen
+				content={content}
 				playerSymbol={playerSymbol}
 				cpuSymbol={cpuSymbol}
 				gameState={gameState}
@@ -70,7 +80,7 @@ describe('GameOverModalScreen component', () => {
 		expect(getByText('No one wins...')).toBeInTheDocument();
 		expect(getByText("It's a draw!")).toBeInTheDocument();
 		expect(getByText('Quit')).toBeInTheDocument();
-		expect(getByText('Next Round')).toBeInTheDocument();
+		expect(getByText('Next round')).toBeInTheDocument();
 	});
 
 	it('should call handleRestartGame when "Quit" button is clicked', () => {
@@ -82,6 +92,7 @@ describe('GameOverModalScreen component', () => {
 
 		const { getByText } = render(
 			<GameOverModalScreen
+				content={content}
 				playerSymbol={playerSymbol}
 				cpuSymbol={cpuSymbol}
 				gameState={gameState}
@@ -97,7 +108,7 @@ describe('GameOverModalScreen component', () => {
 		expect(handleNextRound).not.toHaveBeenCalled();
 	});
 
-	it('should call handleNextRound when "Next Round" button is clicked', () => {
+	it('should call handleNextRound when "Next round" button is clicked', () => {
 		const playerSymbol = PlayerSymbol.X;
 		const cpuSymbol = PlayerSymbol.O;
 		const gameState = GameState.WIN;
@@ -106,6 +117,7 @@ describe('GameOverModalScreen component', () => {
 
 		const { getByText } = render(
 			<GameOverModalScreen
+				content={content}
 				playerSymbol={playerSymbol}
 				cpuSymbol={cpuSymbol}
 				gameState={gameState}
@@ -114,7 +126,7 @@ describe('GameOverModalScreen component', () => {
 			/>
 		);
 
-		const nextRoundButton = getByText('Next Round');
+		const nextRoundButton = getByText('Next round');
 		fireEvent.click(nextRoundButton);
 
 		expect(handleNextRound).toHaveBeenCalledTimes(1);

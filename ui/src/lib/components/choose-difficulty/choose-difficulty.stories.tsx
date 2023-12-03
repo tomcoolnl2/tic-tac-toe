@@ -17,15 +17,15 @@ const Template: StoryFn<Props> = (args) => (
 
 export const ChooseDifficultyEasy = Template.bind({});
 ChooseDifficultyEasy.args = {
-	selectedDifficultySetting: IntelligenceLevel.BIEBER,
+	selectedDifficultySetting: IntelligenceLevel.EASY,
 };
 
 export const ChooseDifficultyNovice = Template.bind({});
 ChooseDifficultyNovice.args = {
-	selectedDifficultySetting: IntelligenceLevel.NOVICE,
+	selectedDifficultySetting: IntelligenceLevel.MEDIUM,
 };
 
 export const ChooseDifficultyMaster = Template.bind({});
 ChooseDifficultyMaster.args = {
-	selectedDifficultySetting: IntelligenceLevel.MASTER,
+	selectedDifficultySetting: IntelligenceLevel.HARD,
 };

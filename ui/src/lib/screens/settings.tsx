@@ -1,10 +1,15 @@
 import React from 'react';
-import { IntelligenceLevel, PlayerSymbol } from '@tic-tac-toe/model';
+import {
+	AppScreenContent,
+	IntelligenceLevel,
+	PlayerSymbol,
+} from '@tic-tac-toe/model';
 import { Divider } from '../core';
 import { Button, ChooseDifficulty, SymbolChoice } from '../components';
 import { BaseScreen } from './base/base';
 
 interface Props {
+	content: AppScreenContent;
 	playerSymbol: PlayerSymbol;
 	selectedDifficultySetting: IntelligenceLevel;
 	handleDifficultySettingsChange: (
@@ -17,6 +22,7 @@ interface Props {
 }
 
 export const SettingsScreen: React.FC<Props> = ({
+	content,
 	playerSymbol,
 	selectedDifficultySetting,
 	handleDifficultySettingsChange,
@@ -26,12 +32,12 @@ export const SettingsScreen: React.FC<Props> = ({
 	return (
 		<BaseScreen>
 			<Divider invisible margin="vertical-l" />
-			<span>Pic Player 1's Mark</span>
+			<span>{content.title}</span>
 			<SymbolChoice
 				playerSymbol={playerSymbol}
 				handleSymbolChoiceChange={handleSymbolChoiceChange}
 			/>
-			<sub>Remember, X goes first</sub>
+			<sub>{content.subtitle}</sub>
 			<Divider invisible margin="vertical-l" />
 			<ChooseDifficulty
 				selectedDifficultySetting={selectedDifficultySetting}
@@ -39,7 +45,7 @@ export const SettingsScreen: React.FC<Props> = ({
 			/>
 			<Divider invisible margin="vertical-l" />
 			<Button variant="secondary" onClick={handleStartGame}>
-				Start game <i className="icon-play-sign"></i>
+				{content.cta1} <i className="icon-play-sign"></i>
 			</Button>
 		</BaseScreen>
 	);
