@@ -1,5 +1,6 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
+import * as TTTUI from '@tic-tac-toe/ui';
 import { App } from './app/app';
 
 const root = ReactDOM.createRoot(
@@ -8,6 +9,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
 	<StrictMode>
-		<App />
+		<TTTUI.Context.ContentProvider>
+			<App />
+		</TTTUI.Context.ContentProvider>
 	</StrictMode>
 );

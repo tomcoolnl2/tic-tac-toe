@@ -4,3 +4,4 @@ export * from './lib/components';
 export * from './lib/screens';
 export * from './lib/error';
 export * as Hooks from './lib/hooks';
+export * as Context from './lib/context';

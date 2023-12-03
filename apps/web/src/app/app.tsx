@@ -1,10 +1,5 @@
 import React from 'react';
 import * as Rx from 'rxjs';
-import {
-	VITE_CF_SPACE_ID,
-	VITE_CF_CONTENT_DELIVERY_API_ACCESS_TOKEN,
-	VITE_CF_LOCALIZED_PROPERTIES_ID,
-} from '@tic-tac-toe/constants';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
 import { AppStore } from '@tic-tac-toe/core';
 import * as TTTModel from '@tic-tac-toe/model';
@@ -12,10 +7,15 @@ import * as TTTUI from '@tic-tac-toe/ui';
 import { AuthError, fetchUserName, login } from '../api/auth';
 
 export const App: React.FC = () => {
-	const [appContent, setAppContent] = React.useState<unknown>(null);
 	const [userName, setUserName] = React.useState<string>('');
 	const [authError, setAuthError] = React.useState<Error | null>(null);
 	const orientation = TTTUI.Hooks.useScreenOrientation();
+
+	const {
+		content: appContent,
+		isContentLoading,
+		contentError,
+	} = TTTUI.Context.useContentContext();
 
 	const [appState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.AppState>(
 		AppStore.state$
@@ -24,6 +24,12 @@ export const App: React.FC = () => {
 	const [userState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.User>(
 		AppStore.user$
 	);
+
+	React.useEffect(() => {
+		if (appContent?.appTitle) {
+			document.title = appContent.appTitle;
+		}
+	}, [appContent]);
 
 	React.useEffect(() => {
 		fetchUserName().then((name) => {
@@ -47,7 +53,7 @@ export const App: React.FC = () => {
 	// Then we check if a user is not logged in
 	React.useEffect(() => {
 		let appScreen: TTTModel.AppScreen;
-		if (appContent === null) {
+		if (isContentLoading) {
 			appScreen = TTTModel.AppScreen.LOADING;
 		} else if (!userState.loggedIn) {
 			appScreen = TTTModel.AppScreen.LOGIN;
@@ -60,7 +66,7 @@ export const App: React.FC = () => {
 			appScreen,
 			gameState: TTTModel.GameState.PREPLAY,
 		});
-	}, [appContent, userState]);
+	}, [isContentLoading, userState]);
 
 	const handleStartGame = React.useCallback(() => {
 		// when player chooses O it means the CPU should make the first move
@@ -164,38 +170,6 @@ export const App: React.FC = () => {
 			subscription.unsubscribe();
 		};
 	}, [closeModalValidator]);
-
-	React.useEffect(() => {
-		const query = `
-			query {
-				localizedProperties(id: "${VITE_CF_LOCALIZED_PROPERTIES_ID}") {
-					appTitle
-				}
-			}
-		`;
-
-		fetch(
-			`https://graphql.contentful.com/content/v1/spaces/${VITE_CF_SPACE_ID}/`,
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${VITE_CF_CONTENT_DELIVERY_API_ACCESS_TOKEN}`,
-				},
-				body: JSON.stringify({ query }),
-			}
-		)
-			.then((response) => response.json())
-			.then(({ data, errors }) => {
-				if (errors) {
-					console.error(errors);
-				} else {
-					const { localizedProperties } = data;
-					setAppContent(localizedProperties);
-					document.title = localizedProperties.appTitle;
-				}
-			});
-	}, []);
 
 	return (
 		<TTTUI.Theme>
