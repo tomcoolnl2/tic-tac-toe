@@ -18,8 +18,7 @@ describe('AppModule', () => {
 	});
 
 	it('should provide EnvConfigService', () => {
-		const envConfigService =
-			appModule.get<EnvConfigService>(EnvConfigService);
+		const envConfigService = appModule.get<EnvConfigService>(EnvConfigService);
 		expect(envConfigService).toBeDefined();
 	});
 
