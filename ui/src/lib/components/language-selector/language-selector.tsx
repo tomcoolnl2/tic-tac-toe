@@ -11,7 +11,7 @@ export const LanguageSelector: React.FC<Props> = ({ selectedLanguage, setSelecte
 	return (
 		<div className="language-selector">
 			{Object.entries(Locale).map(([lang, locale]) => (
-				<>
+				<React.Fragment key={locale}>
 					<input
 						id={lang}
 						type="radio"
@@ -27,7 +27,7 @@ export const LanguageSelector: React.FC<Props> = ({ selectedLanguage, setSelecte
 					>
 						{lang}
 					</label>
-				</>
+				</React.Fragment>
 			))}
 		</div>
 	);
