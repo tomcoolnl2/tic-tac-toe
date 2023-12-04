@@ -9,30 +9,10 @@ import { AuthError, fetchUserName, login } from '../api/auth';
 export const App: React.FC = () => {
 	const [userName, setUserName] = React.useState<string>('');
 	const [authError, setAuthError] = React.useState<Error | null>(null);
+	const { appContent, isContentLoading, setLanguage } = TTTUI.Context.useContentContext();
+	const [appState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
+	const [userState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.User>(AppStore.user$);
 	const orientation = TTTUI.Hooks.useScreenOrientation();
-
-	const {
-		content: appContent,
-		isContentLoading,
-		contentError,
-	} = TTTUI.Context.useContentContext();
-
-	const [appState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.AppState>(
-		AppStore.state$
-	);
-
-	const [userState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.User>(
-		AppStore.user$
-	);
-
-	React.useEffect(() => {
-		if (isDevEnvironment()) {
-			console.info('appContent', appContent);
-		}
-		if (appContent?.appTitle) {
-			document.title = appContent.appTitle;
-		}
-	}, [appContent]);
 
 	React.useEffect(() => {
 		fetchUserName().then((name) => {
@@ -47,10 +27,22 @@ export const App: React.FC = () => {
 
 	React.useEffect(() => {
 		if (isDevEnvironment()) {
+			console.info('appContent', appContent);
+		}
+		if (appContent) {
+			document.title = appContent.appTitle;
+		}
+		if (appState.language) {
+			setLanguage(appState.language);
+		}
+	}, [appContent, appState.language, setLanguage]);
+
+	React.useEffect(() => {
+		if (isDevEnvironment()) {
 			console.info('userState', userState);
 			console.info('appState', appState);
 		}
-	}, [appState, userState]);
+	}, [appState, userState, setLanguage]);
 
 	// First we check if content is loaded,
 	// Then we check if a user is not logged in
@@ -67,9 +59,10 @@ export const App: React.FC = () => {
 		AppStore.nextState({
 			...AppStore.initialState,
 			appScreen,
+			language: appState.language,
 			gameState: TTTModel.GameState.PREPLAY,
 		});
-	}, [isContentLoading, userState]);
+	}, [isContentLoading, userState, appState.language]);
 
 	const handleStartGame = React.useCallback(() => {
 		// when player chooses O it means the CPU should make the first move
@@ -87,12 +80,16 @@ export const App: React.FC = () => {
 		});
 	}, [appState]);
 
-	const handleLoginSuccess = React.useCallback(() => {
-		AppStore.nextState({
-			...appState,
-			appScreen: TTTModel.AppScreen.SETTINGS,
-		});
-	}, [appState]);
+	const handleLoginSuccess = React.useCallback(
+		(user: TTTModel.User) => {
+			AppStore.nextUserState(user);
+			AppStore.nextState({
+				...appState,
+				appScreen: TTTModel.AppScreen.SETTINGS,
+			});
+		},
+		[appState]
+	);
 
 	const handleLogin = React.useCallback(
 		(pwd: string) => {
@@ -106,8 +103,11 @@ export const App: React.FC = () => {
 	);
 
 	const handleRestartGame = React.useCallback(() => {
-		AppStore.nextState(AppStore.initialState);
-	}, []);
+		AppStore.nextState({
+			...AppStore.initialState,
+			language: appState.language,
+		});
+	}, [appState.language]);
 
 	const handleReloadDialog = React.useCallback(() => {
 		AppStore.nextState({
@@ -144,6 +144,15 @@ export const App: React.FC = () => {
 		[appState]
 	);
 
+	const handleLanguageChange = React.useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>) => {
+			const language = event.target.value as TTTModel.Locale;
+			setLanguage(language);
+			AppStore.nextState({ ...appState, language });
+		},
+		[appState, setLanguage]
+	);
+
 	const closeModalScreen = React.useCallback(() => {
 		AppStore.nextState({
 			...appState,
@@ -162,10 +171,9 @@ export const App: React.FC = () => {
 	}, [appState, closeModalScreen]);
 
 	React.useEffect(() => {
-		const keyDownHandler = Rx.fromEvent<KeyboardEvent>(
-			document,
-			'keydown'
-		).pipe(Rx.filter((event) => event.key === 'Escape'));
+		const keyDownHandler = Rx.fromEvent<KeyboardEvent>(document, 'keydown').pipe(
+			Rx.filter((event) => event.key === 'Escape')
+		);
 
 		const subscription = keyDownHandler.subscribe(closeModalValidator);
 
@@ -177,46 +185,33 @@ export const App: React.FC = () => {
 	return (
 		<TTTUI.Theme>
 			<div className={`screen ${appState.appScreen}`}>
-				<div
-					className={`screen-inner ${
-						useLandscapeDesign ? 'landscape' : ''
-					}`}
-				>
+				<div className={`screen-inner ${useLandscapeDesign ? 'landscape' : ''}`}>
 					<TTTUI.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
 						<div className="screen-front">
-							{appState.appScreen ===
-								TTTModel.AppScreen.LOADING && (
+							{appState.appScreen === TTTModel.AppScreen.LOADING && (
 								<TTTUI.LoadingScreen />
 							)}
-							{appContent &&
-								appState.appScreen ===
-									TTTModel.AppScreen.LOGIN && (
-									<TTTUI.LoginScreen
-										content={appContent.loginScreen}
-										userName={userName}
-										authError={authError}
-										handleSubmit={handleLogin}
-										setAuthError={setAuthError}
-									/>
-								)}
-							{appContent &&
-								appState.appScreen ===
-									TTTModel.AppScreen.SETTINGS && (
-									<TTTUI.SettingsScreen
-										content={appContent.settingsScreen}
-										playerSymbol={appState.playerSymbol}
-										selectedDifficultySetting={
-											appState.intelligenceLevel
-										}
-										handleDifficultySettingsChange={
-											handleDifficultySettingsChange
-										}
-										handleSymbolChoiceChange={
-											handleSymbolChoiceChange
-										}
-										handleStartGame={handleStartGame}
-									/>
-								)}
+							{appContent && appState.appScreen === TTTModel.AppScreen.LOGIN && (
+								<TTTUI.LoginScreen
+									content={appContent.loginScreen}
+									userName={userName}
+									authError={authError}
+									handleSubmit={handleLogin}
+									setAuthError={setAuthError}
+								/>
+							)}
+							{appContent && appState.appScreen === TTTModel.AppScreen.SETTINGS && (
+								<TTTUI.SettingsScreen
+									language={appState.language}
+									content={appContent.settingsScreen}
+									playerSymbol={appState.playerSymbol}
+									selectedDifficultySetting={appState.intelligenceLevel}
+									handleDifficultySettingsChange={handleDifficultySettingsChange}
+									handleSymbolChoiceChange={handleSymbolChoiceChange}
+									handleLanguageChange={handleLanguageChange}
+									handleStartGame={handleStartGame}
+								/>
+							)}
 						</div>
 						<div className="screen-back">
 							{appContent && (
@@ -232,16 +227,14 @@ export const App: React.FC = () => {
 			</div>
 			{appContent && appState.appModalScreen !== null && (
 				<TTTUI.Modal>
-					{appState.appModalScreen ===
-						TTTModel.AppModalScreen.RELOAD && (
+					{appState.appModalScreen === TTTModel.AppModalScreen.RELOAD && (
 						<TTTUI.ReloadModalScreen
 							content={appContent.restartModal}
 							handleRestartGame={handleRestartGame}
 							closeModalScreen={closeModalScreen}
 						/>
 					)}
-					{appState.appModalScreen ===
-						TTTModel.AppModalScreen.GAME_OVER && (
+					{appState.appModalScreen === TTTModel.AppModalScreen.GAME_OVER && (
 						<TTTUI.GameOverModalScreen
 							content={appContent.gameOverModal}
 							gameState={appState.gameState}

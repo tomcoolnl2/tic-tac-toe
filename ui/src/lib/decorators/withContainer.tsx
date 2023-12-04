@@ -11,14 +11,13 @@ export function withContainer<P extends object>(
 	const EnhancedComponent: React.FC<P & ContainerProps> = (props) => {
 		const { containerWidth = defaultWidth, ...restProps } = props;
 		return (
-			<div style={{ width: `${containerWidth}px` }}>
+			<div style={{ width: `${containerWidth}px`, position: 'relative', padding: 20 }}>
 				<WrappedComponent {...(restProps as P)} />
 			</div>
 		);
 	};
 
-	const displayName =
-		WrappedComponent.displayName || WrappedComponent.name || 'Component';
+	const displayName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
 	EnhancedComponent.displayName = `withContainer(${displayName})`;
 
 	return EnhancedComponent;

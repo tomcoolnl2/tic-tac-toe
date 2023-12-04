@@ -49,7 +49,7 @@ export async function fetchUserName(): Promise<string | AuthError | null> {
  */
 export async function login(
 	pwd: string,
-	successHandler: (response: Response) => void
+	successHandler: (user: TTTModel.User) => void
 ): Promise<AuthError | void> {
 	const { signal } = new AbortController();
 	const url = `${VITE_AUTH_API_URL}/login`;
@@ -62,10 +62,11 @@ export async function login(
 		signal,
 	});
 
+	const data = await response.json();
+
 	if (!response.ok) {
-		const data = await response.json();
 		return new AuthError(data.message, response.status);
 	} else {
-		successHandler(response);
+		successHandler(data);
 	}
 }

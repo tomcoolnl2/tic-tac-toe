@@ -5,6 +5,7 @@ import {
 	IntelligenceLevel,
 	PlayerSymbol,
 	GameState,
+	Locale,
 } from '@tic-tac-toe/model';
 import { AppStore } from '../lib/store-manager';
 
@@ -14,6 +15,7 @@ let userState: User;
 
 beforeEach(() => {
 	appState = {
+		language: Locale.EN,
 		appScreen: AppScreen.LOADING,
 		appModalScreen: null,
 		intelligenceLevel: IntelligenceLevel.EASY,
@@ -46,21 +48,12 @@ describe('StateStorage', () => {
 	test('State updates correctly and updates storage', async () => {
 		// Prepare
 		const newState: AppState = {
+			language: Locale.EN,
 			appScreen: AppScreen.LOADING,
 			appModalScreen: null,
 			intelligenceLevel: IntelligenceLevel.MEDIUM,
 			bitBoards: [0x1, 0x2],
-			boardState: [
-				PlayerSymbol.X,
-				PlayerSymbol.O,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null,
-				null,
-			],
+			boardState: [PlayerSymbol.X, PlayerSymbol.O, null, null, null, null, null, null, null],
 			currentPlayer: PlayerSymbol.O,
 			playerSymbol: PlayerSymbol.X,
 			cpuSymbol: PlayerSymbol.O,

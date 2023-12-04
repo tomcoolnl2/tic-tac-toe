@@ -62,6 +62,7 @@ class Store {
 	 */
 	public get initialState(): TTTModel.AppState {
 		return {
+			language: TTTModel.Locale.EN,
 			appScreen: TTTModel.AppScreen.LOADING,
 			appModalScreen: null,
 			intelligenceLevel: TTTModel.IntelligenceLevel.EASY,
@@ -82,11 +83,11 @@ class Store {
 	 * @returns The next application state.
 	 */
 	public getNextGameState(prevAppState: TTTModel.AppState) {
-		const { playerSymbol, cpuSymbol, intelligenceLevel, scores } =
-			prevAppState;
+		const { playerSymbol, cpuSymbol, intelligenceLevel, scores, language } = prevAppState;
 
 		return {
 			...this.initialState,
+			language,
 			playerSymbol,
 			cpuSymbol,
 			intelligenceLevel,
@@ -106,6 +107,15 @@ class Store {
 	}
 
 	/**
+	 * Updates the application user state and stores it.
+	 * @param newState - The new application user state.
+	 */
+	public nextUserState(newState: TTTModel.User): void {
+		this.user$.next(newState);
+		this.storage!.user = newState;
+	}
+
+	/**
 	 * Resets the application state to its initial state.
 	 */
 	public resetState() {
@@ -116,9 +126,7 @@ class Store {
 	 * Subscribes a React component to changes in the application state.
 	 * @param setState - The React state setter function.
 	 */
-	public subscribe(
-		setState: React.Dispatch<React.SetStateAction<TTTModel.AppState>>
-	): void {
+	public subscribe(setState: React.Dispatch<React.SetStateAction<TTTModel.AppState>>): void {
 		this.state$.subscribe(setState);
 	}
 
@@ -132,20 +140,14 @@ class Store {
 				Rx.take(1), // Take the latest value from the BehaviorSubject
 				Rx.mergeMap(async (state) => {
 					// Call game engine method passing current state and cellIndex
-					let newState = this.gameEngine!.update(
-						{ ...state },
-						cellIndex
-					);
+					let newState = this.gameEngine!.update({ ...state }, cellIndex);
 					// Update state using nextState method and await the completion
 					this.nextState(newState);
 
 					if (newState.gameState === TTTModel.GameState.PLAYING) {
 						// Initiate AI's turn with a delay
 						const nullIndex = await this.aiEngine!.update(newState);
-						newState = this.gameEngine!.update(
-							{ ...newState },
-							nullIndex
-						);
+						newState = this.gameEngine!.update({ ...newState }, nullIndex);
 						this.nextState(newState);
 					}
 				})
@@ -165,8 +167,7 @@ class Store {
 	 * @param n - The number to convert.
 	 * @returns The binary representation of the number.
 	 */
-	public static toBinString = (n: number): string =>
-		`0b${(n >>> 0).toString(2)}`;
+	public static toBinString = (n: number): string => `0b${(n >>> 0).toString(2)}`;
 
 	/**
 	 * Logs the application state and its representations.

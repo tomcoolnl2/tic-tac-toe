@@ -4,6 +4,7 @@ import {
 	IntelligenceLevel,
 	PlayerSymbol,
 	GameState,
+	Locale,
 } from '@tic-tac-toe/model';
 import { StateStorage } from '../lib/storage-manager';
 import { MockStorage } from './mock/mock-storage';
@@ -17,6 +18,7 @@ beforeEach(() => {
 	stateStorage = new StateStorage(mockStorage);
 
 	appState = {
+		language: Locale.EN,
 		appScreen: AppScreen.LOADING,
 		appModalScreen: null,
 		intelligenceLevel: IntelligenceLevel.EASY,

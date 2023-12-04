@@ -5,7 +5,7 @@ import { ScoreBoardItem, type Props } from './score-board-item';
 
 const EnchantedScoreBoardItem: React.FC<Props & ContainerProps> = withContainer(
 	ScoreBoardItem,
-	100
+	130
 );
 
 const Story: Meta<typeof ScoreBoardItem> = {
@@ -14,9 +14,8 @@ const Story: Meta<typeof ScoreBoardItem> = {
 };
 export default Story;
 
-const Template: StoryFn<Props> = (args) => (
-	<EnchantedScoreBoardItem {...args} />
-);
+const Template: StoryFn<Props> = (args) => <EnchantedScoreBoardItem {...args} />;
+const content = ['You', 'Ties', 'CPU'] as [string, string, string];
 
 export const PlayerScore = Template.bind({});
 PlayerScore.args = {
@@ -24,6 +23,7 @@ PlayerScore.args = {
 	playerSymbol: PlayerSymbol.X,
 	cpuSymbol: PlayerSymbol.O,
 	index: 0,
+	content,
 };
 
 export const TieScore = Template.bind({});
@@ -32,6 +32,7 @@ TieScore.args = {
 	playerSymbol: PlayerSymbol.X,
 	cpuSymbol: PlayerSymbol.O,
 	index: 1,
+	content,
 };
 
 export const CpuScore = Template.bind({});
@@ -40,4 +41,5 @@ CpuScore.args = {
 	playerSymbol: PlayerSymbol.X,
 	cpuSymbol: PlayerSymbol.O,
 	index: 2,
+	content,
 };
