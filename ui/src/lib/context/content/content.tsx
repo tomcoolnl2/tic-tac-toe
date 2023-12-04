@@ -9,26 +9,19 @@ import {
 import { fetchContentfulData } from './api';
 
 const initialContentContext: AppContentState = {
-	content: null,
+	appContent: null,
 	isContentLoading: false,
 	contentError: null,
 	locale: Locale.EN,
 };
 
-const ContentContext = React.createContext<AppContentState>(
-	initialContentContext
-);
+const ContentContext = React.createContext<AppContentState>(initialContentContext);
 
 export const useContentContext = () => {
-	return React.useContext(
-		ContentContext
-	) as AppContentStateWithLanguageSelector;
+	return React.useContext(ContentContext) as AppContentStateWithLanguageSelector;
 };
 
-const contentReducer = (
-	state: AppContentState,
-	action: AppContentAction
-): AppContentState => {
+const contentReducer = (state: AppContentState, action: AppContentAction): AppContentState => {
 	switch (action.type) {
 		case 'FETCH_START':
 			return {
@@ -38,7 +31,7 @@ const contentReducer = (
 		case 'FETCH_SUCCESS':
 			return {
 				...state,
-				content: action.payload,
+				appContent: action.payload,
 				isContentLoading: false,
 				contentError: null,
 			};
@@ -58,13 +51,8 @@ const contentReducer = (
 	}
 };
 
-export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({
-	children,
-}) => {
-	const [contentState, dispatch] = React.useReducer(
-		contentReducer,
-		initialContentContext
-	);
+export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+	const [contentState, dispatch] = React.useReducer(contentReducer, initialContentContext);
 
 	const setLanguage = React.useCallback((locale: Locale): void => {
 		dispatch({ type: 'SET_LANGUAGE', payload: locale });
@@ -74,9 +62,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({
 		const fetchDataFromApi = async () => {
 			dispatch({ type: 'FETCH_START' });
 			try {
-				const content: AppContent = await fetchContentfulData(
-					contentState.locale
-				);
+				const content: AppContent = await fetchContentfulData(contentState.locale);
 				dispatch({ type: 'FETCH_SUCCESS', payload: content });
 			} catch (error: unknown) {
 				dispatch({
@@ -93,9 +79,5 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({
 		setLanguage,
 	};
 
-	return (
-		<ContentContext.Provider value={contextValue}>
-			{children}
-		</ContentContext.Provider>
-	);
+	return <ContentContext.Provider value={contextValue}>{children}</ContentContext.Provider>;
 };

@@ -6,16 +6,14 @@ import './choose-difficulty.scss';
 
 export interface Props {
 	selectedDifficultySetting: IntelligenceLevel;
-	handleDifficultySettingsChange: (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => void;
+	handleDifficultySettingsChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const ChooseDifficulty: React.FC<Props> = ({
 	selectedDifficultySetting,
 	handleDifficultySettingsChange,
 }) => {
-	const { content: appContent, isContentLoading } = useContentContext();
+	const { appContent, isContentLoading } = useContentContext();
 
 	const options = React.useMemo(() => Object.keys(IntelligenceLevel), []);
 
@@ -25,19 +23,11 @@ export const ChooseDifficulty: React.FC<Props> = ({
 				options.indexOf(selectedDifficultySetting.toUpperCase())
 			] ?? ''
 		);
-	}, [
-		appContent?.gameScreen.intelligenceLevel,
-		options,
-		selectedDifficultySetting,
-	]);
+	}, [appContent?.gameScreen.intelligenceLevel, options, selectedDifficultySetting]);
 
 	return (
 		!isContentLoading && (
-			<FlexBox
-				direction="column"
-				alignItems="center"
-				className="choose-difficulty"
-			>
+			<FlexBox direction="column" alignItems="center" className="choose-difficulty">
 				<FlexBox>
 					{options.reverse().map((level, i) => (
 						<React.Fragment key={level}>

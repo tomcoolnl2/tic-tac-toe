@@ -7,7 +7,7 @@ export type AppContentAction =
 	| { type: 'SET_LANGUAGE'; payload: Locale };
 
 export interface AppContentState {
-	content: AppContent | null;
+	appContent: AppContent | null;
 	isContentLoading: boolean;
 	contentError: Error | null;
 	locale: Locale;

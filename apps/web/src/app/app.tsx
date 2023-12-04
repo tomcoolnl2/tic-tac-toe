@@ -11,21 +11,12 @@ export const App: React.FC = () => {
 	const [authError, setAuthError] = React.useState<Error | null>(null);
 	const orientation = TTTUI.Hooks.useScreenOrientation();
 
-	const {
-		content: appContent,
-		isContentLoading,
-		contentError,
-		locale,
-		setLanguage,
-	} = TTTUI.Context.useContentContext();
+	const { appContent, isContentLoading, contentError, locale, setLanguage } =
+		TTTUI.Context.useContentContext();
 
-	const [appState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.AppState>(
-		AppStore.state$
-	);
+	const [appState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
 
-	const [userState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.User>(
-		AppStore.user$
-	);
+	const [userState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.User>(AppStore.user$);
 
 	React.useEffect(() => {
 		if (isDevEnvironment()) {
@@ -178,10 +169,9 @@ export const App: React.FC = () => {
 	}, [appState, closeModalScreen]);
 
 	React.useEffect(() => {
-		const keyDownHandler = Rx.fromEvent<KeyboardEvent>(
-			document,
-			'keydown'
-		).pipe(Rx.filter((event) => event.key === 'Escape'));
+		const keyDownHandler = Rx.fromEvent<KeyboardEvent>(document, 'keydown').pipe(
+			Rx.filter((event) => event.key === 'Escape')
+		);
 
 		const subscription = keyDownHandler.subscribe(closeModalValidator);
 
@@ -193,46 +183,33 @@ export const App: React.FC = () => {
 	return (
 		<TTTUI.Theme>
 			<div className={`screen ${appState.appScreen}`}>
-				<div
-					className={`screen-inner ${
-						useLandscapeDesign ? 'landscape' : ''
-					}`}
-				>
+				<div className={`screen-inner ${useLandscapeDesign ? 'landscape' : ''}`}>
 					<TTTUI.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
 						<div className="screen-front">
-							{appState.appScreen ===
-								TTTModel.AppScreen.LOADING && (
+							{appState.appScreen === TTTModel.AppScreen.LOADING && (
 								<TTTUI.LoadingScreen />
 							)}
-							{appContent &&
-								appState.appScreen ===
-									TTTModel.AppScreen.LOGIN && (
-									<TTTUI.LoginScreen
-										content={appContent.loginScreen}
-										userName={userName}
-										authError={authError}
-										handleSubmit={handleLogin}
-										setAuthError={setAuthError}
-									/>
-								)}
-							{appContent &&
-								appState.appScreen ===
-									TTTModel.AppScreen.SETTINGS && (
-									<TTTUI.SettingsScreen
-										content={appContent.settingsScreen}
-										playerSymbol={appState.playerSymbol}
-										selectedDifficultySetting={
-											appState.intelligenceLevel
-										}
-										handleDifficultySettingsChange={
-											handleDifficultySettingsChange
-										}
-										handleSymbolChoiceChange={
-											handleSymbolChoiceChange
-										}
-										handleStartGame={handleStartGame}
-									/>
-								)}
+							{appContent && appState.appScreen === TTTModel.AppScreen.LOGIN && (
+								<TTTUI.LoginScreen
+									content={appContent.loginScreen}
+									userName={userName}
+									authError={authError}
+									handleSubmit={handleLogin}
+									setAuthError={setAuthError}
+								/>
+							)}
+							{appContent && appState.appScreen === TTTModel.AppScreen.SETTINGS && (
+								<TTTUI.SettingsScreen
+									locale={locale}
+									content={appContent.settingsScreen}
+									playerSymbol={appState.playerSymbol}
+									selectedDifficultySetting={appState.intelligenceLevel}
+									handleDifficultySettingsChange={handleDifficultySettingsChange}
+									handleSymbolChoiceChange={handleSymbolChoiceChange}
+									handleLanguageChange={handleLanguageChange}
+									handleStartGame={handleStartGame}
+								/>
+							)}
 						</div>
 						<div className="screen-back">
 							{appContent && (
@@ -243,25 +220,19 @@ export const App: React.FC = () => {
 								/>
 							)}
 						</div>
-						<TTTUI.LanguageSelector
-							selectedLanguage={locale}
-							setSelectedLanguage={handleLanguageChange}
-						/>
 					</TTTUI.ErrorBoundary>
 				</div>
 			</div>
 			{appContent && appState.appModalScreen !== null && (
 				<TTTUI.Modal>
-					{appState.appModalScreen ===
-						TTTModel.AppModalScreen.RELOAD && (
+					{appState.appModalScreen === TTTModel.AppModalScreen.RELOAD && (
 						<TTTUI.ReloadModalScreen
 							content={appContent.restartModal}
 							handleRestartGame={handleRestartGame}
 							closeModalScreen={closeModalScreen}
 						/>
 					)}
-					{appState.appModalScreen ===
-						TTTModel.AppModalScreen.GAME_OVER && (
+					{appState.appModalScreen === TTTModel.AppModalScreen.GAME_OVER && (
 						<TTTUI.GameOverModalScreen
 							content={appContent.gameOverModal}
 							gameState={appState.gameState}

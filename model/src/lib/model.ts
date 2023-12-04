@@ -21,7 +21,7 @@ export interface AppState {
 
 export enum Locale {
 	EN = 'en-US',
-	CN = 'zh-CN',
+	中文 = 'zh-CN',
 }
 export enum AppScreen {
 	LOADING = 'loading',

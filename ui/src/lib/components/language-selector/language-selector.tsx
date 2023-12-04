@@ -7,10 +7,7 @@ interface Props {
 	setSelectedLanguage: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-export const LanguageSelector: React.FC<Props> = ({
-	selectedLanguage,
-	setSelectedLanguage,
-}) => {
+export const LanguageSelector: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
 	return (
 		<div className="language-selector">
 			{Object.entries(Locale).map(([lang, locale]) => (
@@ -26,11 +23,7 @@ export const LanguageSelector: React.FC<Props> = ({
 					<label
 						htmlFor={lang}
 						title={locale}
-						className={
-							selectedLanguage === locale
-								? 'selected-language'
-								: undefined
-						}
+						className={selectedLanguage === locale ? 'selected-language' : undefined}
 					>
 						{lang}
 					</label>
