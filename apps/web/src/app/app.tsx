@@ -9,10 +9,24 @@ import { AuthError, fetchUserName, login } from '../api/auth';
 export const App: React.FC = () => {
 	const [userName, setUserName] = React.useState<string>('');
 	const [authError, setAuthError] = React.useState<Error | null>(null);
+
+	const {
+		useBehaviorSubjectState,
+		useScreenOrientation,
+		useGameHandlers,
+		useSettingsHandlers,
+		useUIHandlers,
+	} = TTTUI.Hooks;
+
+	const [appState] = useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
+	const [userState] = useBehaviorSubjectState<TTTModel.User>(AppStore.user$);
+
+	const orientation = useScreenOrientation();
 	const { appContent, isContentLoading, setLanguage } = TTTUI.Context.useContentContext();
-	const [appState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
-	const [userState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.User>(AppStore.user$);
-	const orientation = TTTUI.Hooks.useScreenOrientation();
+	const { handleStartGame, handleRestartGame, handleNextRound } = useGameHandlers(appState);
+	const { handleAvatarChange, handleDifficultyChange, handleLanguageChange } =
+		useSettingsHandlers(appState);
+	const { openRestartModal, closeModalScreen, validateCloseModal } = useUIHandlers(appState);
 
 	React.useEffect(() => {
 		fetchUserName().then((name) => {
@@ -64,22 +78,6 @@ export const App: React.FC = () => {
 		});
 	}, [isContentLoading, userState, appState.language]);
 
-	const handleStartGame = React.useCallback(() => {
-		// when player chooses O it means the CPU should make the first move
-		let updatedAppState = {};
-		if (appState.playerSymbol === TTTModel.PlayerSymbol.O) {
-			updatedAppState = AppStore.gameEngine!.takeFirstTurn({
-				...appState,
-			});
-		}
-		AppStore.nextState({
-			...appState,
-			...updatedAppState,
-			appScreen: TTTModel.AppScreen.GAME,
-			gameState: TTTModel.GameState.PLAYING,
-		});
-	}, [appState]);
-
 	const handleLoginSuccess = React.useCallback(
 		(user: TTTModel.User) => {
 			AppStore.nextUserState(user);
@@ -102,86 +100,21 @@ export const App: React.FC = () => {
 		[handleLoginSuccess]
 	);
 
-	const handleRestartGame = React.useCallback(() => {
-		AppStore.nextState({
-			...AppStore.initialState,
-			language: appState.language,
-			appScreen: TTTModel.AppScreen.SETTINGS,
-		});
-	}, [appState.language]);
-
-	const handleReloadDialog = React.useCallback(() => {
-		AppStore.nextState({
-			...appState,
-			appModalScreen: TTTModel.AppModalScreen.RELOAD,
-		});
-	}, [appState]);
-
-	const handleNextRound = React.useCallback(() => {
-		const nextState = AppStore.getNextGameState(appState);
-		AppStore.nextState(nextState);
-	}, [appState]);
-
-	const handleSymbolChoiceChange = React.useCallback(
-		(event: React.ChangeEvent<HTMLInputElement>) => {
-			const value = +(event.target as HTMLInputElement).checked;
-			AppStore.nextState({
-				...appState,
-				playerSymbol: value,
-				cpuSymbol: value ^ 1,
-			});
-		},
-		[appState]
-	);
-
-	const handleDifficultySettingsChange = React.useCallback(
-		(event: React.ChangeEvent<HTMLInputElement>) => {
-			const value = event.target.value;
-			AppStore.nextState({
-				...appState,
-				intelligenceLevel: value as TTTModel.IntelligenceLevel,
-			});
-		},
-		[appState]
-	);
-
-	const handleLanguageChange = React.useCallback(
-		(event: React.ChangeEvent<HTMLInputElement>) => {
-			const language = event.target.value as TTTModel.Locale;
-			setLanguage(language);
-			AppStore.nextState({ ...appState, language });
-		},
-		[appState, setLanguage]
-	);
-
-	const closeModalScreen = React.useCallback(() => {
-		AppStore.nextState({
-			...appState,
-			appModalScreen: null,
-		});
-	}, [appState]);
-
 	const useLandscapeDesign = React.useMemo(() => {
 		return orientation?.startsWith('landscape') && 'ontouchstart' in window;
 	}, [orientation]);
-
-	const closeModalValidator = React.useCallback(() => {
-		if (appState.appModalScreen !== TTTModel.AppModalScreen.GAME_OVER) {
-			closeModalScreen();
-		}
-	}, [appState, closeModalScreen]);
 
 	React.useEffect(() => {
 		const keyDownHandler = Rx.fromEvent<KeyboardEvent>(document, 'keydown').pipe(
 			Rx.filter((event) => event.key === 'Escape')
 		);
 
-		const subscription = keyDownHandler.subscribe(closeModalValidator);
+		const subscription = keyDownHandler.subscribe(validateCloseModal);
 
 		return () => {
 			subscription.unsubscribe();
 		};
-	}, [closeModalValidator]);
+	}, [validateCloseModal]);
 
 	return (
 		<TTTUI.Theme>
@@ -207,8 +140,8 @@ export const App: React.FC = () => {
 									content={appContent.settingsScreen}
 									playerSymbol={appState.playerSymbol}
 									selectedDifficultySetting={appState.intelligenceLevel}
-									handleDifficultySettingsChange={handleDifficultySettingsChange}
-									handleSymbolChoiceChange={handleSymbolChoiceChange}
+									handleDifficultyChange={handleDifficultyChange}
+									handleAvatarChange={handleAvatarChange}
 									handleLanguageChange={handleLanguageChange}
 									handleStartGame={handleStartGame}
 								/>
@@ -218,7 +151,7 @@ export const App: React.FC = () => {
 							{appContent && (
 								<TTTUI.GameScreen
 									content={appContent.gameScreen}
-									handleReloadDialog={handleReloadDialog}
+									openRestartModal={openRestartModal}
 									useLandscapeDesign={useLandscapeDesign}
 								/>
 							)}

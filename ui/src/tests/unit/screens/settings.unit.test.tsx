@@ -15,10 +15,10 @@ describe('SettingsScreen component', () => {
 			<SettingsScreen
 				content={content}
 				playerSymbol={PlayerSymbol.X}
-				handleSymbolChoiceChange={jest.fn()}
+				handleAvatarChange={jest.fn()}
 				handleStartGame={jest.fn()}
 				selectedDifficultySetting={IntelligenceLevel.EASY}
-				handleDifficultySettingsChange={jest.fn()}
+				handleDifficultyChange={jest.fn()}
 			/>
 		);
 		expect(getByText("Pick Player 1's mark")).toBeInTheDocument();
@@ -27,24 +27,24 @@ describe('SettingsScreen component', () => {
 		expect(getByText('Start game')).toBeInTheDocument();
 	});
 
-	it('should call handleSymbolChoiceChange when symbol choice is changed', () => {
-		const handleSymbolChoiceChange = jest.fn();
+	it('should call handleAvatarChange when symbol choice is changed', () => {
+		const handleAvatarChange = jest.fn();
 
 		const { container } = render(
 			<SettingsScreen
 				content={content}
 				playerSymbol={PlayerSymbol.X}
-				handleSymbolChoiceChange={handleSymbolChoiceChange}
+				handleAvatarChange={handleAvatarChange}
 				handleStartGame={jest.fn()}
 				selectedDifficultySetting={IntelligenceLevel.EASY}
-				handleDifficultySettingsChange={jest.fn()}
+				handleDifficultyChange={jest.fn()}
 			/>
 		);
 
 		const checkbox = container.querySelector('.choose-player');
 		fireEvent.click(checkbox!);
 
-		expect(handleSymbolChoiceChange).toHaveBeenCalledTimes(1);
+		expect(handleAvatarChange).toHaveBeenCalledTimes(1);
 	});
 
 	it('should call handleStartGame when "Start game" button is clicked', () => {
@@ -53,10 +53,10 @@ describe('SettingsScreen component', () => {
 			<SettingsScreen
 				content={content}
 				playerSymbol={PlayerSymbol.X}
-				handleSymbolChoiceChange={jest.fn()}
+				handleAvatarChange={jest.fn()}
 				handleStartGame={handleStartGame}
 				selectedDifficultySetting={IntelligenceLevel.EASY}
-				handleDifficultySettingsChange={jest.fn()}
+				handleDifficultyChange={jest.fn()}
 			/>
 		);
 

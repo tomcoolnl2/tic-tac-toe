@@ -6,10 +6,7 @@ import { SymbolChoice } from '../../../lib/components';
 describe('SymbolChoice component snapshot test', () => {
 	it('should match the snapshot', () => {
 		const { asFragment } = render(
-			<SymbolChoice
-				playerSymbol={PlayerSymbol.X}
-				handleSymbolChoiceChange={jest.fn()}
-			/>
+			<SymbolChoice playerSymbol={PlayerSymbol.X} handleAvatarChange={jest.fn()} />
 		);
 		expect(asFragment()).toMatchSnapshot();
 	});

@@ -6,12 +6,12 @@ import './choose-difficulty.scss';
 
 export interface Props {
 	selectedDifficultySetting: IntelligenceLevel;
-	handleDifficultySettingsChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	handleDifficultyChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const ChooseDifficulty: React.FC<Props> = ({
 	selectedDifficultySetting,
-	handleDifficultySettingsChange,
+	handleDifficultyChange,
 }) => {
 	const { appContent, isContentLoading } = useContentContext();
 
@@ -37,7 +37,7 @@ export const ChooseDifficulty: React.FC<Props> = ({
 								name="level"
 								value={level}
 								checked={selectedDifficultySetting === level}
-								onChange={handleDifficultySettingsChange}
+								onChange={handleDifficultyChange}
 							/>
 							<label htmlFor={level} title={level} />
 						</React.Fragment>
