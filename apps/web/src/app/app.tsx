@@ -100,6 +100,17 @@ export const App: React.FC = () => {
 		[handleLoginSuccess]
 	);
 
+	const handleLogout = React.useCallback(() => {
+		AppStore.nextUserState({
+			...userState,
+			loggedIn: false,
+		});
+		AppStore.nextState({
+			...appState,
+			appScreen: TTTModel.AppScreen.SETTINGS,
+		});
+	}, [appState, userState]);
+
 	const useLandscapeDesign = React.useMemo(() => {
 		return orientation?.startsWith('landscape') && 'ontouchstart' in window;
 	}, [orientation]);
@@ -146,6 +157,7 @@ export const App: React.FC = () => {
 									handleAvatarChange={handleAvatarChange}
 									handleLanguageChange={handleLanguageChange}
 									handleStartGame={handleStartGame}
+									handleLogout={handleLogout}
 								/>
 							)}
 						</div>

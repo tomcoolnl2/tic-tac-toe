@@ -6,6 +6,7 @@ export { ChooseDifficulty } from './choose-difficulty/choose-difficulty';
 export { GameOver } from './game-over/game-over';
 export { Input } from './input/input';
 export { LanguageSelector } from './language-selector/language-selector';
+export { Logout } from './logout/logout';
 export { Modal } from './modal/modal';
 export { ReloadButton } from './reload-button/reload-button';
 export { ScoreBoardItem } from './score-board-item/score-board-item';

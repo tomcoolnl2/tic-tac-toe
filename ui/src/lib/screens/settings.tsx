@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppScreenContent, IntelligenceLevel, Locale, PlayerSymbol } from '@tic-tac-toe/model';
-import { Button, ChooseDifficulty, LanguageSelector, SymbolChoice } from '../components';
+import { Button, ChooseDifficulty, LanguageSelector, Logout, SymbolChoice } from '../components';
 import { BaseScreen } from './base/base';
 import { Divider } from '../core';
 
@@ -13,6 +13,7 @@ interface Props {
 	handleAvatarChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	handleLanguageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	handleStartGame: () => void;
+	handleLogout: () => void;
 }
 
 export const SettingsScreen: React.FC<Props> = ({
@@ -24,9 +25,11 @@ export const SettingsScreen: React.FC<Props> = ({
 	handleAvatarChange,
 	handleLanguageChange,
 	handleStartGame,
+	handleLogout,
 }) => {
 	return (
 		<BaseScreen>
+			<Logout handleLogout={handleLogout} />
 			<LanguageSelector
 				selectedLanguage={language}
 				setSelectedLanguage={handleLanguageChange}

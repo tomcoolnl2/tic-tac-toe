@@ -19,6 +19,13 @@ exports[`SettingsScreen screen component snapshot test should match the snapshot
       class="divider full-width horizontal margin-vertical invisible"
     />
     <div
+      class="logout"
+    >
+      <i
+        class="icon-reply"
+      />
+    </div>
+    <div
       class="language-selector"
     >
       <input
