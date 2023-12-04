@@ -9,8 +9,8 @@ interface Props {
 	content: AppScreenContent;
 	playerSymbol: PlayerSymbol;
 	selectedDifficultySetting: IntelligenceLevel;
-	handleDifficultySettingsChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	handleSymbolChoiceChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	handleDifficultyChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	handleAvatarChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	handleLanguageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	handleStartGame: () => void;
 }
@@ -20,8 +20,8 @@ export const SettingsScreen: React.FC<Props> = ({
 	content,
 	playerSymbol,
 	selectedDifficultySetting,
-	handleDifficultySettingsChange,
-	handleSymbolChoiceChange,
+	handleDifficultyChange,
+	handleAvatarChange,
 	handleLanguageChange,
 	handleStartGame,
 }) => {
@@ -33,15 +33,12 @@ export const SettingsScreen: React.FC<Props> = ({
 			/>
 			<Divider invisible margin="vertical-l" />
 			<span>{content.title}</span>
-			<SymbolChoice
-				playerSymbol={playerSymbol}
-				handleSymbolChoiceChange={handleSymbolChoiceChange}
-			/>
+			<SymbolChoice playerSymbol={playerSymbol} handleAvatarChange={handleAvatarChange} />
 			<sub>{content.subtitle}</sub>
 			<Divider invisible margin="vertical-l" />
 			<ChooseDifficulty
 				selectedDifficultySetting={selectedDifficultySetting}
-				handleDifficultySettingsChange={handleDifficultySettingsChange}
+				handleDifficultyChange={handleDifficultyChange}
 			/>
 			<Divider invisible margin="vertical-l" />
 			<Button variant="secondary" onClick={handleStartGame}>

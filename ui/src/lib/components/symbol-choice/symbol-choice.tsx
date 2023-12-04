@@ -6,19 +6,14 @@ import './symbol-choice.scss';
 
 export interface Props {
 	playerSymbol: PlayerSymbol;
-	handleSymbolChoiceChange: (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => void;
+	handleAvatarChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const SymbolChoice: React.FC<Props> = ({
-	playerSymbol,
-	handleSymbolChoiceChange,
-}) => {
+export const SymbolChoice: React.FC<Props> = ({ playerSymbol, handleAvatarChange }) => {
 	return (
 		<label htmlFor="choose-player" className="choose-player">
 			<input
-				onChange={handleSymbolChoiceChange}
+				onChange={handleAvatarChange}
 				checked={Boolean(playerSymbol)}
 				id="choose-player"
 				type="checkbox"
@@ -29,18 +24,14 @@ export const SymbolChoice: React.FC<Props> = ({
 					<Avatar
 						type={PlayerSymbol.X}
 						size="m"
-						variant={
-							playerSymbol === PlayerSymbol.X ? 'dark' : 'light'
-						}
+						variant={playerSymbol === PlayerSymbol.X ? 'dark' : 'light'}
 					/>
 				</GridItem>
 				<GridItem placeSelf="center">
 					<Avatar
 						type={PlayerSymbol.O}
 						size="m"
-						variant={
-							playerSymbol === PlayerSymbol.O ? 'dark' : 'light'
-						}
+						variant={playerSymbol === PlayerSymbol.O ? 'dark' : 'light'}
 					/>
 				</GridItem>
 			</Grid>

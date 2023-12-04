@@ -12,13 +12,13 @@ describe('GameScreen component', () => {
 
 	it('should render the component correctly', () => {
 		const useLandscapeDesign = true;
-		const handleReloadDialog = jest.fn();
+		const openRestartModal = jest.fn();
 
 		const { container } = render(
 			<GameScreen
 				content={content}
 				useLandscapeDesign={useLandscapeDesign}
-				handleReloadDialog={handleReloadDialog}
+				openRestartModal={openRestartModal}
 			/>
 		);
 
@@ -26,26 +26,24 @@ describe('GameScreen component', () => {
 		expect(container.querySelector('.turn-indicator')).toBeInTheDocument();
 		expect(container.querySelector('.icon-reload')).toBeInTheDocument();
 		expect(container.querySelector('.board')).toBeInTheDocument();
-		expect(
-			container.querySelector('.score-board-item')
-		).toBeInTheDocument();
+		expect(container.querySelector('.score-board-item')).toBeInTheDocument();
 	});
 
 	it('should call handleReloadDialog when reload button is clicked', () => {
 		const useLandscapeDesign = true;
-		const handleReloadDialog = jest.fn();
+		const openRestartModal = jest.fn();
 
 		const { container } = render(
 			<GameScreen
 				content={content}
 				useLandscapeDesign={useLandscapeDesign}
-				handleReloadDialog={handleReloadDialog}
+				openRestartModal={openRestartModal}
 			/>
 		);
 
 		const reloadButton = container.querySelector('.icon-reload');
 		fireEvent.click(reloadButton!);
 
-		expect(handleReloadDialog).toHaveBeenCalledTimes(1);
+		expect(openRestartModal).toHaveBeenCalledTimes(1);
 	});
 });

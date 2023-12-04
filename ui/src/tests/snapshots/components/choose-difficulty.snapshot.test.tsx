@@ -7,7 +7,7 @@ describe('ChooseDifficulty component snapshot test', () => {
 		const { asFragment } = render(
 			<ChooseDifficulty
 				selectedDifficultySetting={IntelligenceLevel.EASY}
-				handleDifficultySettingsChange={jest.fn()}
+				handleDifficultyChange={jest.fn()}
 			/>
 		);
 		expect(asFragment()).toMatchSnapshot();

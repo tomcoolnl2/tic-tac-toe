@@ -3,41 +3,22 @@ import { AppStore } from '@tic-tac-toe/core';
 import { AppGameContent, AppState } from '@tic-tac-toe/model';
 import { Grid, GridItem } from '../core';
 import * as Hooks from '../hooks';
-import {
-	AppLogo,
-	Cell,
-	ReloadButton,
-	ScoreBoardItem,
-	TurnIndicator,
-} from '../components';
+import { AppLogo, Cell, ReloadButton, ScoreBoardItem, TurnIndicator } from '../components';
 
 interface Props {
 	content: AppGameContent;
 	useLandscapeDesign: boolean;
-	handleReloadDialog: () => void;
+	openRestartModal: () => void;
 }
 
-export const GameScreen: React.FC<Props> = ({
-	content,
-	useLandscapeDesign,
-	handleReloadDialog,
-}) => {
+export const GameScreen: React.FC<Props> = ({ content, useLandscapeDesign, openRestartModal }) => {
 	const [appState] = Hooks.useBehaviorSubjectState<AppState>(AppStore.state$);
-	const { scores, playerSymbol, cpuSymbol, currentPlayer, solutionCells } =
-		appState;
+	const { scores, playerSymbol, cpuSymbol, currentPlayer, solutionCells } = appState;
 
 	return (
-		<Grid
-			cols={useLandscapeDesign ? 3 : 1}
-			rowGap="l"
-			colGap={useLandscapeDesign ? 'l' : 'm'}
-		>
+		<Grid cols={useLandscapeDesign ? 3 : 1} rowGap="l" colGap={useLandscapeDesign ? 'l' : 'm'}>
 			<GridItem>
-				<Grid
-					colGap="m"
-					rowGap="l"
-					cols={useLandscapeDesign ? 1 : '1fr auto 1fr'}
-				>
+				<Grid colGap="m" rowGap="l" cols={useLandscapeDesign ? 1 : '1fr auto 1fr'}>
 					<GridItem>
 						<AppLogo />
 					</GridItem>
@@ -49,7 +30,7 @@ export const GameScreen: React.FC<Props> = ({
 						/>
 					</GridItem>
 					<GridItem placeSelf="flex-end">
-						<ReloadButton handleReloadDialog={handleReloadDialog} />
+						<ReloadButton handleReloadDialog={openRestartModal} />
 					</GridItem>
 				</Grid>
 			</GridItem>
@@ -61,9 +42,7 @@ export const GameScreen: React.FC<Props> = ({
 							index={i}
 							type={type}
 							solutionCells={solutionCells}
-							disabled={
-								appState.currentPlayer === appState.cpuSymbol
-							}
+							disabled={appState.currentPlayer === appState.cpuSymbol}
 						/>
 					))}
 				</Grid>
