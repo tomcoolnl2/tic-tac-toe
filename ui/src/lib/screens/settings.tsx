@@ -5,7 +5,7 @@ import { BaseScreen } from './base/base';
 import { Divider } from '../core';
 
 interface Props {
-	locale: Locale;
+	language: Locale;
 	content: AppScreenContent;
 	playerSymbol: PlayerSymbol;
 	selectedDifficultySetting: IntelligenceLevel;
@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const SettingsScreen: React.FC<Props> = ({
-	locale,
+	language,
 	content,
 	playerSymbol,
 	selectedDifficultySetting,
@@ -28,7 +28,7 @@ export const SettingsScreen: React.FC<Props> = ({
 	return (
 		<BaseScreen>
 			<LanguageSelector
-				selectedLanguage={locale}
+				selectedLanguage={language}
 				setSelectedLanguage={handleLanguageChange}
 			/>
 			<Divider invisible margin="vertical-l" />
