@@ -1,6 +1,6 @@
 import { StoryFn, type Meta } from '@storybook/react';
 import { Locale } from '@tic-tac-toe/model';
-import { withContainer, type ContainerProps } from '../../decorators';
+import { withContainer, type ContainerProps } from '../../../../.storybook/decorators';
 import { LanguageSelector, Props } from './language-selector';
 
 const EnchantedLanguageSelector: React.FC<Props & ContainerProps> = withContainer(

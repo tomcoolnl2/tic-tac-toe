@@ -116,8 +116,10 @@ export const App: React.FC = () => {
 		};
 	}, [validateCloseModal]);
 
+	const theme = React.useMemo(() => (window as any)?.electron?.theme ?? 'web', []);
+
 	return (
-		<TTTUI.Theme>
+		<TTTUI.Theme theme={theme}>
 			<div className={`screen ${appState.appScreen}`}>
 				<div className={`screen-inner ${useLandscapeDesign ? 'landscape' : ''}`}>
 					<TTTUI.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>

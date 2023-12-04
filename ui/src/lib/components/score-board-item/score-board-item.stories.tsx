@@ -1,6 +1,6 @@
 import { StoryFn, type Meta } from '@storybook/react';
 import { PlayerSymbol } from '@tic-tac-toe/model';
-import { withContainer, type ContainerProps } from '../../decorators';
+import { withContainer, type ContainerProps } from '../../../../.storybook/decorators';
 import { ScoreBoardItem, type Props } from './score-board-item';
 
 const EnchantedScoreBoardItem: React.FC<Props & ContainerProps> = withContainer(
