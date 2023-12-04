@@ -23,7 +23,7 @@ exports[`SettingsScreen screen component snapshot test should match the snapshot
     >
       <input
         id="EN"
-        name="level"
+        name="language-selector"
         type="radio"
         value="en-US"
       />
@@ -35,7 +35,7 @@ exports[`SettingsScreen screen component snapshot test should match the snapshot
       </label>
       <input
         id="中文"
-        name="level"
+        name="language-selector"
         type="radio"
         value="zh-CN"
       />

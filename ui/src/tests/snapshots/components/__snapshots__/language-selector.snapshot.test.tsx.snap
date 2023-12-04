@@ -10,7 +10,7 @@ exports[`LanguageSelector component renders correctly 1`] = `
       >
         <input
           id="EN"
-          name="level"
+          name="language-selector"
           type="radio"
           value="en-US"
         />
@@ -23,7 +23,7 @@ exports[`LanguageSelector component renders correctly 1`] = `
         <input
           checked=""
           id="中文"
-          name="level"
+          name="language-selector"
           type="radio"
           value="zh-CN"
         />
@@ -43,7 +43,7 @@ exports[`LanguageSelector component renders correctly 1`] = `
     >
       <input
         id="EN"
-        name="level"
+        name="language-selector"
         type="radio"
         value="en-US"
       />
@@ -56,7 +56,7 @@ exports[`LanguageSelector component renders correctly 1`] = `
       <input
         checked=""
         id="中文"
-        name="level"
+        name="language-selector"
         type="radio"
         value="zh-CN"
       />
