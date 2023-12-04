@@ -12,10 +12,5 @@ export interface Props {
 }
 
 export const Theme: React.FC<Props> = ({ theme = Themes.WEB, children }) => {
-	React.useEffect(() => {
-		Object.values(Themes).map((theme) => document.body.classList.remove(theme));
-		document.body.classList.add(theme);
-	}, [theme]);
-
-	return <main>{children}</main>;
+	return <main className={theme}>{children}</main>;
 };

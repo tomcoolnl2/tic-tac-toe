@@ -11,7 +11,11 @@ const preview: Preview = {
 			toolbar: {
 				title: 'Theme',
 				icon: 'circlehollow',
-				items: Object.values(Themes),
+				items: [
+					{ value: Themes.WEB, icon: 'circlehollow', title: 'Web' },
+					{ value: Themes.DESKTOP, icon: 'circle', title: 'Desktop' },
+					{ value: 'side-by-side', icon: 'sidebar', title: 'Both' },
+				],
 			},
 		},
 	},

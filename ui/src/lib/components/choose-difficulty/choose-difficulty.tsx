@@ -36,7 +36,7 @@ export const ChooseDifficulty: React.FC<Props> = ({
 								type="radio"
 								name="level"
 								value={level}
-								checked={selectedDifficultySetting === level}
+								defaultChecked={selectedDifficultySetting === level}
 								onChange={handleDifficultyChange}
 							/>
 							<label htmlFor={level} title={level} />
