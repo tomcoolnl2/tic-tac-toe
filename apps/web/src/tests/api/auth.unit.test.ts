@@ -58,16 +58,12 @@ describe('fetchUserName function', () => {
 describe('login function', () => {
 	it('handles successful login', async () => {
 		const successHandler = jest.fn();
-		const mockResponse = {
-			/* Your mock response for a successful login */
-		};
+		const mockResponse = { status: 200 };
 		fetchMock.mockResponse(JSON.stringify(mockResponse), { status: 200 });
 
 		await login('validPassword', successHandler);
 
-		expect(successHandler).toHaveBeenCalledWith(
-			expect.objectContaining({ status: 200 })
-		);
+		expect(successHandler).toHaveBeenCalledWith(expect.objectContaining({ status: 200 }));
 	});
 
 	it('handles unsuccessful login with non-200 status', async () => {

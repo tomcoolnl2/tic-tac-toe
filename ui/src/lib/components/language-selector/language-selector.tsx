@@ -17,7 +17,7 @@ export const LanguageSelector: React.FC<Props> = ({ selectedLanguage, setSelecte
 						type="radio"
 						name="level"
 						value={locale}
-						checked={selectedLanguage === locale}
+						defaultChecked={selectedLanguage === locale}
 						onChange={setSelectedLanguage}
 					/>
 					<label

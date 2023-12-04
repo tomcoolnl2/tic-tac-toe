@@ -18,6 +18,34 @@ exports[`SettingsScreen screen component snapshot test should match the snapshot
     <hr
       class="divider full-width horizontal margin-vertical invisible"
     />
+    <div
+      class="language-selector"
+    >
+      <input
+        id="EN"
+        name="level"
+        type="radio"
+        value="en-US"
+      />
+      <label
+        for="EN"
+        title="en-US"
+      >
+        EN
+      </label>
+      <input
+        id="中文"
+        name="level"
+        type="radio"
+        value="zh-CN"
+      />
+      <label
+        for="中文"
+        title="zh-CN"
+      >
+        中文
+      </label>
+    </div>
     <hr
       class="divider full-width horizontal margin-vertical-l invisible"
     />
