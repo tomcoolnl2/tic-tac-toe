@@ -9,23 +9,10 @@ import { AuthError, fetchUserName, login } from '../api/auth';
 export const App: React.FC = () => {
 	const [userName, setUserName] = React.useState<string>('');
 	const [authError, setAuthError] = React.useState<Error | null>(null);
-	const orientation = TTTUI.Hooks.useScreenOrientation();
-
-	const { appContent, isContentLoading, contentError, locale, setLanguage } =
-		TTTUI.Context.useContentContext();
-
+	const { appContent, isContentLoading, setLanguage } = TTTUI.Context.useContentContext();
 	const [appState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
-
 	const [userState] = TTTUI.Hooks.useBehaviorSubjectState<TTTModel.User>(AppStore.user$);
-
-	React.useEffect(() => {
-		if (isDevEnvironment()) {
-			console.info('appContent', appContent);
-		}
-		if (appContent?.appTitle) {
-			document.title = appContent.appTitle;
-		}
-	}, [appContent]);
+	const orientation = TTTUI.Hooks.useScreenOrientation();
 
 	React.useEffect(() => {
 		fetchUserName().then((name) => {
@@ -40,10 +27,22 @@ export const App: React.FC = () => {
 
 	React.useEffect(() => {
 		if (isDevEnvironment()) {
+			console.info('appContent', appContent);
+		}
+		if (appContent) {
+			document.title = appContent.appTitle;
+		}
+		if (appState.language) {
+			setLanguage(appState.language);
+		}
+	}, [appContent, appState.language, setLanguage]);
+
+	React.useEffect(() => {
+		if (isDevEnvironment()) {
 			console.info('userState', userState);
 			console.info('appState', appState);
 		}
-	}, [appState, userState]);
+	}, [appState, userState, setLanguage]);
 
 	// First we check if content is loaded,
 	// Then we check if a user is not logged in
@@ -104,8 +103,11 @@ export const App: React.FC = () => {
 	);
 
 	const handleRestartGame = React.useCallback(() => {
-		AppStore.nextState(AppStore.initialState);
-	}, []);
+		AppStore.nextState({
+			...AppStore.initialState,
+			language: appState.language,
+		});
+	}, [appState.language]);
 
 	const handleReloadDialog = React.useCallback(() => {
 		AppStore.nextState({
@@ -200,7 +202,7 @@ export const App: React.FC = () => {
 							)}
 							{appContent && appState.appScreen === TTTModel.AppScreen.SETTINGS && (
 								<TTTUI.SettingsScreen
-									locale={locale}
+									language={appState.language}
 									content={appContent.settingsScreen}
 									playerSymbol={appState.playerSymbol}
 									selectedDifficultySetting={appState.intelligenceLevel}
