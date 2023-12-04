@@ -13,15 +13,9 @@ export default class SquirrelEvents {
 	// app paths
 	private static appFolder = resolve(process.execPath, '..');
 	private static appRootFolder = resolve(SquirrelEvents.appFolder, '..');
-	private static updateExe = resolve(
-		join(SquirrelEvents.appRootFolder, 'Update.exe')
-	);
+	private static updateExe = resolve(join(SquirrelEvents.appRootFolder, 'Update.exe'));
 	private static exeName = resolve(
-		join(
-			SquirrelEvents.appRootFolder,
-			'app-' + environment.version,
-			basename(process.execPath)
-		)
+		join(SquirrelEvents.appRootFolder, 'app-' + environment.version, basename(process.execPath))
 	);
 
 	static handleEvents(): boolean {
@@ -33,19 +27,13 @@ export default class SquirrelEvents {
 			case '--squirrel-install':
 			case '--squirrel-updated':
 				// Install desktop and start menu shortcuts
-				SquirrelEvents.update([
-					'--createShortcut',
-					SquirrelEvents.exeName,
-				]);
+				SquirrelEvents.update(['--createShortcut', SquirrelEvents.exeName]);
 
 				return true;
 
 			case '--squirrel-uninstall':
 				// Remove desktop and start menu shortcuts
-				SquirrelEvents.update([
-					'--removeShortcut',
-					SquirrelEvents.exeName,
-				]);
+				SquirrelEvents.update(['--removeShortcut', SquirrelEvents.exeName]);
 
 				return true;
 
@@ -68,9 +56,8 @@ export default class SquirrelEvents {
 
 	private static update(args: Array<string>) {
 		try {
-			spawn(SquirrelEvents.updateExe, args, { detached: true }).on(
-				'close',
-				() => setTimeout(app.quit, 1000)
+			spawn(SquirrelEvents.updateExe, args, { detached: true }).on('close', () =>
+				setTimeout(app.quit, 1000)
 			);
 		} catch (error) {
 			setTimeout(app.quit, 1000);

@@ -42,13 +42,11 @@ describe('AppController', () => {
 		it('should return a user object if the password matches', () => {
 			const username = 'testuser';
 			const password = 'testpassword';
-			jest.spyOn(configService, 'get').mockImplementation(
-				(key: string) => {
-					if (key === 'VITE_USERPWD') return password;
-					if (key === 'VITE_USERNAME') return username;
-					return undefined;
-				}
-			);
+			jest.spyOn(configService, 'get').mockImplementation((key: string) => {
+				if (key === 'VITE_USERPWD') return password;
+				if (key === 'VITE_USERNAME') return username;
+				return undefined;
+			});
 			const result = appController.login(password);
 			expect(result).toEqual({
 				name: username,
@@ -59,16 +57,12 @@ describe('AppController', () => {
 
 		it('should throw Forbidden exception if password is incorrect', () => {
 			jest.spyOn(configService, 'get').mockReturnValue('correctpassword');
-			expect(() => appController.login('incorrectpassword')).toThrowError(
-				HttpException
-			);
+			expect(() => appController.login('incorrectpassword')).toThrowError(HttpException);
 			try {
 				appController.login('incorrectpassword');
 			} catch (error) {
 				expect(error.getStatus()).toBe(HttpStatus.FORBIDDEN);
-				expect(error.message).toBe(
-					'Validation failed: wrong password!'
-				);
+				expect(error.message).toBe('Validation failed: wrong password!');
 			}
 		});
 	});
