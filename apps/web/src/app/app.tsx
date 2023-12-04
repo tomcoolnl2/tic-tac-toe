@@ -106,6 +106,7 @@ export const App: React.FC = () => {
 		AppStore.nextState({
 			...AppStore.initialState,
 			language: appState.language,
+			appScreen: TTTModel.AppScreen.SETTINGS,
 		});
 	}, [appState.language]);
 
