@@ -2,7 +2,7 @@ import React from 'react';
 import { Locale } from '@tic-tac-toe/model';
 import './language-selector.scss';
 
-interface Props {
+export interface Props {
 	selectedLanguage: Locale;
 	setSelectedLanguage: React.ChangeEventHandler<HTMLInputElement>;
 }

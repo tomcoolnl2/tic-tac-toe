@@ -3,17 +3,17 @@ import { ChooseDifficulty, Props } from './choose-difficulty';
 import { withContainer, type ContainerProps } from '../../decorators';
 import { IntelligenceLevel } from '@tic-tac-toe/model';
 
-const EnchantedChooseDifficulty: React.FC<Props & ContainerProps> =
-	withContainer(ChooseDifficulty, 320);
+const EnchantedChooseDifficulty: React.FC<Props & ContainerProps> = withContainer(
+	ChooseDifficulty,
+	300
+);
 const Story: Meta<typeof ChooseDifficulty> = {
 	component: ChooseDifficulty,
 	title: 'Components/ChooseDifficulty',
 };
 export default Story;
 
-const Template: StoryFn<Props> = (args) => (
-	<EnchantedChooseDifficulty {...args} />
-);
+const Template: StoryFn<Props> = (args) => <EnchantedChooseDifficulty {...args} />;
 
 export const ChooseDifficultyEasy = Template.bind({});
 ChooseDifficultyEasy.args = {
