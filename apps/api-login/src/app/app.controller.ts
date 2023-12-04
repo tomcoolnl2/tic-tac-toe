@@ -1,11 +1,4 @@
-import {
-	Controller,
-	Body,
-	Get,
-	Post,
-	HttpException,
-	HttpStatus,
-} from '@nestjs/common';
+import { Controller, Body, Get, Post, HttpException, HttpStatus } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { User, PlayerSymbol } from '@tic-tac-toe/model';
 
@@ -19,10 +12,7 @@ export class AppController {
 		if (name) {
 			return { name };
 		} else {
-			throw new HttpException(
-				`Couldn't find username`,
-				HttpStatus.NOT_FOUND
-			);
+			throw new HttpException(`Couldn't find username`, HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -36,10 +26,7 @@ export class AppController {
 				loggedIn: true,
 			};
 		} else {
-			throw new HttpException(
-				`Validation failed: wrong password!`,
-				HttpStatus.FORBIDDEN
-			);
+			throw new HttpException(`Validation failed: wrong password!`, HttpStatus.FORBIDDEN);
 		}
 	}
 }

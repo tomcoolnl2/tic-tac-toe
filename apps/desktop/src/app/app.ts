@@ -13,8 +13,7 @@ export default class App {
 
 	public static isDevelopmentMode() {
 		const isEnvironmentSet: boolean = 'ELECTRON_IS_DEV' in process.env;
-		const getFromEnvironment: boolean =
-			parseInt(process.env.ELECTRON_IS_DEV, 10) === 1;
+		const getFromEnvironment: boolean = parseInt(process.env.ELECTRON_IS_DEV, 10) === 1;
 
 		return isEnvironmentSet ? getFromEnvironment : !environment.production;
 	}
@@ -104,12 +103,7 @@ export default class App {
 		} else {
 			App.mainWindow.loadURL(
 				format({
-					pathname: join(
-						__dirname,
-						'..',
-						rendererAppName,
-						'index.html'
-					),
+					pathname: join(__dirname, '..', rendererAppName, 'index.html'),
 					protocol: 'file:',
 					slashes: true,
 				})
