@@ -1,5 +1,5 @@
 import type { StoryFn, Meta } from '@storybook/react';
-import { withContainer, type ContainerProps } from '../../decorators';
+import { withContainer, type ContainerProps } from '../../../../.storybook/decorators';
 import { Button, Props } from './button';
 
 const EnchantedButton: React.FC<Props & ContainerProps> = withContainer(Button, 220);

@@ -1,11 +1,8 @@
 import { StoryFn, type Meta } from '@storybook/react';
 import { Input, Props } from './input';
-import { ContainerProps, withContainer } from '../../decorators';
+import { ContainerProps, withContainer } from '../../../../.storybook/decorators';
 
-const EnchantedInput: React.FC<Props & ContainerProps> = withContainer(
-	Input,
-	300
-);
+const EnchantedInput: React.FC<Props & ContainerProps> = withContainer(Input, 300);
 
 const Story: Meta<typeof Input> = {
 	component: Input,

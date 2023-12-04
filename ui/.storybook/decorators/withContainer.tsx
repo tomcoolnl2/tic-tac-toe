@@ -11,7 +11,7 @@ export function withContainer<P extends object>(
 	const EnhancedComponent: React.FC<P & ContainerProps> = (props) => {
 		const { containerWidth = defaultWidth, ...restProps } = props;
 		return (
-			<div style={{ width: `${containerWidth}px`, position: 'relative', padding: 20 }}>
+			<div style={{ width: `${containerWidth}px`, position: 'relative' }}>
 				<WrappedComponent {...(restProps as P)} />
 			</div>
 		);

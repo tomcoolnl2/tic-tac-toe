@@ -9,18 +9,22 @@
 }
 
 body {
-    background: var(--background-color-secondary);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1em;
     line-height: 1em;
     text-transform: uppercase;
     letter-spacing: 2px;
+    overflow: hidden;
+}
+
+main {
+    background: var(--background-color-secondary);
     color: var(--light-primary);
     width: 100vw;
-    height: 100vh; 
-    overflow: hidden;
+    height: 100vh;
     display: grid;
     place-items: center;
+    overflow: hidden;
 }
 
 sub {
