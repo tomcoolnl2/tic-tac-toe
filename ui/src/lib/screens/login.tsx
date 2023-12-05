@@ -25,12 +25,9 @@ export const LoginScreen: React.FC<Props> = ({
 		return authError instanceof Error;
 	}, [authError]);
 
-	const handlePwdChange = React.useCallback(
-		(event: React.ChangeEvent<HTMLInputElement>) => {
-			setPwd(event.target.value);
-		},
-		[]
-	);
+	const handlePwdChange = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+		setPwd(event.target.value);
+	}, []);
 
 	const handleLoginSubmit = React.useCallback(
 		(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -50,14 +47,10 @@ export const LoginScreen: React.FC<Props> = ({
 			<span>{content.title}</span>
 			<Divider invisible margin="vertical" />
 			<form className="login-form" noValidate autoComplete="off">
-				<Input
-					id="username"
-					disabled
-					value={userName}
-					testId="username"
-				/>
+				<Input icon="user" id="username" disabled value={userName} testId="username" />
 				<Divider invisible margin="vertical" />
 				<Input
+					icon="lock"
 					type="password"
 					id="password"
 					value={pwd}
@@ -73,11 +66,7 @@ export const LoginScreen: React.FC<Props> = ({
 						<Divider invisible margin="vertical-l" />
 					</>
 				) : null}
-				<Button
-					variant="primary"
-					onClick={handleLoginSubmit}
-					testId="submit"
-				>
+				<Button variant="primary" onClick={handleLoginSubmit} testId="submit">
 					{content.cta1}
 				</Button>
 			</form>

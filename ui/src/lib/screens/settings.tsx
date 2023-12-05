@@ -45,7 +45,7 @@ export const SettingsScreen: React.FC<Props> = ({
 			/>
 			<Divider invisible margin="vertical-l" />
 			<Button variant="secondary" onClick={handleStartGame}>
-				{content.cta1} <i className="icon-play-sign"></i>
+				{content.cta1} <i className="icon-play-sign" />
 			</Button>
 		</BaseScreen>
 	);

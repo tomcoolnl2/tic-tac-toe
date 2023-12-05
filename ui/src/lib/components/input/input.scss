@@ -1,5 +1,26 @@
+
+.form-input {
+    border: 2px solid var(--background-color-secondary);
+    border-radius: 4px;
+    position: relative;
+
+    &.icon {
+        border-left-width: 36px;
+
+        i {
+            position: absolute;
+            top: 50%;
+            left: -24px;
+            transform: translateY(-50%);
+        }
+    }
+
+}
+
 input {
-    background-color: white;
+    outline: none;
+    background-color: var(--light-secondary);
+    color: white;
     padding: 10px;
     width: 100%;
     opacity: 0.8;
