@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input component renders without crashing 1`] = `
+<div
+  class="form-input"
+>
+  <i
+    class="icon-undefined"
+  />
+  <input
+    autocomplete="off"
+    data-testid="test-input"
+    id="test-input"
+    name="test-input"
+    type="text"
+    value=""
+  />
+</div>
+`;

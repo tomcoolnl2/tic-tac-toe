@@ -2,24 +2,38 @@
 
 exports[`Input component password snapshot test 1`] = `
 <div>
-  <input
-    autocomplete="off"
-    id="password"
-    name="password"
-    type="password"
-    value="pwd"
-  />
+  <div
+    class="form-input icon"
+  >
+    <i
+      class="icon-lock"
+    />
+    <input
+      autocomplete="off"
+      id="password"
+      name="password"
+      type="password"
+      value="pwd"
+    />
+  </div>
 </div>
 `;
 
 exports[`Input component snapshot test 1`] = `
 <div>
-  <input
-    autocomplete="off"
-    id="username"
-    name="username"
-    type="text"
-    value="test"
-  />
+  <div
+    class="form-input icon"
+  >
+    <i
+      class="icon-user"
+    />
+    <input
+      autocomplete="off"
+      id="username"
+      name="username"
+      type="text"
+      value="test"
+    />
+  </div>
 </div>
 `;

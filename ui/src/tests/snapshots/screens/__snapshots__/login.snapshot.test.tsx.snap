@@ -32,26 +32,40 @@ exports[`LoginScreen screen component snapshot test should match the snapshot 1`
       class="login-form"
       novalidate=""
     >
-      <input
-        autocomplete="off"
-        data-testid="username"
-        disabled=""
-        id="username"
-        name="username"
-        type="text"
-        value="TestUser"
-      />
+      <div
+        class="form-input icon"
+      >
+        <i
+          class="icon-user"
+        />
+        <input
+          autocomplete="off"
+          data-testid="username"
+          disabled=""
+          id="username"
+          name="username"
+          type="text"
+          value="TestUser"
+        />
+      </div>
       <hr
         class="divider full-width horizontal margin-vertical invisible"
       />
-      <input
-        autocomplete="off"
-        data-testid="password"
-        id="password"
-        name="password"
-        type="password"
-        value=""
-      />
+      <div
+        class="form-input icon"
+      >
+        <i
+          class="icon-lock"
+        />
+        <input
+          autocomplete="off"
+          data-testid="password"
+          id="password"
+          name="password"
+          type="password"
+          value=""
+        />
+      </div>
       <hr
         class="divider full-width horizontal margin-vertical invisible"
       />
