@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppScreenContent } from '@tic-tac-toe/model';
 import { Divider } from '../core';
-import { Button, Input } from '../components';
+import { Button, Input, LanguageSelector } from '../components';
 import { BaseScreen } from './base/base';
 
 interface Props {
@@ -43,6 +43,7 @@ export const LoginScreen: React.FC<Props> = ({
 
 	return (
 		<BaseScreen>
+			<LanguageSelector />
 			<Divider invisible margin="vertical-l" />
 			<span>{content.title}</span>
 			<Divider invisible margin="vertical" />

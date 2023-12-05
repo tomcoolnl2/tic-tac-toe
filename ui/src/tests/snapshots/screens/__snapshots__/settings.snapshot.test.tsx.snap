@@ -29,12 +29,14 @@ exports[`SettingsScreen screen component snapshot test should match the snapshot
       class="language-selector"
     >
       <input
+        checked=""
         id="EN"
         name="language-selector"
         type="radio"
         value="en-US"
       />
       <label
+        class="selected-language"
         for="EN"
         title="en-US"
       >

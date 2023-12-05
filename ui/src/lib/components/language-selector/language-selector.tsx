@@ -1,13 +1,13 @@
 import React from 'react';
-import { Locale } from '@tic-tac-toe/model';
+import { AppState, Locale } from '@tic-tac-toe/model';
 import './language-selector.scss';
+import { useBehaviorSubjectState, useSettingsHandlers } from '../../hooks';
+import { AppStore } from '@tic-tac-toe/core';
 
-export interface Props {
-	selectedLanguage: Locale;
-	setSelectedLanguage: React.ChangeEventHandler<HTMLInputElement>;
-}
-
-export const LanguageSelector: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
+export const LanguageSelector: React.FC = () => {
+	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
+	const { handleLanguageChange } = useSettingsHandlers(appState);
+	const { language } = appState;
 	return (
 		<div className="language-selector">
 			{Object.entries(Locale).map(([lang, locale]) => (
@@ -17,13 +17,13 @@ export const LanguageSelector: React.FC<Props> = ({ selectedLanguage, setSelecte
 						type="radio"
 						name="language-selector"
 						value={locale}
-						defaultChecked={selectedLanguage === locale}
-						onChange={setSelectedLanguage}
+						defaultChecked={language === locale}
+						onChange={handleLanguageChange}
 					/>
 					<label
 						htmlFor={lang}
 						title={locale}
-						className={selectedLanguage === locale ? 'selected-language' : undefined}
+						className={language === locale ? 'selected-language' : undefined}
 					>
 						{lang}
 					</label>
