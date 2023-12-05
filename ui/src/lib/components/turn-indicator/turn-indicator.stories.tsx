@@ -1,7 +1,7 @@
-import { StoryFn, type Meta } from '@storybook/react';
+import type { StoryFn, Meta } from '@storybook/react';
 import { PlayerSymbol } from '@tic-tac-toe/model';
 import { withContainer, type ContainerProps } from '../../../../.storybook/decorators';
-import { TurnIndicator, Props } from './turn-indicator';
+import { TurnIndicator, type Props } from './turn-indicator';
 
 const EnchantedTurnIndicator: React.FC<Props & ContainerProps> = withContainer(TurnIndicator, 90);
 const Story: Meta<typeof TurnIndicator> = {

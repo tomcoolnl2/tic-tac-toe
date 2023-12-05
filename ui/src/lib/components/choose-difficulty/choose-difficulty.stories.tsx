@@ -1,7 +1,7 @@
-import { StoryFn, type Meta } from '@storybook/react';
-import { ChooseDifficulty, Props } from './choose-difficulty';
-import { withContainer, type ContainerProps } from '../../../../.storybook/decorators';
+import type { StoryFn, Meta } from '@storybook/react';
 import { IntelligenceLevel } from '@tic-tac-toe/model';
+import { type ContainerProps, withContainer } from '../../../../.storybook/decorators';
+import { type Props, ChooseDifficulty } from './choose-difficulty';
 
 const EnchantedChooseDifficulty: React.FC<Props & ContainerProps> = withContainer(
 	ChooseDifficulty,

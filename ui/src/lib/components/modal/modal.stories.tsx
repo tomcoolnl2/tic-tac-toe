@@ -1,5 +1,5 @@
-import { StoryFn, type Meta } from '@storybook/react';
-import { Modal, Props } from './modal';
+import type { StoryFn, Meta } from '@storybook/react';
+import { type Props, Modal } from './modal';
 
 const Story: Meta<typeof Modal> = {
 	component: Modal,

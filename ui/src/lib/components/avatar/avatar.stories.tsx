@@ -1,6 +1,6 @@
 import type { StoryFn, Meta } from '@storybook/react';
 import { PlayerSymbol } from '@tic-tac-toe/model';
-import { Avatar, Props } from './avatar';
+import { type Props, Avatar } from './avatar';
 
 const Story: Meta<typeof Avatar> = {
 	title: 'Components/Avatar',

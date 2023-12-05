@@ -1,6 +1,6 @@
-import { StoryFn, type Meta } from '@storybook/react';
-import { Logout, Props } from './logout';
-import { ContainerProps, withContainer } from '../../../../.storybook/decorators';
+import type { StoryFn, Meta } from '@storybook/react';
+import { type Props, Logout } from './logout';
+import { type ContainerProps, withContainer } from '../../../../.storybook/decorators';
 
 const EnchantedLogout: React.FC<Props & ContainerProps> = withContainer(Logout, 300);
 

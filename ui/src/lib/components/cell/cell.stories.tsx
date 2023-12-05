@@ -1,6 +1,6 @@
-import { StoryFn, type Meta } from '@storybook/react';
-import { Cell, Props } from './cell';
+import type { StoryFn, Meta } from '@storybook/react';
 import { PlayerSymbol } from '@tic-tac-toe/model';
+import { type Props, Cell } from './cell';
 
 const Story: Meta<typeof Cell> = {
 	component: Cell,
