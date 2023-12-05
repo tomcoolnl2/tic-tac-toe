@@ -9,26 +9,17 @@ import { AuthError, fetchUserName, login } from '../api/auth';
 export const App: React.FC = () => {
 	const [userName, setUserName] = React.useState<string>('');
 	const [authError, setAuthError] = React.useState<Error | null>(null);
+	const theme = React.useMemo(() => (window as any)?.electron?.theme ?? 'web', []);
 
-	const {
-		useBehaviorSubjectState,
-		useScreenOrientation,
-		useGameHandlers,
-		useSettingsHandlers,
-		useUIHandlers,
-	} = TTTUI.Hooks;
+	const { useBehaviorSubjectState, useScreenOrientation, useGameHandlers, useUIHandlers } =
+		TTTUI.Hooks;
 
 	const [appState] = useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
 	const [userState] = useBehaviorSubjectState<TTTModel.User>(AppStore.user$);
 
 	const orientation = useScreenOrientation();
 	const { appContent, isContentLoading, setLanguage } = TTTUI.Context.useContentContext();
-	const { handleStartGame, handleQuitGame, handleNextRound } = useGameHandlers(
-		appState,
-		userState
-	);
-	const { handleAvatarChange, handleDifficultyChange, handleLanguageChange } =
-		useSettingsHandlers(appState);
+	const { handleQuitGame, handleNextRound } = useGameHandlers(appState, userState);
 	const { openRestartModal, closeModalScreen, validateCloseModal } = useUIHandlers(appState);
 
 	React.useEffect(() => {
@@ -130,8 +121,6 @@ export const App: React.FC = () => {
 		};
 	}, [validateCloseModal]);
 
-	const theme = React.useMemo(() => (window as any)?.electron?.theme ?? 'web', []);
-
 	return (
 		<TTTUI.Theme theme={theme}>
 			<div className={`screen ${appState.appScreen}`}>
@@ -152,14 +141,9 @@ export const App: React.FC = () => {
 							)}
 							{appContent && appState.appScreen === TTTModel.AppScreen.SETTINGS && (
 								<TTTUI.SettingsScreen
-									language={appState.language}
 									content={appContent.settingsScreen}
 									playerSymbol={appState.playerSymbol}
 									selectedDifficultySetting={appState.intelligenceLevel}
-									handleDifficultyChange={handleDifficultyChange}
-									handleAvatarChange={handleAvatarChange}
-									handleLanguageChange={handleLanguageChange}
-									handleStartGame={handleStartGame}
 									handleLogout={handleLogout}
 								/>
 							)}

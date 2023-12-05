@@ -1,39 +1,39 @@
 import React from 'react';
-import { AppScreenContent, IntelligenceLevel, Locale, PlayerSymbol } from '@tic-tac-toe/model';
-import { Button, ChooseDifficulty, LanguageSelector, Logout, SymbolChoice } from '../components';
+import { AppStore } from '@tic-tac-toe/core';
+import {
+	AppScreenContent,
+	AppState,
+	IntelligenceLevel,
+	PlayerSymbol,
+	User,
+} from '@tic-tac-toe/model';
 import { BaseScreen } from './base/base';
+import { Button, ChooseDifficulty, LanguageSelector, Logout, SymbolChoice } from '../components';
 import { Divider } from '../core';
+import { useBehaviorSubjectState, useGameHandlers, useSettingsHandlers } from '../hooks';
 
 interface Props {
-	language: Locale;
 	content: AppScreenContent;
 	playerSymbol: PlayerSymbol;
 	selectedDifficultySetting: IntelligenceLevel;
-	handleDifficultyChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	handleAvatarChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	handleLanguageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	handleStartGame: () => void;
 	handleLogout: () => void;
 }
 
 export const SettingsScreen: React.FC<Props> = ({
-	language,
 	content,
 	playerSymbol,
 	selectedDifficultySetting,
-	handleDifficultyChange,
-	handleAvatarChange,
-	handleLanguageChange,
-	handleStartGame,
 	handleLogout,
 }) => {
+	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
+	const [userState] = useBehaviorSubjectState<User>(AppStore.user$);
+	const { handleStartGame } = useGameHandlers(appState, userState);
+	const { handleAvatarChange, handleDifficultyChange } = useSettingsHandlers(appState);
+
 	return (
 		<BaseScreen>
 			<Logout handleLogout={handleLogout} />
-			<LanguageSelector
-				selectedLanguage={language}
-				setSelectedLanguage={handleLanguageChange}
-			/>
+			<LanguageSelector />
 			<Divider invisible margin="vertical-l" />
 			<span>{content.title}</span>
 			<SymbolChoice playerSymbol={playerSymbol} handleAvatarChange={handleAvatarChange} />

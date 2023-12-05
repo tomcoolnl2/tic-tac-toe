@@ -9,26 +9,26 @@ exports[`LanguageSelector component renders correctly 1`] = `
         class="language-selector"
       >
         <input
+          checked=""
           id="EN"
           name="language-selector"
           type="radio"
           value="en-US"
         />
         <label
+          class="selected-language"
           for="EN"
           title="en-US"
         >
           EN
         </label>
         <input
-          checked=""
           id="中文"
           name="language-selector"
           type="radio"
           value="zh-CN"
         />
         <label
-          class="selected-language"
           for="中文"
           title="zh-CN"
         >
@@ -42,26 +42,26 @@ exports[`LanguageSelector component renders correctly 1`] = `
       class="language-selector"
     >
       <input
+        checked=""
         id="EN"
         name="language-selector"
         type="radio"
         value="en-US"
       />
       <label
+        class="selected-language"
         for="EN"
         title="en-US"
       >
         EN
       </label>
       <input
-        checked=""
         id="中文"
         name="language-selector"
         type="radio"
         value="zh-CN"
       />
       <label
-        class="selected-language"
         for="中文"
         title="zh-CN"
       >

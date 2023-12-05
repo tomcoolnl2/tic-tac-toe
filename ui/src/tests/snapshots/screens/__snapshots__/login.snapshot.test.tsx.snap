@@ -18,6 +18,36 @@ exports[`LoginScreen screen component snapshot test should match the snapshot 1`
     <hr
       class="divider full-width horizontal margin-vertical invisible"
     />
+    <div
+      class="language-selector"
+    >
+      <input
+        checked=""
+        id="EN"
+        name="language-selector"
+        type="radio"
+        value="en-US"
+      />
+      <label
+        class="selected-language"
+        for="EN"
+        title="en-US"
+      >
+        EN
+      </label>
+      <input
+        id="中文"
+        name="language-selector"
+        type="radio"
+        value="zh-CN"
+      />
+      <label
+        for="中文"
+        title="zh-CN"
+      >
+        中文
+      </label>
+    </div>
     <hr
       class="divider full-width horizontal margin-vertical-l invisible"
     />
