@@ -9,13 +9,13 @@ describe('ReloadModalScreen component', () => {
 		title: 'Restart game?',
 	};
 	it('should render the component correctly', () => {
-		const handleRestartGame = jest.fn();
+		const handleQuitGame = jest.fn();
 		const closeModalScreen = jest.fn();
 
 		const { getByText } = render(
 			<ReloadModalScreen
 				content={content}
-				handleRestartGame={handleRestartGame}
+				handleQuitGame={handleQuitGame}
 				closeModalScreen={closeModalScreen}
 			/>
 		);
@@ -26,13 +26,13 @@ describe('ReloadModalScreen component', () => {
 	});
 
 	it('should call closeModalScreen when "No, Cancel" button is clicked', () => {
-		const handleRestartGame = jest.fn();
+		const handleQuitGame = jest.fn();
 		const closeModalScreen = jest.fn();
 
 		const { getByText } = render(
 			<ReloadModalScreen
 				content={content}
-				handleRestartGame={handleRestartGame}
+				handleQuitGame={handleQuitGame}
 				closeModalScreen={closeModalScreen}
 			/>
 		);
@@ -41,17 +41,17 @@ describe('ReloadModalScreen component', () => {
 		fireEvent.click(cancelButton);
 
 		expect(closeModalScreen).toHaveBeenCalledTimes(1);
-		expect(handleRestartGame).not.toHaveBeenCalled();
+		expect(handleQuitGame).not.toHaveBeenCalled();
 	});
 
-	it('should call handleRestartGame when "Yes, Restart" button is clicked', () => {
-		const handleRestartGame = jest.fn();
+	it('should call handleQuitGame when "Yes, Restart" button is clicked', () => {
+		const handleQuitGame = jest.fn();
 		const closeModalScreen = jest.fn();
 
 		const { getByText } = render(
 			<ReloadModalScreen
 				content={content}
-				handleRestartGame={handleRestartGame}
+				handleQuitGame={handleQuitGame}
 				closeModalScreen={closeModalScreen}
 			/>
 		);
@@ -59,7 +59,7 @@ describe('ReloadModalScreen component', () => {
 		const restartButton = getByText('Yes, Restart');
 		fireEvent.click(restartButton);
 
-		expect(handleRestartGame).toHaveBeenCalledTimes(1);
+		expect(handleQuitGame).toHaveBeenCalledTimes(1);
 		expect(closeModalScreen).not.toHaveBeenCalled();
 	});
 });

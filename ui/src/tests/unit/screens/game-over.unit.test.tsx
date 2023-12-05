@@ -15,7 +15,7 @@ describe('GameOverModalScreen component', () => {
 		const playerSymbol = PlayerSymbol.X;
 		const cpuSymbol = PlayerSymbol.O;
 		const gameState = GameState.WIN;
-		const handleRestartGame = jest.fn();
+		const handleQuitGame = jest.fn();
 		const handleNextRound = jest.fn();
 
 		const { getByText } = render(
@@ -24,7 +24,7 @@ describe('GameOverModalScreen component', () => {
 				playerSymbol={playerSymbol}
 				cpuSymbol={cpuSymbol}
 				gameState={gameState}
-				handleRestartGame={handleRestartGame}
+				handleQuitGame={handleQuitGame}
 				handleNextRound={handleNextRound}
 			/>
 		);
@@ -39,7 +39,7 @@ describe('GameOverModalScreen component', () => {
 		const playerSymbol = PlayerSymbol.X;
 		const cpuSymbol = PlayerSymbol.O;
 		const gameState = GameState.LOST;
-		const handleRestartGame = jest.fn();
+		const handleQuitGame = jest.fn();
 		const handleNextRound = jest.fn();
 
 		const { getByText } = render(
@@ -48,7 +48,7 @@ describe('GameOverModalScreen component', () => {
 				playerSymbol={playerSymbol}
 				cpuSymbol={cpuSymbol}
 				gameState={gameState}
-				handleRestartGame={handleRestartGame}
+				handleQuitGame={handleQuitGame}
 				handleNextRound={handleNextRound}
 			/>
 		);
@@ -63,7 +63,7 @@ describe('GameOverModalScreen component', () => {
 		const playerSymbol = PlayerSymbol.X;
 		const cpuSymbol = PlayerSymbol.O;
 		const gameState = GameState.DRAW;
-		const handleRestartGame = jest.fn();
+		const handleQuitGame = jest.fn();
 		const handleNextRound = jest.fn();
 
 		const { getByText } = render(
@@ -72,7 +72,7 @@ describe('GameOverModalScreen component', () => {
 				playerSymbol={playerSymbol}
 				cpuSymbol={cpuSymbol}
 				gameState={gameState}
-				handleRestartGame={handleRestartGame}
+				handleQuitGame={handleQuitGame}
 				handleNextRound={handleNextRound}
 			/>
 		);
@@ -83,11 +83,11 @@ describe('GameOverModalScreen component', () => {
 		expect(getByText('Next round')).toBeInTheDocument();
 	});
 
-	it('should call handleRestartGame when "Quit" button is clicked', () => {
+	it('should call handleQuitGame when "Quit" button is clicked', () => {
 		const playerSymbol = PlayerSymbol.X;
 		const cpuSymbol = PlayerSymbol.O;
 		const gameState = GameState.WIN;
-		const handleRestartGame = jest.fn();
+		const handleQuitGame = jest.fn();
 		const handleNextRound = jest.fn();
 
 		const { getByText } = render(
@@ -96,7 +96,7 @@ describe('GameOverModalScreen component', () => {
 				playerSymbol={playerSymbol}
 				cpuSymbol={cpuSymbol}
 				gameState={gameState}
-				handleRestartGame={handleRestartGame}
+				handleQuitGame={handleQuitGame}
 				handleNextRound={handleNextRound}
 			/>
 		);
@@ -104,7 +104,7 @@ describe('GameOverModalScreen component', () => {
 		const quitButton = getByText('Quit');
 		fireEvent.click(quitButton);
 
-		expect(handleRestartGame).toHaveBeenCalledTimes(1);
+		expect(handleQuitGame).toHaveBeenCalledTimes(1);
 		expect(handleNextRound).not.toHaveBeenCalled();
 	});
 
@@ -112,7 +112,7 @@ describe('GameOverModalScreen component', () => {
 		const playerSymbol = PlayerSymbol.X;
 		const cpuSymbol = PlayerSymbol.O;
 		const gameState = GameState.WIN;
-		const handleRestartGame = jest.fn();
+		const handleQuitGame = jest.fn();
 		const handleNextRound = jest.fn();
 
 		const { getByText } = render(
@@ -121,7 +121,7 @@ describe('GameOverModalScreen component', () => {
 				playerSymbol={playerSymbol}
 				cpuSymbol={cpuSymbol}
 				gameState={gameState}
-				handleRestartGame={handleRestartGame}
+				handleQuitGame={handleQuitGame}
 				handleNextRound={handleNextRound}
 			/>
 		);
@@ -130,6 +130,6 @@ describe('GameOverModalScreen component', () => {
 		fireEvent.click(nextRoundButton);
 
 		expect(handleNextRound).toHaveBeenCalledTimes(1);
-		expect(handleRestartGame).not.toHaveBeenCalled();
+		expect(handleQuitGame).not.toHaveBeenCalled();
 	});
 });

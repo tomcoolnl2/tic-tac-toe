@@ -17,7 +17,7 @@ describe('GameOverModalScreen screen component snapshot test', () => {
 				gameState={GameState.WIN}
 				playerSymbol={PlayerSymbol.X}
 				cpuSymbol={PlayerSymbol.O}
-				handleRestartGame={fn}
+				handleQuitGame={fn}
 				handleNextRound={fn}
 			/>
 		);

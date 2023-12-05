@@ -3,23 +3,28 @@ import * as TTTModel from '@tic-tac-toe/model';
 import { AppStore } from '@tic-tac-toe/core';
 
 export function useGameHandlers(appState: TTTModel.AppState, userState: TTTModel.User) {
-	const handleStartGame = React.useCallback(() => {
-		// when player chooses O it means the CPU should make the first move
-		let updatedAppState = {};
+	const validateFirstTurn = React.useCallback(() => {
+		let nextState = {};
 		if (appState.playerSymbol === TTTModel.PlayerSymbol.O) {
-			updatedAppState = AppStore.gameEngine!.takeFirstTurn({
+			nextState = AppStore.gameEngine!.takeFirstTurn({
 				...appState,
 			});
 		}
+		return nextState;
+	}, [appState]);
+
+	const handleStartGame = React.useCallback(() => {
+		// when player chooses O it means the CPU should make the first move
+		const nextState = validateFirstTurn();
 		AppStore.nextState({
 			...appState,
-			...updatedAppState,
+			...nextState,
 			appScreen: TTTModel.AppScreen.GAME,
 			gameState: TTTModel.GameState.PLAYING,
 		});
-	}, [appState]);
+	}, [appState, validateFirstTurn]);
 
-	const handleRestartGame = React.useCallback(() => {
+	const handleQuitGame = React.useCallback(() => {
 		const appScreen = userState.loggedIn
 			? TTTModel.AppScreen.SETTINGS
 			: TTTModel.AppScreen.LOGIN;
@@ -31,13 +36,14 @@ export function useGameHandlers(appState: TTTModel.AppState, userState: TTTModel
 	}, [appState.language, userState]);
 
 	const handleNextRound = React.useCallback(() => {
-		const nextState = AppStore.getNextGameState(appState);
-		AppStore.nextState(nextState);
-	}, [appState]);
+		const nextState = AppStore.getNextRoundGameState(appState);
+		const updatedState = validateFirstTurn();
+		AppStore.nextState({ ...nextState, ...updatedState });
+	}, [appState, validateFirstTurn]);
 
 	return {
 		handleStartGame,
-		handleRestartGame,
+		handleQuitGame,
 		handleNextRound,
 	};
 }

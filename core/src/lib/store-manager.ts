@@ -82,7 +82,7 @@ class Store {
 	 * @param prevAppState - The previous application state.
 	 * @returns The next application state.
 	 */
-	public getNextGameState(prevAppState: TTTModel.AppState) {
+	public getNextRoundGameState(prevAppState: TTTModel.AppState) {
 		const { playerSymbol, cpuSymbol, intelligenceLevel, scores, language } = prevAppState;
 
 		return {

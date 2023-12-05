@@ -23,7 +23,10 @@ export const App: React.FC = () => {
 
 	const orientation = useScreenOrientation();
 	const { appContent, isContentLoading, setLanguage } = TTTUI.Context.useContentContext();
-	const { handleStartGame, handleRestartGame, handleNextRound } = useGameHandlers(appState);
+	const { handleStartGame, handleQuitGame, handleNextRound } = useGameHandlers(
+		appState,
+		userState
+	);
 	const { handleAvatarChange, handleDifficultyChange, handleLanguageChange } =
 		useSettingsHandlers(appState);
 	const { openRestartModal, closeModalScreen, validateCloseModal } = useUIHandlers(appState);
@@ -178,7 +181,7 @@ export const App: React.FC = () => {
 					{appState.appModalScreen === TTTModel.AppModalScreen.RELOAD && (
 						<TTTUI.ReloadModalScreen
 							content={appContent.restartModal}
-							handleRestartGame={handleRestartGame}
+							handleQuitGame={handleQuitGame}
 							closeModalScreen={closeModalScreen}
 						/>
 					)}
@@ -188,7 +191,7 @@ export const App: React.FC = () => {
 							gameState={appState.gameState}
 							playerSymbol={appState.playerSymbol}
 							cpuSymbol={appState.cpuSymbol}
-							handleRestartGame={handleRestartGame}
+							handleQuitGame={handleQuitGame}
 							handleNextRound={handleNextRound}
 						/>
 					)}
