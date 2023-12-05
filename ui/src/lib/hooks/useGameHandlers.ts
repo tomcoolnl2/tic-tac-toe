@@ -2,7 +2,7 @@ import React from 'react';
 import * as TTTModel from '@tic-tac-toe/model';
 import { AppStore } from '@tic-tac-toe/core';
 
-export function useGameHandlers(appState: TTTModel.AppState) {
+export function useGameHandlers(appState: TTTModel.AppState, userState: TTTModel.User) {
 	const handleStartGame = React.useCallback(() => {
 		// when player chooses O it means the CPU should make the first move
 		let updatedAppState = {};
@@ -20,12 +20,15 @@ export function useGameHandlers(appState: TTTModel.AppState) {
 	}, [appState]);
 
 	const handleRestartGame = React.useCallback(() => {
+		const appScreen = userState.loggedIn
+			? TTTModel.AppScreen.SETTINGS
+			: TTTModel.AppScreen.LOGIN;
 		AppStore.nextState({
 			...AppStore.initialState,
 			language: appState.language,
-			appScreen: TTTModel.AppScreen.SETTINGS,
+			appScreen,
 		});
-	}, [appState.language]);
+	}, [appState.language, userState]);
 
 	const handleNextRound = React.useCallback(() => {
 		const nextState = AppStore.getNextGameState(appState);
