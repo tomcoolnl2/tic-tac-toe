@@ -3,7 +3,7 @@ import * as TTTModel from '@tic-tac-toe/model';
 import { AppStore } from '@tic-tac-toe/core';
 
 export function useGameHandlers(appState: TTTModel.AppState, userState: TTTModel.User) {
-	const validateFirstTurn = React.useCallback(() => {
+	const validateFirstTurn = React.useCallback((appState: TTTModel.AppState) => {
 		let nextState = {};
 		if (appState.playerSymbol === TTTModel.PlayerSymbol.O) {
 			nextState = AppStore.gameEngine!.takeFirstTurn({
@@ -11,11 +11,11 @@ export function useGameHandlers(appState: TTTModel.AppState, userState: TTTModel
 			});
 		}
 		return nextState;
-	}, [appState]);
+	}, []);
 
 	const handleStartGame = React.useCallback(() => {
 		// when player chooses O it means the CPU should make the first move
-		const nextState = validateFirstTurn();
+		const nextState = validateFirstTurn(appState);
 		AppStore.nextState({
 			...appState,
 			...nextState,
@@ -37,8 +37,9 @@ export function useGameHandlers(appState: TTTModel.AppState, userState: TTTModel
 
 	const handleNextRound = React.useCallback(() => {
 		const nextState = AppStore.getNextRoundGameState(appState);
-		const updatedState = validateFirstTurn();
+		const updatedState = validateFirstTurn(nextState);
 		AppStore.nextState({ ...nextState, ...updatedState });
+		console.log('handleNextRound', { ...nextState, ...updatedState });
 	}, [appState, validateFirstTurn]);
 
 	return {

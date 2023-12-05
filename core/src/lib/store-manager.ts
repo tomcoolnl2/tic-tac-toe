@@ -84,7 +84,6 @@ class Store {
 	 */
 	public getNextRoundGameState(prevAppState: TTTModel.AppState) {
 		const { playerSymbol, cpuSymbol, intelligenceLevel, scores, language } = prevAppState;
-
 		return {
 			...this.initialState,
 			language,
