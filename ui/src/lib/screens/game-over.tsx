@@ -8,7 +8,7 @@ interface Props {
 	gameState: GameState;
 	playerSymbol: PlayerSymbol;
 	cpuSymbol: PlayerSymbol;
-	handleRestartGame: () => void;
+	handleQuitGame: () => void;
 	handleNextRound: () => void;
 }
 
@@ -17,7 +17,7 @@ export const GameOverModalScreen: React.FC<Props> = ({
 	playerSymbol,
 	cpuSymbol,
 	gameState,
-	handleRestartGame,
+	handleQuitGame,
 	handleNextRound,
 }) => {
 	let title = content.title[0];
@@ -45,15 +45,10 @@ export const GameOverModalScreen: React.FC<Props> = ({
 
 	return (
 		<>
-			<GameOver
-				title={title}
-				subtitle={subtitle}
-				avatar={avatar}
-				className={className}
-			/>
+			<GameOver title={title} subtitle={subtitle} avatar={avatar} className={className} />
 			<Divider margin="vertical-l" />
 			<Grid cols={2} colGap="l">
-				<Button variant="light" onClick={handleRestartGame}>
+				<Button variant="light" onClick={handleQuitGame}>
 					{content.cta1}
 				</Button>
 				<Button variant="secondary" onClick={handleNextRound}>

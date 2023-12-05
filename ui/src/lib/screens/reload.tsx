@@ -5,13 +5,13 @@ import { Button } from '../components';
 
 interface Props {
 	content: AppScreenContent;
-	handleRestartGame: () => void;
+	handleQuitGame: () => void;
 	closeModalScreen: () => void;
 }
 
 export const ReloadModalScreen: React.FC<Props> = ({
 	content,
-	handleRestartGame,
+	handleQuitGame,
 	closeModalScreen,
 }) => {
 	return (
@@ -22,7 +22,7 @@ export const ReloadModalScreen: React.FC<Props> = ({
 				<Button variant="light" onClick={closeModalScreen}>
 					{content.cta1}
 				</Button>
-				<Button variant="secondary" onClick={handleRestartGame}>
+				<Button variant="secondary" onClick={handleQuitGame}>
 					{content.cta2}
 				</Button>
 			</Grid>
