@@ -1,14 +1,14 @@
 {
-	"name": "api-login-e2e",
+	"name": "api-auth-e2e",
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
-	"implicitDependencies": ["api-login"],
+	"implicitDependencies": ["api-auth"],
 	"projectType": "application",
 	"targets": {
 		"e2e": {
 			"executor": "@nx/jest:jest",
 			"outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
 			"options": {
-				"jestConfig": "apps/api-login-e2e/jest.config.ts",
+				"jestConfig": "apps/api-auth-e2e/jest.config.ts",
 				"passWithNoTests": true
 			}
 		},
@@ -16,7 +16,7 @@
 			"executor": "@nx/eslint:lint",
 			"outputs": ["{options.outputFile}"],
 			"options": {
-				"lintFilePatterns": ["apps/api-login-e2e/**/*.{js,ts}"]
+				"lintFilePatterns": ["apps/api-auth-e2e/**/*.{js,ts}"]
 			}
 		}
 	}
