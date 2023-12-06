@@ -27,6 +27,7 @@
 		"test:ui:coverage": "yarn test:ui && npx serve ./coverage/ui -p 2110",
 		"test:api-login": "npx nx test api-login --collectCoverage --verbose",
 		"test:api-login:coverage": "yarn test:api-login && npx serve ./coverage/api-login -p 2120",
+		"e2e:web": "nx e2e web-e2e",
 		"storybook": "nx run ui:storybook",
 		"format": "prettier --write 'apps/**/*.{ts,tsx,html,css,scss,json,md}'",
 		"postinstall": "electron-builder install-app-deps"
