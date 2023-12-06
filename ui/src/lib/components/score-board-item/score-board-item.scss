@@ -7,14 +7,19 @@
     border-radius: 4px;
     padding: 8px 10px 4px;
     box-shadow: utils.generate-box-shadow($color: var(--light-secondary));
-
-    &-x {
-        background-color: var(--theme-primary);
-        box-shadow: utils.generate-box-shadow($color: var(--theme-secondary));
-    }
-
-    &-o {
-        background-color: var(--sunshine-gold);
-        box-shadow: utils.generate-box-shadow($color: var(--bronze-amber));
-    }
 }
+
+.score-board-item-x {
+    background-color: var(--theme-primary);
+    box-shadow: utils.generate-box-shadow($color: var(--theme-secondary));
+}
+
+.score-board-item-o {
+    background-color: var(--sunshine-gold);
+    box-shadow: utils.generate-box-shadow($color: var(--bronze-amber));
+}
+
+.desktop .score-board-item-x {
+    color: var(--light-primary);
+}
+    
