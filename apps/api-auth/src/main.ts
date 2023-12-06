@@ -17,7 +17,7 @@ async function bootstrap() {
 		credentials: true,
 	});
 
-	const globalPrefix = 'api-login';
+	const globalPrefix = 'api-auth';
 	app.setGlobalPrefix(globalPrefix);
 	const port = process.env.PORT || 3000;
 
