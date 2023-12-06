@@ -13,24 +13,6 @@
     box-shadow: utils.generate-box-shadow($color: var(--theme-secondary));
     width: 100%;
 
-    // &.primary {}
-
-    &.button-secondary {
-        background-color: var(--sunshine-gold);
-        box-shadow: utils.generate-box-shadow($color: var(--bronze-amber));
-    }
-
-    &.button-dark {
-        color: var(--light-primary);
-        background: var(--background-color-secondary);
-        box-shadow: utils.generate-box-shadow($color: var(--background-color-tertiary));
-    }
-
-    &.button-light {
-        background-color: var(--light-primary);
-        box-shadow: utils.generate-box-shadow($color: var(--light-secondary));
-    }
-
     &[disabled] {
         cursor: not-allowed;
         opacity: .8;
@@ -40,5 +22,26 @@
         font-size: 18px;
         position: absolute;
         transform: translate(5px, -3px);
+    }
+}
+
+.button-secondary {
+    background-color: var(--sunshine-gold);
+    box-shadow: utils.generate-box-shadow($color: var(--bronze-amber));
+}
+.button-dark {
+    color: var(--light-primary);
+    background: var(--background-color-secondary);
+    box-shadow: utils.generate-box-shadow($color: var(--background-color-tertiary));
+}
+
+.button-light {
+    background-color: var(--light-primary);
+    box-shadow: utils.generate-box-shadow($color: var(--light-secondary));
+}
+
+.desktop {
+    .button-primary {
+        color: var(--light-primary);
     }
 }
