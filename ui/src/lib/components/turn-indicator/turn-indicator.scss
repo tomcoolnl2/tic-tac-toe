@@ -3,7 +3,7 @@
 .turn-indicator {
     position: relative;
     padding-left: 35px;
-    cursor: default;
+    cursor: default !important; // overrule disabled button cursor
     width: 130px;
 
     > .avatar {
