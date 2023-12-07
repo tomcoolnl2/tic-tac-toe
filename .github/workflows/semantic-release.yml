@@ -1,5 +1,10 @@
 name: Semantic Release
 
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+
 on:
     push:
         branches:
