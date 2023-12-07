@@ -6,16 +6,8 @@ on:
             - main
 
 jobs:
-    setup:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Placeholder job without dependencies
-              run: echo "This job has no dependencies"
-
     semantic-release:
-        needs: setup
         runs-on: ubuntu-latest
-
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
