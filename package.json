@@ -6,6 +6,19 @@
 	"repository": {
 		"url": "https://github.com/tomcoolnl2/tic-tac-toe"
 	},
+	"release": {
+		"repositoryUrl": "https://github.com/tomcoolnl2/tic-tac-toe",
+		"branches": [
+			"main"
+		],
+		"plugins": [
+			"@semantic-release/commit-analyzer",
+			"@semantic-release/release-notes-generator",
+			"@semantic-release/changelog",
+			"@semantic-release/npm",
+			"@semantic-release/git"
+		]
+	},
 	"engines": {
 		"node": ">= 18.17.0"
 	},
