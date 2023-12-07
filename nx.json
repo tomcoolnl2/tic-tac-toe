@@ -3,13 +3,8 @@
 	"targetDefaults": {
 		"build": {
 			"cache": true,
-			"dependsOn": [
-				"^build"
-			],
-			"inputs": [
-				"production",
-				"^production"
-			]
+			"dependsOn": ["^build"],
+			"inputs": ["production", "^production"]
 		},
 		"lint": {
 			"cache": true,
@@ -22,18 +17,11 @@
 		},
 		"test": {
 			"cache": true,
-			"inputs": [
-				"default",
-				"^production",
-				"{workspaceRoot}/jest.preset.js"
-			]
+			"inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
 		},
 		"e2e": {
 			"cache": true,
-			"inputs": [
-				"default",
-				"^production"
-			]
+			"inputs": ["default", "^production"]
 		},
 		"build-storybook": {
 			"cache": true,
@@ -46,10 +34,7 @@
 		}
 	},
 	"namedInputs": {
-		"default": [
-			"{projectRoot}/**/*",
-			"sharedGlobals"
-		],
+		"default": ["{projectRoot}/**/*", "sharedGlobals"],
 		"production": [
 			"default",
 			"!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -86,11 +71,10 @@
 	"tasksRunnerOptions": {
 		"default": {
 			"options": {
-				"cacheableOperations": [
-					"build-storybook"
-				]
+				"cacheableOperations": ["build-storybook"]
 			}
 		}
 	},
-	"defaultProject": "desktop"
+	"defaultProject": "desktop",
+	"nxCloudAccessToken": "NDAwYWJkNTUtY2QxOS00M2Y0LThmNzAtMWNkYjE3OGUwMTk3fHJlYWQtd3JpdGU="
 }

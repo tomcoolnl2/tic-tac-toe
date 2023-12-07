@@ -1,0 +1,37 @@
+name: Semantic Release
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    setup:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Placeholder job without dependencies
+              run: echo "This job has no dependencies"
+
+    semantic-release:
+        needs: setup
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 18.17.0
+
+            - name: Install Yarn
+              run: npm install -g yarn
+
+            - name: Install dependencies
+              run: yarn install
+
+            - name: Run semantic release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.TIC_TAC_TOKEN }}
+              run: npx semantic-release
