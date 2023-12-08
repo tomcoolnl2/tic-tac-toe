@@ -31,7 +31,7 @@
 		"storybook": "nx run ui:storybook",
 		"version:next": "conventional-recommended-bump -p angular",
 		"version:bump": "yarn version --no-git-tag-version",
-		"version:update-changelog": "standard-version --releaseCommitMessageFormat=chore(release): ${nextRelease.version} [skip ci]\n${nextRelease.notes}",
+		"version:update-changelog": "standard-version --release-as \"$npm_package_version\" --no-verify --commit-all",
 		"format": "prettier --write 'apps/**/*.{ts,tsx,html,css,scss,json,md}'",
 		"postinstall": "electron-builder install-app-deps"
 	},
