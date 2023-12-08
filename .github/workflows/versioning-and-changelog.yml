@@ -34,15 +34,15 @@ jobs:
                   pr_number=${pr_ref%/merge}
                   git fetch origin "refs/pull/$pr_number/head:pr-$pr_number"
                   git checkout "pr-$pr_number"
-                  # git branch --set-upstream-to=origin/$GITHUB_HEAD_REF "pr-$pr_number"
 
-            - name: Push changes to the pull request branch
+            - name: Bump version and commit changes
               run: |
                   next_version=$(npx conventional-recommended-bump -p angular)
                   echo $next_version
                   yarn version --new-version=$next_version --no-git-tag-version
+                  git add .
                   if [ -n "$(git status --porcelain)" ]; then
-                    git commit -am "chore: bump version to $next_version"
+                    git commit -m "chore: bump version to $next_version"
                     git push origin HEAD:pr-$pr_number
                   else
                     echo "No changes to commit."
