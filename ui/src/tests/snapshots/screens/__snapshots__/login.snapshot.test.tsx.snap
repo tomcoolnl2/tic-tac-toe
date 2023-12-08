@@ -82,7 +82,10 @@ exports[`LoginScreen screen component snapshot test should match the snapshot 1`
         />
       </div>
       <hr
-        class="divider full-width horizontal margin-vertical invisible"
+        class="divider full-width horizontal margin-bottom invisible"
+      />
+      <hr
+        class="divider full-width horizontal margin-bottom invisible landscape-hidden"
       />
       <div
         class="form-input icon"
@@ -100,7 +103,10 @@ exports[`LoginScreen screen component snapshot test should match the snapshot 1`
         />
       </div>
       <hr
-        class="divider full-width horizontal margin-vertical invisible"
+        class="divider full-width horizontal margin-bottom invisible"
+      />
+      <hr
+        class="divider full-width horizontal margin-bottom invisible landscape-hidden"
       />
       <button
         class="button button-primary"

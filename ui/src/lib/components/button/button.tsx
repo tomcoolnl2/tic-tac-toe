@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import './button.scss';
+import { Loader } from '../loader/loader';
 
 export interface Props {
 	variant?: 'primary' | 'secondary' | 'dark' | 'light';
@@ -8,6 +9,7 @@ export interface Props {
 	className?: string;
 	children?: React.ReactNode;
 	disabled?: boolean;
+	loading?: boolean;
 	testId?: string;
 }
 
@@ -17,6 +19,7 @@ export const Button: React.FC<Props> = ({
 	className,
 	children,
 	disabled,
+	loading,
 	testId,
 }) => {
 	return (
@@ -26,7 +29,7 @@ export const Button: React.FC<Props> = ({
 			disabled={disabled}
 			data-testid={testId}
 		>
-			{children}
+			{loading ? <Loader /> : children}
 		</button>
 	);
 };
