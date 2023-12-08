@@ -29,4 +29,13 @@ export class AppController {
 			throw new HttpException(`Validation failed: wrong password!`, HttpStatus.FORBIDDEN);
 		}
 	}
+
+	@Get('logout')
+	logout(): User {
+		return {
+			name: null,
+			avatar: null,
+			loggedIn: false,
+		};
+	}
 }

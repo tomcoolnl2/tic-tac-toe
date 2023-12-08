@@ -1,19 +1,19 @@
-import { Locale } from './model';
+import { Locale } from '@tic-tac-toe/model';
 
-export type AppContentAction =
+export type ContentAction =
 	| { type: 'FETCH_START' }
 	| { type: 'FETCH_SUCCESS'; payload: AppContent }
 	| { type: 'FETCH_ERROR'; payload: Error }
 	| { type: 'SET_LANGUAGE'; payload: Locale };
 
-export interface AppContentState {
+export interface ContentState {
 	appContent: AppContent | null;
 	isContentLoading: boolean;
 	contentError: Error | null;
 	locale: Locale;
 }
 
-export type AppContentStateWithLanguageSelector = AppContentState & {
+export type ContentStateWithLanguageSelector = ContentState & {
 	setLanguage: (locale: Locale) => void;
 };
 

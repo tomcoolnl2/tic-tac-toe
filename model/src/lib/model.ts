@@ -1,7 +1,7 @@
 export interface User {
-	name: string;
-	avatar: PlayerSymbol;
-	loggedIn: boolean;
+	name: string | null;
+	avatar: PlayerSymbol | null;
+	loggedIn: boolean | null;
 }
 
 export interface AppState {
