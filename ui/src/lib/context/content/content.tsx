@@ -1,27 +1,27 @@
 import React from 'react';
-import {
-	type AppContentStateWithLanguageSelector,
-	AppContentState,
-	AppContentAction,
+import { Locale } from '@tic-tac-toe/model';
+import type {
+	ContentState,
+	ContentStateWithLanguageSelector,
+	ContentAction,
 	AppContent,
-	Locale,
-} from '@tic-tac-toe/model';
+} from './model';
 import { fetchContentfulData } from './api';
 
-const initialContentContext: AppContentState = {
+const initialContentContext: ContentState = {
 	appContent: null,
 	isContentLoading: false,
 	contentError: null,
 	locale: Locale.EN,
 };
 
-const ContentContext = React.createContext<AppContentState>(initialContentContext);
+const ContentContext = React.createContext<ContentState>(initialContentContext);
 
 export const useContentContext = () => {
-	return React.useContext(ContentContext) as AppContentStateWithLanguageSelector;
+	return React.useContext(ContentContext) as ContentStateWithLanguageSelector;
 };
 
-const contentReducer = (state: AppContentState, action: AppContentAction): AppContentState => {
+const contentReducer = (state: ContentState, action: ContentAction): ContentState => {
 	switch (action.type) {
 		case 'FETCH_START':
 			return {
@@ -74,7 +74,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
 		fetchDataFromApi();
 	}, [contentState.locale]);
 
-	const contextValue: AppContentStateWithLanguageSelector = {
+	const contextValue: ContentStateWithLanguageSelector = {
 		...contentState,
 		setLanguage,
 	};

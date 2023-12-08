@@ -1,6 +1,8 @@
 import '@testing-library/jest-dom';
 import fetchMock from 'jest-fetch-mock';
-import { AuthError, fetchUserName, login } from '../../api/auth';
+import { VITE_AUTH_API_URL } from '@tic-tac-toe/constants';
+import { fetchUserName, login, logout } from '../../../../lib/context/auth/api';
+import { AuthError } from '../../../../lib/context/auth/error';
 
 describe('fetchUserName function', () => {
 	beforeEach(() => {
@@ -56,25 +58,34 @@ describe('fetchUserName function', () => {
 });
 
 describe('login function', () => {
-	it('handles successful login', async () => {
-		const successHandler = jest.fn();
-		const mockResponse = { status: 200 };
-		fetchMock.mockResponse(JSON.stringify(mockResponse), { status: 200 });
-
-		await login('validPassword', successHandler);
-
-		expect(successHandler).toHaveBeenCalledWith(expect.objectContaining({ status: 200 }));
-	});
-
 	it('handles unsuccessful login with non-200 status', async () => {
 		const mockErrorResponse = { message: 'Unauthorized' };
 		const status = 401;
 		fetchMock.mockResponse(JSON.stringify(mockErrorResponse), { status });
 
-		const error = (await login('invalidPassword', jest.fn())) as AuthError;
+		const error = (await login('invalidPassword')) as AuthError;
 
 		expect(error).toBeInstanceOf(AuthError);
 		expect(error.message).toBe(`${status}: Unauthorized`);
 		expect(error.status).toBe(status);
+	});
+});
+
+describe('logout function', () => {
+	it('handles successful logout', async () => {
+		const mockUserResponse = {
+			name: null,
+			avatar: null,
+			loggedIn: false,
+		};
+		const status = 200;
+		fetchMock.mockResponse(JSON.stringify(mockUserResponse), { status });
+
+		const result = await logout();
+
+		expect(result).toEqual(mockUserResponse);
+		expect(fetchMock).toHaveBeenCalledWith(`${VITE_AUTH_API_URL}/logout`, {
+			signal: expect.any(AbortSignal),
+		});
 	});
 });

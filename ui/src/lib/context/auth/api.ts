@@ -1,24 +1,6 @@
 import * as TTTModel from '@tic-tac-toe/model';
 import { VITE_AUTH_API_URL } from '@tic-tac-toe/constants';
-
-/**
- * Represents an authentication error.
- * @class
- * @extends Error
- */
-export class AuthError extends Error {
-	/**
-	 * Creates an instance of AuthError.
-	 * @param {string} message - The error message.
-	 * @param {number} status - The status code associated with the error.
-	 */
-	constructor(message: string, public status: number = 500) {
-		super(message);
-		this.name = this.constructor.name;
-		this.message = `${this.status}: ${message}`;
-		Object.setPrototypeOf(this, AuthError.prototype);
-	}
-}
+import { AuthError } from './error';
 
 /**
  * Fetches the username asynchronously.
@@ -44,13 +26,9 @@ export async function fetchUserName(): Promise<string | AuthError | null> {
 /**
  * Performs a login operation asynchronously.
  * @param {string} pwd - The password for login.
- * @param {Function} successHandler - The function to handle a successful response.
- * @returns {Promise<AuthError | void>} A promise resolving to either an AuthError or void.
+ * @returns {Promise<TTTModel.User | AuthError>} A promise resolving to either anTTTModel.User or AuthError.
  */
-export async function login(
-	pwd: string,
-	successHandler: (user: TTTModel.User) => void
-): Promise<AuthError | void> {
+export async function login(pwd: string): Promise<TTTModel.User | AuthError> {
 	const { signal } = new AbortController();
 	const url = `${VITE_AUTH_API_URL}/login`;
 	const response = await fetch(url, {
@@ -67,6 +45,13 @@ export async function login(
 	if (!response.ok) {
 		return new AuthError(data.message, response.status);
 	} else {
-		successHandler(data);
+		return data as TTTModel.User;
 	}
+}
+
+export async function logout(): Promise<TTTModel.User> {
+	const { signal } = new AbortController();
+	const url = `${VITE_AUTH_API_URL}/logout`;
+	const response = await fetch(url, { signal });
+	return (await response.json()) as TTTModel.User;
 }

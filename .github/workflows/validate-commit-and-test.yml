@@ -2,8 +2,7 @@ name: Validate Commit and Test
 
 on:
     push:
-        branches:
-            - '!main'
+    pull_request:
 
 jobs:
     validate-commit-message:

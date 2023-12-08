@@ -1,16 +1,18 @@
 import React from 'react';
 import * as Rx from 'rxjs';
-import { isDevEnvironment } from '@tic-tac-toe/debug';
 import { AppStore } from '@tic-tac-toe/core';
+import { isDevEnvironment } from '@tic-tac-toe/debug';
 import * as TTTModel from '@tic-tac-toe/model';
 import * as TTTUI from '@tic-tac-toe/ui';
-import { AuthError, fetchUserName, login } from '../api/auth';
 
 export const App: React.FC = () => {
-	const [userName, setUserName] = React.useState<string>('');
-	const [authError, setAuthError] = React.useState<Error | null>(null);
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const theme = React.useMemo(() => (window as any)?.electron?.theme ?? 'web', []);
 
+	const [userName, setUserName] = React.useState<string>('');
+	const [authError, setAuthError] = React.useState<Error | null>(null);
+
+	const { useAuthContext, useContentContext } = TTTUI.Context;
 	const { useBehaviorSubjectState, useScreenOrientation, useGameHandlers, useUIHandlers } =
 		TTTUI.Hooks;
 
@@ -18,20 +20,18 @@ export const App: React.FC = () => {
 	const [userState] = useBehaviorSubjectState<TTTModel.User>(AppStore.user$);
 
 	const orientation = useScreenOrientation();
-	const { appContent, isContentLoading, setLanguage } = TTTUI.Context.useContentContext();
+	const { fetchUserName, login, logout } = useAuthContext();
+	const { appContent, isContentLoading, setLanguage } = useContentContext();
 	const { handleQuitGame, handleNextRound } = useGameHandlers(appState, userState);
 	const { openRestartModal, closeModalScreen, validateCloseModal } = useUIHandlers(appState);
 
 	React.useEffect(() => {
 		fetchUserName().then((name) => {
-			if (name instanceof AuthError) {
-				setAuthError(name);
-			}
-			if (typeof name === 'string') {
-				setUserName(name);
-			}
+			name instanceof TTTUI.Error.AuthError
+				? setAuthError(name)
+				: setUserName(name as string);
 		});
-	}, []);
+	}, [fetchUserName]);
 
 	React.useEffect(() => {
 		if (isDevEnvironment()) {
@@ -72,38 +72,30 @@ export const App: React.FC = () => {
 		});
 	}, [isContentLoading, userState, appState.language]);
 
-	const handleLoginSuccess = React.useCallback(
-		(user: TTTModel.User) => {
-			AppStore.nextUserState(user);
-			AppStore.nextState({
-				...appState,
-				appScreen: TTTModel.AppScreen.SETTINGS,
-			});
-		},
-		[appState]
-	);
-
 	const handleLogin = React.useCallback(
-		(pwd: string) => {
-			login(pwd, handleLoginSuccess).then((data) => {
-				if (data instanceof AuthError) {
-					setAuthError(data);
-				}
-			});
+		async (pwd: string) => {
+			const data = await login(pwd);
+			if (data instanceof TTTUI.Error.AuthError) {
+				setAuthError(data);
+			} else {
+				AppStore.nextUserState(data);
+				AppStore.nextState({
+					...appState,
+					appScreen: TTTModel.AppScreen.SETTINGS,
+				});
+			}
 		},
-		[handleLoginSuccess]
+		[appState, login]
 	);
 
-	const handleLogout = React.useCallback(() => {
-		AppStore.nextUserState({
-			...userState,
-			loggedIn: false,
-		});
+	const handleLogout = React.useCallback(async () => {
+		const data = await logout();
+		AppStore.nextUserState(data);
 		AppStore.nextState({
 			...appState,
 			appScreen: TTTModel.AppScreen.SETTINGS,
 		});
-	}, [appState, userState]);
+	}, [appState, logout]);
 
 	const useLandscapeDesign = React.useMemo(() => {
 		return orientation?.startsWith('landscape') && 'ontouchstart' in window;
@@ -125,7 +117,7 @@ export const App: React.FC = () => {
 		<TTTUI.Theme theme={theme}>
 			<div className={`screen ${appState.appScreen}`}>
 				<div className={`screen-inner ${useLandscapeDesign ? 'landscape' : ''}`}>
-					<TTTUI.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
+					<TTTUI.Error.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
 						<div className="screen-front">
 							{appState.appScreen === TTTModel.AppScreen.LOADING && (
 								<TTTUI.LoadingScreen />
@@ -157,7 +149,7 @@ export const App: React.FC = () => {
 								/>
 							)}
 						</div>
-					</TTTUI.ErrorBoundary>
+					</TTTUI.Error.ErrorBoundary>
 				</div>
 			</div>
 			{appContent && appState.appModalScreen !== null && (

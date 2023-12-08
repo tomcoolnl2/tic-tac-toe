@@ -51,8 +51,8 @@ class Store {
 	 */
 	private get initialUserState(): TTTModel.User {
 		return {
-			name: '',
-			avatar: TTTModel.PlayerSymbol.X,
+			name: null,
+			avatar: null,
 			loggedIn: false,
 		};
 	}

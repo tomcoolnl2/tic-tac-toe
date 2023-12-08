@@ -30,8 +30,8 @@ beforeEach(() => {
 	};
 
 	userState = {
-		name: '',
-		avatar: PlayerSymbol.X,
+		name: null,
+		avatar: null,
 		loggedIn: false,
 	};
 
