@@ -5,6 +5,8 @@ import { isDevEnvironment } from '@tic-tac-toe/debug';
 import * as TTTModel from '@tic-tac-toe/model';
 import * as TTTUI from '@tic-tac-toe/ui';
 
+console.log('HELLO');
+
 export const App: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const theme = React.useMemo(() => (window as any)?.electron?.theme ?? 'web', []);
