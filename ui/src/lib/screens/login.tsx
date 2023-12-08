@@ -3,12 +3,13 @@ import { AppScreenContent } from '../context/content/model';
 import { Divider } from '../core';
 import { Button, Input, LanguageSelector } from '../components';
 import { BaseScreen } from './base/base';
+import { sleep } from '../utils';
 
 interface Props {
 	content: AppScreenContent;
 	userName: string;
 	authError: Error | null;
-	setAuthError: (error: Error) => void;
+	setAuthError: (error: Error | null) => void;
 	handleSubmit: (pwd: string) => void;
 }
 
@@ -20,6 +21,7 @@ export const LoginScreen: React.FC<Props> = ({
 	handleSubmit,
 }) => {
 	const [pwd, setPwd] = React.useState<string>('');
+	const [isAuthenticating, setIsAuthenticating] = React.useState<boolean>(false);
 
 	const hasError = React.useMemo(() => {
 		return authError instanceof Error;
@@ -30,13 +32,17 @@ export const LoginScreen: React.FC<Props> = ({
 	}, []);
 
 	const handleLoginSubmit = React.useCallback(
-		(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+		async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
 			event.preventDefault();
+			setIsAuthenticating(true);
 			if (pwd === '') {
 				setAuthError(new Error(content.errors?.emptyPwd || ''));
 			} else {
+				await sleep(1000);
 				handleSubmit(pwd);
+				setAuthError(null);
 			}
+			setIsAuthenticating(false);
 		},
 		[pwd, setAuthError, content, handleSubmit]
 	);
@@ -50,7 +56,8 @@ export const LoginScreen: React.FC<Props> = ({
 			<Divider invisible margin="vertical" />
 			<form className="login-form" noValidate autoComplete="off">
 				<Input icon="user" id="username" disabled value={userName} testId="username" />
-				<Divider invisible margin="vertical" />
+				<Divider invisible margin="bottom" />
+				<Divider invisible margin="bottom" className="landscape-hidden" />
 				<Input
 					icon="lock"
 					type="password"
@@ -59,16 +66,23 @@ export const LoginScreen: React.FC<Props> = ({
 					onChange={(value) => handlePwdChange(value)}
 					testId="password"
 				/>
-				<Divider invisible margin="vertical" />
+				<Divider invisible margin="bottom" />
+				<Divider invisible margin="bottom" className="landscape-hidden" />
 				{hasError ? (
 					<>
 						<p className="error-message">
 							<small>{authError!.message}</small>
 						</p>
-						<Divider invisible margin="vertical-l" />
+						<Divider invisible margin="bottom" />
+						<Divider invisible margin="bottom" className="landscape-hidden" />
 					</>
 				) : null}
-				<Button variant="primary" onClick={handleLoginSubmit} testId="submit">
+				<Button
+					variant="primary"
+					onClick={handleLoginSubmit}
+					testId="submit"
+					loading={isAuthenticating}
+				>
 					{content.cta1}
 				</Button>
 			</form>
