@@ -2,7 +2,7 @@ name: Version Bump and Changelog Update
 
 on:
     pull_request:
-        types: [opened]
+        types: [opened, reopened]
 
 jobs:
     bump-version:
