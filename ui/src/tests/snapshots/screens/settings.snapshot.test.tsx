@@ -13,10 +13,8 @@ describe('SettingsScreen screen component snapshot test', () => {
 			<SettingsScreen
 				content={content}
 				playerSymbol={PlayerSymbol.X}
-				handleStartGame={jest.fn()}
-				handleAvatarChange={jest.fn()}
 				selectedDifficultySetting={IntelligenceLevel.EASY}
-				handleDifficultyChange={jest.fn()}
+				handleLogout={jest.fn()}
 			/>
 		);
 		expect(asFragment()).toMatchSnapshot();

@@ -56,7 +56,7 @@ exports[`SettingsScreen screen component snapshot test should match the snapshot
       </label>
     </div>
     <hr
-      class="divider full-width horizontal margin-vertical-l invisible"
+      class="divider full-width horizontal margin-vertical-l invisible landscape-hidden"
     />
     <span>
       Pic Player 1's mark
@@ -96,7 +96,10 @@ exports[`SettingsScreen screen component snapshot test should match the snapshot
       Remember, X goes first
     </sub>
     <hr
-      class="divider full-width horizontal margin-vertical-l invisible"
+      class="divider full-width horizontal margin-bottom invisible"
+    />
+    <hr
+      class="divider full-width horizontal margin-vertical invisible landscape-hidden"
     />
     <div
       class="flex-box direction-column justify-content-flex-start align-items-center choose-difficulty"
@@ -142,7 +145,10 @@ exports[`SettingsScreen screen component snapshot test should match the snapshot
       <sup />
     </div>
     <hr
-      class="divider full-width horizontal margin-vertical-l invisible"
+      class="divider full-width horizontal margin-vertical invisible"
+    />
+    <hr
+      class="divider full-width horizontal margin-bottom invisible landscape-hidden"
     />
     <button
       class="button button-secondary"

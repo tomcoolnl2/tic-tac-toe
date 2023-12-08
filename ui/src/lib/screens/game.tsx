@@ -1,9 +1,10 @@
 import React from 'react';
 import { AppStore } from '@tic-tac-toe/core';
-import { AppGameContent, AppState } from '@tic-tac-toe/model';
+import type { AppState } from '@tic-tac-toe/model';
+import type { AppGameContent } from '../context/content/model';
 import { Grid, GridItem } from '../core';
-import * as Hooks from '../hooks';
 import { AppLogo, Cell, ReloadButton, ScoreBoardItem, TurnIndicator } from '../components';
+import { useBehaviorSubjectState } from '../hooks';
 
 interface Props {
 	content: AppGameContent;
@@ -12,7 +13,7 @@ interface Props {
 }
 
 export const GameScreen: React.FC<Props> = ({ content, useLandscapeDesign, openRestartModal }) => {
-	const [appState] = Hooks.useBehaviorSubjectState<AppState>(AppStore.state$);
+	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
 	const { scores, playerSymbol, cpuSymbol, currentPlayer, solutionCells } = appState;
 
 	return (
