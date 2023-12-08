@@ -12,6 +12,15 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
+            # - name: Set up Node.js
+            #   uses: actions/setup-node@v4
+            #   with:
+            #       node-version: 18.17.0
+
+            - name: Set Git user information
+              run: |
+                  git config --global user.email ${{ secrets.GIT_EMAIL }}
+                  git config --global user.name ${{ secrets.GIT_USERNAME }}
 
             - name: Bumping version
               uses: jpb06/bump-package@latest
@@ -19,16 +28,6 @@ jobs:
                   major-keywords: BREAKING CHANGE
                   minor-keywords: build,feat,fix
                   patch-keywords: chore,ci,docs,style,refactor, perf,test
-
-            # - name: Set up Node.js
-            #   uses: actions/setup-node@v4
-            #   with:
-            #       node-version: 18.17.0
-
-            # - name: Set Git user information
-            #   run: |
-            #       git config --global user.email ${{ secrets.GIT_EMAIL }}
-            #       git config --global user.name ${{ secrets.GIT_USERNAME }}
 
             # - name: Install Yarn
             #   run: npm install -g yarn
