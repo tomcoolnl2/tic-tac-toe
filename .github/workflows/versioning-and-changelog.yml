@@ -2,7 +2,7 @@ name: Version Bump and Changelog Update
 
 on:
     pull_request:
-        types: [opened, reopened]
+        types: [opened]
 
 jobs:
     bump-version:
@@ -28,18 +28,22 @@ jobs:
                   git config --global user.email ${{ secrets.GIT_EMAIL }}
                   git config --global user.name ${{ secrets.GIT_USERNAME }}
 
-            - name: Checkout PR branch
+            - name: Extract branch name from GITHUB_REF and set upstream branch
               run: |
-                  git checkout $GITHUB_HEAD_REF
+                  pr_ref=${GITHUB_REF#refs/pull/}
+                  pr_number=${pr_ref%/merge}
+                  git fetch origin "refs/pull/$pr_number/head:pr-$pr_number"
+                  git checkout "pr-$pr_number"
+                  git branch --set-upstream-to=origin/$GITHUB_HEAD_REF "pr-$pr_number"
 
-            - name: Get next version
+            - name: Push changes to the pull request branch
               run: |
                   next_version=$(npx conventional-recommended-bump -p angular)
                   echo $next_version
                   yarn version --new-version=$next_version --no-git-tag-version
                   if [ -n "$(git status --porcelain)" ]; then
                     git commit -am "chore: bump version to $next_version"
-                    git push origin $GITHUB_HEAD_REF
+                    git push origin HEAD:pr-$pr_number
                   else
                     echo "No changes to commit."
                   fi
