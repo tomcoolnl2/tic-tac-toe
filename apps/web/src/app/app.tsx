@@ -7,7 +7,7 @@ import * as TTTUI from '@tic-tac-toe/ui';
 
 export const App: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const theme = React.useMemo(() => (window as any)?.electron?.theme ?? 'web', []);
+	const theme = React.useMemo(() => (window as any)?.electron?.theme ?? 'desktop', []);
 
 	const [userName, setUserName] = React.useState<string>('');
 	const [authError, setAuthError] = React.useState<Error | null>(null);
