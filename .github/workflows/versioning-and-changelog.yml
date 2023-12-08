@@ -13,34 +13,37 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
 
-            - name: Set up Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 18.17.0
+            - name: Bumping version
+              uses: jpb06/bump-package@latest
 
-            - name: Set Git user information
-              run: |
-                  git config --global user.email ${{ secrets.GIT_EMAIL }}
-                  git config --global user.name ${{ secrets.GIT_USERNAME }}
+            # - name: Set up Node.js
+            #   uses: actions/setup-node@v4
+            #   with:
+            #       node-version: 18.17.0
 
-            - name: Install Yarn
-              run: npm install -g yarn
+            # - name: Set Git user information
+            #   run: |
+            #       git config --global user.email ${{ secrets.GIT_EMAIL }}
+            #       git config --global user.name ${{ secrets.GIT_USERNAME }}
 
-            - name: Install dependencies
-              run: yarn install
+            # - name: Install Yarn
+            #   run: npm install -g yarn
 
-            - name: Get next version
-              run: |
-                  next_version=$(yarn run version:next)
-                  echo "Next version: $next_version"
-                  yarn run version:bump
+            # - name: Install dependencies
+            #   run: yarn install
 
-            - name: Update Changelog and version
-              run: |
-                  yarn run version:update-changelog
+            # - name: Get next version
+            #   run: |
+            #       next_version=$(yarn run version:next)
+            #       echo "Next version: $next_version"
+            #       yarn run version:bump
 
-            - name: Display updated version and changelog
-              run: |
-                  new_version=$(node -pe "require('./package.json').version")
-                  echo "Updated version: $new_version"
-                  cat CHANGELOG.md
+            # - name: Update Changelog and version
+            #   run: |
+            #       yarn run version:update-changelog
+
+            # - name: Display updated version and changelog
+            #   run: |
+            #       new_version=$(node -pe "require('./package.json').version")
+            #       echo "Updated version: $new_version"
+            #       cat CHANGELOG.md
