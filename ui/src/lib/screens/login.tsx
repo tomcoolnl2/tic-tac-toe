@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppScreenContent } from '@tic-tac-toe/model';
+import { AppScreenContent } from '../context/content/model';
 import { Divider } from '../core';
 import { Button, Input, LanguageSelector } from '../components';
 import { BaseScreen } from './base/base';
@@ -44,7 +44,8 @@ export const LoginScreen: React.FC<Props> = ({
 	return (
 		<BaseScreen>
 			<LanguageSelector />
-			<Divider invisible margin="vertical-l" />
+			<Divider invisible margin="bottom" />
+			<Divider invisible margin="vertical" className="landscape-hidden" />
 			<span>{content.title}</span>
 			<Divider invisible margin="vertical" />
 			<form className="login-form" noValidate autoComplete="off">

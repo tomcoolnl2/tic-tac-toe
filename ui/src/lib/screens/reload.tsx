@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppScreenContent } from '@tic-tac-toe/model';
+import type { AppScreenContent } from '../context/content/model';
 import { Divider, Grid } from '../core';
 import { Button } from '../components';
 

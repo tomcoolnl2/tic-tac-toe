@@ -40,6 +40,7 @@ jobs:
                   next_version=$(npx conventional-recommended-bump -p angular)
                   echo $next_version
                   yarn version --new-version=$next_version --no-git-tag-version
+                  git status
                   git add .
                   if [ -n "$(git status --porcelain)" ]; then
                     git commit -m "chore: bump version to $next_version"

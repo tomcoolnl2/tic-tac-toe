@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import * as Rx from 'rxjs';
 import { AppStore } from '@tic-tac-toe/core';
@@ -116,7 +117,7 @@ export const App: React.FC = () => {
 	return (
 		<TTTUI.Theme theme={theme}>
 			<div className={`screen ${appState.appScreen}`}>
-				<div className={`screen-inner ${useLandscapeDesign ? 'landscape' : ''}`}>
+				<div className={classNames('screen-inner', { landscape: useLandscapeDesign })}>
 					<TTTUI.Error.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
 						<div className="screen-front">
 							{appState.appScreen === TTTModel.AppScreen.LOADING && (

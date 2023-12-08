@@ -1,5 +1,6 @@
 import React from 'react';
-import { AppScreenContent, GameState, PlayerSymbol } from '@tic-tac-toe/model';
+import { type PlayerSymbol, GameState } from '@tic-tac-toe/model';
+import type { AppScreenContent } from '../context/content/model';
 import { Divider, Grid } from '../core';
 import { GameOver, Button } from '../components';
 
