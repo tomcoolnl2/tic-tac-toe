@@ -1,6 +1,6 @@
 {
 	"name": "@tic-tac-toe/source",
-	"version": "0.2.2",
+	"version": "0.2.0",
 	"license": "MIT",
 	"private": true,
 	"repository": {
@@ -29,6 +29,7 @@
 		"test:api-auth:coverage": "yarn test:api-auth && npx serve ./coverage/api-auth -p 2120",
 		"e2e:web": "nx e2e web-e2e",
 		"storybook": "nx run ui:storybook",
+		"version:next": "conventional-recommended-bump -p angular",
 		"version:bump": "yarn version --no-git-tag-version",
 		"version:update-changelog": "standard-version --release-as \"$npm_package_version\" --no-verify --commit-all",
 		"format": "prettier --write 'apps/**/*.{ts,tsx,html,css,scss,json,md}'",

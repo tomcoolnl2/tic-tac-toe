@@ -31,10 +31,14 @@ jobs:
 
             - name: Get next version
               run: |
-                  next_version=$(next_version=$(npx conventional-recommended-bump -p angular))
-                  echo "$next_version"
+                  next_version=$(npx conventional-recommended-bump -p angular)
+                  echo $next_version
                   yarn version --new-version=$next_version --no-git-tag-version
-                  git commit -am "chore: bump version to $next_version"
+                  if [ -n "$(git status --porcelain)" ]; then
+                    git commit -am "chore: bump version to $next_version"
+                  else
+                    echo "No changes to commit."
+                  fi
 
             - name: Update Changelog and version
               run: |

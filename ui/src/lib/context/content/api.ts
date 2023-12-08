@@ -1,9 +1,11 @@
-import { AppContent, Locale } from '@tic-tac-toe/model';
+import { Locale } from '@tic-tac-toe/model';
 import {
 	VITE_CF_SPACE_ID,
 	VITE_CF_LOCALIZED_PROPERTIES_ID,
 	VITE_CF_CONTENT_DELIVERY_API_ACCESS_TOKEN,
 } from '@tic-tac-toe/constants';
+import { AppContent } from './model';
+import { ContentfulError } from './error';
 
 function generateQuery(locale: string): string {
 	return `
@@ -20,9 +22,7 @@ function generateQuery(locale: string): string {
 	`;
 }
 
-export const fetchContentfulData = async (
-	locale: Locale
-): Promise<AppContent> => {
+export const fetchContentfulData = async (locale: Locale): Promise<AppContent> => {
 	try {
 		const url = `https://graphql.contentful.com/content/v1/spaces/${VITE_CF_SPACE_ID}/`;
 		const response = await fetch(url, {
@@ -39,6 +39,6 @@ export const fetchContentfulData = async (
 		const json = await response.json();
 		return json.data.localizedProperties;
 	} catch (error) {
-		throw new Error(`Fetch error: Something went wrong`);
+		throw new ContentfulError(`Fetch error: Something went wrong`);
 	}
 };

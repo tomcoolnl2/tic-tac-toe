@@ -7,6 +7,7 @@ import type {
 	AppContent,
 } from './model';
 import { fetchContentfulData } from './api';
+import { ContentfulError } from './error';
 
 const initialContentContext: ContentState = {
 	appContent: null,
@@ -67,7 +68,7 @@ export const ContentProvider: React.FC<{ children: React.ReactNode }> = ({ child
 			} catch (error: unknown) {
 				dispatch({
 					type: 'FETCH_ERROR',
-					payload: new Error('Something went wrong'),
+					payload: new ContentfulError('Something went wrong'),
 				});
 			}
 		};
