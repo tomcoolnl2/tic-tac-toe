@@ -17,8 +17,8 @@ jobs:
               uses: jpb06/bump-package@latest
               with:
                   major-keywords: BREAKING CHANGE
-                  minor-keywords: feat,minor
-                  patch-keywords: fix,chore
+                  minor-keywords: build,feat,fix
+                  patch-keywords: chore,ci,docs,style,refactor, perf,test
 
             # - name: Set up Node.js
             #   uses: actions/setup-node@v4
