@@ -15,6 +15,10 @@ jobs:
 
             - name: Bumping version
               uses: jpb06/bump-package@latest
+              with:
+                  major-keywords: BREAKING CHANGE
+                  minor-keywords: feat,minor
+                  patch-keywords: fix,chore
 
             # - name: Set up Node.js
             #   uses: actions/setup-node@v4
