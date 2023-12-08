@@ -16,14 +16,14 @@ jobs:
             - name: Set up Node.js
               uses: actions/setup-node@v4
               with:
-                  node-version: '18.17.0'
+                  node-version: 18.17.0
 
             - name: Install dependencies
               run: yarn install
 
             - name: Get next version
               run: |
-                  next_version=$(yarn run get-next-version)
+                  next_version=$(yarn run version:next)
                   echo "Next version: $next_version"
                   yarn run version:bump
 
