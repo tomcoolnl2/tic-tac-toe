@@ -29,6 +29,9 @@
 		"test:api-auth:coverage": "yarn test:api-auth && npx serve ./coverage/api-auth -p 2120",
 		"e2e:web": "nx e2e web-e2e",
 		"storybook": "nx run ui:storybook",
+		"version:next": "conventional-recommended-bump -p angular",
+		"version:bump": "yarn version --no-git-tag-version",
+		"version:update-changelog": "standard-version --releaseCommitMessageFormat=chore(release): ${nextRelease.version} [skip ci]\n${nextRelease.notes}",
 		"format": "prettier --write 'apps/**/*.{ts,tsx,html,css,scss,json,md}'",
 		"postinstall": "electron-builder install-app-deps"
 	},
@@ -36,14 +39,15 @@
 		"@nestjs/common": "10.0.2",
 		"@nestjs/core": "10.0.2",
 		"@nestjs/platform-express": "10.0.2",
-		"@semantic-release/git": "^10.0.1",
 		"@swc/helpers": "0.5.2",
 		"axios": "1.0.0",
 		"classnames": "2.3.2",
+		"conventional-recommended-bump": "9.0.0",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
 		"reflect-metadata": "0.1.13",
 		"rxjs": "7.8.0",
+		"standard-version": "9.5.0",
 		"tslib": "2.3.0"
 	},
 	"devDependencies": {
@@ -107,7 +111,7 @@
 		"nx-electron": "16.1.0",
 		"prettier": "2.6.2",
 		"sass": "1.55.0",
-		"semantic-release": "^22.0.10",
+		"semantic-release": "22.0.10",
 		"ts-jest": "29.1.0",
 		"ts-node": "10.9.1",
 		"typescript": "5.1.3",
@@ -115,40 +119,5 @@
 		"vite-plugin-dts": "2.3.0",
 		"vitest": "0.32.0",
 		"webpack-node-externals": "3.0.0"
-	},
-	"release": {
-		"repositoryUrl": "https://github.com/tomcoolnl2/tic-tac-toe",
-		"branches": [
-			"main"
-		],
-		"plugins": [
-			"@semantic-release/commit-analyzer",
-			"@semantic-release/release-notes-generator",
-			[
-				"@semantic-release/changelog",
-				{
-					"changelogFile": "CHANGELOG.md"
-				}
-			],
-			[
-				"@semantic-release/git",
-				{
-					"assets": [
-						"CHANGELOG.md"
-					]
-				}
-			],
-			[
-				"@semantic-release/git",
-				{
-					"assets": [
-						"dist/**/*.{js,css}",
-						"docs",
-						"package.json"
-					],
-					"message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-				}
-			]
-		]
 	}
 }

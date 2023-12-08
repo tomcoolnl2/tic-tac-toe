@@ -1,9 +1,4 @@
-name: Semantic Release
-
-permissions:
-    contents: read
-    pages: write
-    id-token: write
+name: Version Bump and Changelog Update
 
 on:
     push:
@@ -11,24 +6,68 @@ on:
             - main
 
 jobs:
-    semantic-release:
+    bump-version:
         runs-on: ubuntu-latest
+
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
 
-            - name: Setup Node.js
+            - name: Set up Node.js
               uses: actions/setup-node@v4
               with:
-                  node-version: 18.17.0
-
-            - name: Install Yarn
-              run: npm install -g yarn
+                  node-version: '18.17.0'
 
             - name: Install dependencies
               run: yarn install
 
-            - name: Run semantic release
-              env:
-                  GITHUB_TOKEN: ${{ secrets.TIC_TAC_TOKEN }}
-              run: npx semantic-release
+            - name: Get next version
+              run: |
+                  next_version=$(yarn run get-next-version)
+                  echo "Next version: $next_version"
+                  yarn run version:bump
+
+            - name: Update Changelog and version
+              run: |
+                  yarn run version:update-changelog
+
+            - name: Display updated version and changelog
+              run: |
+                  new_version=$(node -pe "require('./package.json').version")
+                  echo "Updated version: $new_version"
+                  cat CHANGELOG.md
+
+# name: Semantic Release
+
+# permissions:
+#     contents: read
+#     pages: write
+#     id-token: write
+
+# on:
+#     push:
+#         branches:
+#             - main
+
+# jobs:
+#     semantic-release:
+#         runs-on: ubuntu-latest
+#         steps:
+#             - name: Checkout code
+#               uses: actions/checkout@v2
+
+#             - name: Setup Node.js
+#               uses: actions/setup-node@v4
+#               with:
+#                   node-version: 18.17.0
+
+#             - name: Install Yarn
+#               run: npm install -g yarn
+
+#             - name: Install dependencies
+#               run: yarn install
+
+#             - name: Run semantic release
+#               env:
+#                   GITHUB_TOKEN: ${{ secrets.TIC_TAC_TOKEN }}
+#               run: npx semantic-release
