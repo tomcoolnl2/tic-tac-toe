@@ -37,21 +37,17 @@ export interface DividerProps {
 	className?: string;
 }
 
-export const Divider: FC<DividerProps> = ({
-	variant,
-	orientation,
-	margin,
-	invisible,
-	className,
-}) => (
-	<hr
-		className={classNames(
-			'divider',
-			variant || 'full-width',
-			orientation || 'horizontal',
-			margin && `margin-${margin}`,
-			invisible && 'invisible',
-			className
-		)}
-	/>
+export const Divider: FC<DividerProps> = React.memo(
+	({ variant, orientation, margin, invisible, className }) => (
+		<hr
+			className={classNames(
+				'divider',
+				variant || 'full-width',
+				orientation || 'horizontal',
+				margin && `margin-${margin}`,
+				invisible && 'invisible',
+				className
+			)}
+		/>
+	)
 );

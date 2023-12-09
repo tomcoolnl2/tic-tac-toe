@@ -6,14 +6,10 @@ export interface Props {
 	children: React.ReactNode;
 }
 
-export const Modal: React.FC<Props> = ({ children }) => {
+export const Modal: React.FC<Props> = React.memo(({ children }) => {
 	return (
 		<FlexBox className="modal-backdrop" direction="row" alignItems="center">
-			<FlexBox
-				className="modal-background"
-				direction="column"
-				alignItems="center"
-			>
+			<FlexBox className="modal-background" direction="column" alignItems="center">
 				<FlexBox
 					className="modal-content"
 					direction="column"
@@ -25,4 +21,4 @@ export const Modal: React.FC<Props> = ({ children }) => {
 			</FlexBox>
 		</FlexBox>
 	);
-};
+});

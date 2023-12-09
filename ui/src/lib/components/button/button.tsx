@@ -13,23 +13,17 @@ export interface Props {
 	testId?: string;
 }
 
-export const Button: React.FC<Props> = ({
-	variant = 'primary',
-	onClick,
-	className,
-	children,
-	disabled,
-	loading,
-	testId,
-}) => {
-	return (
-		<button
-			className={classNames('button', `button-${variant}`, className)}
-			onClick={onClick}
-			disabled={disabled}
-			data-testid={testId}
-		>
-			{loading ? <Loader /> : children}
-		</button>
-	);
-};
+export const Button: React.FC<Props> = React.memo(
+	({ variant = 'primary', onClick, className, children, disabled, loading, testId }) => {
+		return (
+			<button
+				className={classNames('button', `button-${variant}`, className)}
+				onClick={onClick}
+				disabled={disabled}
+				data-testid={testId}
+			>
+				{loading ? <Loader /> : children}
+			</button>
+		);
+	}
+);

@@ -14,36 +14,33 @@ interface Props {
 	handleLogout: () => void;
 }
 
-export const SettingsScreen: React.FC<Props> = ({
-	content,
-	playerSymbol,
-	selectedDifficultySetting,
-	handleLogout,
-}) => {
-	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
-	const [userState] = useBehaviorSubjectState<User>(AppStore.user$);
-	const { handleStartGame } = useGameHandlers(appState, userState);
-	const { handleAvatarChange, handleDifficultyChange } = useSettingsHandlers(appState);
+export const SettingsScreen: React.FC<Props> = React.memo(
+	({ content, playerSymbol, selectedDifficultySetting, handleLogout }) => {
+		const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
+		const [userState] = useBehaviorSubjectState<User>(AppStore.user$);
+		const { handleStartGame } = useGameHandlers(appState, userState);
+		const { handleAvatarChange, handleDifficultyChange } = useSettingsHandlers(appState);
 
-	return (
-		<BaseScreen>
-			<Logout handleLogout={handleLogout} />
-			<LanguageSelector />
-			<Divider invisible margin="vertical-l" className="landscape-hidden" />
-			<span>{content.title}</span>
-			<SymbolChoice playerSymbol={playerSymbol} handleAvatarChange={handleAvatarChange} />
-			<sub>{content.subtitle}</sub>
-			<Divider invisible margin="bottom" />
-			<Divider invisible margin="vertical" className="landscape-hidden" />
-			<ChooseDifficulty
-				selectedDifficultySetting={selectedDifficultySetting}
-				handleDifficultyChange={handleDifficultyChange}
-			/>
-			<Divider invisible margin="vertical" />
-			<Divider invisible margin="bottom" className="landscape-hidden" />
-			<Button variant="secondary" onClick={handleStartGame}>
-				{content.cta1} <i className="icon-play-sign" />
-			</Button>
-		</BaseScreen>
-	);
-};
+		return (
+			<BaseScreen>
+				<Logout handleLogout={handleLogout} />
+				<LanguageSelector />
+				<Divider invisible margin="vertical-l" className="landscape-hidden" />
+				<span>{content.title}</span>
+				<SymbolChoice playerSymbol={playerSymbol} handleAvatarChange={handleAvatarChange} />
+				<sub>{content.subtitle}</sub>
+				<Divider invisible margin="bottom" />
+				<Divider invisible margin="vertical" className="landscape-hidden" />
+				<ChooseDifficulty
+					selectedDifficultySetting={selectedDifficultySetting}
+					handleDifficultyChange={handleDifficultyChange}
+				/>
+				<Divider invisible margin="vertical" />
+				<Divider invisible margin="bottom" className="landscape-hidden" />
+				<Button variant="secondary" onClick={handleStartGame}>
+					{content.cta1} <i className="icon-play-sign" />
+				</Button>
+			</BaseScreen>
+		);
+	}
+);
