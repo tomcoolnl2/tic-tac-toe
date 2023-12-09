@@ -9,7 +9,7 @@ export interface Props {
 	handleAvatarChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const SymbolChoice: React.FC<Props> = ({ playerSymbol, handleAvatarChange }) => {
+export const SymbolChoice: React.FC<Props> = React.memo(({ playerSymbol, handleAvatarChange }) => {
 	return (
 		<label htmlFor="choose-player" className="choose-player">
 			<input
@@ -37,4 +37,4 @@ export const SymbolChoice: React.FC<Props> = ({ playerSymbol, handleAvatarChange
 			</Grid>
 		</label>
 	);
-};
+});

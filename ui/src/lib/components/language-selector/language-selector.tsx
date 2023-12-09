@@ -4,7 +4,7 @@ import './language-selector.scss';
 import { useBehaviorSubjectState, useSettingsHandlers } from '../../hooks';
 import { AppStore } from '@tic-tac-toe/core';
 
-export const LanguageSelector: React.FC = () => {
+export const LanguageSelector: React.FC = React.memo(() => {
 	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
 	const { handleLanguageChange } = useSettingsHandlers(appState);
 	const { language } = appState;
@@ -31,4 +31,4 @@ export const LanguageSelector: React.FC = () => {
 			))}
 		</div>
 	);
-};
+});

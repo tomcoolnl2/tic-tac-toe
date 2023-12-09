@@ -13,20 +13,12 @@ export interface Props {
 	disabled: boolean;
 }
 
-export const Cell: React.FC<Props> = ({
-	type,
-	index,
-	solutionCells,
-	disabled,
-}) => {
+export const Cell: React.FC<Props> = React.memo(({ type, index, solutionCells, disabled }) => {
 	const cellRef = React.useRef(null);
 	const getIndex = getDataSetAttribute('index');
 
 	React.useEffect(() => {
-		const clickHandler = Rx.fromEvent<MouseEvent>(
-			cellRef.current!,
-			'click'
-		).pipe(
+		const clickHandler = Rx.fromEvent<MouseEvent>(cellRef.current!, 'click').pipe(
 			Rx.take(1),
 			Rx.map(getEventTargetElement),
 			Rx.map(getIndex),
@@ -41,9 +33,7 @@ export const Cell: React.FC<Props> = ({
 	}, [getIndex]);
 
 	const classNames = React.useMemo(() => {
-		return solutionCells?.includes(index)
-			? `invert invert-${['x', 'o'][type!]}`
-			: '';
+		return solutionCells?.includes(index) ? `invert invert-${['x', 'o'][type!]}` : '';
 	}, [type, index, solutionCells]);
 
 	return (
@@ -58,4 +48,4 @@ export const Cell: React.FC<Props> = ({
 			{type !== null && <Avatar size="xl" type={type} />}
 		</button>
 	);
-};
+});

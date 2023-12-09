@@ -1,3 +1,4 @@
+import React from 'react';
 import classNames from 'classnames';
 import { PlayerSymbol } from '@tic-tac-toe/model';
 import './avatar.scss';
@@ -9,7 +10,7 @@ export interface Props {
 	className?: string;
 }
 
-export const Avatar: React.FC<Props> = ({ type, size, variant, className }) => {
+export const Avatar: React.FC<Props> = React.memo(({ type, size, variant, className }) => {
 	const version = type === PlayerSymbol.X ? 'x' : 'o';
 
 	const variantClassName =
@@ -30,4 +31,4 @@ export const Avatar: React.FC<Props> = ({ type, size, variant, className }) => {
 			)}
 		/>
 	);
-};
+});

@@ -11,12 +11,7 @@ interface Props {
 	className: string;
 }
 
-export const GameOver: React.FC<Props> = ({
-	title,
-	subtitle,
-	avatar,
-	className,
-}) => {
+export const GameOver: React.FC<Props> = React.memo(({ title, subtitle, avatar, className }) => {
 	return (
 		<FlexBox className="game-over" direction="column" alignItems="center">
 			<sub>{subtitle}</sub>
@@ -25,4 +20,4 @@ export const GameOver: React.FC<Props> = ({
 			<h2 className={`text-player-${className}`}>{title}</h2>
 		</FlexBox>
 	);
-};
+});

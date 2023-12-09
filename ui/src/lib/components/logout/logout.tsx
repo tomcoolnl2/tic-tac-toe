@@ -5,10 +5,10 @@ export interface Props {
 	handleLogout: () => void;
 }
 
-export const Logout: React.FC<Props> = ({ handleLogout }) => {
+export const Logout: React.FC<Props> = React.memo(({ handleLogout }) => {
 	return (
 		<div className="logout" onClick={handleLogout}>
 			<i className="icon-reply" />
 		</div>
 	);
-};
+});
