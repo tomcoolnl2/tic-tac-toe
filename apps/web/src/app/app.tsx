@@ -1,12 +1,24 @@
 import classNames from 'classnames';
 import React from 'react';
 import * as Rx from 'rxjs';
+import { useAuthenticator } from '@aws-amplify/ui-react';
 import { AppStore } from '@tic-tac-toe/core';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
 import * as TTTModel from '@tic-tac-toe/model';
 import * as TTTUI from '@tic-tac-toe/ui';
 
 export const App: React.FC = () => {
+	const { user, signOut, authStatus, submitForm } = useAuthenticator((context) => [
+		context.user,
+		context.signOut,
+		context.authStatus,
+		context.submitForm,
+	]);
+
+	React.useEffect(() => {
+		console.log('authStatus, user, signOut, submitForm', authStatus, user, signOut, submitForm);
+	}, [user, signOut, authStatus, submitForm]);
+
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const theme = React.useMemo(() => (window as any)?.electron?.theme ?? 'web', []);
 
@@ -75,16 +87,18 @@ export const App: React.FC = () => {
 
 	const handleLogin = React.useCallback(
 		async (pwd: string) => {
-			const data = await login(pwd);
-			if (data instanceof TTTUI.Error.AuthError) {
-				setAuthError(data);
-			} else {
-				AppStore.nextUserState(data);
-				AppStore.nextState({
-					...appState,
-					appScreen: TTTModel.AppScreen.SETTINGS,
-				});
-			}
+			// const data = await login(pwd);
+			// if (data instanceof TTTUI.Error.AuthError) {
+			// 	setAuthError(data);
+			// } else {
+			// 	AppStore.nextUserState(data);
+			// 	AppStore.nextState({
+			// 		...appState,
+			// 		appScreen: TTTModel.AppScreen.SETTINGS,
+			// 	});
+			// }
+
+			submitForm({});
 		},
 		[appState, login]
 	);

@@ -11,6 +11,6 @@ export interface Props {
 	children: React.ReactNode;
 }
 
-export const Theme: React.FC<Props> = ({ theme = Themes.WEB, children }) => {
+export const Theme: React.FC<Props> = React.memo(({ theme = Themes.WEB, children }) => {
 	return <main className={theme}>{children}</main>;
-};
+});
