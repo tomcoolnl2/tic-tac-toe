@@ -2,12 +2,17 @@
 	"$schema": "./node_modules/nx/schemas/nx-schema.json",
 	"targetDefaults": {
 		"build": {
-			"cache": true,
-			"dependsOn": ["^build"],
-			"inputs": ["production", "^production"]
+			"cache": false,
+			"dependsOn": [
+				"^build"
+			],
+			"inputs": [
+				"production",
+				"^production"
+			]
 		},
 		"lint": {
-			"cache": true,
+			"cache": false,
 			"inputs": [
 				"default",
 				"{workspaceRoot}/.eslintrc.json",
@@ -16,15 +21,22 @@
 			]
 		},
 		"test": {
-			"cache": true,
-			"inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
+			"cache": false,
+			"inputs": [
+				"default",
+				"^production",
+				"{workspaceRoot}/jest.preset.js"
+			]
 		},
 		"e2e": {
-			"cache": true,
-			"inputs": ["default", "^production"]
+			"cache": false,
+			"inputs": [
+				"default",
+				"^production"
+			]
 		},
 		"build-storybook": {
-			"cache": true,
+			"cache": false,
 			"inputs": [
 				"default",
 				"^production",
@@ -34,7 +46,10 @@
 		}
 	},
 	"namedInputs": {
-		"default": ["{projectRoot}/**/*", "sharedGlobals"],
+		"default": [
+			"{projectRoot}/**/*",
+			"sharedGlobals"
+		],
 		"production": [
 			"default",
 			"!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -71,7 +86,9 @@
 	"tasksRunnerOptions": {
 		"default": {
 			"options": {
-				"cacheableOperations": ["build-storybook"]
+				"cacheableOperations": [
+					"build-storybook"
+				]
 			}
 		}
 	},
