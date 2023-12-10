@@ -1,0 +1,30 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-tictactoe-dev-122922-authRole",
+      "UnauthRoleArn": "arn:aws:iam::305046737427:role/amplify-tictactoe-dev-122922-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::305046737427:role/amplify-tictactoe-dev-122922-authRole",
+      "Region": "us-west-1",
+      "DeploymentBucketName": "amplify-tictactoe-dev-122922-deployment",
+      "UnauthRoleName": "amplify-tictactoe-dev-122922-unauthRole",
+      "StackName": "amplify-tictactoe-dev-122922",
+      "StackId": "arn:aws:cloudformation:us-west-1:305046737427:stack/amplify-tictactoe-dev-122922/352782f0-9686-11ee-b9f8-0670a5a2b6b1",
+      "AmplifyAppId": "d1f5yq03jperr5"
+    },
+    "categories": {
+      "auth": {
+        "tictactoe": {},
+        "userPoolGroups": {}
+      },
+      "function": {
+        "AdminQueries666504d0": {
+          "deploymentBucketName": "amplify-tictactoe-dev-122922-deployment",
+          "s3Key": "amplify-builds/AdminQueries666504d0-4f71445a4d4f5272696e-build.zip"
+        }
+      },
+      "api": {
+        "AdminQueries": {}
+      }
+    }
+  }
+}
