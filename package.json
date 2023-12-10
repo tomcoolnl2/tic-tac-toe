@@ -13,7 +13,7 @@
 		"start:web": "nx serve web",
 		"start:desktop": "yarn start:web & nx serve desktop",
 		"start:api-auth": "nx serve api-auth",
-		"build": "nx build web",
+		"build:web": "nx run web:build",
 		"build:desktop": "nx run desktop:build",
 		"test": "yarn test:web && yarn test:lib && yarn test:api",
 		"test:coverage": "yarn test:lib:coverage && yarn test:api-auth:coverage",

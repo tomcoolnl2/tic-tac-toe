@@ -5,10 +5,10 @@
   "javascript": {
     "framework": "react",
     "config": {
-      "SourceDir": "src",
+      "SourceDir": "apps/web/auth",
       "DistributionDir": "build",
-      "BuildCommand": "npm run-script build",
-      "StartCommand": "npm run-script start"
+      "BuildCommand": "yarn build:web",
+      "StartCommand": "yarn start:web"
     }
   },
   "providers": [
