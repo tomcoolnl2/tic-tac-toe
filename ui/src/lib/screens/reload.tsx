@@ -9,7 +9,7 @@ interface Props {
 	closeModalScreen: () => void;
 }
 
-export const ReloadModalScreen: React.FC<Props> = ({
+export const RestartModalScreen: React.FC<Props> = ({
 	content,
 	handleQuitGame,
 	closeModalScreen,

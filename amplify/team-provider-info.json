@@ -16,7 +16,8 @@
         "tictactoe": {}
       },
       "auth": {
-        "tictactoec15e0e56": {}
+        "tictactoec15e0e56": {},
+        "userPoolGroups": {}
       }
     }
   }

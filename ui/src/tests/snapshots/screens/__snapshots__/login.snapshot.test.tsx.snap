@@ -74,11 +74,10 @@ exports[`LoginScreen screen component snapshot test should match the snapshot 1`
         <input
           autocomplete="off"
           data-testid="username"
-          disabled=""
           id="username"
           name="username"
           type="text"
-          value="TestUser"
+          value=""
         />
       </div>
       <hr

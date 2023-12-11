@@ -39,7 +39,6 @@ export function useGameHandlers(appState: TTTModel.AppState, userState: TTTModel
 		const nextState = AppStore.getNextRoundGameState(appState);
 		const updatedState = validateFirstTurn(nextState);
 		AppStore.nextState({ ...nextState, ...updatedState });
-		console.log('handleNextRound', { ...nextState, ...updatedState });
 	}, [appState, validateFirstTurn]);
 
 	return {

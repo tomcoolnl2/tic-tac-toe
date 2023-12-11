@@ -1,4 +1,5 @@
 import React from 'react';
+import type { SignInInput } from 'aws-amplify/auth';
 import { AppScreenContent } from '../context/content/model';
 import { Divider } from '../core';
 import { Button, Input, LanguageSelector } from '../components';
@@ -10,7 +11,7 @@ interface Props {
 	userName: string;
 	authError: Error | null;
 	setAuthError: (error: Error | null) => void;
-	handleSubmit: (pwd: string) => void;
+	handleSubmit: ({ username, password }: SignInInput) => Promise<void>;
 }
 
 export const LoginScreen: React.FC<Props> = ({
@@ -39,7 +40,7 @@ export const LoginScreen: React.FC<Props> = ({
 				setAuthError(new Error(content.errors?.emptyPwd || ''));
 			} else {
 				await sleep(1000);
-				handleSubmit(pwd);
+				handleSubmit({ username: 'tomcoolnl', password: pwd });
 				setAuthError(null);
 			}
 			setIsAuthenticating(false);
@@ -55,14 +56,14 @@ export const LoginScreen: React.FC<Props> = ({
 			<span>{content.title}</span>
 			<Divider invisible margin="vertical" />
 			<form className="login-form" noValidate autoComplete="off">
-				<Input icon="user" id="username" disabled value={userName} testId="username" />
+				<Input icon="user" id="username" defaultValue={userName} testId="username" />
 				<Divider invisible margin="bottom" />
 				<Divider invisible margin="bottom" className="landscape-hidden" />
 				<Input
 					icon="lock"
 					type="password"
 					id="password"
-					value={pwd}
+					defaultValue={pwd}
 					onChange={(value) => handlePwdChange(value)}
 					testId="password"
 				/>

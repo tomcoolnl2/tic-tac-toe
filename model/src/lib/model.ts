@@ -32,7 +32,7 @@ export enum AppScreen {
 
 export enum AppModalScreen {
 	GAME_OVER = 'game-over',
-	RELOAD = 'reload',
+	RESTART = 'restart',
 }
 
 export enum PlayerSymbol {

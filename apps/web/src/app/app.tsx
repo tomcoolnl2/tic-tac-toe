@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import * as Rx from 'rxjs';
+import { type SignInInput, signIn, signOut } from 'aws-amplify/auth';
 import { AppStore } from '@tic-tac-toe/core';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
 import * as TTTModel from '@tic-tac-toe/model';
@@ -74,22 +75,37 @@ export const App: React.FC = () => {
 	}, [isContentLoading, userState, appState.language]);
 
 	const handleLogin = React.useCallback(
-		async (pwd: string) => {
-			const data = await login(pwd);
-			if (data instanceof TTTUI.Error.AuthError) {
-				setAuthError(data);
-			} else {
-				AppStore.nextUserState(data);
-				AppStore.nextState({
-					...appState,
-					appScreen: TTTModel.AppScreen.SETTINGS,
-				});
+		async ({ username, password }: SignInInput) => {
+			try {
+				const { isSignedIn, nextStep } = await signIn({ username, password });
+				console.log('isSignedIn, nextStep', isSignedIn, nextStep);
+			} catch (error) {
+				console.log('error signing in', error);
 			}
 		},
 		[appState, login]
 	);
 
+	// React.useEffect(() => {
+	// 	(async () => {
+	// 		try {
+	// 			const { username, userId, signInDetails } = await getCurrentUser();
+	// 			console.log(`The username: ${username}`);
+	// 			console.log(`The userId: ${userId}`);
+	// 			console.log(`The signInDetails: ${signInDetails}`);
+	// 		} catch (err) {
+	// 			console.log(err);
+	// 		}
+	// 	})();
+	// }, []);
+
 	const handleLogout = React.useCallback(async () => {
+		try {
+			await signOut();
+		} catch (error) {
+			console.log('error signing out: ', error);
+		}
+		// TODO
 		const data = await logout();
 		AppStore.nextUserState(data);
 		AppStore.nextState({
@@ -155,8 +171,8 @@ export const App: React.FC = () => {
 			</div>
 			{appContent && appState.appModalScreen !== null && (
 				<TTTUI.Modal>
-					{appState.appModalScreen === TTTModel.AppModalScreen.RELOAD && (
-						<TTTUI.ReloadModalScreen
+					{appState.appModalScreen === TTTModel.AppModalScreen.RESTART && (
+						<TTTUI.RestartModalScreen
 							content={appContent.restartModal}
 							handleQuitGame={handleQuitGame}
 							closeModalScreen={closeModalScreen}
