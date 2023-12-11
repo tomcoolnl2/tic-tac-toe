@@ -14,7 +14,7 @@
 		"start:desktop": "yarn start:web & nx serve desktop",
 		"build:web": "nx run web:build",
 		"build:desktop": "nx run desktop:build",
-		"test": "yarn test:web && yarn test:lib && yarn test:api",
+		"test": "yarn test:web && yarn test:lib",
 		"test:coverage": "yarn test:lib:coverage",
 		"test:web": "nx test web --collectCoverage --verbose",
 		"test:lib": "yarn test:core && yarn test:ui",

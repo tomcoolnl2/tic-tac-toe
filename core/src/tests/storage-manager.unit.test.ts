@@ -46,28 +46,11 @@ describe('StateStorage', () => {
 		expect(retrievedState).toEqual(appState);
 	});
 
-	it('should retrieve the user from storage', () => {
-		// Prepare
-		const user = { name: 'John', avatar: PlayerSymbol.X };
-		// Act
-		mockStorage.setItem('ttt:user', JSON.stringify(user));
-		// Assert
-		const retrievedUser = stateStorage.user;
-		expect(retrievedUser).toEqual(user);
-	});
-
 	it('should return null when state is not found', () => {
 		// Act
 		const retrievedState = stateStorage.state;
 		// Assert
 		expect(retrievedState).toBeNull();
-	});
-
-	it('should return null when user is not found', () => {
-		// Act
-		const retrievedUser = stateStorage.user;
-		// Assert
-		expect(retrievedUser).toBeNull();
 	});
 
 	it('should set the state in storage', () => {
@@ -76,16 +59,6 @@ describe('StateStorage', () => {
 		const storedState = mockStorage.getItem('ttt:state');
 		// Assert
 		expect(JSON.parse(storedState!)).toEqual(appState);
-	});
-
-	it('should set the user in storage', () => {
-		// Prepare
-		const user = { name: 'John', avatar: PlayerSymbol.X, loggedIn: true };
-		// Act
-		stateStorage.user = user;
-		const storedUser = mockStorage.getItem('ttt:user');
-		// Assert
-		expect(JSON.parse(storedUser!)).toEqual(user);
 	});
 
 	it('should clear the state from storage', () => {

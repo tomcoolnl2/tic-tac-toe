@@ -47,30 +47,12 @@ export class StateStorage {
 	}
 
 	/**
-	 * Retrieves user data from storage.
-	 * @returns User data.
-	 */
-	public get user(): TTTModel.User {
-		return this.fromStorage<TTTModel.User>('user');
-	}
-
-	/**
-	 * Stores user data in storage.
-	 * @param state - The user data to store.
-	 */
-	public set user(state: TTTModel.User) {
-		this.toStorage<TTTModel.User>('user', state);
-	}
-
-	/**
 	 * Retrieves data from storage based on a namespace.
 	 * @param ns - The namespace identifier.
 	 * @returns The data retrieved from storage.
 	 */
 	private fromStorage<T>(ns: string): T {
-		return JSON.parse(
-			this.storage.getItem(this.namespace(ns))! ?? null
-		) as T;
+		return JSON.parse(this.storage.getItem(this.namespace(ns))! ?? null) as T;
 	}
 
 	/**

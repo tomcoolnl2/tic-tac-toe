@@ -1,6 +1,5 @@
 import {
 	AppState,
-	User,
 	AppScreen,
 	IntelligenceLevel,
 	PlayerSymbol,
@@ -11,7 +10,6 @@ import { AppStore } from '../lib/store-manager';
 
 let store: typeof AppStore;
 let appState: AppState;
-let userState: User;
 
 beforeEach(() => {
 	appState = {
@@ -29,12 +27,6 @@ beforeEach(() => {
 		scores: [0, 0, 0],
 	};
 
-	userState = {
-		name: null,
-		avatar: null,
-		loggedIn: false,
-	};
-
 	store = AppStore;
 });
 
@@ -42,7 +34,6 @@ describe('StateStorage', () => {
 	test('Store initializes with the correct initial state and user state', () => {
 		// Assert
 		expect(store.state$.getValue()).toEqual(appState);
-		expect(store.user$.getValue()).toEqual(userState);
 	});
 
 	test('State updates correctly and updates storage', async () => {
