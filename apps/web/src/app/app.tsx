@@ -35,7 +35,6 @@ export const App: React.FC = () => {
 				console.log(`currentUser: `, currentUser);
 				setIsUserSignedIn(true);
 			} catch (err) {
-				console.error(err);
 				setIsUserSignedIn(false);
 			}
 		})();

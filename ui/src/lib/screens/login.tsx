@@ -37,6 +37,7 @@ export const LoginScreen: React.FC<Props> = ({
 			if (password.length === 0) {
 				setAuthError(new Error(content.errors?.emptyPwd));
 			} else {
+				await sleep(750);
 				handleSubmit(userName, password);
 				setAuthError(null);
 			}
