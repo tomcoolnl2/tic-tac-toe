@@ -40,12 +40,14 @@ jobs:
             - name: Run Jest tests
               run: yarn test
 
-            - name: Run Cypress tests
+            - name: Create amplifyconfiguration.json if not exist
               run: |
                   mkdir -p apps/web/src/auth
                   touch apps/web/src/auth/amplifyconfiguration.json
                   echo '{}' > apps/web/src/auth/amplifyconfiguration.json
-                  yarn e2e:web
+
+            - name: Run Cypress tests
+              run: yarn e2e:web
 
             - name: Save test results
               uses: actions/upload-artifact@v2
