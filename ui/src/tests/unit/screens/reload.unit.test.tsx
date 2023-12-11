@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent } from '@testing-library/react';
-import { ReloadModalScreen } from '../../../lib/screens';
+import { RestartModalScreen } from '../../../lib/screens';
 
-describe('ReloadModalScreen component', () => {
+describe('RestartModalScreen component', () => {
 	const content = {
 		cta1: 'No, Cancel',
 		cta2: 'Yes, Restart',
@@ -13,7 +13,7 @@ describe('ReloadModalScreen component', () => {
 		const closeModalScreen = jest.fn();
 
 		const { getByText } = render(
-			<ReloadModalScreen
+			<RestartModalScreen
 				content={content}
 				handleQuitGame={handleQuitGame}
 				closeModalScreen={closeModalScreen}
@@ -30,7 +30,7 @@ describe('ReloadModalScreen component', () => {
 		const closeModalScreen = jest.fn();
 
 		const { getByText } = render(
-			<ReloadModalScreen
+			<RestartModalScreen
 				content={content}
 				handleQuitGame={handleQuitGame}
 				closeModalScreen={closeModalScreen}
@@ -49,7 +49,7 @@ describe('ReloadModalScreen component', () => {
 		const closeModalScreen = jest.fn();
 
 		const { getByText } = render(
-			<ReloadModalScreen
+			<RestartModalScreen
 				content={content}
 				handleQuitGame={handleQuitGame}
 				closeModalScreen={closeModalScreen}

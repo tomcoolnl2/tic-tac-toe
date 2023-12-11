@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppStore } from '@tic-tac-toe/core';
-import { type AppState, type User, IntelligenceLevel, PlayerSymbol } from '@tic-tac-toe/model';
+import { type AppState, IntelligenceLevel, PlayerSymbol } from '@tic-tac-toe/model';
 import type { AppScreenContent } from '../context/content/model';
 import { BaseScreen } from './base/base';
 import { Button, ChooseDifficulty, LanguageSelector, Logout, SymbolChoice } from '../components';
@@ -17,8 +17,8 @@ interface Props {
 export const SettingsScreen: React.FC<Props> = React.memo(
 	({ content, playerSymbol, selectedDifficultySetting, handleLogout }) => {
 		const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
-		const [userState] = useBehaviorSubjectState<User>(AppStore.user$);
-		const { handleStartGame } = useGameHandlers(appState, userState);
+
+		const { handleStartGame } = useGameHandlers(appState);
 		const { handleAvatarChange, handleDifficultyChange } = useSettingsHandlers(appState);
 
 		return (

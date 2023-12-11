@@ -6,7 +6,7 @@ export function useUIHandlers(appState: TTTModel.AppState) {
 	const openRestartModal = React.useCallback(() => {
 		AppStore.nextState({
 			...appState,
-			appModalScreen: TTTModel.AppModalScreen.RELOAD,
+			appModalScreen: TTTModel.AppModalScreen.RESTART,
 		});
 	}, [appState]);
 

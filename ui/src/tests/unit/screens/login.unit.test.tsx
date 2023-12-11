@@ -35,10 +35,9 @@ describe('LoginScreen component', () => {
 			);
 			getByTestId = renderedGetByTestId;
 		});
-		const usernameInput = getByTestId!('username');
+
 		const passwordInput = getByTestId!('password');
 
-		expect(usernameInput).toBeDisabled();
 		expect(passwordInput).toHaveValue('');
 	});
 

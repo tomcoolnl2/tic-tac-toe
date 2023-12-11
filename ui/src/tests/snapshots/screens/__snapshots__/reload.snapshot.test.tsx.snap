@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ReloadModalScreen screen component snapshot test should match the snapshot 1`] = `
+exports[`RestartModalScreen screen component snapshot test should match the snapshot 1`] = `
 <DocumentFragment>
   <h1>
     Restart game?

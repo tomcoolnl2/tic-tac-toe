@@ -11,7 +11,6 @@
 // 		getGreeting().contains(/Welcome/);
 // 	});
 // });
-
 describe('Initial Loading Screen', () => {
 	it('Loads the initial screen and transitions to the main app', () => {
 		cy.visit('/');

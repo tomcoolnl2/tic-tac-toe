@@ -2,7 +2,7 @@ import React from 'react';
 import * as TTTModel from '@tic-tac-toe/model';
 import { AppStore } from '@tic-tac-toe/core';
 
-export function useGameHandlers(appState: TTTModel.AppState, userState: TTTModel.User) {
+export function useGameHandlers(appState: TTTModel.AppState) {
 	const validateFirstTurn = React.useCallback((appState: TTTModel.AppState) => {
 		let nextState = {};
 		if (appState.playerSymbol === TTTModel.PlayerSymbol.O) {
@@ -25,21 +25,17 @@ export function useGameHandlers(appState: TTTModel.AppState, userState: TTTModel
 	}, [appState, validateFirstTurn]);
 
 	const handleQuitGame = React.useCallback(() => {
-		const appScreen = userState.loggedIn
-			? TTTModel.AppScreen.SETTINGS
-			: TTTModel.AppScreen.LOGIN;
 		AppStore.nextState({
 			...AppStore.initialState,
 			language: appState.language,
-			appScreen,
+			appScreen: TTTModel.AppScreen.SETTINGS,
 		});
-	}, [appState.language, userState]);
+	}, [appState.language]);
 
 	const handleNextRound = React.useCallback(() => {
 		const nextState = AppStore.getNextRoundGameState(appState);
 		const updatedState = validateFirstTurn(nextState);
 		AppStore.nextState({ ...nextState, ...updatedState });
-		console.log('handleNextRound', { ...nextState, ...updatedState });
 	}, [appState, validateFirstTurn]);
 
 	return {

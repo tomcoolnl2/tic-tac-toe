@@ -12,10 +12,8 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
 	<StrictMode>
-		<TTTUI.Context.AuthProvider>
-			<TTTUI.Context.ContentProvider>
-				<App />
-			</TTTUI.Context.ContentProvider>
-		</TTTUI.Context.AuthProvider>
+		<TTTUI.Context.ContentProvider>
+			<App />
+		</TTTUI.Context.ContentProvider>
 	</StrictMode>
 );
