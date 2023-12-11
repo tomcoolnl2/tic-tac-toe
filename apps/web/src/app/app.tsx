@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import * as Rx from 'rxjs';
-import { type SignInInput, signIn, signOut } from 'aws-amplify/auth';
+import { signIn, signOut, getCurrentUser } from 'aws-amplify/auth';
 import { AppStore } from '@tic-tac-toe/core';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
 import * as TTTModel from '@tic-tac-toe/model';
@@ -11,29 +11,35 @@ export const App: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const theme = React.useMemo(() => (window as any)?.electron?.theme ?? 'web', []);
 
-	const [userName, setUserName] = React.useState<string>('');
+	const [isUserSignedIn, setIsUserSignedIn] = React.useState<boolean>(false);
 	const [authError, setAuthError] = React.useState<Error | null>(null);
 
-	const { useAuthContext, useContentContext } = TTTUI.Context;
+	const { useContentContext } = TTTUI.Context;
 	const { useBehaviorSubjectState, useScreenOrientation, useGameHandlers, useUIHandlers } =
 		TTTUI.Hooks;
 
-	const [appState] = useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
-	const [userState] = useBehaviorSubjectState<TTTModel.User>(AppStore.user$);
-
-	const orientation = useScreenOrientation();
-	const { fetchUserName, login, logout } = useAuthContext();
 	const { appContent, isContentLoading, setLanguage } = useContentContext();
-	const { handleQuitGame, handleNextRound } = useGameHandlers(appState, userState);
+	const [appState] = useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
+	const { handleQuitGame, handleNextRound } = useGameHandlers(appState);
 	const { openRestartModal, closeModalScreen, validateCloseModal } = useUIHandlers(appState);
 
+	const orientation = useScreenOrientation();
+	const useLandscapeDesign = React.useMemo(() => {
+		return orientation?.startsWith('landscape') && 'ontouchstart' in window;
+	}, [orientation]);
+
 	React.useEffect(() => {
-		fetchUserName().then((name) => {
-			name instanceof TTTUI.Error.AuthError
-				? setAuthError(name)
-				: setUserName(name as string);
-		});
-	}, [fetchUserName]);
+		(async () => {
+			try {
+				const currentUser = await getCurrentUser();
+				console.log(`currentUser: `, currentUser);
+				setIsUserSignedIn(true);
+			} catch (err) {
+				console.error(err);
+				setIsUserSignedIn(false);
+			}
+		})();
+	}, []);
 
 	React.useEffect(() => {
 		if (isDevEnvironment()) {
@@ -49,74 +55,52 @@ export const App: React.FC = () => {
 
 	React.useEffect(() => {
 		if (isDevEnvironment()) {
-			console.info('userState', userState);
 			console.info('appState', appState);
 		}
-	}, [appState, userState, setLanguage]);
+	}, [appState, setLanguage]);
 
-	// First we check if content is loaded,
-	// Then we check if a user is not logged in
 	React.useEffect(() => {
 		let appScreen: TTTModel.AppScreen;
 		if (isContentLoading) {
 			appScreen = TTTModel.AppScreen.LOADING;
-		} else if (!userState.loggedIn) {
+		} else if (!isUserSignedIn) {
 			appScreen = TTTModel.AppScreen.LOGIN;
 		} else {
 			appScreen = TTTModel.AppScreen.SETTINGS;
 		}
-
 		AppStore.nextState({
 			...AppStore.initialState,
 			appScreen,
 			language: appState.language,
 			gameState: TTTModel.GameState.PREPLAY,
 		});
-	}, [isContentLoading, userState, appState.language]);
+	}, [isContentLoading, isUserSignedIn, appState.language]);
 
-	const handleLogin = React.useCallback(
-		async ({ username, password }: SignInInput) => {
-			try {
-				const { isSignedIn, nextStep } = await signIn({ username, password });
-				console.log('isSignedIn, nextStep', isSignedIn, nextStep);
-			} catch (error) {
-				console.log('error signing in', error);
+	const handleSignIn = React.useCallback(async (username: string, password: string) => {
+		try {
+			const { isSignedIn } = await signIn({ username, password });
+			if (isSignedIn) {
+				setIsUserSignedIn(isSignedIn);
+			} else {
+				throw new Error('Error signing in');
 			}
-		},
-		[appState, login]
-	);
+		} catch (error: unknown) {
+			const authError = error instanceof Error ? error : new Error('');
+			setAuthError(authError);
+			setIsUserSignedIn(false);
+		}
+	}, []);
 
-	// React.useEffect(() => {
-	// 	(async () => {
-	// 		try {
-	// 			const { username, userId, signInDetails } = await getCurrentUser();
-	// 			console.log(`The username: ${username}`);
-	// 			console.log(`The userId: ${userId}`);
-	// 			console.log(`The signInDetails: ${signInDetails}`);
-	// 		} catch (err) {
-	// 			console.log(err);
-	// 		}
-	// 	})();
-	// }, []);
-
-	const handleLogout = React.useCallback(async () => {
+	const handleSignOut = React.useCallback(async () => {
 		try {
 			await signOut();
 		} catch (error) {
-			console.log('error signing out: ', error);
+			const authError = error instanceof Error ? error : new Error('Error signing out');
+			setAuthError(authError);
+			console.log('Error signing out: ', error);
 		}
-		// TODO
-		const data = await logout();
-		AppStore.nextUserState(data);
-		AppStore.nextState({
-			...appState,
-			appScreen: TTTModel.AppScreen.SETTINGS,
-		});
-	}, [appState, logout]);
-
-	const useLandscapeDesign = React.useMemo(() => {
-		return orientation?.startsWith('landscape') && 'ontouchstart' in window;
-	}, [orientation]);
+		setIsUserSignedIn(false);
+	}, []);
 
 	React.useEffect(() => {
 		const keyDownHandler = Rx.fromEvent<KeyboardEvent>(document, 'keydown').pipe(
@@ -142,9 +126,8 @@ export const App: React.FC = () => {
 							{appContent && appState.appScreen === TTTModel.AppScreen.LOGIN && (
 								<TTTUI.LoginScreen
 									content={appContent.loginScreen}
-									userName={userName}
 									authError={authError}
-									handleSubmit={handleLogin}
+									handleSubmit={handleSignIn}
 									setAuthError={setAuthError}
 								/>
 							)}
@@ -153,7 +136,7 @@ export const App: React.FC = () => {
 									content={appContent.settingsScreen}
 									playerSymbol={appState.playerSymbol}
 									selectedDifficultySetting={appState.intelligenceLevel}
-									handleLogout={handleLogout}
+									handleLogout={handleSignOut}
 								/>
 							)}
 						</div>

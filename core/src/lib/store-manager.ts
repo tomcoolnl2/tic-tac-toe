@@ -20,11 +20,6 @@ class Store {
 	 */
 	public state$: Rx.BehaviorSubject<TTTModel.AppState>;
 
-	/**
-	 * Represents the user-specific state.
-	 */
-	public user$: Rx.BehaviorSubject<TTTModel.User>;
-
 	private constructor() {
 		this.aiEngine = new AIEngine();
 		this.gameEngine = new GameEngine();
@@ -32,8 +27,6 @@ class Store {
 		// Initialize state and user BehaviorSubjects with default or stored values
 		const state = this.storage.state ?? this.initialState;
 		this.state$ = new Rx.BehaviorSubject(state);
-		const userState = this.storage.user ?? this.initialUserState;
-		this.user$ = new Rx.BehaviorSubject(userState);
 	}
 
 	/**
@@ -44,17 +37,6 @@ class Store {
 			Store._instance = new Store();
 		}
 		return Store._instance;
-	}
-
-	/**
-	 * Gets the initial user state.
-	 */
-	private get initialUserState(): TTTModel.User {
-		return {
-			name: null,
-			avatar: null,
-			loggedIn: false,
-		};
 	}
 
 	/**
@@ -103,15 +85,6 @@ class Store {
 	public nextState(newState: TTTModel.AppState): void {
 		this.state$.next(newState);
 		this.storage!.state = newState;
-	}
-
-	/**
-	 * Updates the application user state and stores it.
-	 * @param newState - The new application user state.
-	 */
-	public nextUserState(newState: TTTModel.User): void {
-		this.user$.next(newState);
-		this.storage!.user = newState;
 	}
 
 	/**

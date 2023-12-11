@@ -1,9 +1,3 @@
-export interface User {
-	name: string | null;
-	avatar: PlayerSymbol | null;
-	loggedIn: boolean | null;
-}
-
 export interface AppState {
 	language: Locale;
 	appScreen: AppScreen;

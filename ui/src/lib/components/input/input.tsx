@@ -9,7 +9,7 @@ export interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input: React.FC<Props> = React.memo(
-	({ type = 'text', icon, id, name, disabled, value, onChange, testId }) => {
+	({ type = 'text', icon, id, name, onChange, testId, ...props }) => {
 		return (
 			<div className={classNames('form-input', { icon })}>
 				<i className={`icon-${icon}`} />
@@ -17,11 +17,10 @@ export const Input: React.FC<Props> = React.memo(
 					type={type}
 					id={id}
 					name={name ?? id}
-					disabled={disabled || false}
-					value={value}
 					autoComplete="off"
 					onChange={onChange}
 					data-testid={testId}
+					{...props}
 				/>
 			</div>
 		);

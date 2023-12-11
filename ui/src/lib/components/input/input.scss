@@ -1,36 +1,43 @@
-
 .form-input {
-    border: 2px solid var(--background-color-secondary);
-    border-radius: 4px;
-    position: relative;
+	border: 2px solid var(--background-color-secondary);
+	border-radius: 4px;
+	position: relative;
 
-    &.icon {
-        border-left-width: 36px;
+	&.icon {
+		border-left-width: 36px;
 
-        i {
-            position: absolute;
-            top: 50%;
-            left: -24px;
-            transform: translateY(-50%);
-        }
-    }
-
+		i {
+			position: absolute;
+			top: 50%;
+			left: -24px;
+			transform: translateY(-50%);
+		}
+	}
 }
 
-input {
-    outline: none;
-    background-color: var(--light-secondary);
-    color: white;
-    padding: 10px;
-    width: 100%;
-    opacity: 0.8;
-    border-radius: 4px;
+::placeholder {
+	color: var(--light-primary);
+	opacity: 1; /* Firefox */
+}
 
-    &:disabled {
-        cursor: not-allowed;
-    }
+::-ms-input-placeholder {
+	/* Edge 12-18 */
+	color: var(--light-primary);
+}
+input {
+	outline: none;
+	background-color: var(--light-secondary);
+	color: white;
+	padding: 10px;
+	width: 100%;
+	opacity: 0.8;
+	border-radius: 4px;
+
+	&:disabled {
+		cursor: not-allowed;
+	}
 }
 
 [data-lastpass-icon-root] {
-    display: none !important;
+	display: none !important;
 }
