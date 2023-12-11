@@ -40,8 +40,10 @@ jobs:
             - name: Run Jest tests
               run: yarn test
 
-            # - name: Run Cypress tests
-            #   run: yarn e2e:web
+            - name: Run Cypress tests
+              run: |
+                  echo '{}' > apps/web/src/auth/amplifyconfiguration.json
+                  yarn e2e:web
 
             - name: Save test results
               uses: actions/upload-artifact@v2
