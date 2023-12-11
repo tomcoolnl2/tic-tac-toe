@@ -42,7 +42,8 @@ jobs:
 
             - name: Run Cypress tests
               run: |
-                  echo '{}' > apps/web/src/auth/amplifyconfiguration.json
+                  touch ./apps/web/src/auth/amplifyconfiguration.json
+                  echo '{}' > ./apps/web/src/auth/amplifyconfiguration.json
                   yarn e2e:web
 
             - name: Save test results
