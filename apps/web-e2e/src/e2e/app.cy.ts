@@ -11,8 +11,18 @@
 // 		getGreeting().contains(/Welcome/);
 // 	});
 // });
-
 describe('Initial Loading Screen', () => {
+	before(() => {
+		// Create a stub for the import statement
+		cy.on('window:before:load', (win) => {
+			cy.stub(win, 'require').callsFake((moduleName) => {
+				if (moduleName === './auth/amplifyconfiguration.json') {
+					return {};
+				}
+			});
+		});
+	});
+
 	it('Loads the initial screen and transitions to the main app', () => {
 		cy.visit('/');
 		cy.get('.screen-front').should('exist');
