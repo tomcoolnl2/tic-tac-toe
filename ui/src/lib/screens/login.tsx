@@ -1,12 +1,12 @@
 import React from 'react';
-import { AppScreenContent } from '../context/content/model';
+import { AppLoginContent } from '../context/content/model';
 import { Divider } from '../core';
 import { Button, Input, LanguageSelector } from '../components';
 import { BaseScreen } from './base/base';
 import { sleep } from '../utils';
 
 interface Props {
-	content: AppScreenContent;
+	content: AppLoginContent;
 	authError: Error | null;
 	setAuthError: (error: Error | null) => void;
 	handleSubmit: (userName: string, password: string) => Promise<void>;
@@ -56,22 +56,22 @@ export const LoginScreen: React.FC<Props> = ({
 			<form className="login-form" noValidate autoComplete="off">
 				<Input
 					icon="user"
-					id="username"
+					id={content.username}
 					defaultValue={userName}
-					testId="username"
+					testId={content.username}
 					onChange={handleUserNameChange}
-					placeholder="username"
+					placeholder={content.username}
 				/>
 				<Divider invisible margin="bottom" />
 				<Divider invisible margin="bottom" className="landscape-hidden" />
 				<Input
 					icon="lock"
-					type="password"
-					id="password"
+					type={content.password}
+					id={content.password}
 					defaultValue={password}
 					onChange={handlePassWordChange}
-					testId="password"
-					placeholder="password"
+					testId={content.password}
+					placeholder={content.password}
 				/>
 				<Divider invisible margin="bottom" />
 				<Divider invisible margin="bottom" className="landscape-hidden" />

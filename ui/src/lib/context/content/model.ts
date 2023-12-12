@@ -36,6 +36,11 @@ export interface AppScreenContent {
 	};
 }
 
+export interface AppLoginContent extends AppScreenContent {
+	password: string;
+	username: string;
+}
+
 export interface AppGameContent {
 	intelligenceLevel: [string, string, string];
 	turnIndicator: [string, string];
