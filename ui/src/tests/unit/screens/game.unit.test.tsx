@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent } from '@testing-library/react';
+import { AppGameContent } from '../../../lib/context/content/model';
 import { GameScreen } from '../../../lib/screens';
-import { AppGameContent } from '@tic-tac-toe/model';
 
 describe('GameScreen component', () => {
 	const content: AppGameContent = {
@@ -24,12 +24,12 @@ describe('GameScreen component', () => {
 
 		expect(container.querySelector('.logo')).toBeInTheDocument();
 		expect(container.querySelector('.turn-indicator')).toBeInTheDocument();
-		expect(container.querySelector('.icon-reload')).toBeInTheDocument();
+		expect(container.querySelector('.icon-repeat')).toBeInTheDocument();
 		expect(container.querySelector('.board')).toBeInTheDocument();
 		expect(container.querySelector('.score-board-item')).toBeInTheDocument();
 	});
 
-	it('should call handleReloadDialog when reload button is clicked', () => {
+	it('should call handleReloadDialog when reload icon is clicked', () => {
 		const useLandscapeDesign = true;
 		const openRestartModal = jest.fn();
 
@@ -41,7 +41,7 @@ describe('GameScreen component', () => {
 			/>
 		);
 
-		const reloadButton = container.querySelector('.icon-reload');
+		const reloadButton = container.querySelector('.icon-repeat');
 		fireEvent.click(reloadButton!);
 
 		expect(openRestartModal).toHaveBeenCalledTimes(1);
