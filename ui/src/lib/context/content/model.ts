@@ -19,7 +19,7 @@ export type ContentStateWithLanguageSelector = ContentState & {
 
 export interface AppContent {
 	appTitle: string;
-	loginScreen: AppScreenContent;
+	loginScreen: AppLoginContent;
 	settingsScreen: AppScreenContent;
 	gameScreen: AppGameContent;
 	restartModal: AppScreenContent;
