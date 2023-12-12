@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import * as Rx from 'rxjs';
-import { signIn, signOut, getCurrentUser } from 'aws-amplify/auth';
+// import { signIn, signOut, getCurrentUser } from 'aws-amplify/auth';
 import { AppStore } from '@tic-tac-toe/core';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
 import * as TTTModel from '@tic-tac-toe/model';
@@ -29,15 +29,16 @@ export const App: React.FC = () => {
 	}, [orientation]);
 
 	React.useEffect(() => {
-		(async () => {
-			try {
-				const currentUser = await getCurrentUser();
-				console.log(`currentUser: `, currentUser);
-				setIsUserSignedIn(true);
-			} catch (err) {
-				setIsUserSignedIn(false);
-			}
-		})();
+		// (async () => {
+		// 	try {
+		// 		const currentUser = await getCurrentUser();
+		// 		console.log(`currentUser: `, currentUser);
+		// 		setIsUserSignedIn(true);
+		// 	} catch (err) {
+		// 		setIsUserSignedIn(false);
+		// 	}
+		// })();
+		setIsUserSignedIn(true);
 	}, []);
 
 	React.useEffect(() => {
@@ -76,28 +77,29 @@ export const App: React.FC = () => {
 	}, [isContentLoading, isUserSignedIn, appState.language]);
 
 	const handleSignIn = React.useCallback(async (username: string, password: string) => {
-		try {
-			const { isSignedIn } = await signIn({ username, password });
-			if (isSignedIn) {
-				setIsUserSignedIn(isSignedIn);
-			} else {
-				throw new Error('Error signing in');
-			}
-		} catch (error: unknown) {
-			const authError = error instanceof Error ? error : new Error('');
-			setAuthError(authError);
-			setIsUserSignedIn(false);
-		}
+		// try {
+		// 	const { isSignedIn } = await signIn({ username, password });
+		// 	if (isSignedIn) {
+		// 		setIsUserSignedIn(isSignedIn);
+		// 	} else {
+		// 		throw new Error('Error signing in');
+		// 	}
+		// } catch (error: unknown) {
+		// 	const authError = error instanceof Error ? error : new Error('');
+		// 	setAuthError(authError);
+		// 	setIsUserSignedIn(false);
+		// }
+		setIsUserSignedIn(true);
 	}, []);
 
 	const handleSignOut = React.useCallback(async () => {
-		try {
-			await signOut();
-		} catch (error) {
-			const authError = error instanceof Error ? error : new Error('Error signing out');
-			setAuthError(authError);
-			console.log('Error signing out: ', error);
-		}
+		// try {
+		// 	await signOut();
+		// } catch (error) {
+		// 	const authError = error instanceof Error ? error : new Error('Error signing out');
+		// 	setAuthError(authError);
+		// 	console.log('Error signing out: ', error);
+		// }
 		setIsUserSignedIn(false);
 	}, []);
 

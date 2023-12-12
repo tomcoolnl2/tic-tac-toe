@@ -3,10 +3,10 @@ import * as ReactDOM from 'react-dom/client';
 import * as TTTUI from '@tic-tac-toe/ui';
 import { App } from './app/app';
 
-import { Amplify } from 'aws-amplify';
-import amplifyConfig from './auth/amplifyconfiguration.json';
+// import { Amplify } from 'aws-amplify';
+// import amplifyConfig from './auth/amplifyconfiguration.json';
 
-Amplify.configure(amplifyConfig);
+// Amplify.configure(amplifyConfig);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
