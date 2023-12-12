@@ -41,9 +41,6 @@ exports[`GameScreen screen component snapshot test should match the snapshot 1`]
             class="game-controls"
           >
             <i
-              class="icon icon-pause"
-            />
-            <i
               class="icon icon-repeat"
             />
           </div>
