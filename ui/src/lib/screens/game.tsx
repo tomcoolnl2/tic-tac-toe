@@ -9,10 +9,16 @@ import { useBehaviorSubjectState } from '../hooks';
 interface Props {
 	content: AppGameContent;
 	useLandscapeDesign: boolean;
+	pauseGame: () => void;
 	openRestartModal: () => void;
 }
 
-export const GameScreen: React.FC<Props> = ({ content, useLandscapeDesign, openRestartModal }) => {
+export const GameScreen: React.FC<Props> = ({
+	content,
+	useLandscapeDesign,
+	pauseGame,
+	openRestartModal,
+}) => {
 	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
 	const { scores, playerSymbol, cpuSymbol, currentPlayer, solutionCells } = appState;
 
@@ -32,7 +38,7 @@ export const GameScreen: React.FC<Props> = ({ content, useLandscapeDesign, openR
 					</GridItem>
 					<GridItem placeSelf="flex-end">
 						<div className="game-controls">
-							{/* <Icon name="icon-pause" /> */}
+							<Icon name="icon-pause" handleOnClick={pauseGame} />
 							<Icon name="icon-repeat" handleOnClick={openRestartModal} />
 						</div>
 					</GridItem>

@@ -21,7 +21,7 @@ export const App: React.FC = () => {
 	const { appContent, isContentLoading, setLanguage } = useContentContext();
 	const [appState] = useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
 	const { handleQuitGame, handleNextRound } = useGameHandlers(appState);
-	const { openRestartModal, closeModalScreen, validateCloseModal } = useUIHandlers(appState);
+	const { openModalScreen, closeModalScreen, validateCloseModal } = useUIHandlers(appState);
 
 	const orientation = useScreenOrientation();
 	const useLandscapeDesign = React.useMemo(() => {
@@ -143,7 +143,12 @@ export const App: React.FC = () => {
 							{appContent && (
 								<TTTUI.GameScreen
 									content={appContent.gameScreen}
-									openRestartModal={openRestartModal}
+									pauseGame={() =>
+										openModalScreen(TTTModel.AppModalScreen.PAUSED)
+									}
+									openRestartModal={() =>
+										openModalScreen(TTTModel.AppModalScreen.RESTART)
+									}
 									useLandscapeDesign={useLandscapeDesign}
 								/>
 							)}
@@ -153,6 +158,12 @@ export const App: React.FC = () => {
 			</div>
 			{appContent && appState.appModalScreen !== null && (
 				<TTTUI.Modal>
+					{appState.appModalScreen === TTTModel.AppModalScreen.PAUSED && (
+						<TTTUI.ResumeModalScreen
+							content={appContent.modalResumeGame}
+							handleResumeGame={closeModalScreen}
+						/>
+					)}
 					{appState.appModalScreen === TTTModel.AppModalScreen.RESTART && (
 						<TTTUI.RestartModalScreen
 							content={appContent.restartModal}

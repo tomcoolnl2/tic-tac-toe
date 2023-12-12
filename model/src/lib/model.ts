@@ -25,6 +25,7 @@ export enum AppScreen {
 }
 
 export enum AppModalScreen {
+	PAUSED = 'paused',
 	GAME_OVER = 'game-over',
 	RESTART = 'restart',
 }
