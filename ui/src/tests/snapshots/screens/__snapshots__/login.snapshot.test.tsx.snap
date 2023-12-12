@@ -73,6 +73,9 @@ exports[`LoginScreen screen component snapshot test should match the snapshot 1`
         />
         <input
           autocomplete="off"
+          data-testid="username"
+          id="username"
+          name="username"
           type="text"
           value=""
         />
@@ -91,7 +94,10 @@ exports[`LoginScreen screen component snapshot test should match the snapshot 1`
         />
         <input
           autocomplete="off"
-          type="text"
+          data-testid="password"
+          id="password"
+          name="password"
+          type="password"
           value=""
         />
       </div>
