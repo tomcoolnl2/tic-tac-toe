@@ -18,7 +18,7 @@
     }
   },
   "auth": {
-    "tictactoec15e0e56": {
+    "tictactoe210b1a2d": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -52,11 +52,36 @@
             "IdentityPoolId"
           ],
           "category": "auth",
-          "resourceName": "tictactoec15e0e56"
+          "resourceName": "tictactoe210b1a2d"
         }
       ],
       "providerPlugin": "awscloudformation",
       "service": "Cognito-UserPool-Groups"
+    }
+  },
+  "hosting": {
+    "amplifyhosting": {
+      "providerPlugin": "awscloudformation",
+      "service": "amplifyhosting",
+      "type": "manual"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_hosting_amplifyhosting_appId": {
+      "usedBy": [
+        {
+          "category": "hosting",
+          "resourceName": "amplifyhosting"
+        }
+      ]
+    },
+    "AMPLIFY_hosting_amplifyhosting_type": {
+      "usedBy": [
+        {
+          "category": "hosting",
+          "resourceName": "amplifyhosting"
+        }
+      ]
     }
   }
 }

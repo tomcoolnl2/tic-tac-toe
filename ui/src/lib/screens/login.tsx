@@ -56,9 +56,9 @@ export const LoginScreen: React.FC<Props> = ({
 			<form className="login-form" noValidate autoComplete="off">
 				<Input
 					icon="user"
-					id={content.username}
+					id="username"
 					defaultValue={userName}
-					testId={content.username}
+					testId="username"
 					onChange={handleUserNameChange}
 					placeholder={content.username}
 				/>
@@ -66,11 +66,11 @@ export const LoginScreen: React.FC<Props> = ({
 				<Divider invisible margin="bottom" className="landscape-hidden" />
 				<Input
 					icon="lock"
-					type={content.password}
-					id={content.password}
+					type="password"
+					id="password"
 					defaultValue={password}
 					onChange={handlePassWordChange}
-					testId={content.password}
+					testId="password"
 					placeholder={content.password}
 				/>
 				<Divider invisible margin="bottom" />

@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "tictactoec15e0e56_identitypool_c15e0e56",
+    "identityPoolName": "tictactoe210b1a2d_identitypool_210b1a2d",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "tictacc15e0e56",
-    "userPoolName": "tictactoec15e0e56_userpool_c15e0e56",
+    "resourceNameTruncated": "tictac210b1a2d",
+    "userPoolName": "tictactoe210b1a2d_userpool_210b1a2d",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,13 +31,12 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "tictacc15e0e56_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "tictac210b1a2d_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "c15e0e56",
-    "resourceName": "tictactoec15e0e56",
+    "sharedId": "210b1a2d",
+    "resourceName": "tictactoe210b1a2d",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "default",
-    "triggers": {},
     "userPoolGroupList": [
       "tictactoeuserpoolgroup"
     ],
@@ -57,10 +56,6 @@
       ]
     },
     "breakCircularDependency": true,
-    "dependsOn": [],
-    "parentStack": {
-      "Ref": "AWS::StackId"
-    },
-    "permissions": []
+    "dependsOn": []
   }
 }

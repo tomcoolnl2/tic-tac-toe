@@ -5,7 +5,7 @@
   "javascript": {
     "framework": "react",
     "config": {
-      "SourceDir": "apps/web",
+      "SourceDir": "apps/web/src",
       "DistributionDir": "dist/apps/web",
       "BuildCommand": "yarn build:web",
       "StartCommand": "yarn start:web"
