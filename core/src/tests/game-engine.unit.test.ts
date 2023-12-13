@@ -133,7 +133,7 @@ describe('GameEngine - determineDraw', () => {
 			appState = gameEngine.update(appState, cellIndex);
 		});
 		// Assert
-		expect(appState.gameState).toBe(GameState.PAUSED);
+		expect(appState.gameState).toBe(GameState.STOPPED);
 		expect(appState.scores).toEqual([0, 0, 0]);
 	});
 
@@ -159,7 +159,7 @@ describe('GameEngine - determineDraw', () => {
 			appState = gameEngine.update(appState, cellIndex);
 		});
 		// Assert
-		expect(appState.gameState).toBe(GameState.PAUSED);
+		expect(appState.gameState).toBe(GameState.STOPPED);
 		expect(appState.scores).toEqual([0, 0, 0]);
 	});
 });
