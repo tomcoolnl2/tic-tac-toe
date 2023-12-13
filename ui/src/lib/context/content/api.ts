@@ -15,7 +15,7 @@ function generateQuery(locale: string): string {
 			  loginScreen
 			  settingsScreen
 			  gameScreen
-			  modalResumeGame
+			  resumeGameModal
 			  restartModal
 			  gameOverModal
 		  }
