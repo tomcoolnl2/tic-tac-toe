@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React from 'react';
-import * as Rx from 'rxjs';
 import { signIn, signOut, getCurrentUser } from 'aws-amplify/auth';
 import { AppStore } from '@tic-tac-toe/core';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
@@ -15,16 +14,15 @@ export const App: React.FC = () => {
 	const [authError, setAuthError] = React.useState<Error | null>(null);
 
 	const { useContentContext } = TTTUI.Context;
-	const { useBehaviorSubjectState, useScreenOrientation, useGameHandlers, useUIHandlers } =
-		TTTUI.Hooks;
+	const { useBehaviorSubjectState, useScreenOrientation, useInterfaceHandlers } = TTTUI.Hooks;
 
 	const { appContent, isContentLoading, setLanguage } = useContentContext();
 	const [appState] = useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
-	const { handleQuitGame, handleNextRound } = useGameHandlers(appState);
-	const { openModalScreen, closeModalScreen, validateCloseModal } = useUIHandlers(appState);
+	const { handlePauseGame, handleResumeGame, handleQuitGame, handleNextRound } =
+		useInterfaceHandlers(appState);
 
 	const orientation = useScreenOrientation();
-	const useLandscapeDesign = React.useMemo(() => {
+	const landscape = React.useMemo(() => {
 		return orientation?.startsWith('landscape') && 'ontouchstart' in window;
 	}, [orientation]);
 
@@ -56,7 +54,7 @@ export const App: React.FC = () => {
 		if (isDevEnvironment()) {
 			console.info('appState', appState);
 		}
-	}, [appState, setLanguage]);
+	}, [appState]);
 
 	React.useEffect(() => {
 		let appScreen: TTTModel.AppScreen;
@@ -71,7 +69,7 @@ export const App: React.FC = () => {
 			...AppStore.initialState,
 			appScreen,
 			language: appState.language,
-			gameState: TTTModel.GameState.PREPLAY,
+			gameState: TTTModel.GameState.PAUSED,
 		});
 	}, [isContentLoading, isSignedIn, appState.language]);
 
@@ -101,20 +99,10 @@ export const App: React.FC = () => {
 		setIsSignedIn(false);
 	}, []);
 
-	React.useEffect(() => {
-		const keyDownHandler = Rx.fromEvent<KeyboardEvent>(document, 'keydown').pipe(
-			Rx.filter((event) => event.key === 'Escape')
-		);
-		const subscription = keyDownHandler.subscribe(validateCloseModal);
-		return () => {
-			subscription.unsubscribe();
-		};
-	}, [validateCloseModal]);
-
 	return (
 		<TTTUI.Theme theme={theme}>
 			<div className={`screen ${appState.appScreen}`}>
-				<div className={classNames('screen-inner', { landscape: useLandscapeDesign })}>
+				<div className={classNames('screen-inner', { landscape })}>
 					<TTTUI.Error.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
 						<div className="screen-front">
 							{appState.appScreen === TTTModel.AppScreen.LOADING && (
@@ -141,13 +129,13 @@ export const App: React.FC = () => {
 							{appContent && (
 								<TTTUI.GameScreen
 									content={appContent.gameScreen}
-									pauseGame={() =>
-										openModalScreen(TTTModel.AppModalScreen.PAUSED)
+									landscape={landscape}
+									handlePauseGame={() =>
+										handlePauseGame(TTTModel.AppModalScreen.PAUSED)
 									}
 									openRestartModal={() =>
-										openModalScreen(TTTModel.AppModalScreen.RESTART)
+										handlePauseGame(TTTModel.AppModalScreen.RESTART)
 									}
-									useLandscapeDesign={useLandscapeDesign}
 								/>
 							)}
 						</div>
@@ -159,14 +147,14 @@ export const App: React.FC = () => {
 					{appState.appModalScreen === TTTModel.AppModalScreen.PAUSED && (
 						<TTTUI.ResumeModalScreen
 							content={appContent.modalResumeGame}
-							handleResumeGame={closeModalScreen}
+							handleResumeGame={handleResumeGame}
 						/>
 					)}
 					{appState.appModalScreen === TTTModel.AppModalScreen.RESTART && (
 						<TTTUI.RestartModalScreen
 							content={appContent.restartModal}
 							handleQuitGame={handleQuitGame}
-							closeModalScreen={closeModalScreen}
+							handleResumeGame={handleResumeGame}
 						/>
 					)}
 					{appState.appModalScreen === TTTModel.AppModalScreen.GAME_OVER && (

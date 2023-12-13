@@ -25,13 +25,10 @@ exports[`GameScreen screen component snapshot test should match the snapshot 1`]
         </div>
         <div>
           <button
-            class="button button-dark turn-indicator turn-indicator-x"
+            class="button button-dark timer"
             disabled=""
           >
-            <span
-              class="avatar avatar-x avatar-size-s avatar-variant-light"
-            />
-            Your turn
+            00:00
           </button>
         </div>
         <div

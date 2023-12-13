@@ -8,15 +8,16 @@ describe('RestartModalScreen component', () => {
 		cta2: 'Yes, Restart',
 		title: 'Restart game?',
 	};
+
 	it('should render the component correctly', () => {
 		const handleQuitGame = jest.fn();
-		const closeModalScreen = jest.fn();
+		const handleResumeGame = jest.fn();
 
 		const { getByText } = render(
 			<RestartModalScreen
 				content={content}
 				handleQuitGame={handleQuitGame}
-				closeModalScreen={closeModalScreen}
+				handleResumeGame={handleResumeGame}
 			/>
 		);
 
@@ -27,32 +28,32 @@ describe('RestartModalScreen component', () => {
 
 	it('should call closeModalScreen when "No, Cancel" button is clicked', () => {
 		const handleQuitGame = jest.fn();
-		const closeModalScreen = jest.fn();
+		const handleResumeGame = jest.fn();
 
 		const { getByText } = render(
 			<RestartModalScreen
 				content={content}
 				handleQuitGame={handleQuitGame}
-				closeModalScreen={closeModalScreen}
+				handleResumeGame={handleResumeGame}
 			/>
 		);
 
 		const cancelButton = getByText('No, Cancel');
 		fireEvent.click(cancelButton);
 
-		expect(closeModalScreen).toHaveBeenCalledTimes(1);
+		expect(handleResumeGame).toHaveBeenCalledTimes(1);
 		expect(handleQuitGame).not.toHaveBeenCalled();
 	});
 
 	it('should call handleQuitGame when "Yes, Restart" button is clicked', () => {
 		const handleQuitGame = jest.fn();
-		const closeModalScreen = jest.fn();
+		const handleResumeGame = jest.fn();
 
 		const { getByText } = render(
 			<RestartModalScreen
 				content={content}
 				handleQuitGame={handleQuitGame}
-				closeModalScreen={closeModalScreen}
+				handleResumeGame={handleResumeGame}
 			/>
 		);
 
@@ -60,6 +61,6 @@ describe('RestartModalScreen component', () => {
 		fireEvent.click(restartButton);
 
 		expect(handleQuitGame).toHaveBeenCalledTimes(1);
-		expect(closeModalScreen).not.toHaveBeenCalled();
+		expect(handleResumeGame).not.toHaveBeenCalled();
 	});
 });

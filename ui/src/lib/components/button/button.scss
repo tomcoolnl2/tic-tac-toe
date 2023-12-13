@@ -1,47 +1,47 @@
 @use '../../theme/utils' as utils;
 
 .button {
-    position: relative;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: bold;
-    text-align: center;
-    color: var(--background-color-tertiary);
-    background-color: var(--theme-primary);
-    border-radius: 4px;
-    padding: 12px 10px 8px;
-    box-shadow: utils.generate-box-shadow($color: var(--theme-secondary));
-    width: 100%;
+	position: relative;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-align: center;
+	color: var(--background-color-tertiary);
+	background-color: var(--theme-primary);
+	border-radius: 4px;
+	padding: 12px 10px 8px;
+	box-shadow: utils.generate-box-shadow($color: var(--theme-secondary));
+	width: 100%;
 
-    &[disabled] {
-        cursor: not-allowed;
-        opacity: .8;
-    }
+	&[disabled] {
+		cursor: default;
+		opacity: 0.8;
+	}
 
-    > i {
-        font-size: 18px;
-        position: absolute;
-        transform: translate(5px, -3px);
-    }
+	> i {
+		font-size: 18px;
+		position: absolute;
+		transform: translate(5px, -3px);
+	}
 }
 
 .button-secondary {
-    background-color: var(--sunshine-gold);
-    box-shadow: utils.generate-box-shadow($color: var(--bronze-amber));
+	background-color: var(--sunshine-gold);
+	box-shadow: utils.generate-box-shadow($color: var(--bronze-amber));
 }
 .button-dark {
-    color: var(--light-primary);
-    background: var(--background-color-secondary);
-    box-shadow: utils.generate-box-shadow($color: var(--background-color-tertiary));
+	color: var(--light-primary);
+	background: var(--background-color-secondary);
+	box-shadow: utils.generate-box-shadow($color: var(--background-color-tertiary));
 }
 
 .button-light {
-    background-color: var(--light-primary);
-    box-shadow: utils.generate-box-shadow($color: var(--light-secondary));
+	background-color: var(--light-primary);
+	box-shadow: utils.generate-box-shadow($color: var(--light-secondary));
 }
 
 .desktop {
-    .button-primary {
-        color: var(--light-primary);
-    }
+	.button-primary {
+		color: var(--light-primary);
+	}
 }

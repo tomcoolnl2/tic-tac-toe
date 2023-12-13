@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import './button.scss';
 import { Loader } from '../loader/loader';
+import './button.scss';
 
 export interface Props {
 	variant?: 'primary' | 'secondary' | 'dark' | 'light';

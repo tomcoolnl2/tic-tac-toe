@@ -42,12 +42,15 @@ export enum IntelligenceLevel {
 }
 
 export enum GameState {
-	PREPLAY,
-	PLAYING,
-	WIN,
-	LOST,
-	DRAW,
+	STOPPED = 'stopped',
+	PLAYING = 'playing',
+	PAUSED = 'paused',
+	WIN = 'win',
+	LOST = 'lost',
+	DRAW = 'draw',
 }
+
+export type GameDuration = `${number}${number}:${number}${number}`;
 
 export type BoardState = Array<PlayerSymbol | null>;
 

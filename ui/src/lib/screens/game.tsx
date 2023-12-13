@@ -3,42 +3,38 @@ import { AppStore } from '@tic-tac-toe/core';
 import type { AppState } from '@tic-tac-toe/model';
 import type { AppGameContent } from '../context/content/model';
 import { Grid, GridItem } from '../core';
-import { AppLogo, Cell, Icon, ScoreBoardItem, TurnIndicator } from '../components';
+import { AppLogo, Cell, Icon, ScoreBoardItem, Timer } from '../components';
 import { useBehaviorSubjectState } from '../hooks';
 
 interface Props {
 	content: AppGameContent;
-	useLandscapeDesign: boolean;
-	pauseGame: () => void;
+	landscape: boolean;
+	handlePauseGame: () => void;
 	openRestartModal: () => void;
 }
 
 export const GameScreen: React.FC<Props> = ({
 	content,
-	useLandscapeDesign,
-	pauseGame,
+	landscape,
+	handlePauseGame,
 	openRestartModal,
 }) => {
 	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
-	const { scores, playerSymbol, cpuSymbol, currentPlayer, solutionCells } = appState;
+	const { scores, playerSymbol, cpuSymbol, solutionCells } = appState;
 
 	return (
-		<Grid cols={useLandscapeDesign ? 3 : 1} rowGap="l" colGap={useLandscapeDesign ? 'l' : 'm'}>
+		<Grid cols={landscape ? 3 : 1} rowGap="l" colGap={landscape ? 'l' : 'm'}>
 			<GridItem>
-				<Grid colGap="m" rowGap="l" cols={useLandscapeDesign ? 1 : '1fr auto 1fr'}>
+				<Grid colGap="m" rowGap="l" cols={landscape ? 1 : '1fr auto 1fr'}>
 					<GridItem>
 						<AppLogo />
 					</GridItem>
 					<GridItem>
-						<TurnIndicator
-							content={content.turnIndicator}
-							playerSymbol={playerSymbol}
-							currentPlayer={currentPlayer}
-						/>
+						<Timer />
 					</GridItem>
 					<GridItem placeSelf="flex-end">
 						<div className="game-controls">
-							<Icon name="icon-pause" handleOnClick={pauseGame} />
+							<Icon name="icon-pause" handleOnClick={handlePauseGame} />
 							<Icon name="icon-repeat" handleOnClick={openRestartModal} />
 						</div>
 					</GridItem>
@@ -58,7 +54,7 @@ export const GameScreen: React.FC<Props> = ({
 				</Grid>
 			</GridItem>
 			<GridItem>
-				<Grid cols={useLandscapeDesign ? 1 : 3} colGap="m" rowGap="m">
+				<Grid cols={landscape ? 1 : 3} colGap="m" rowGap="m">
 					{scores.map((score, i) => {
 						return (
 							<ScoreBoardItem

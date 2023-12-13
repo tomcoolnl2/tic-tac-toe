@@ -6,20 +6,20 @@ import { Button } from '../components';
 interface Props {
 	content: AppScreenContent;
 	handleQuitGame: () => void;
-	closeModalScreen: () => void;
+	handleResumeGame: () => void;
 }
 
 export const RestartModalScreen: React.FC<Props> = ({
 	content,
 	handleQuitGame,
-	closeModalScreen,
+	handleResumeGame,
 }) => {
 	return (
 		<>
 			<h1>{content.title}</h1>
 			<Divider margin="vertical-l" />
 			<Grid cols={2} colGap="l">
-				<Button variant="light" onClick={closeModalScreen}>
+				<Button variant="light" onClick={handleResumeGame}>
 					{content.cta1}
 				</Button>
 				<Button variant="secondary" onClick={handleQuitGame}>

@@ -12,4 +12,4 @@ export { Modal } from './modal/modal';
 export { ScoreBoardItem } from './score-board-item/score-board-item';
 export { Spinner } from './spinner/spinner';
 export { SymbolChoice } from './symbol-choice/symbol-choice';
-export { TurnIndicator } from './turn-indicator/turn-indicator';
+export { Timer } from './timer/timer';
