@@ -86,10 +86,7 @@ describe('GameEngine - determineDraw', () => {
 		// Make the first valid move to occupy the cell
 		const updatedGameState = gameEngine.update(appState, cellIndex);
 		// Attempt to make another move on the same cell (invalid move)
-		const invalidMoveGameState = gameEngine.update(
-			updatedGameState,
-			cellIndex
-		);
+		const invalidMoveGameState = gameEngine.update(updatedGameState, cellIndex);
 		// Assert
 		expect(invalidMoveGameState).toEqual(updatedGameState);
 	});
@@ -98,10 +95,7 @@ describe('GameEngine - determineDraw', () => {
 		// Prepare
 		const invalidCellIndex = -1; // Cell index out of bounds (negative)
 		// Act
-		const invalidMoveGameState = gameEngine.update(
-			appState,
-			invalidCellIndex
-		);
+		const invalidMoveGameState = gameEngine.update(appState, invalidCellIndex);
 		// Assert
 		expect(invalidMoveGameState).toEqual(appState);
 	});
@@ -139,7 +133,7 @@ describe('GameEngine - determineDraw', () => {
 			appState = gameEngine.update(appState, cellIndex);
 		});
 		// Assert
-		expect(appState.gameState).toBe(GameState.PREPLAY);
+		expect(appState.gameState).toBe(GameState.PAUSED);
 		expect(appState.scores).toEqual([0, 0, 0]);
 	});
 
@@ -165,7 +159,7 @@ describe('GameEngine - determineDraw', () => {
 			appState = gameEngine.update(appState, cellIndex);
 		});
 		// Assert
-		expect(appState.gameState).toBe(GameState.PREPLAY);
+		expect(appState.gameState).toBe(GameState.PAUSED);
 		expect(appState.scores).toEqual([0, 0, 0]);
 	});
 });

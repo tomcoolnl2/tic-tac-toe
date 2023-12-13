@@ -53,7 +53,7 @@ class Store {
 			currentPlayer: 0,
 			playerSymbol: TTTModel.PlayerSymbol.X,
 			cpuSymbol: TTTModel.PlayerSymbol.O,
-			gameState: TTTModel.GameState.PREPLAY,
+			gameState: TTTModel.GameState.STOPPED,
 			solutionCells: null,
 			scores: [0, 0, 0],
 		};

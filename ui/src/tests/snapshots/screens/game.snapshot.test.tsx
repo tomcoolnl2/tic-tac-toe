@@ -13,7 +13,7 @@ describe('GameScreen screen component snapshot test', () => {
 		const { asFragment } = render(
 			<GameScreen
 				content={content as AppGameContent}
-				useLandscapeDesign={false}
+				landscape={false}
 				handleReloadDialog={handleReloadDialog}
 			/>
 		);

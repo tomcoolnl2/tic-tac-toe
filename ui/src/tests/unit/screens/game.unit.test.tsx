@@ -15,9 +15,9 @@ describe('GameScreen component', () => {
 		const { container } = render(
 			<GameScreen
 				content={content}
-				useLandscapeDesign={true}
+				landscape={true}
 				openRestartModal={openRestartModal}
-				pauseGame={jest.fn()}
+				handlePauseGame={jest.fn()}
 			/>
 		);
 		const reloadButton = container.querySelector('.icon-repeat');
@@ -30,9 +30,9 @@ describe('GameScreen component', () => {
 		const { container } = render(
 			<GameScreen
 				content={content}
-				useLandscapeDesign={true}
+				landscape={true}
 				openRestartModal={jest.fn()}
-				pauseGame={openPauseGameModal}
+				handlePauseGame={openPauseGameModal}
 			/>
 		);
 		const reloadButton = container.querySelector('.icon-pause');

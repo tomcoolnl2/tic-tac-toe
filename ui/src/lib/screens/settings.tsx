@@ -5,7 +5,7 @@ import type { AppScreenContent } from '../context/content/model';
 import { BaseScreen } from './base/base';
 import { Button, ChooseDifficulty, LanguageSelector, Logout, SymbolChoice } from '../components';
 import { Divider } from '../core';
-import { useBehaviorSubjectState, useGameHandlers, useSettingsHandlers } from '../hooks';
+import { useBehaviorSubjectState, useInterfaceHandlers, useSettingsHandlers } from '../hooks';
 
 interface Props {
 	content: AppScreenContent;
@@ -16,9 +16,9 @@ interface Props {
 
 export const SettingsScreen: React.FC<Props> = React.memo(
 	({ content, playerSymbol, selectedDifficultySetting, handleLogout }) => {
+		//
 		const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
-
-		const { handleStartGame } = useGameHandlers(appState);
+		const { handleStartGame } = useInterfaceHandlers(appState);
 		const { handleAvatarChange, handleDifficultyChange } = useSettingsHandlers(appState);
 
 		return (

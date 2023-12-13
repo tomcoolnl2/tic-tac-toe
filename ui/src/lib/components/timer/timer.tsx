@@ -1,16 +1,35 @@
 import React from 'react';
-import { GameDuration } from '@tic-tac-toe/model';
+import { AppStore } from '@tic-tac-toe/core';
+import * as TTTModel from '@tic-tac-toe/model';
+import { useBehaviorSubjectState, useTimer } from '../../hooks';
 import { Button } from '../button/button';
 import './timer.scss';
 
-interface Props {
-	duration: GameDuration;
-}
+export const Timer: React.FC = () => {
+	//
+	const [appState] = useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
+	const { time, startTimer, pauseTimer, resetTimer } = useTimer();
 
-export const Timer: React.FC<Props> = ({ duration }) => {
+	React.useEffect(() => {
+		switch (appState.gameState) {
+			case TTTModel.GameState.PLAYING:
+				startTimer();
+				break;
+			case TTTModel.GameState.PAUSED:
+			case TTTModel.GameState.WIN:
+			case TTTModel.GameState.DRAW:
+			case TTTModel.GameState.LOST:
+				pauseTimer();
+				break;
+			default:
+				resetTimer();
+				break;
+		}
+	}, [appState.gameState, pauseTimer, startTimer, resetTimer]);
+
 	return (
 		<Button variant="dark" disabled className="timer">
-			{duration}
+			{time}
 		</Button>
 	);
 };

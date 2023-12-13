@@ -27,7 +27,7 @@ beforeEach(() => {
 		currentPlayer: 0,
 		playerSymbol: PlayerSymbol.X,
 		cpuSymbol: PlayerSymbol.O,
-		gameState: GameState.PREPLAY,
+		gameState: GameState.PAUSED,
 		solutionCells: null,
 		scores: [0, 0, 0],
 	};
