@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import * as Rx from 'rxjs';
-import { signIn, signOut, getCurrentUser, confirmSignIn } from 'aws-amplify/auth';
+import { signIn, signOut, getCurrentUser } from 'aws-amplify/auth';
 import { AppStore } from '@tic-tac-toe/core';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
 import * as TTTModel from '@tic-tac-toe/model';
@@ -105,9 +105,7 @@ export const App: React.FC = () => {
 		const keyDownHandler = Rx.fromEvent<KeyboardEvent>(document, 'keydown').pipe(
 			Rx.filter((event) => event.key === 'Escape')
 		);
-
 		const subscription = keyDownHandler.subscribe(validateCloseModal);
-
 		return () => {
 			subscription.unsubscribe();
 		};

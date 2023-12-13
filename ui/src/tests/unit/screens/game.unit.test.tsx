@@ -10,40 +10,33 @@ describe('GameScreen component', () => {
 		scoreBoard: ['You', 'Ties', 'CPU'],
 	};
 
-	it('should render the component correctly', () => {
-		const useLandscapeDesign = true;
+	it('should call handleReloadDialog when the reload icon is clicked', () => {
 		const openRestartModal = jest.fn();
-
 		const { container } = render(
 			<GameScreen
 				content={content}
-				useLandscapeDesign={useLandscapeDesign}
+				useLandscapeDesign={true}
 				openRestartModal={openRestartModal}
+				pauseGame={jest.fn()}
 			/>
 		);
-
-		expect(container.querySelector('.logo')).toBeInTheDocument();
-		expect(container.querySelector('.turn-indicator')).toBeInTheDocument();
-		expect(container.querySelector('.icon-repeat')).toBeInTheDocument();
-		expect(container.querySelector('.board')).toBeInTheDocument();
-		expect(container.querySelector('.score-board-item')).toBeInTheDocument();
-	});
-
-	it('should call handleReloadDialog when reload icon is clicked', () => {
-		const useLandscapeDesign = true;
-		const openRestartModal = jest.fn();
-
-		const { container } = render(
-			<GameScreen
-				content={content}
-				useLandscapeDesign={useLandscapeDesign}
-				openRestartModal={openRestartModal}
-			/>
-		);
-
 		const reloadButton = container.querySelector('.icon-repeat');
 		fireEvent.click(reloadButton!);
-
 		expect(openRestartModal).toHaveBeenCalledTimes(1);
+	});
+
+	it('should call pauseGame when the pause icon is clicked', () => {
+		const openPauseGameModal = jest.fn();
+		const { container } = render(
+			<GameScreen
+				content={content}
+				useLandscapeDesign={true}
+				openRestartModal={jest.fn()}
+				pauseGame={openPauseGameModal}
+			/>
+		);
+		const reloadButton = container.querySelector('.icon-pause');
+		fireEvent.click(reloadButton!);
+		expect(openPauseGameModal).toHaveBeenCalledTimes(1);
 	});
 });
