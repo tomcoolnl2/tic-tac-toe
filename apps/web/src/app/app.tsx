@@ -146,7 +146,7 @@ export const App: React.FC = () => {
 				<TTTUI.Modal>
 					{appState.appModalScreen === TTTModel.AppModalScreen.PAUSED && (
 						<TTTUI.ResumeModalScreen
-							content={appContent.modalResumeGame}
+							content={appContent.resumeGameModal}
 							handleResumeGame={handleResumeGame}
 						/>
 					)}
