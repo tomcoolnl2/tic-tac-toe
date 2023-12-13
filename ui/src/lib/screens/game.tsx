@@ -3,7 +3,7 @@ import { AppStore } from '@tic-tac-toe/core';
 import type { AppState } from '@tic-tac-toe/model';
 import type { AppGameContent } from '../context/content/model';
 import { Grid, GridItem } from '../core';
-import { AppLogo, Cell, Icon, ScoreBoardItem, TurnIndicator } from '../components';
+import { AppLogo, Cell, Icon, ScoreBoardItem, Timer } from '../components';
 import { useBehaviorSubjectState } from '../hooks';
 
 interface Props {
@@ -20,7 +20,7 @@ export const GameScreen: React.FC<Props> = ({
 	openRestartModal,
 }) => {
 	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
-	const { scores, playerSymbol, cpuSymbol, currentPlayer, solutionCells } = appState;
+	const { scores, playerSymbol, cpuSymbol, solutionCells } = appState;
 
 	return (
 		<Grid cols={useLandscapeDesign ? 3 : 1} rowGap="l" colGap={useLandscapeDesign ? 'l' : 'm'}>
@@ -30,11 +30,7 @@ export const GameScreen: React.FC<Props> = ({
 						<AppLogo />
 					</GridItem>
 					<GridItem>
-						<TurnIndicator
-							content={content.turnIndicator}
-							playerSymbol={playerSymbol}
-							currentPlayer={currentPlayer}
-						/>
+						<Timer duration={'00:00'} />
 					</GridItem>
 					<GridItem placeSelf="flex-end">
 						<div className="game-controls">

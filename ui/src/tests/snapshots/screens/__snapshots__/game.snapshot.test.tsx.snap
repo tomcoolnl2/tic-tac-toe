@@ -24,15 +24,9 @@ exports[`GameScreen screen component snapshot test should match the snapshot 1`]
           </div>
         </div>
         <div>
-          <button
-            class="button button-dark turn-indicator turn-indicator-x"
-            disabled=""
-          >
-            <span
-              class="avatar avatar-x avatar-size-s avatar-variant-light"
-            />
-            Your turn
-          </button>
+          <span>
+            00:00
+          </span>
         </div>
         <div
           style="place-self: flex-end;"
