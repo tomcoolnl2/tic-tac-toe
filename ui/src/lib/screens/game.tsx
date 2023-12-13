@@ -30,7 +30,7 @@ export const GameScreen: React.FC<Props> = ({
 						<AppLogo />
 					</GridItem>
 					<GridItem>
-						<Timer duration={'00:00'} />
+						<Timer duration={'03:51'} />
 					</GridItem>
 					<GridItem placeSelf="flex-end">
 						<div className="game-controls">

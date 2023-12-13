@@ -49,7 +49,7 @@ export enum GameState {
 	DRAW,
 }
 
-export type GameDuration = `${number | ''}${number}:${number}${number}`;
+export type GameDuration = `${number}${number}:${number}${number}`;
 
 export type BoardState = Array<PlayerSymbol | null>;
 
