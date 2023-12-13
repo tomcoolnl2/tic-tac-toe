@@ -10,12 +10,10 @@ export const App: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const theme = React.useMemo(() => (window as any)?.electron?.theme ?? 'web', []);
 
-	const [isSignedIn, setIsSignedIn] = React.useState<boolean>(false);
-	const [authError, setAuthError] = React.useState<Error | null>(null);
-
-	const { useContentContext } = TTTUI.Context;
+	const { useAuthContext, useContentContext } = TTTUI.Context;
 	const { useBehaviorSubjectState, useScreenOrientation, useInterfaceHandlers } = TTTUI.Hooks;
 
+	const { signedIn, authError, handleSignIn, handleSignOut, setAuthError } = useAuthContext();
 	const { appContent, isContentLoading, setLanguage } = useContentContext();
 	const [appState] = useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
 	const { handlePauseGame, handleResumeGame, handleQuitGame, handleNextRound } =
@@ -25,18 +23,6 @@ export const App: React.FC = () => {
 	const landscape = React.useMemo(() => {
 		return orientation?.startsWith('landscape') && 'ontouchstart' in window;
 	}, [orientation]);
-
-	React.useEffect(() => {
-		(async () => {
-			try {
-				const currentUser = await getCurrentUser();
-				console.log(`currentUser: `, currentUser);
-				setIsSignedIn(true);
-			} catch (err) {
-				setIsSignedIn(false);
-			}
-		})();
-	}, []);
 
 	React.useEffect(() => {
 		if (isDevEnvironment()) {
@@ -60,7 +46,7 @@ export const App: React.FC = () => {
 		let appScreen: TTTModel.AppScreen;
 		if (isContentLoading) {
 			appScreen = TTTModel.AppScreen.LOADING;
-		} else if (!isSignedIn) {
+		} else if (!signedIn) {
 			appScreen = TTTModel.AppScreen.LOGIN;
 		} else {
 			appScreen = TTTModel.AppScreen.SETTINGS;
@@ -71,33 +57,7 @@ export const App: React.FC = () => {
 			language: appState.language,
 			gameState: TTTModel.GameState.PAUSED,
 		});
-	}, [isContentLoading, isSignedIn, appState.language]);
-
-	const handleSignIn = React.useCallback(async (username: string, password: string) => {
-		try {
-			const { isSignedIn } = await signIn({ username, password });
-			if (isSignedIn) {
-				setIsSignedIn(isSignedIn);
-			} else {
-				throw new Error('Error signing in');
-			}
-		} catch (error: unknown) {
-			const authError = error instanceof Error ? error : new Error('');
-			setAuthError(authError);
-			setIsSignedIn(false);
-		}
-	}, []);
-
-	const handleSignOut = React.useCallback(async () => {
-		try {
-			await signOut();
-		} catch (error) {
-			const authError = error instanceof Error ? error : new Error('Error signing out');
-			setAuthError(authError);
-			console.log('Error signing out: ', error);
-		}
-		setIsSignedIn(false);
-	}, []);
+	}, [isContentLoading, signedIn, appState.language]);
 
 	return (
 		<TTTUI.Theme theme={theme}>
