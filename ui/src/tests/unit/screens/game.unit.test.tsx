@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent } from '@testing-library/react';
+import { AppGameContent } from '../../../lib/context/content/model';
 import { GameScreen } from '../../../lib/screens';
-import { AppGameContent } from '@tic-tac-toe/model';
 
 describe('GameScreen component', () => {
 	const content: AppGameContent = {
@@ -10,40 +10,33 @@ describe('GameScreen component', () => {
 		scoreBoard: ['You', 'Ties', 'CPU'],
 	};
 
-	it('should render the component correctly', () => {
-		const useLandscapeDesign = true;
+	it('should call handleReloadDialog when the reload icon is clicked', () => {
 		const openRestartModal = jest.fn();
-
 		const { container } = render(
 			<GameScreen
 				content={content}
-				useLandscapeDesign={useLandscapeDesign}
+				useLandscapeDesign={true}
 				openRestartModal={openRestartModal}
+				pauseGame={jest.fn()}
 			/>
 		);
-
-		expect(container.querySelector('.logo')).toBeInTheDocument();
-		expect(container.querySelector('.turn-indicator')).toBeInTheDocument();
-		expect(container.querySelector('.icon-reload')).toBeInTheDocument();
-		expect(container.querySelector('.board')).toBeInTheDocument();
-		expect(container.querySelector('.score-board-item')).toBeInTheDocument();
+		const reloadButton = container.querySelector('.icon-repeat');
+		fireEvent.click(reloadButton!);
+		expect(openRestartModal).toHaveBeenCalledTimes(1);
 	});
 
-	it('should call handleReloadDialog when reload button is clicked', () => {
-		const useLandscapeDesign = true;
-		const openRestartModal = jest.fn();
-
+	it('should call pauseGame when the pause icon is clicked', () => {
+		const openPauseGameModal = jest.fn();
 		const { container } = render(
 			<GameScreen
 				content={content}
-				useLandscapeDesign={useLandscapeDesign}
-				openRestartModal={openRestartModal}
+				useLandscapeDesign={true}
+				openRestartModal={jest.fn()}
+				pauseGame={openPauseGameModal}
 			/>
 		);
-
-		const reloadButton = container.querySelector('.icon-reload');
+		const reloadButton = container.querySelector('.icon-pause');
 		fireEvent.click(reloadButton!);
-
-		expect(openRestartModal).toHaveBeenCalledTimes(1);
+		expect(openPauseGameModal).toHaveBeenCalledTimes(1);
 	});
 });

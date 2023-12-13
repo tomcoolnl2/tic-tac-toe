@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import * as Rx from 'rxjs';
-import { signIn, signOut, getCurrentUser, confirmSignIn } from 'aws-amplify/auth';
+import { signIn, signOut, getCurrentUser } from 'aws-amplify/auth';
 import { AppStore } from '@tic-tac-toe/core';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
 import * as TTTModel from '@tic-tac-toe/model';
@@ -21,7 +21,7 @@ export const App: React.FC = () => {
 	const { appContent, isContentLoading, setLanguage } = useContentContext();
 	const [appState] = useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
 	const { handleQuitGame, handleNextRound } = useGameHandlers(appState);
-	const { openRestartModal, closeModalScreen, validateCloseModal } = useUIHandlers(appState);
+	const { openModalScreen, closeModalScreen, validateCloseModal } = useUIHandlers(appState);
 
 	const orientation = useScreenOrientation();
 	const useLandscapeDesign = React.useMemo(() => {
@@ -105,9 +105,7 @@ export const App: React.FC = () => {
 		const keyDownHandler = Rx.fromEvent<KeyboardEvent>(document, 'keydown').pipe(
 			Rx.filter((event) => event.key === 'Escape')
 		);
-
 		const subscription = keyDownHandler.subscribe(validateCloseModal);
-
 		return () => {
 			subscription.unsubscribe();
 		};
@@ -143,7 +141,12 @@ export const App: React.FC = () => {
 							{appContent && (
 								<TTTUI.GameScreen
 									content={appContent.gameScreen}
-									openRestartModal={openRestartModal}
+									pauseGame={() =>
+										openModalScreen(TTTModel.AppModalScreen.PAUSED)
+									}
+									openRestartModal={() =>
+										openModalScreen(TTTModel.AppModalScreen.RESTART)
+									}
 									useLandscapeDesign={useLandscapeDesign}
 								/>
 							)}
@@ -153,6 +156,12 @@ export const App: React.FC = () => {
 			</div>
 			{appContent && appState.appModalScreen !== null && (
 				<TTTUI.Modal>
+					{appState.appModalScreen === TTTModel.AppModalScreen.PAUSED && (
+						<TTTUI.ResumeModalScreen
+							content={appContent.modalResumeGame}
+							handleResumeGame={closeModalScreen}
+						/>
+					)}
 					{appState.appModalScreen === TTTModel.AppModalScreen.RESTART && (
 						<TTTUI.RestartModalScreen
 							content={appContent.restartModal}

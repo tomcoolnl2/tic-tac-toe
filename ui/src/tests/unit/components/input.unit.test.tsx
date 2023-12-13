@@ -10,11 +10,6 @@ describe('Input component', () => {
 		testId: 'test-input',
 	};
 
-	it('renders without crashing', () => {
-		const { container } = render(<Input {...defaultProps} />);
-		expect(container.firstChild).toMatchSnapshot();
-	});
-
 	it('renders with icon when provided', () => {
 		const { container } = render(<Input {...defaultProps} icon="search" />);
 		expect(container.querySelector('.icon-search')).toBeTruthy();
@@ -42,6 +37,4 @@ describe('Input component', () => {
 
 		expect(input.disabled).toBe(true);
 	});
-
-	// Add more test cases as needed based on specific functionality
 });

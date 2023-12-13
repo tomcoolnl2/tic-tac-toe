@@ -3,12 +3,15 @@ import * as TTTModel from '@tic-tac-toe/model';
 import { AppStore } from '@tic-tac-toe/core';
 
 export function useUIHandlers(appState: TTTModel.AppState) {
-	const openRestartModal = React.useCallback(() => {
-		AppStore.nextState({
-			...appState,
-			appModalScreen: TTTModel.AppModalScreen.RESTART,
-		});
-	}, [appState]);
+	const openModalScreen = React.useCallback(
+		(appModalScreen: TTTModel.AppModalScreen) => {
+			AppStore.nextState({
+				...appState,
+				appModalScreen,
+			});
+		},
+		[appState]
+	);
 
 	const closeModalScreen = React.useCallback(() => {
 		AppStore.nextState({
@@ -18,13 +21,14 @@ export function useUIHandlers(appState: TTTModel.AppState) {
 	}, [appState]);
 
 	const validateCloseModal = React.useCallback(() => {
-		if (appState.appModalScreen !== TTTModel.AppModalScreen.GAME_OVER) {
+		const skip = [TTTModel.AppModalScreen.GAME_OVER, TTTModel.AppModalScreen.PAUSED];
+		if (appState.appModalScreen && !skip.includes(appState.appModalScreen)) {
 			closeModalScreen();
 		}
 	}, [appState, closeModalScreen]);
 
 	return {
-		openRestartModal,
+		openModalScreen,
 		closeModalScreen,
 		validateCloseModal,
 	};

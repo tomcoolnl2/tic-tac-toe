@@ -37,13 +37,16 @@ exports[`GameScreen screen component snapshot test should match the snapshot 1`]
         <div
           style="place-self: flex-end;"
         >
-          <button
-            class="button button-light icon-reload"
+          <div
+            class="game-controls"
           >
             <i
-              class="icon-repeat"
+              class="icon icon-pause"
             />
-          </button>
+            <i
+              class="icon icon-repeat"
+            />
+          </div>
         </div>
       </div>
     </div>

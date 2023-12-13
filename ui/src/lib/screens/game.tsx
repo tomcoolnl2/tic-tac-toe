@@ -3,16 +3,22 @@ import { AppStore } from '@tic-tac-toe/core';
 import type { AppState } from '@tic-tac-toe/model';
 import type { AppGameContent } from '../context/content/model';
 import { Grid, GridItem } from '../core';
-import { AppLogo, Cell, ReloadButton, ScoreBoardItem, TurnIndicator } from '../components';
+import { AppLogo, Cell, Icon, ScoreBoardItem, TurnIndicator } from '../components';
 import { useBehaviorSubjectState } from '../hooks';
 
 interface Props {
 	content: AppGameContent;
 	useLandscapeDesign: boolean;
+	pauseGame: () => void;
 	openRestartModal: () => void;
 }
 
-export const GameScreen: React.FC<Props> = ({ content, useLandscapeDesign, openRestartModal }) => {
+export const GameScreen: React.FC<Props> = ({
+	content,
+	useLandscapeDesign,
+	pauseGame,
+	openRestartModal,
+}) => {
 	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
 	const { scores, playerSymbol, cpuSymbol, currentPlayer, solutionCells } = appState;
 
@@ -31,7 +37,10 @@ export const GameScreen: React.FC<Props> = ({ content, useLandscapeDesign, openR
 						/>
 					</GridItem>
 					<GridItem placeSelf="flex-end">
-						<ReloadButton handleReloadDialog={openRestartModal} />
+						<div className="game-controls">
+							<Icon name="icon-pause" handleOnClick={pauseGame} />
+							<Icon name="icon-repeat" handleOnClick={openRestartModal} />
+						</div>
 					</GridItem>
 				</Grid>
 			</GridItem>

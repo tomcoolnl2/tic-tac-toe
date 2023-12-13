@@ -22,6 +22,7 @@ export interface AppContent {
 	loginScreen: AppLoginContent;
 	settingsScreen: AppScreenContent;
 	gameScreen: AppGameContent;
+	modalResumeGame: AppScreenContent;
 	restartModal: AppScreenContent;
 	gameOverModal: AppScreenContent;
 }
