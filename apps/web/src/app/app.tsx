@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React from 'react';
-import { signIn, signOut, getCurrentUser } from 'aws-amplify/auth';
 import { AppStore } from '@tic-tac-toe/core';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
 import * as TTTModel from '@tic-tac-toe/model';
@@ -62,7 +61,11 @@ export const App: React.FC = () => {
 	return (
 		<TTTUI.Theme theme={theme}>
 			<div className={`screen ${appState.appScreen}`}>
-				<div className={classNames('screen-inner', { landscape })}>
+				<div
+					className={classNames('screen-inner', { landscape })}
+					onAnimationStart={() => console.log('start')}
+					onAnimationEnd={() => console.log('end')}
+				>
 					<TTTUI.Error.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
 						<div className="screen-front">
 							{appState.appScreen === TTTModel.AppScreen.LOADING && (
