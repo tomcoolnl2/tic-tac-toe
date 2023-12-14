@@ -86,6 +86,7 @@ export function useInterfaceHandlers(appState: TTTModel.AppState) {
 
 	const handleNextRound = React.useCallback(async () => {
 		await handleResetTimer();
+		playStartGameSfx();
 		const nextState = AppStore.getNextRoundGameState(appState);
 		const updatedState = validateFirstTurn(nextState);
 		AppStore.nextState({
