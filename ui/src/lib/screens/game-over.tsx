@@ -27,9 +27,9 @@ export const GameOverModalScreen: React.FC<Props> = ({
 	handleNextRound,
 }) => {
 	//
-	const [playDrawSfx] = useSound(drawSfx);
-	const [playLooseSfx] = useSound(looseSfx);
-	const [playWinSfx] = useSound(winSfx);
+	const [playDrawSfx] = useSound(drawSfx, { volume: 0.75 });
+	const [playLooseSfx] = useSound(looseSfx, { volume: 0.75 });
+	const [playWinSfx] = useSound(winSfx, { volume: 0.5 });
 
 	let title = content.title[0];
 	let subtitle = '';
