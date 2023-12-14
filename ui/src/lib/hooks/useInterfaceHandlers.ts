@@ -2,10 +2,14 @@ import React from 'react';
 import * as Rx from 'rxjs';
 import * as TTTModel from '@tic-tac-toe/model';
 import { AppStore } from '@tic-tac-toe/core';
+import useSound from 'use-sound';
+import startGameSfx from '../theme/sound/start.wav';
 import { sleep } from '../utils';
 
 export function useInterfaceHandlers(appState: TTTModel.AppState) {
 	//
+	const [playStartGameSfx] = useSound(startGameSfx);
+
 	const openModalScreen = React.useCallback(
 		(appModalScreen: TTTModel.AppModalScreen) => {
 			AppStore.nextState({
@@ -49,7 +53,8 @@ export function useInterfaceHandlers(appState: TTTModel.AppState) {
 			appScreen: TTTModel.AppScreen.GAME,
 			gameState: TTTModel.GameState.PLAYING,
 		});
-	}, [appState, validateFirstTurn]);
+		playStartGameSfx();
+	}, [appState, playStartGameSfx, validateFirstTurn]);
 
 	const handleResumeGame = React.useCallback(() => {
 		AppStore.nextState({
