@@ -63,7 +63,6 @@ export const App: React.FC = () => {
 			<div className={`screen ${appState.appScreen}`}>
 				<div
 					className={classNames('screen-inner', { landscape })}
-					onAnimationStart={() => console.log('start')}
 					onAnimationEnd={() => console.log('end')}
 				>
 					<TTTUI.Error.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
