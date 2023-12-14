@@ -6,7 +6,7 @@ import { AppState, PlayerSymbol } from '@tic-tac-toe/model';
 import { getDataSetAttribute, getEventTargetElement } from '../../utils';
 import { Avatar } from '../avatar/avatar';
 
-import turnSfx from '../../theme/sound/turn.wav';
+import turnSfx from '../../sound/turn.wav';
 import './cell.scss';
 
 export interface Props {

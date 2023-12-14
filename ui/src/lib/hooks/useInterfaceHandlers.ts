@@ -3,7 +3,7 @@ import * as Rx from 'rxjs';
 import * as TTTModel from '@tic-tac-toe/model';
 import { AppStore } from '@tic-tac-toe/core';
 import useSound from 'use-sound';
-import startGameSfx from '../theme/sound/start.wav';
+import startGameSfx from '../sound/start.wav';
 import { sleep } from '../utils';
 
 export function useInterfaceHandlers(appState: TTTModel.AppState) {
