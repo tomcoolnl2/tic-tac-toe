@@ -27,6 +27,18 @@ export function useInterfaceHandlers(appState: TTTModel.AppState) {
 		});
 	}, [appState]);
 
+	const handleNextScreen = React.useCallback(
+		(appScreen: TTTModel.AppScreen) => {
+			AppStore.nextState({
+				...AppStore.initialState,
+				appScreen,
+				language: appState.language,
+				gameState: TTTModel.GameState.PAUSED,
+			});
+		},
+		[appState.language]
+	);
+
 	const handleResetTimer = React.useCallback(async () => {
 		AppStore.nextState({
 			...appState,
@@ -114,6 +126,7 @@ export function useInterfaceHandlers(appState: TTTModel.AppState) {
 	return {
 		openModalScreen,
 		closeModalScreen,
+		handleNextScreen,
 		handleStartGame,
 		handlePauseGame,
 		handleResumeGame,

@@ -41,9 +41,10 @@ sub {
 	position: relative;
 	width: 340px;
 	height: 472px;
-	transition: transform 0.8s;
-	transform-style: preserve-3d;
 	margin: 20px;
+	transform-style: preserve-3d;
+	animation-fill-mode: forwards;
+	animation-duration: 0.8s;
 }
 
 .screen-inner.landscape {
@@ -59,8 +60,30 @@ sub {
 	}
 }
 
+@keyframes flipForward {
+	0% {
+		transform: rotateY(0deg);
+	}
+	100% {
+		transform: rotateY(180deg);
+	}
+}
+
+@keyframes flipBackward {
+	0% {
+		transform: rotateY(180deg);
+	}
+	100% {
+		transform: rotateY(0deg);
+	}
+}
+
 .screen.game .screen-inner {
-	transform: rotateY(180deg);
+	animation-name: flipForward;
+}
+
+.screen:not(.game) .screen-inner {
+	animation-name: flipBackward;
 }
 
 .screen-front,
