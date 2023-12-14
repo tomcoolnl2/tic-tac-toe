@@ -1,9 +1,12 @@
 import * as Rx from 'rxjs';
 import React from 'react';
+import useSound from 'use-sound';
 import { AppStore } from '@tic-tac-toe/core';
 import { AppState, PlayerSymbol } from '@tic-tac-toe/model';
 import { getDataSetAttribute, getEventTargetElement } from '../../utils';
-import { Avatar } from '..';
+import { Avatar } from '../avatar/avatar';
+
+import turnSfx from '../../theme/sound/turn.wav';
 import './cell.scss';
 
 export interface Props {
@@ -13,7 +16,9 @@ export interface Props {
 	disabled: boolean;
 }
 
-export const Cell: React.FC<Props> = React.memo(({ type, index, solutionCells, disabled }) => {
+export const Cell: React.FC<Props> = ({ type, index, solutionCells, disabled }) => {
+	//
+	const [playTurnSfx] = useSound(turnSfx);
 	const cellRef = React.useRef(null);
 	const getIndex = getDataSetAttribute('index');
 
@@ -22,7 +27,11 @@ export const Cell: React.FC<Props> = React.memo(({ type, index, solutionCells, d
 			Rx.take(1),
 			Rx.map(getEventTargetElement),
 			Rx.map(getIndex),
-			Rx.map((index) => Number(index))
+			Rx.map((index) => Number(index)),
+			Rx.mergeMap((index) => {
+				playTurnSfx();
+				return Rx.of(index);
+			})
 		);
 
 		const subscription = clickHandler.subscribe(AppStore.update);
@@ -30,7 +39,7 @@ export const Cell: React.FC<Props> = React.memo(({ type, index, solutionCells, d
 		return () => {
 			subscription.unsubscribe();
 		};
-	}, [getIndex]);
+	}, [getIndex, playTurnSfx]);
 
 	const classNames = React.useMemo(() => {
 		return solutionCells?.includes(index) ? `invert invert-${['x', 'o'][type!]}` : '';
@@ -48,4 +57,4 @@ export const Cell: React.FC<Props> = React.memo(({ type, index, solutionCells, d
 			{type !== null && <Avatar size="xl" type={type} />}
 		</button>
 	);
-});
+};

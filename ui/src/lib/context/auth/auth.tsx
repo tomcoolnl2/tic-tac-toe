@@ -53,7 +53,7 @@ export const AuthProvider: React.FC<Props> = React.memo(({ children }) => {
 				throw new Error('Error signing in');
 			}
 		} catch (error: unknown) {
-			const authError = error instanceof Error ? error : new Error('');
+			const authError = error instanceof Error ? error : new Error('Error signing in');
 			setAuthError(authError);
 			setSignedIn(false);
 		}
