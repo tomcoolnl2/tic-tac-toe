@@ -15,6 +15,7 @@ beforeEach(() => {
 	appState = {
 		language: Locale.EN,
 		appScreen: AppScreen.LOADING,
+		appScreenSide: null,
 		appModalScreen: null,
 		intelligenceLevel: IntelligenceLevel.EASY,
 		bitBoards: [0x0, 0x0],
@@ -41,6 +42,7 @@ describe('StateStorage', () => {
 		const newState: AppState = {
 			language: Locale.EN,
 			appScreen: AppScreen.LOADING,
+			appScreenSide: null,
 			appModalScreen: null,
 			intelligenceLevel: IntelligenceLevel.MEDIUM,
 			bitBoards: [0x1, 0x2],

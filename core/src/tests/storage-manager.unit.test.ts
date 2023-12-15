@@ -20,6 +20,7 @@ beforeEach(() => {
 	appState = {
 		language: Locale.EN,
 		appScreen: AppScreen.LOADING,
+		appScreenSide: null,
 		appModalScreen: null,
 		intelligenceLevel: IntelligenceLevel.EASY,
 		bitBoards: [0x0, 0x0],
