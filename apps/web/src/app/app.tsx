@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React from 'react';
-import { signIn, signOut, getCurrentUser } from 'aws-amplify/auth';
 import { AppStore } from '@tic-tac-toe/core';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
 import * as TTTModel from '@tic-tac-toe/model';
@@ -16,8 +15,14 @@ export const App: React.FC = () => {
 	const { signedIn, authError, handleSignIn, handleSignOut, setAuthError } = useAuthContext();
 	const { appContent, isContentLoading, setLanguage } = useContentContext();
 	const [appState] = useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
-	const { handlePauseGame, handleResumeGame, handleQuitGame, handleNextRound } =
-		useInterfaceHandlers(appState);
+	const {
+		flipScreenSide,
+		handlePauseGame,
+		handleResumeGame,
+		handleQuitGame,
+		handleNextRound,
+		handleNextScreen,
+	} = useInterfaceHandlers(appState);
 
 	const orientation = useScreenOrientation();
 	const landscape = React.useMemo(() => {
@@ -51,18 +56,16 @@ export const App: React.FC = () => {
 		} else {
 			appScreen = TTTModel.AppScreen.SETTINGS;
 		}
-		AppStore.nextState({
-			...AppStore.initialState,
-			appScreen,
-			language: appState.language,
-			gameState: TTTModel.GameState.PAUSED,
-		});
+		handleNextScreen(appScreen);
 	}, [isContentLoading, signedIn, appState.language]);
 
 	return (
 		<TTTUI.Theme theme={theme}>
 			<div className={`screen ${appState.appScreen}`}>
-				<div className={classNames('screen-inner', { landscape })}>
+				<div
+					className={classNames('screen-inner', { landscape })}
+					onAnimationEnd={flipScreenSide}
+				>
 					<TTTUI.Error.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
 						<div className="screen-front">
 							{appState.appScreen === TTTModel.AppScreen.LOADING && (
