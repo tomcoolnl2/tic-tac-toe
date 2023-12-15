@@ -31,7 +31,7 @@ export const GameScreen: React.FC<Props> = ({
 					</GridItem>
 					<GridItem>
 						<Difficulty intelligenceLevel={intelligenceLevel} />
-						<Divider margin="bottom-s" />
+						<Divider margin="bottom" />
 						<Timer />
 					</GridItem>
 					<GridItem placeSelf="flex-end">

@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent } from '@testing-library/react';
-import { ResumeModalScreen } from '../../../lib/screens';
+import { ResumeModalScreen } from '../../../../lib/screens';
 
 describe('RestartModalScreen component', () => {
 	const content = {
