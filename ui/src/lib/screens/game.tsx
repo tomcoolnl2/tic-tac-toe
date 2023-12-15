@@ -2,8 +2,8 @@ import React from 'react';
 import { AppStore } from '@tic-tac-toe/core';
 import type { AppState } from '@tic-tac-toe/model';
 import type { AppGameContent } from '../context/content/model';
-import { Grid, GridItem } from '../core';
-import { AppLogo, Cell, Icon, ScoreBoardItem, Timer } from '../components';
+import { Divider, Grid, GridItem } from '../core';
+import { AppLogo, Cell, Difficulty, Icon, ScoreBoardItem, Timer } from '../components';
 import { useBehaviorSubjectState } from '../hooks';
 
 interface Props {
@@ -20,7 +20,7 @@ export const GameScreen: React.FC<Props> = ({
 	openRestartModal,
 }) => {
 	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
-	const { scores, playerSymbol, cpuSymbol, solutionCells } = appState;
+	const { scores, playerSymbol, cpuSymbol, solutionCells, intelligenceLevel } = appState;
 
 	return (
 		<Grid cols={landscape ? 3 : 1} rowGap="l" colGap={landscape ? 'l' : 'm'}>
@@ -30,6 +30,8 @@ export const GameScreen: React.FC<Props> = ({
 						<AppLogo />
 					</GridItem>
 					<GridItem>
+						<Difficulty intelligenceLevel={intelligenceLevel} />
+						<Divider margin="bottom-s" />
 						<Timer />
 					</GridItem>
 					<GridItem placeSelf="flex-end">

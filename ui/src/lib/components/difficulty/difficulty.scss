@@ -1,0 +1,25 @@
+.difficulty {
+	width: 90px;
+	> .star {
+		position: relative;
+		color: var(--light-primary);
+		font-family: FontAwesome;
+		font-size: 0.75em;
+		width: 10px;
+		aspect-ratio: 1;
+
+		&::before {
+			content: '\f005';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+}
+
+.difficulty-easy > .star:first-child,
+.difficulty-medium > .star:nth-child(-n + 2),
+.difficulty-hard > .star {
+	color: var(--sunshine-gold);
+}

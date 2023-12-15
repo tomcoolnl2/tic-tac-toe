@@ -3,6 +3,7 @@ export { Avatar } from './avatar/avatar';
 export { Button } from './button/button';
 export { Cell } from './cell/cell';
 export { ChooseDifficulty } from './choose-difficulty/choose-difficulty';
+export { Difficulty } from './difficulty/difficulty';
 export { GameOver } from './game-over/game-over';
 export { Icon } from './icon/icon';
 export { Input } from './input/input';

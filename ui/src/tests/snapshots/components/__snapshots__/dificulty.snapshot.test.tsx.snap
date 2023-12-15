@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Difficulty component snapshot test 1`] = `
+<div>
+  <div
+    class="flex-box direction-row justify-content-center align-items-flex-start spacing-m difficulty difficulty-medium"
+  >
+    <div
+      class="star"
+    />
+    <div
+      class="star"
+    />
+    <div
+      class="star"
+    />
+  </div>
+</div>
+`;
