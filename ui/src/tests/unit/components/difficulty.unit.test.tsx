@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
-import { Difficulty, type Props } from '../../../lib/components/difficulty/difficulty';
 import { IntelligenceLevel } from '@tic-tac-toe/model';
+import { Difficulty, type Props } from '../../../lib/components/difficulty/difficulty';
 
 describe('Difficulty Component', () => {
 	test('renders Difficulty component with correct intelligence level class', () => {
