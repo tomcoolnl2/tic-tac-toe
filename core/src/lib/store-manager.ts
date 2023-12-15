@@ -46,6 +46,7 @@ class Store {
 		return {
 			language: TTTModel.Locale.EN,
 			appScreen: TTTModel.AppScreen.LOADING,
+			appScreenSide: null,
 			appModalScreen: null,
 			intelligenceLevel: TTTModel.IntelligenceLevel.EASY,
 			bitBoards: [0x0, 0x0],

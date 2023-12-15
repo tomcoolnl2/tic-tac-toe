@@ -15,8 +15,14 @@ export const App: React.FC = () => {
 	const { signedIn, authError, handleSignIn, handleSignOut, setAuthError } = useAuthContext();
 	const { appContent, isContentLoading, setLanguage } = useContentContext();
 	const [appState] = useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
-	const { handlePauseGame, handleResumeGame, handleQuitGame, handleNextRound, handleNextScreen } =
-		useInterfaceHandlers(appState);
+	const {
+		flipScreenSide,
+		handlePauseGame,
+		handleResumeGame,
+		handleQuitGame,
+		handleNextRound,
+		handleNextScreen,
+	} = useInterfaceHandlers(appState);
 
 	const orientation = useScreenOrientation();
 	const landscape = React.useMemo(() => {
@@ -58,7 +64,7 @@ export const App: React.FC = () => {
 			<div className={`screen ${appState.appScreen}`}>
 				<div
 					className={classNames('screen-inner', { landscape })}
-					onAnimationEnd={() => console.log('animation end')}
+					onAnimationEnd={flipScreenSide}
 				>
 					<TTTUI.Error.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
 						<div className="screen-front">

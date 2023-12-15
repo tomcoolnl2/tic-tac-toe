@@ -1,6 +1,9 @@
+import * as Rx from 'rxjs';
+
 export interface AppState {
 	language: Locale;
 	appScreen: AppScreen;
+	appScreenSide: AppScreenAnimation | null;
 	appModalScreen: AppModalScreen | null;
 	intelligenceLevel: IntelligenceLevel;
 	bitBoards: [number, number];
@@ -22,6 +25,11 @@ export enum AppScreen {
 	LOGIN = 'login',
 	SETTINGS = 'settings',
 	GAME = 'game',
+}
+
+export enum AppScreenAnimation {
+	FORWARD = 'flipForward',
+	BACKWARD = 'flipBackwards',
 }
 
 export enum AppModalScreen {
