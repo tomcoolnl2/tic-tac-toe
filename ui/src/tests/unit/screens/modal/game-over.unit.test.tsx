@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent } from '@testing-library/react';
 import { GameState, PlayerSymbol } from '@tic-tac-toe/model';
-import { GameOverModalScreen } from '../../../lib/screens';
+import { GameOverModalScreen } from '../../../../lib/screens';
 
 describe('GameOverModalScreen component', () => {
 	const content = {

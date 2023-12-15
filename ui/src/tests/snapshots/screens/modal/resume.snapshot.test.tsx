@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { ResumeModalScreen } from '../../../lib/screens/resume';
+import { ResumeModalScreen } from '../../../../lib/screens/modal/resume';
 
 describe('ResumeModalScreen component', () => {
 	const content = {

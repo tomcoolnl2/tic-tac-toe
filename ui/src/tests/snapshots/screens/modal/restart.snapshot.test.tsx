@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { RestartModalScreen } from '../../../lib/screens';
+import { RestartModalScreen } from '../../../../lib/screens';
 
 describe('RestartModalScreen screen component snapshot test', () => {
 	const content = {
@@ -10,7 +10,7 @@ describe('RestartModalScreen screen component snapshot test', () => {
 	it('should match the snapshot', () => {
 		const fn = jest.fn();
 		const { asFragment } = render(
-			<RestartModalScreen content={content} handleQuitGame={fn} closeModalScreen={fn} />
+			<RestartModalScreen content={content} handleQuitGame={fn} handleResumeGame={fn} />
 		);
 		expect(asFragment()).toMatchSnapshot();
 	});

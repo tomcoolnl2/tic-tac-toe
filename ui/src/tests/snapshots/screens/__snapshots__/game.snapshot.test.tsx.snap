@@ -38,7 +38,7 @@ exports[`GameScreen screen component snapshot test should match the snapshot 1`]
             />
           </div>
           <hr
-            class="divider full-width horizontal margin-bottom-s"
+            class="divider full-width horizontal margin-bottom"
           />
           <button
             class="button button-dark timer"
