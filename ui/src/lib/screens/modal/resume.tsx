@@ -1,7 +1,7 @@
 import React from 'react';
-import type { AppScreenContent } from '../context/content/model';
-import { Divider, Grid } from '../core';
-import { Button } from '../components';
+import type { AppScreenContent } from '../../context/content/model';
+import { Divider, Grid } from '../../core';
+import { Button } from '../../components';
 
 interface Props {
 	content: AppScreenContent;

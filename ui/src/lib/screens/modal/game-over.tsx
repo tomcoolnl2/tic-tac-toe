@@ -1,13 +1,13 @@
 import React from 'react';
 import useSound from 'use-sound';
 import { type PlayerSymbol, GameState } from '@tic-tac-toe/model';
-import type { AppScreenContent } from '../context/content/model';
-import { Divider, Grid } from '../core';
-import { GameOver, Button } from '../components';
+import type { AppScreenContent } from '../../context/content/model';
+import { Divider, Grid } from '../../core';
+import { GameOver, Button } from '../../components';
 
-import drawSfx from '../sound/draw.wav';
-import looseSfx from '../sound/loose.wav';
-import winSfx from '../sound/win.wav';
+import drawSfx from '../../sound/draw.wav';
+import looseSfx from '../../sound/loose.wav';
+import winSfx from '../../sound/win.wav';
 
 interface Props {
 	content: AppScreenContent;
