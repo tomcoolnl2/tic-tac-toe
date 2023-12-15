@@ -24,6 +24,22 @@ exports[`GameScreen screen component snapshot test should match the snapshot 1`]
           </div>
         </div>
         <div>
+          <div
+            class="flex-box direction-row justify-content-center align-items-flex-start spacing-m difficulty difficulty-easy"
+          >
+            <div
+              class="star"
+            />
+            <div
+              class="star"
+            />
+            <div
+              class="star"
+            />
+          </div>
+          <hr
+            class="divider full-width horizontal margin-bottom-s"
+          />
           <button
             class="button button-dark timer"
             disabled=""

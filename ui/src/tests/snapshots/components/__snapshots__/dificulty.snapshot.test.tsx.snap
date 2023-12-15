@@ -17,11 +17,3 @@ exports[`Difficulty component snapshot test 1`] = `
   </div>
 </div>
 `;
-
-exports[`Spinner component snapshot test 1`] = `
-<div>
-  <div
-    class="spinner"
-  />
-</div>
-`;
