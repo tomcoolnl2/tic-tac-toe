@@ -22,6 +22,7 @@ beforeEach(() => {
 		appScreen: AppScreen.LOADING,
 		appScreenSide: null,
 		appModalScreen: null,
+		muted: false,
 		intelligenceLevel: IntelligenceLevel.EASY,
 		bitBoards: [0x0, 0x0],
 		boardState: Array.from({ length: 9 }, () => null),

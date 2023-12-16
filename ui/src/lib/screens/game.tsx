@@ -1,26 +1,31 @@
 import React from 'react';
 import { AppStore } from '@tic-tac-toe/core';
-import type { AppState } from '@tic-tac-toe/model';
+import { AppModalScreen, type AppState } from '@tic-tac-toe/model';
 import type { AppGameContent } from '../context/content/model';
-import { Divider, Grid, GridItem } from '../core';
-import { AppLogo, Cell, Difficulty, Icon, ScoreBoardItem, Timer } from '../components';
-import { useBehaviorSubjectState } from '../hooks';
+import { Divider, FlexBox, Grid, GridItem } from '../core';
+import { AppLogo, Cell, Difficulty, Icon, Mute, ScoreBoardItem, Timer } from '../components';
+import { useBehaviorSubjectState, useInterfaceHandlers } from '../hooks';
 
 interface Props {
 	content: AppGameContent;
 	landscape: boolean;
-	handlePauseGame: () => void;
-	openRestartModal: () => void;
 }
 
-export const GameScreen: React.FC<Props> = ({
-	content,
-	landscape,
-	handlePauseGame,
-	openRestartModal,
-}) => {
+export const GameScreen: React.FC<Props> = React.memo(({ content, landscape }) => {
+	//
 	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
-	const { scores, playerSymbol, cpuSymbol, solutionCells, intelligenceLevel } = appState;
+	const { handlePauseGame } = useInterfaceHandlers(appState);
+
+	const { scores, playerSymbol, cpuSymbol, solutionCells, intelligenceLevel, muted } =
+		React.useMemo(() => appState, [appState]);
+
+	const pauseGame = React.useCallback(() => {
+		handlePauseGame(AppModalScreen.PAUSED);
+	}, [handlePauseGame]);
+
+	const openRestartModal = React.useCallback(() => {
+		handlePauseGame(AppModalScreen.RESTART);
+	}, [handlePauseGame]);
 
 	return (
 		<Grid cols={landscape ? 3 : 1} rowGap="l" colGap={landscape ? 'l' : 'm'}>
@@ -34,11 +39,15 @@ export const GameScreen: React.FC<Props> = ({
 						<Divider margin="bottom" />
 						<Timer />
 					</GridItem>
-					<GridItem placeSelf="flex-end">
-						<div className="game-controls">
-							<Icon name="icon-pause" handleOnClick={handlePauseGame} />
-							<Icon name="icon-repeat" handleOnClick={openRestartModal} />
-						</div>
+					<GridItem>
+						<FlexBox className="game-controls" justifyContent="flex-end">
+							<Icon name="icon-pause" handleOnClick={pauseGame} testId="pause-icon" />
+							<Icon
+								name="icon-repeat"
+								handleOnClick={openRestartModal}
+								testId="restart-icon"
+							/>
+						</FlexBox>
 					</GridItem>
 				</Grid>
 			</GridItem>
@@ -51,6 +60,7 @@ export const GameScreen: React.FC<Props> = ({
 							type={type}
 							solutionCells={solutionCells}
 							disabled={appState.currentPlayer === appState.cpuSymbol}
+							muted={muted}
 						/>
 					))}
 				</Grid>
@@ -73,4 +83,4 @@ export const GameScreen: React.FC<Props> = ({
 			</GridItem>
 		</Grid>
 	);
-};
+});

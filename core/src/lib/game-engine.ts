@@ -15,19 +15,19 @@ export class GameEngine {
 	 * Takes the first turn for the CPU in the game.
 	 * Randomly selects an empty cell on the board and assigns it as the CPU's move.
 	 * If no empty cell is available, throws an error indicating an impossible next move.
-	 * @param {TTTModel.AppState} state - The current application state.
+	 * @param {TTTModel.AppState} appState - The current application state.
 	 * @returns {TTTModel.AppState} - The updated application state after the CPU's first move.
 	 * @throws {Error} - Throws an error if no empty cell is available for the CPU's move.
 	 */
-	public takeFirstTurn(state: TTTModel.AppState): TTTModel.AppState {
-		const nullIndex = getRandomNullIndex(state.boardState);
+	public takeFirstTurn(appState: TTTModel.AppState): TTTModel.AppState {
+		const nullIndex = getRandomNullIndex(appState.boardState);
 		if (~nullIndex) {
-			state.boardState[nullIndex] = state.cpuSymbol;
-			this.update(state, nullIndex);
+			appState.boardState[nullIndex] = appState.cpuSymbol;
+			this.update(appState, nullIndex);
 		} else {
 			throw new Error('Next move not possible.');
 		}
-		return state;
+		return appState;
 	}
 
 	/**
@@ -57,50 +57,50 @@ export class GameEngine {
 
 	/**
 	 * Determines if the game has ended in a draw.
-	 * @param state - The current game state.
+	 * @param appState - The current game state.
 	 * @returns True if the game is a draw, false otherwise.
 	 */
-	public determineDraw(state: TTTModel.AppState): boolean {
-		const [score1, score2] = state.bitBoards;
+	public determineDraw(appState: TTTModel.AppState): boolean {
+		const [score1, score2] = appState.bitBoards;
 		return (score1 | score2) === this.drawMask;
 	}
 
 	/**
 	 * Updates the game state based on the player's move.
-	 * @param state - The current game state.
+	 * @param appState - The current game state.
 	 * @param cellIndex - The index of the selected cell.
 	 * @returns The updated game state.
 	 */
-	public update(state: TTTModel.AppState, cellIndex: number): TTTModel.AppState {
+	public update(appState: TTTModel.AppState, cellIndex: number): TTTModel.AppState {
 		const mask = 1 << cellIndex;
-		const [scoreX, scoreO] = state.bitBoards;
+		const [scoreX, scoreO] = appState.bitBoards;
 
 		if (!((scoreX | scoreO) & mask)) {
-			state.bitBoards[state.currentPlayer] |= mask;
-			state.boardState[cellIndex] = state.currentPlayer;
+			appState.bitBoards[appState.currentPlayer] |= mask;
+			appState.boardState[cellIndex] = appState.currentPlayer;
 
-			const winningMask = this.determineWinner(state);
+			const winningMask = this.determineWinner(appState);
 			if (winningMask !== null) {
-				if (state.currentPlayer === state.playerSymbol) {
-					state.gameStatus = TTTModel.GameStatus.WIN;
-					state.scores[0] += 1;
+				if (appState.currentPlayer === appState.playerSymbol) {
+					appState.gameStatus = TTTModel.GameStatus.WIN;
+					appState.scores[0] += 1;
 				} else {
-					state.gameStatus = TTTModel.GameStatus.LOST;
-					state.scores[2] += 1;
+					appState.gameStatus = TTTModel.GameStatus.LOST;
+					appState.scores[2] += 1;
 				}
-				state.appModalScreen = TTTModel.AppModalScreen.GAME_OVER;
-				state.solutionCells = this.getWinningCells(
+				appState.appModalScreen = TTTModel.AppModalScreen.GAME_OVER;
+				appState.solutionCells = this.getWinningCells(
 					winningMask
 				) as TTTModel.AppState['solutionCells'];
-			} else if (this.determineDraw(state)) {
-				state.gameStatus = TTTModel.GameStatus.DRAW;
-				state.scores[1] += 1;
-				state.appModalScreen = TTTModel.AppModalScreen.GAME_OVER;
+			} else if (this.determineDraw(appState)) {
+				appState.gameStatus = TTTModel.GameStatus.DRAW;
+				appState.scores[1] += 1;
+				appState.appModalScreen = TTTModel.AppModalScreen.GAME_OVER;
 			} else {
-				state.currentPlayer ^= 1 as TTTModel.PlayerSymbol;
+				appState.currentPlayer ^= 1 as TTTModel.PlayerSymbol;
 			}
 		}
 
-		return state;
+		return appState;
 	}
 }

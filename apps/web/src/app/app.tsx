@@ -15,14 +15,8 @@ export const App: React.FC = () => {
 	const { signedIn, authError, handleSignIn, handleSignOut, setAuthError } = useAuthContext();
 	const { appContent, isContentLoading, setLanguage } = useContentContext();
 	const [appState] = useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
-	const {
-		flipScreenSide,
-		handlePauseGame,
-		handleResumeGame,
-		handleQuitGame,
-		handleNextRound,
-		handleNextScreen,
-	} = useInterfaceHandlers(appState);
+	const { flipScreenSide, handleResumeGame, handleQuitGame, handleNextRound, handleNextScreen } =
+		useInterfaceHandlers(appState);
 
 	const orientation = useScreenOrientation();
 	const landscape = React.useMemo(() => {
@@ -57,7 +51,7 @@ export const App: React.FC = () => {
 			appScreen = TTTModel.AppScreen.SETTINGS;
 		}
 		handleNextScreen(appScreen);
-	}, [isContentLoading, signedIn, appState.language]);
+	}, [isContentLoading, signedIn]);
 
 	return (
 		<TTTUI.Theme theme={theme}>
@@ -93,12 +87,6 @@ export const App: React.FC = () => {
 								<TTTUI.GameScreen
 									content={appContent.gameScreen}
 									landscape={landscape}
-									handlePauseGame={() =>
-										handlePauseGame(TTTModel.AppModalScreen.PAUSED)
-									}
-									openRestartModal={() =>
-										handlePauseGame(TTTModel.AppModalScreen.RESTART)
-									}
 								/>
 							)}
 						</div>
@@ -126,6 +114,7 @@ export const App: React.FC = () => {
 							gameStatus={appState.gameStatus}
 							playerSymbol={appState.playerSymbol}
 							cpuSymbol={appState.cpuSymbol}
+							muted={appState.muted}
 							handleQuitGame={handleQuitGame}
 							handleNextRound={handleNextRound}
 						/>

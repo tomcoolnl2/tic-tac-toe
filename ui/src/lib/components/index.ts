@@ -10,6 +10,7 @@ export { Input } from './input/input';
 export { LanguageSelector } from './language-selector/language-selector';
 export { Logout } from './logout/logout';
 export { Modal } from './modal/modal';
+export { Mute } from './mute/mute';
 export { ScoreBoardItem } from './score-board-item/score-board-item';
 export { Spinner } from './spinner/spinner';
 export { SymbolChoice } from './symbol-choice/symbol-choice';

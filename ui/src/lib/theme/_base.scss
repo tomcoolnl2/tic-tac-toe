@@ -105,5 +105,13 @@ sub {
 }
 
 .game-controls {
-	margin-bottom: 14px;
+	font-size: 0.85em;
+
+	> .icon {
+		padding: 3px;
+		position: initial;
+		left: initial;
+		top: initial;
+		width: 20px;
+	}
 }

@@ -3,7 +3,8 @@
 exports[`Logout component snapshot test 1`] = `
 <div>
   <i
-    class="logout icon-reply"
+    class="icon mute icon-volume-up"
+    data-testid="mute-icon"
   />
 </div>
 `;

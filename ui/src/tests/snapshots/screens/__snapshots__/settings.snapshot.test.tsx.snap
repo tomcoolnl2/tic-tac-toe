@@ -18,13 +18,13 @@ exports[`SettingsScreen screen component snapshot test should match the snapshot
     <hr
       class="divider full-width horizontal margin-vertical invisible"
     />
-    <div
-      class="logout"
-    >
-      <i
-        class="icon-reply"
-      />
-    </div>
+    <i
+      class="logout icon-reply"
+    />
+    <i
+      class="icon mute icon-volume-up"
+      data-testid="mute-icon"
+    />
     <div
       class="language-selector"
     >
@@ -104,6 +104,9 @@ exports[`SettingsScreen screen component snapshot test should match the snapshot
     <div
       class="flex-box direction-column justify-content-flex-start align-items-center choose-difficulty"
     >
+      <hr
+        class="divider full-width horizontal margin-vertical-s invisible"
+      />
       <div
         class="flex-box direction-row justify-content-flex-start align-items-flex-start"
       >

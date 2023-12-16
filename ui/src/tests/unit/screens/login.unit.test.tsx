@@ -1,12 +1,14 @@
 import '@testing-library/jest-dom';
 import fetchMock from 'jest-fetch-mock';
-import { render, fireEvent, waitFor, act } from '@testing-library/react';
+import { render, fireEvent, act } from '@testing-library/react';
 import { LoginScreen } from '../../../lib/screens';
 
 fetchMock.enableMocks();
 
 describe('LoginScreen component', () => {
 	const content = {
+		username: 'testUserName',
+		password: 'testPassword',
 		cta1: 'Login',
 		title: 'Login',
 		errors: {
@@ -27,7 +29,6 @@ describe('LoginScreen component', () => {
 			const { getByTestId: renderedGetByTestId } = render(
 				<LoginScreen
 					content={content}
-					userName={'testUserName'}
 					authError={null}
 					handleSubmit={jest.fn()}
 					setAuthError={jest.fn()}
@@ -50,7 +51,6 @@ describe('LoginScreen component', () => {
 			const { getByTestId: renderedGetByTestId } = render(
 				<LoginScreen
 					content={content}
-					userName={'testUserName'}
 					authError={null}
 					handleSubmit={jest.fn()}
 					setAuthError={jest.fn()}

@@ -3,6 +3,7 @@ export interface AppState {
 	appScreen: AppScreen;
 	appScreenSide: AppScreenAnimation | null;
 	appModalScreen: AppModalScreen | null;
+	muted: boolean;
 	intelligenceLevel: IntelligenceLevel;
 	bitBoards: [number, number];
 	boardState: BoardState;
@@ -27,7 +28,7 @@ export enum AppScreen {
 
 export enum AppScreenAnimation {
 	FORWARD = 'flipForward',
-	BACKWARD = 'flipBackwards',
+	BACKWARD = 'flipBackward',
 }
 
 export enum AppModalScreen {

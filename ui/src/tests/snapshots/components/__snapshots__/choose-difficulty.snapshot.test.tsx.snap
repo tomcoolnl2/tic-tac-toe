@@ -5,6 +5,9 @@ exports[`ChooseDifficulty component snapshot test should match the snapshot 1`] 
   <div
     class="flex-box direction-column justify-content-flex-start align-items-center choose-difficulty"
   >
+    <hr
+      class="divider full-width horizontal margin-vertical-s invisible"
+    />
     <div
       class="flex-box direction-row justify-content-flex-start align-items-flex-start"
     >

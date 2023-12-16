@@ -6,9 +6,5 @@ export interface Props {
 }
 
 export const Logout: React.FC<Props> = React.memo(({ handleLogout }) => {
-	return (
-		<div className="logout" onClick={handleLogout}>
-			<i className="icon-reply" />
-		</div>
-	);
+	return <i className="logout icon-reply" onClick={handleLogout} />;
 });

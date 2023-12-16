@@ -48,6 +48,7 @@ class Store {
 			appScreen: TTTModel.AppScreen.LOADING,
 			appScreenSide: null,
 			appModalScreen: null,
+			muted: false,
 			intelligenceLevel: TTTModel.IntelligenceLevel.EASY,
 			bitBoards: [0x0, 0x0],
 			boardState: Array.from({ length: 9 }, () => null),

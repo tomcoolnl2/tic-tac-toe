@@ -14,9 +14,10 @@ export interface Props {
 	index: number;
 	solutionCells: AppState['solutionCells'];
 	disabled: boolean;
+	muted: boolean;
 }
 
-export const Cell: React.FC<Props> = ({ type, index, solutionCells, disabled }) => {
+export const Cell: React.FC<Props> = ({ type, index, solutionCells, disabled, muted }) => {
 	//
 	const [playTurnSfx] = useSound(turnSfx);
 	const cellRef = React.useRef(null);
@@ -29,7 +30,7 @@ export const Cell: React.FC<Props> = ({ type, index, solutionCells, disabled }) 
 			Rx.map(getIndex),
 			Rx.map((index) => Number(index)),
 			Rx.mergeMap((index) => {
-				playTurnSfx();
+				!muted && playTurnSfx();
 				return Rx.of(index);
 			})
 		);
@@ -39,7 +40,7 @@ export const Cell: React.FC<Props> = ({ type, index, solutionCells, disabled }) 
 		return () => {
 			subscription.unsubscribe();
 		};
-	}, [getIndex, playTurnSfx]);
+	}, [getIndex, muted, playTurnSfx]);
 
 	const classNames = React.useMemo(() => {
 		return solutionCells?.includes(index) ? `invert invert-${['x', 'o'][type!]}` : '';

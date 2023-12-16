@@ -16,6 +16,7 @@ export interface UseInterfaceHandlers {
 	handleResumeGame: () => void;
 	handleQuitGame: () => void;
 	handleNextRound: () => void;
+	handleMuteSound: (muted: boolean) => Promise<void>;
 }
 
 /**
@@ -36,13 +37,14 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 	const flipScreenSide = React.useCallback(
 		({ animationName }: React.AnimationEvent) => {
 			if (animationName === TTTModel.AppScreenAnimation.BACKWARD) {
-				const { language, appScreen } = appState;
+				const { language, appScreen, muted } = appState;
 				AppStore.nextState({
 					...AppStore.initialState,
 					appScreenSide: animationName,
 					gameStatus: TTTModel.GameStatus.STOPPED,
 					language,
 					appScreen,
+					muted,
 				});
 			}
 		},
@@ -82,11 +84,12 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 			AppStore.nextState({
 				...AppStore.initialState,
 				appScreen,
+				muted: appState.muted,
 				language: appState.language,
 				gameStatus: TTTModel.GameStatus.PAUSED,
 			});
 		},
-		[appState.language]
+		[appState.language, appState.muted]
 	);
 
 	/**
@@ -101,12 +104,16 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 		await sleep(1);
 	}, [appState]);
 
+	/**
+	 * Validates and initiates the first turn of the game based on the player's symbol.
+	 * @param {TTTModel.AppState} appState - The current application state
+	 * @returns {TTTModel.AppState | null} The updated game state if conditions are met, otherwise {}
+	 */
 	const validateFirstTurn = React.useCallback((appState: TTTModel.AppState) => {
-		let nextState = {};
-		if (appState.playerSymbol === TTTModel.PlayerSymbol.O) {
-			nextState = AppStore.gameEngine!.takeFirstTurn(appState);
+		if (AppStore.gameEngine && appState.playerSymbol === TTTModel.PlayerSymbol.O) {
+			return AppStore.gameEngine.takeFirstTurn(appState);
 		}
-		return nextState;
+		return {};
 	}, []);
 
 	/**
@@ -121,7 +128,7 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 			appScreen: TTTModel.AppScreen.GAME,
 			gameStatus: TTTModel.GameStatus.PLAYING,
 		});
-		playStartGameSfx();
+		!appState.muted && playStartGameSfx();
 	}, [appState, playStartGameSfx, validateFirstTurn]);
 
 	/**
@@ -169,7 +176,7 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 	 */
 	const handleNextRound = React.useCallback(async () => {
 		await handleResetTimer();
-		playStartGameSfx();
+		!appState.muted && playStartGameSfx();
 		const nextState = AppStore.getNextRoundGameStatus(appState);
 		const updatedState = validateFirstTurn(nextState);
 		AppStore.nextState({
@@ -177,7 +184,18 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 			...updatedState,
 			gameStatus: TTTModel.GameStatus.PLAYING,
 		});
-	}, [handleResetTimer, playStartGameSfx, appState, validateFirstTurn]);
+	}, [appState, handleResetTimer, playStartGameSfx, validateFirstTurn]);
+
+	/**
+	 * Mute the sounds.
+	 * @param {boolean} muted - Mute/unmute the sounds
+	 */
+	const handleMuteSound = React.useCallback(
+		async (muted: boolean) => {
+			AppStore.nextState({ ...appState, muted });
+		},
+		[appState]
+	);
 
 	/**
 	 * Handles the 'Escape' key event to close modals.
@@ -208,5 +226,6 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 		handleResumeGame,
 		handleQuitGame,
 		handleNextRound,
+		handleMuteSound,
 	};
 }

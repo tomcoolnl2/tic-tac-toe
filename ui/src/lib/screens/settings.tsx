@@ -3,7 +3,14 @@ import { AppStore } from '@tic-tac-toe/core';
 import { type AppState, IntelligenceLevel, PlayerSymbol } from '@tic-tac-toe/model';
 import type { AppScreenContent } from '../context/content/model';
 import { BaseScreen } from './base/base';
-import { Button, ChooseDifficulty, LanguageSelector, Logout, SymbolChoice } from '../components';
+import {
+	Button,
+	ChooseDifficulty,
+	LanguageSelector,
+	Logout,
+	Mute,
+	SymbolChoice,
+} from '../components';
 import { Divider } from '../core';
 import { useBehaviorSubjectState, useInterfaceHandlers, useSettingsHandlers } from '../hooks';
 
@@ -18,12 +25,13 @@ export const SettingsScreen: React.FC<Props> = React.memo(
 	({ content, playerSymbol, selectedDifficultySetting, handleLogout }) => {
 		//
 		const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
-		const { handleStartGame } = useInterfaceHandlers(appState);
+		const { handleStartGame, handleMuteSound } = useInterfaceHandlers(appState);
 		const { handleAvatarChange, handleDifficultyChange } = useSettingsHandlers(appState);
 
 		return (
 			<BaseScreen>
 				<Logout handleLogout={handleLogout} />
+				<Mute muted={appState.muted} handleMuteSound={handleMuteSound} />
 				<LanguageSelector />
 				<Divider invisible margin="vertical-l" className="landscape-hidden" />
 				<span>{content.title}</span>

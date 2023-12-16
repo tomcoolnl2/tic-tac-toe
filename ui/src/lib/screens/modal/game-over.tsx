@@ -14,6 +14,7 @@ interface Props {
 	gameStatus: GameStatus;
 	playerSymbol: PlayerSymbol;
 	cpuSymbol: PlayerSymbol;
+	muted: boolean;
 	handleQuitGame: () => void;
 	handleNextRound: () => void;
 }
@@ -23,6 +24,7 @@ export const GameOverModalScreen: React.FC<Props> = ({
 	playerSymbol,
 	cpuSymbol,
 	gameStatus,
+	muted,
 	handleQuitGame,
 	handleNextRound,
 }) => {
@@ -41,19 +43,19 @@ export const GameOverModalScreen: React.FC<Props> = ({
 			subtitle = content.subtitle?.[0] || '';
 			avatar = playerSymbol;
 			className = ['x', 'o'][playerSymbol];
-			playWinSfx();
+			!muted && playWinSfx();
 			break;
 		case GameStatus.LOST:
 			subtitle = content.subtitle?.[1] || '';
 			avatar = cpuSymbol;
 			className = ['x', 'o'][cpuSymbol];
-			playLooseSfx();
+			!muted && playLooseSfx();
 			break;
 		case GameStatus.DRAW:
 			title = content.title[1];
 			subtitle = content.subtitle?.[2] || '';
 			className = 'text-light';
-			playDrawSfx();
+			!muted && playDrawSfx();
 			break;
 	}
 
