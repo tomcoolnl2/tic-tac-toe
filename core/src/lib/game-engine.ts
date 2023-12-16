@@ -5,27 +5,40 @@ import { getRandomNullIndex } from './utils';
  * The GameEngine class is responsible for managing the game logic.
  */
 export class GameEngine {
+	//
 	// Constants representing winning combinations and a draw mask
-	public static solutionMasks = [
-		0x1c0, 0x038, 0x007, 0x124, 0x092, 0x049, 0x111, 0x054,
-	];
-	private readonly drawMask = 0x1ff; // 511
+	public static solutionMasks = [0x1c0, 0x038, 0x007, 0x124, 0x092, 0x049, 0x111, 0x054];
+	// 511
+	private readonly drawMask = 0x1ff;
 
+	/**
+	 * Takes the first turn for the CPU in the game.
+	 * Randomly selects an empty cell on the board and assigns it as the CPU's move.
+	 * If no empty cell is available, throws an error indicating an impossible next move.
+	 * @param {TTTModel.AppState} state - The current application state.
+	 * @returns {TTTModel.AppState} - The updated application state after the CPU's first move.
+	 * @throws {Error} - Throws an error if no empty cell is available for the CPU's move.
+	 */
 	public takeFirstTurn(state: TTTModel.AppState): TTTModel.AppState {
 		const nullIndex = getRandomNullIndex(state.boardState);
-		state.boardState[nullIndex!] = state.cpuSymbol;
-		this.update(state, nullIndex!);
+		if (~nullIndex) {
+			state.boardState[nullIndex] = state.cpuSymbol;
+			this.update(state, nullIndex);
+		} else {
+			throw new Error('Next move not possible.');
+		}
 		return state;
 	}
+
 	/**
 	 * Gets an array of winning cell indices based on a winning mask.
 	 * @param winningMask - The winning mask representing a winning combination.
 	 * @returns An array of winning cell indices.
 	 */
 	public getWinningCells(winningMask: number): number[] {
-		return Array.from({ length: 9 }, (_, i) => i).filter((i) =>
-			Boolean(winningMask & (1 << i))
-		);
+		return Array.from({ length: 9 }, (_, i) => i).filter((i) => {
+			Boolean(winningMask & (1 << i));
+		});
 	}
 
 	/**
@@ -33,14 +46,12 @@ export class GameEngine {
 	 * @param state - The current game state.
 	 * @returns The player symbol of the winner or null if there is no winner yet.
 	 */
-	public determineWinner(
-		state: TTTModel.AppState
-	): TTTModel.PlayerSymbol | null {
+	public determineWinner(state: TTTModel.AppState): TTTModel.PlayerSymbol | null {
 		const { bitBoards, currentPlayer } = state;
 		return (
-			GameEngine.solutionMasks.find(
-				(mask) => (bitBoards[currentPlayer] & mask) === mask
-			) ?? null
+			GameEngine.solutionMasks.find((mask) => {
+				return (bitBoards[currentPlayer] & mask) === mask;
+			}) ?? null
 		);
 	}
 
@@ -60,10 +71,7 @@ export class GameEngine {
 	 * @param cellIndex - The index of the selected cell.
 	 * @returns The updated game state.
 	 */
-	public update(
-		state: TTTModel.AppState,
-		cellIndex: number
-	): TTTModel.AppState {
+	public update(state: TTTModel.AppState, cellIndex: number): TTTModel.AppState {
 		const mask = 1 << cellIndex;
 		const [scoreX, scoreO] = state.bitBoards;
 

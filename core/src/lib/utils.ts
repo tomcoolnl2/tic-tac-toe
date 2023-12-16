@@ -14,18 +14,13 @@ export const delay = (ms = 500) => {
  * @param {AppState['boardState']} boardState - The current state of the game board.
  * @returns {number[]} An array of indices representing null (empty) cells.
  */
-export const getNullIndices = (
-	boardState: AppState['boardState']
-): number[] => {
-	return boardState.reduce(
-		(indices: number[], value: PlayerSymbol | null, index: number) => {
-			if (value === null) {
-				indices.push(index);
-			}
-			return indices;
-		},
-		[]
-	);
+export const getNullIndices = (boardState: AppState['boardState']): number[] => {
+	return boardState.reduce((indices: number[], value: PlayerSymbol | null, index: number) => {
+		if (value === null) {
+			indices.push(index);
+		}
+		return indices;
+	}, []);
 };
 
 /**
@@ -33,13 +28,11 @@ export const getNullIndices = (
  * @param boardState - The game board state.
  * @returns A random null index or null if none is available.
  */
-export const getRandomNullIndex = (
-	boardState: AppState['boardState']
-): number | null => {
+export const getRandomNullIndex = (boardState: AppState['boardState']): number => {
 	const nullIndices = getNullIndices(boardState);
 
 	if (nullIndices.length === 0) {
-		return null;
+		return -1;
 	}
 
 	const randomIndex = nullIndices[(Math.random() * nullIndices.length) << 0];

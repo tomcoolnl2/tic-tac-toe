@@ -26,26 +26,6 @@ describe('AIEngine', () => {
 			const result = await aiEngine.update(appState);
 			expect(result).toBeLessThanOrEqual(8);
 		});
-
-		// it('should log a message for NOVICE intelligence level', async () => {
-		// 	const aiEngine = new AIEngine();
-		// 	const spyConsoleLog = jest.spyOn(console, 'log');
-		// 	appState.intelligenceLevel = IntelligenceLevel.MEDIUM;
-		// 	await aiEngine.update(appState);
-		// 	expect(spyConsoleLog).toHaveBeenCalledWith(
-		// 		'This is Method ' + IntelligenceLevel.MEDIUM
-		// 	);
-		// });
-
-		// it('should log a message for MASTER intelligence level', async () => {
-		// 	const aiEngine = new AIEngine();
-		// 	const spyConsoleLog = jest.spyOn(console, 'log');
-		// 	appState.intelligenceLevel = IntelligenceLevel.HARD;
-		// 	await aiEngine.update(appState);
-		// 	expect(spyConsoleLog).toHaveBeenCalledWith(
-		// 		'This is Method ' + IntelligenceLevel.HARD
-		// 	);
-		// });
 	});
 
 	describe('getRandomNullIndex method', () => {
@@ -62,7 +42,7 @@ describe('AIEngine', () => {
 				PlayerSymbol.O,
 			];
 			const result = getRandomNullIndex(boardState);
-			expect(boardState[result!]).toBeNull();
+			expect(boardState[result]).toBeNull();
 		});
 
 		it('should return null if there are no null indices', () => {
@@ -78,7 +58,7 @@ describe('AIEngine', () => {
 				PlayerSymbol.X,
 			];
 			const result = getRandomNullIndex(boardState);
-			expect(result).toBeNull();
+			expect(result).toBe(-1);
 		});
 	});
 });
