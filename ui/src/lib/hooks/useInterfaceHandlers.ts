@@ -168,6 +168,7 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 			...appState,
 			appModalScreen: null,
 			appScreen: TTTModel.AppScreen.SETTINGS,
+			intelligenceLevel: TTTModel.IntelligenceLevel.EASY,
 		});
 	}, [appState]);
 
