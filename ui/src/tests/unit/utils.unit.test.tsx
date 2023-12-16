@@ -1,4 +1,4 @@
-import { getEventTargetElement, getDataSetAttribute } from '../../lib/utils';
+import { getEventTargetElement, getDataSetAttribute, sleep } from '../../lib/utils';
 
 describe('getEventTargetElement', () => {
 	test('returns the target element from a MouseEvent', () => {
@@ -37,5 +37,28 @@ describe('getDataSetAttribute', () => {
 
 		// Check if the function returns undefined for non-existing attribute
 		expect(result).toBeUndefined();
+	});
+});
+
+describe('"sleep" function', () => {
+	// Test case for default delay (500ms)
+	test('should resolve after default delay', async () => {
+		const start = Date.now();
+		await sleep();
+		const end = Date.now();
+		const elapsed = end - start;
+		expect(elapsed).toBeGreaterThanOrEqual(450); // Some leeway for timing fluctuations
+		expect(elapsed).toBeLessThan(600); // Still within the expected range
+	});
+
+	// Test case for custom delay
+	test('should resolve after specified delay', async () => {
+		const delayTime = 1000; // 1 second
+		const start = Date.now();
+		await sleep(delayTime);
+		const end = Date.now();
+		const elapsed = end - start;
+		expect(elapsed).toBeGreaterThanOrEqual(950); // Some leeway for timing fluctuations
+		expect(elapsed).toBeLessThan(1100); // Still within the expected range
 	});
 });

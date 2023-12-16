@@ -1,28 +1,5 @@
 import { BoardState } from '@tic-tac-toe/model';
-import { delay, getNullIndices, getRandomNullIndex } from '../lib/utils';
-
-describe('"delay" function', () => {
-	// Test case for default delay (500ms)
-	test('should resolve after default delay', async () => {
-		const start = Date.now();
-		await delay();
-		const end = Date.now();
-		const elapsed = end - start;
-		expect(elapsed).toBeGreaterThanOrEqual(450); // Some leeway for timing fluctuations
-		expect(elapsed).toBeLessThan(600); // Still within the expected range
-	});
-
-	// Test case for custom delay
-	test('should resolve after specified delay', async () => {
-		const delayTime = 1000; // 1 second
-		const start = Date.now();
-		await delay(delayTime);
-		const end = Date.now();
-		const elapsed = end - start;
-		expect(elapsed).toBeGreaterThanOrEqual(950); // Some leeway for timing fluctuations
-		expect(elapsed).toBeLessThan(1100); // Still within the expected range
-	});
-});
+import { getNullIndices, getRandomNullIndex, sleep } from '../lib/utils';
 
 describe('"getNullIndices" function', () => {
 	// Test case for an empty board
@@ -86,5 +63,28 @@ describe('"getRandomNullIndex" function', () => {
 		const filledBoard = ['X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X']; // Completely filled board
 		const randomIndex = getRandomNullIndex(filledBoard as unknown as BoardState);
 		expect(randomIndex).toBe(-1);
+	});
+});
+
+describe('"sleep" function', () => {
+	// Test case for default delay (500ms)
+	test('should resolve after default delay', async () => {
+		const start = Date.now();
+		await sleep();
+		const end = Date.now();
+		const elapsed = end - start;
+		expect(elapsed).toBeGreaterThanOrEqual(450); // Some leeway for timing fluctuations
+		expect(elapsed).toBeLessThan(600); // Still within the expected range
+	});
+
+	// Test case for custom delay
+	test('should resolve after specified delay', async () => {
+		const delayTime = 1000; // 1 second
+		const start = Date.now();
+		await sleep(delayTime);
+		const end = Date.now();
+		const elapsed = end - start;
+		expect(elapsed).toBeGreaterThanOrEqual(950); // Some leeway for timing fluctuations
+		expect(elapsed).toBeLessThan(1100); // Still within the expected range
 	});
 });
