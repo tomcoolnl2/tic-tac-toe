@@ -3,7 +3,7 @@ import {
 	AppScreen,
 	IntelligenceLevel,
 	PlayerSymbol,
-	GameState,
+	GameStatus,
 	Locale,
 } from '@tic-tac-toe/model';
 import { AppStore } from '../lib/store-manager';
@@ -23,7 +23,7 @@ beforeEach(() => {
 		currentPlayer: PlayerSymbol.X,
 		playerSymbol: PlayerSymbol.X,
 		cpuSymbol: PlayerSymbol.O,
-		gameState: GameState.STOPPED,
+		gameStatus: GameStatus.STOPPED,
 		solutionCells: null,
 		scores: [0, 0, 0],
 	};
@@ -50,7 +50,7 @@ describe('StateStorage', () => {
 			currentPlayer: PlayerSymbol.O,
 			playerSymbol: PlayerSymbol.X,
 			cpuSymbol: PlayerSymbol.O,
-			gameState: GameState.PLAYING,
+			gameStatus: GameStatus.PLAYING,
 			solutionCells: null,
 			scores: [1, 2, 0],
 		};

@@ -11,21 +11,21 @@ export const Timer: React.FC = () => {
 	const { time, startTimer, pauseTimer, resetTimer } = useTimer();
 
 	React.useEffect(() => {
-		switch (appState.gameState) {
-			case TTTModel.GameState.PLAYING:
+		switch (appState.gameStatus) {
+			case TTTModel.GameStatus.PLAYING:
 				startTimer();
 				break;
-			case TTTModel.GameState.PAUSED:
-			case TTTModel.GameState.WIN:
-			case TTTModel.GameState.DRAW:
-			case TTTModel.GameState.LOST:
+			case TTTModel.GameStatus.PAUSED:
+			case TTTModel.GameStatus.WIN:
+			case TTTModel.GameStatus.DRAW:
+			case TTTModel.GameStatus.LOST:
 				pauseTimer();
 				break;
 			default:
 				resetTimer();
 				break;
 		}
-	}, [appState.gameState, pauseTimer, startTimer, resetTimer]);
+	}, [appState.gameStatus, pauseTimer, startTimer, resetTimer]);
 
 	return (
 		<Button variant="dark" disabled className="timer">

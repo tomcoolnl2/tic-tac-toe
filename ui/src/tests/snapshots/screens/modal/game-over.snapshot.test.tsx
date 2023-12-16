@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { GameState, PlayerSymbol } from '@tic-tac-toe/model';
+import { GameStatus, PlayerSymbol } from '@tic-tac-toe/model';
 import { GameOverModalScreen } from '../../../../lib/screens';
 
 describe('GameOverModalScreen screen component snapshot test', () => {
@@ -14,7 +14,7 @@ describe('GameOverModalScreen screen component snapshot test', () => {
 		const { asFragment } = render(
 			<GameOverModalScreen
 				content={content}
-				gameState={GameState.WIN}
+				gameStatus={GameStatus.WIN}
 				playerSymbol={PlayerSymbol.X}
 				cpuSymbol={PlayerSymbol.O}
 				handleQuitGame={fn}

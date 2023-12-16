@@ -123,7 +123,7 @@ export const App: React.FC = () => {
 					{appState.appModalScreen === TTTModel.AppModalScreen.GAME_OVER && (
 						<TTTUI.GameOverModalScreen
 							content={appContent.gameOverModal}
-							gameState={appState.gameState}
+							gameStatus={appState.gameStatus}
 							playerSymbol={appState.playerSymbol}
 							cpuSymbol={appState.cpuSymbol}
 							handleQuitGame={handleQuitGame}

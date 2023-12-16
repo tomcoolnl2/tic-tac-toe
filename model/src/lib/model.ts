@@ -1,5 +1,3 @@
-import * as Rx from 'rxjs';
-
 export interface AppState {
 	language: Locale;
 	appScreen: AppScreen;
@@ -11,7 +9,7 @@ export interface AppState {
 	currentPlayer: PlayerSymbol;
 	playerSymbol: PlayerSymbol;
 	cpuSymbol: PlayerSymbol;
-	gameState: GameState;
+	gameStatus: GameStatus;
 	solutionCells: [number, number, number] | null;
 	scores: [number, number, number];
 }
@@ -49,7 +47,7 @@ export enum IntelligenceLevel {
 	HARD = 'HARD',
 }
 
-export enum GameState {
+export enum GameStatus {
 	STOPPED = 'stopped',
 	PLAYING = 'playing',
 	PAUSED = 'paused',

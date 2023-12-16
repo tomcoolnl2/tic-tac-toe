@@ -54,7 +54,7 @@ class Store {
 			currentPlayer: 0,
 			playerSymbol: TTTModel.PlayerSymbol.X,
 			cpuSymbol: TTTModel.PlayerSymbol.O,
-			gameState: TTTModel.GameState.STOPPED,
+			gameStatus: TTTModel.GameStatus.STOPPED,
 			solutionCells: null,
 			scores: [0, 0, 0],
 		};
@@ -65,7 +65,7 @@ class Store {
 	 * @param prevAppState - The previous application state.
 	 * @returns The next application state.
 	 */
-	public getNextRoundGameState(prevAppState: TTTModel.AppState) {
+	public getNextRoundGameStatus(prevAppState: TTTModel.AppState) {
 		const { playerSymbol, cpuSymbol, intelligenceLevel, scores, language } = prevAppState;
 		return {
 			...this.initialState,
@@ -74,7 +74,7 @@ class Store {
 			cpuSymbol,
 			intelligenceLevel,
 			scores,
-			gameState: TTTModel.GameState.PLAYING,
+			gameStatus: TTTModel.GameStatus.PLAYING,
 			appScreen: TTTModel.AppScreen.GAME,
 		};
 	}
@@ -117,7 +117,7 @@ class Store {
 					// Update state using nextState method and await the completion
 					this.nextState(newState);
 
-					if (newState.gameState === TTTModel.GameState.PLAYING) {
+					if (newState.gameStatus === TTTModel.GameStatus.PLAYING) {
 						// Initiate AI's turn with a delay
 						const nullIndex = await this.aiEngine!.update(newState);
 						newState = this.gameEngine!.update({ ...newState }, nullIndex);

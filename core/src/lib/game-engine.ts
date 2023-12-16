@@ -82,10 +82,10 @@ export class GameEngine {
 			const winningMask = this.determineWinner(state);
 			if (winningMask !== null) {
 				if (state.currentPlayer === state.playerSymbol) {
-					state.gameState = TTTModel.GameState.WIN;
+					state.gameStatus = TTTModel.GameStatus.WIN;
 					state.scores[0] += 1;
 				} else {
-					state.gameState = TTTModel.GameState.LOST;
+					state.gameStatus = TTTModel.GameStatus.LOST;
 					state.scores[2] += 1;
 				}
 				state.appModalScreen = TTTModel.AppModalScreen.GAME_OVER;
@@ -93,7 +93,7 @@ export class GameEngine {
 					winningMask
 				) as TTTModel.AppState['solutionCells'];
 			} else if (this.determineDraw(state)) {
-				state.gameState = TTTModel.GameState.DRAW;
+				state.gameStatus = TTTModel.GameStatus.DRAW;
 				state.scores[1] += 1;
 				state.appModalScreen = TTTModel.AppModalScreen.GAME_OVER;
 			} else {

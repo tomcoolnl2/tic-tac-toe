@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, fireEvent } from '@testing-library/react';
-import { GameState, PlayerSymbol } from '@tic-tac-toe/model';
+import { GameStatus, PlayerSymbol } from '@tic-tac-toe/model';
 import { GameOverModalScreen } from '../../../../lib/screens';
 
 describe('GameOverModalScreen component', () => {
@@ -11,10 +11,10 @@ describe('GameOverModalScreen component', () => {
 		cta2: 'Next round',
 	};
 
-	it('should render the component correctly when gameState is WIN', () => {
+	it('should render the component correctly when gameStatus is WIN', () => {
 		const playerSymbol = PlayerSymbol.X;
 		const cpuSymbol = PlayerSymbol.O;
-		const gameState = GameState.WIN;
+		const gameStatus = GameStatus.WIN;
 		const handleQuitGame = jest.fn();
 		const handleNextRound = jest.fn();
 
@@ -23,7 +23,7 @@ describe('GameOverModalScreen component', () => {
 				content={content}
 				playerSymbol={playerSymbol}
 				cpuSymbol={cpuSymbol}
-				gameState={gameState}
+				gameStatus={gameStatus}
 				handleQuitGame={handleQuitGame}
 				handleNextRound={handleNextRound}
 			/>
@@ -35,10 +35,10 @@ describe('GameOverModalScreen component', () => {
 		expect(getByText('Next round')).toBeInTheDocument();
 	});
 
-	it('should render the component correctly when gameState is LOST', () => {
+	it('should render the component correctly when gameStatus is LOST', () => {
 		const playerSymbol = PlayerSymbol.X;
 		const cpuSymbol = PlayerSymbol.O;
-		const gameState = GameState.LOST;
+		const gameStatus = GameStatus.LOST;
 		const handleQuitGame = jest.fn();
 		const handleNextRound = jest.fn();
 
@@ -47,7 +47,7 @@ describe('GameOverModalScreen component', () => {
 				content={content}
 				playerSymbol={playerSymbol}
 				cpuSymbol={cpuSymbol}
-				gameState={gameState}
+				gameStatus={gameStatus}
 				handleQuitGame={handleQuitGame}
 				handleNextRound={handleNextRound}
 			/>
@@ -59,10 +59,10 @@ describe('GameOverModalScreen component', () => {
 		expect(getByText('Next round')).toBeInTheDocument();
 	});
 
-	it('should render the component correctly when gameState is DRAW', () => {
+	it('should render the component correctly when gameStatus is DRAW', () => {
 		const playerSymbol = PlayerSymbol.X;
 		const cpuSymbol = PlayerSymbol.O;
-		const gameState = GameState.DRAW;
+		const gameStatus = GameStatus.DRAW;
 		const handleQuitGame = jest.fn();
 		const handleNextRound = jest.fn();
 
@@ -71,7 +71,7 @@ describe('GameOverModalScreen component', () => {
 				content={content}
 				playerSymbol={playerSymbol}
 				cpuSymbol={cpuSymbol}
-				gameState={gameState}
+				gameStatus={gameStatus}
 				handleQuitGame={handleQuitGame}
 				handleNextRound={handleNextRound}
 			/>
@@ -86,7 +86,7 @@ describe('GameOverModalScreen component', () => {
 	it('should call handleQuitGame when "Quit" button is clicked', () => {
 		const playerSymbol = PlayerSymbol.X;
 		const cpuSymbol = PlayerSymbol.O;
-		const gameState = GameState.WIN;
+		const gameStatus = GameStatus.WIN;
 		const handleQuitGame = jest.fn();
 		const handleNextRound = jest.fn();
 
@@ -95,7 +95,7 @@ describe('GameOverModalScreen component', () => {
 				content={content}
 				playerSymbol={playerSymbol}
 				cpuSymbol={cpuSymbol}
-				gameState={gameState}
+				gameStatus={gameStatus}
 				handleQuitGame={handleQuitGame}
 				handleNextRound={handleNextRound}
 			/>
@@ -111,7 +111,7 @@ describe('GameOverModalScreen component', () => {
 	it('should call handleNextRound when "Next round" button is clicked', () => {
 		const playerSymbol = PlayerSymbol.X;
 		const cpuSymbol = PlayerSymbol.O;
-		const gameState = GameState.WIN;
+		const gameStatus = GameStatus.WIN;
 		const handleQuitGame = jest.fn();
 		const handleNextRound = jest.fn();
 
@@ -120,7 +120,7 @@ describe('GameOverModalScreen component', () => {
 				content={content}
 				playerSymbol={playerSymbol}
 				cpuSymbol={cpuSymbol}
-				gameState={gameState}
+				gameStatus={gameStatus}
 				handleQuitGame={handleQuitGame}
 				handleNextRound={handleNextRound}
 			/>

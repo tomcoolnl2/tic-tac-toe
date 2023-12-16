@@ -1,4 +1,4 @@
-import { AppState, GameState, PlayerSymbol } from '@tic-tac-toe/model';
+import { AppState, GameStatus, PlayerSymbol } from '@tic-tac-toe/model';
 import { GameEngine } from '../lib/game-engine';
 import { AppStore } from '../lib/store-manager';
 
@@ -65,18 +65,18 @@ describe('GameEngine - determineDraw', () => {
 		// Prepare
 		const cellIndex = 4; // Cell index for the player's move
 		// Act
-		const updatedGameState = gameEngine.update(appState, cellIndex);
+		const updatedGameStatus = gameEngine.update(appState, cellIndex);
 		// Assert
-		expect(updatedGameState.currentPlayer).toBe(1); // Player O's turn after Player X's move
+		expect(updatedGameStatus.currentPlayer).toBe(1); // Player O's turn after Player X's move
 	});
 
 	it('should not switch turns after an invalid player move', () => {
 		// Prepare
 		const cellIndex = 0;
 		// Act
-		const updatedGameState = gameEngine.update(appState, cellIndex);
+		const updatedGameStatus = gameEngine.update(appState, cellIndex);
 		// Assert
-		expect(updatedGameState.currentPlayer).toBe(appState.currentPlayer);
+		expect(updatedGameStatus.currentPlayer).toBe(appState.currentPlayer);
 	});
 
 	it('should not update the game state for an invalid move on an occupied cell', () => {
@@ -84,20 +84,20 @@ describe('GameEngine - determineDraw', () => {
 		const cellIndex = 4; // Cell index for the first valid move
 		// Act
 		// Make the first valid move to occupy the cell
-		const updatedGameState = gameEngine.update(appState, cellIndex);
+		const updatedGameStatus = gameEngine.update(appState, cellIndex);
 		// Attempt to make another move on the same cell (invalid move)
-		const invalidMoveGameState = gameEngine.update(updatedGameState, cellIndex);
+		const invalidMoveGameStatus = gameEngine.update(updatedGameStatus, cellIndex);
 		// Assert
-		expect(invalidMoveGameState).toEqual(updatedGameState);
+		expect(invalidMoveGameStatus).toEqual(updatedGameStatus);
 	});
 
 	it('should not update the game state for an invalid move on an out-of-bounds cell', () => {
 		// Prepare
 		const invalidCellIndex = -1; // Cell index out of bounds (negative)
 		// Act
-		const invalidMoveGameState = gameEngine.update(appState, invalidCellIndex);
+		const invalidMoveGameStatus = gameEngine.update(appState, invalidCellIndex);
 		// Assert
-		expect(invalidMoveGameState).toEqual(appState);
+		expect(invalidMoveGameStatus).toEqual(appState);
 	});
 
 	it('should detect winning condition for player X', () => {
@@ -108,7 +108,7 @@ describe('GameEngine - determineDraw', () => {
 			appState = gameEngine.update(appState, cellIndex);
 		});
 		// Assert
-		expect(appState.gameState).toBe(GameState.WIN);
+		expect(appState.gameStatus).toBe(GameStatus.WIN);
 		expect(appState.scores[0]).toBe(1);
 	});
 
@@ -121,7 +121,7 @@ describe('GameEngine - determineDraw', () => {
 			appState = gameEngine.update(appState, cellIndex);
 		});
 		// Assert
-		expect(appState.gameState).toBe(GameState.LOST);
+		expect(appState.gameStatus).toBe(GameStatus.LOST);
 		expect(appState.scores[2]).toBe(1);
 	});
 
@@ -133,7 +133,7 @@ describe('GameEngine - determineDraw', () => {
 			appState = gameEngine.update(appState, cellIndex);
 		});
 		// Assert
-		expect(appState.gameState).toBe(GameState.STOPPED);
+		expect(appState.gameStatus).toBe(GameStatus.STOPPED);
 		expect(appState.scores).toEqual([0, 0, 0]);
 	});
 
@@ -145,7 +145,7 @@ describe('GameEngine - determineDraw', () => {
 			appState = gameEngine.update(appState, cellIndex);
 		});
 		// Assert
-		expect(appState.gameState).toBe(GameState.DRAW);
+		expect(appState.gameStatus).toBe(GameStatus.DRAW);
 		expect(appState.scores[1]).toBe(1);
 		expect(appState.bitBoards[appState.playerSymbol]).toBe(355);
 		expect(appState.bitBoards[appState.cpuSymbol]).toBe(156);
@@ -159,7 +159,7 @@ describe('GameEngine - determineDraw', () => {
 			appState = gameEngine.update(appState, cellIndex);
 		});
 		// Assert
-		expect(appState.gameState).toBe(GameState.STOPPED);
+		expect(appState.gameStatus).toBe(GameStatus.STOPPED);
 		expect(appState.scores).toEqual([0, 0, 0]);
 	});
 });

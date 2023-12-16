@@ -40,7 +40,7 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 				AppStore.nextState({
 					...AppStore.initialState,
 					appScreenSide: animationName,
-					gameState: TTTModel.GameState.STOPPED,
+					gameStatus: TTTModel.GameStatus.STOPPED,
 					language,
 					appScreen,
 				});
@@ -83,19 +83,19 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 				...AppStore.initialState,
 				appScreen,
 				language: appState.language,
-				gameState: TTTModel.GameState.PAUSED,
+				gameStatus: TTTModel.GameStatus.PAUSED,
 			});
 		},
 		[appState.language]
 	);
 
 	/**
-	 * Resets the timer by changeing the gameState to STOPPED
+	 * Resets the timer by changeing the gameStatus to STOPPED
 	 */
 	const handleResetTimer = React.useCallback(async () => {
 		AppStore.nextState({
 			...appState,
-			gameState: TTTModel.GameState.STOPPED,
+			gameStatus: TTTModel.GameStatus.STOPPED,
 		});
 		// allow React to process these state changes
 		await sleep(1);
@@ -119,7 +119,7 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 			...nextState,
 			appModalScreen: null,
 			appScreen: TTTModel.AppScreen.GAME,
-			gameState: TTTModel.GameState.PLAYING,
+			gameStatus: TTTModel.GameStatus.PLAYING,
 		});
 		playStartGameSfx();
 	}, [appState, playStartGameSfx, validateFirstTurn]);
@@ -131,7 +131,7 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 		AppStore.nextState({
 			...appState,
 			appModalScreen: null,
-			gameState: TTTModel.GameState.PLAYING,
+			gameStatus: TTTModel.GameStatus.PLAYING,
 		});
 	}, [appState]);
 
@@ -144,7 +144,7 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 			AppStore.nextState({
 				...appState,
 				appModalScreen,
-				gameState: TTTModel.GameState.PAUSED,
+				gameStatus: TTTModel.GameStatus.PAUSED,
 			});
 		},
 		[appState]
@@ -170,12 +170,12 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 	const handleNextRound = React.useCallback(async () => {
 		await handleResetTimer();
 		playStartGameSfx();
-		const nextState = AppStore.getNextRoundGameState(appState);
+		const nextState = AppStore.getNextRoundGameStatus(appState);
 		const updatedState = validateFirstTurn(nextState);
 		AppStore.nextState({
 			...nextState,
 			...updatedState,
-			gameState: TTTModel.GameState.PLAYING,
+			gameStatus: TTTModel.GameStatus.PLAYING,
 		});
 	}, [handleResetTimer, playStartGameSfx, appState, validateFirstTurn]);
 

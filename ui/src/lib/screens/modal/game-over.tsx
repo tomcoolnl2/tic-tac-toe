@@ -1,6 +1,6 @@
 import React from 'react';
 import useSound from 'use-sound';
-import { type PlayerSymbol, GameState } from '@tic-tac-toe/model';
+import { type PlayerSymbol, GameStatus } from '@tic-tac-toe/model';
 import type { AppScreenContent } from '../../context/content/model';
 import { Divider, Grid } from '../../core';
 import { GameOver, Button } from '../../components';
@@ -11,7 +11,7 @@ import winSfx from '../../sound/win.wav';
 
 interface Props {
 	content: AppScreenContent;
-	gameState: GameState;
+	gameStatus: GameStatus;
 	playerSymbol: PlayerSymbol;
 	cpuSymbol: PlayerSymbol;
 	handleQuitGame: () => void;
@@ -22,7 +22,7 @@ export const GameOverModalScreen: React.FC<Props> = ({
 	content,
 	playerSymbol,
 	cpuSymbol,
-	gameState,
+	gameStatus,
 	handleQuitGame,
 	handleNextRound,
 }) => {
@@ -36,20 +36,20 @@ export const GameOverModalScreen: React.FC<Props> = ({
 	let avatar: PlayerSymbol | null = null;
 	let className = '';
 
-	switch (gameState) {
-		case GameState.WIN:
+	switch (gameStatus) {
+		case GameStatus.WIN:
 			subtitle = content.subtitle?.[0] || '';
 			avatar = playerSymbol;
 			className = ['x', 'o'][playerSymbol];
 			playWinSfx();
 			break;
-		case GameState.LOST:
+		case GameStatus.LOST:
 			subtitle = content.subtitle?.[1] || '';
 			avatar = cpuSymbol;
 			className = ['x', 'o'][cpuSymbol];
 			playLooseSfx();
 			break;
-		case GameState.DRAW:
+		case GameStatus.DRAW:
 			title = content.title[1];
 			subtitle = content.subtitle?.[2] || '';
 			className = 'text-light';
