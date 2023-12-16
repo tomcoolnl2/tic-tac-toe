@@ -3,7 +3,7 @@
 exports[`Timer component snapshot test 1`] = `
 <div>
   <button
-    class="button button-dark timer"
+    class="button button-dark timer timer-stopped"
     disabled=""
   >
     00:00

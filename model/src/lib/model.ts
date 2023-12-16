@@ -59,6 +59,13 @@ export enum GameStatus {
 
 export type GameDuration = `${number}${number}:${number}${number}`;
 
+export enum TimerStatus {
+	RUNNING = 'running',
+	STOPPED = 'stopped',
+	DANGER = 'danger',
+	RUNOUT = 'runout',
+}
+
 export type BoardState = Array<PlayerSymbol | null>;
 
 export interface LoggerState {

@@ -41,7 +41,7 @@ exports[`GameScreen screen component snapshot test should match the snapshot 1`]
             class="divider full-width horizontal margin-bottom"
           />
           <button
-            class="button button-dark timer"
+            class="button button-dark timer timer-stopped"
             disabled=""
           >
             00:00
