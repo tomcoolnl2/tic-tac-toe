@@ -1,35 +1,36 @@
+@use '../../theme/animation' as animation;
 
 .choose-difficulty {
-    direction: rtl;
-    background-color: var(--background-color-tertiary);
-    width: 100%;
-    padding: 10px 0;
+	direction: rtl;
+	background-color: var(--background-color-tertiary);
+	width: 100%;
+	padding: 10px 0;
 
-    & [type=radio] { 
-        display: none;
+	& [type='radio'] {
+		display: none;
 
-        &:checked ~ label {
-            &::before {
-                color: var(--sunshine-gold);
-            }
-        }
-    }
+		&:checked ~ label {
+			&::before {
+				color: var(--sunshine-gold);
+			}
+		}
+	}
 
-    & label {
-        cursor: pointer;
-        
-        &::before {
-            color: var(--light-primary);
-            font-family: FontAwesome;
-            font-size: 1.4em;
-            content: '\f005';
-            padding: 0 5px;
-            transition: color .3s;
-        }
-        
-        &:hover::before,
-        &:hover ~ label::before {
-            color: var(--bronze-amber) !important;
-        }
-    }
+	& label {
+		cursor: pointer;
+
+		&::before {
+			color: var(--light-primary);
+			font-family: FontAwesome;
+			font-size: 1.4em;
+			content: '\f005';
+			padding: 0 5px;
+			transition: color map-get(animation.$speeds, normal);
+		}
+
+		&:hover::before,
+		&:hover ~ label::before {
+			color: var(--bronze-amber) !important;
+		}
+	}
 }

@@ -1,9 +1,9 @@
 @use '../../theme/animation' as animation;
 
-.logout {
+.mute {
 	position: absolute;
 	top: -4px;
-	left: -4px;
+	left: 30px;
 	cursor: pointer;
 	transition: color map-get(animation.$speeds, normal);
 

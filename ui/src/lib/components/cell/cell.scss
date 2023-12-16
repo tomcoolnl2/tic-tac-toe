@@ -1,40 +1,42 @@
 @use '../../theme/utils' as utils;
-
+@use '../../theme/animation' as animation;
 
 $avatar-color: var(--background-color-secondary);
 
 .cell {
-    border-radius: 4px;
-    font-size: 46px;
-    aspect-ratio: 1;
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    min-width: 90px;
-    box-shadow: utils.generate-box-shadow($size: 5px, $color: var(--background-color-tertiary));
-    background-color: $avatar-color;
-    transition: background-color .3s, box-shadow .3s;
+	border-radius: 4px;
+	font-size: 46px;
+	aspect-ratio: 1;
+	cursor: pointer;
+	display: grid;
+	place-items: center;
+	min-width: 90px;
+	box-shadow: utils.generate-box-shadow($size: 5px, $color: var(--background-color-tertiary));
+	background-color: $avatar-color;
+	transition: background-color map-get(animation.$speeds, normal),
+		box-shadow map-get(animation.$speeds, normal);
 
-    &[disabled] {
-        cursor: default;
-    }
-  
-    &.invert {
-        .avatar-x::before, .avatar-x::after {
-            background-color: $avatar-color;
-        }
-        .avatar-o::after {
-            border: 13px solid $avatar-color;
-        }
-    }
-  
-    &.invert-x {
-        background-color: var(--theme-primary);
-        box-shadow: utils.generate-box-shadow($color: var(--theme-secondary));
-    }
-  
-    &.invert-o {
-        background-color: var(--sunshine-gold);
-        box-shadow: utils.generate-box-shadow($color: var(--bronze-amber));
-    }
+	&[disabled] {
+		cursor: default;
+	}
+
+	&.invert {
+		.avatar-x::before,
+		.avatar-x::after {
+			background-color: $avatar-color;
+		}
+		.avatar-o::after {
+			border: 13px solid $avatar-color;
+		}
+	}
+
+	&.invert-x {
+		background-color: var(--theme-primary);
+		box-shadow: utils.generate-box-shadow($color: var(--theme-secondary));
+	}
+
+	&.invert-o {
+		background-color: var(--sunshine-gold);
+		box-shadow: utils.generate-box-shadow($color: var(--bronze-amber));
+	}
 }
