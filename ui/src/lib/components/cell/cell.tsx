@@ -17,7 +17,7 @@ export interface Props {
 	muted: boolean;
 }
 
-export const Cell: React.FC<Props> = ({ type, index, solutionCells, disabled, muted }) => {
+export const Cell: React.FC<Props> = React.memo(({ type, index, solutionCells, disabled, muted }) => {
 	//
 	const [playTurnSfx] = useSound(turnSfx);
 	const cellRef = React.useRef(null);
@@ -58,4 +58,4 @@ export const Cell: React.FC<Props> = ({ type, index, solutionCells, disabled, mu
 			{type !== null && <Avatar size="xl" type={type} />}
 		</button>
 	);
-};
+});

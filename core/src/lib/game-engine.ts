@@ -5,10 +5,17 @@ import { getRandomNullIndex } from './utils';
  * The GameEngine class is responsible for managing the game logic.
  */
 export class GameEngine {
-	//
-	// Constants representing winning combinations and a draw mask
+	/**
+	 * Constants representing winning combinations.
+	 * Each element in the array represents a winning combination on the game board.
+	 */
 	public static solutionMasks = [0x1c0, 0x038, 0x007, 0x124, 0x092, 0x049, 0x111, 0x054];
-	// 511
+
+	/**
+	 * Represents the number 511, used as a draw mask.
+	 * This mask indicates a completely filled game board with no winner.
+	 * It helps identify a drawn game situation.
+	 */
 	private readonly drawMask = 0x1ff;
 
 	/**
@@ -66,12 +73,13 @@ export class GameEngine {
 	}
 
 	/**
-	 * Updates the game state based on the player's move.
-	 * @param appState - The current game state.
+	 * Updates the application state based on a move by either the player or the AI.
+	 * @param appState - The current application state.
 	 * @param cellIndex - The index of the selected cell.
-	 * @returns The updated game state.
+	 * @returns The updated application state.
 	 */
 	public update(appState: TTTModel.AppState, cellIndex: number): TTTModel.AppState {
+		//
 		const mask = 1 << cellIndex;
 		const [scoreX, scoreO] = appState.bitBoards;
 
