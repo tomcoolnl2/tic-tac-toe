@@ -6,6 +6,18 @@ import useSound from 'use-sound';
 import startGameSfx from '../sound/start.wav';
 import { sleep } from '../utils';
 
+export interface UseInterfaceHandlers {
+	flipScreenSide: React.AnimationEventHandler;
+	openModalScreen: (appModalScreen: TTTModel.AppModalScreen) => void;
+	closeModalScreen: () => void;
+	handleNextScreen: (appScreen: TTTModel.AppScreen) => void;
+	handleStartGame: () => void;
+	handlePauseGame: (appModalScreen: TTTModel.AppModalScreen | null) => void;
+	handleResumeGame: () => void;
+	handleQuitGame: () => void;
+	handleNextRound: () => void;
+}
+
 /**
  * Event handlers for interface interactions
  *
@@ -22,7 +34,7 @@ import { sleep } from '../utils';
  *  handleNextRound: () => void
  * }} - Returns a set of event handlers for use in React components
  */
-export function useInterfaceHandlers(appState: TTTModel.AppState) {
+export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceHandlers {
 	//
 	const [playStartGameSfx] = useSound(startGameSfx);
 
