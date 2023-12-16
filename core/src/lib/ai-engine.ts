@@ -12,14 +12,10 @@ export class AIEngine {
 	 * * @param {PlayerSymbol} player - The player to see if it's score is a winning one on a next move
 	 * @returns {number} The cellIndex for winning on the next move, otherwise -1.
 	 */
-	public isWinningNextMove(
-		appState: TTTModel.AppState,
-		player: TTTModel.PlayerSymbol
-	): number {
+	public getWinningNextMove(appState: TTTModel.AppState, player: TTTModel.PlayerSymbol): number {
 		const { bitBoards, boardState } = appState;
 		const playerBitboard = bitBoards[player];
 		const nullIndices = getNullIndices(boardState);
-
 		for (const cellIndex of nullIndices) {
 			// Clone the bitboard and set the bit for the current empty cell
 			const potentialBitboard = playerBitboard | (1 << cellIndex);
@@ -30,19 +26,17 @@ export class AIEngine {
 				}
 			}
 		}
-
 		return -1;
 	}
 
 	/**
 	 * AI strategy for the Intelligence Level "EASY."
+	 * It will randomly select a empty cell index for the next move.
 	 * @param appState - The current application state.
-	 * @returns A number representing the selected index.
+	 * @returns A number representing the selected index or -1.
 	 */
-	private [TTTModel.IntelligenceLevel.EASY](
-		appState: TTTModel.AppState
-	): number {
-		return getRandomNullIndex(appState.boardState) ?? 0;
+	private [TTTModel.IntelligenceLevel.EASY](appState: TTTModel.AppState): number {
+		return getRandomNullIndex(appState.boardState);
 	}
 
 	// private calculateBestMove(appState: AppState): number {
@@ -78,16 +72,20 @@ export class AIEngine {
 	/**
 	 * AI strategy for the Intelligence Level "NOVICE."
 	 * NOVICE will lookout for easy winning combinations
-	 * and prevent the Player from winning if it is able on the next turn.
+	 * and prevent the Player from winning on the next turn.
 	 * @param appState - The current application state.
-	 * @returns A Promise that resolves to void.
+	 * @returns A number representing the selected index or -1.
 	 */
-	private [TTTModel.IntelligenceLevel.MEDIUM](
-		appState: TTTModel.AppState
-	): number {
-		let cellIndex = this.isWinningNextMove(appState, appState.playerSymbol);
+	private [TTTModel.IntelligenceLevel.MEDIUM](appState: TTTModel.AppState): number {
+		// check if AI can win
+		let cellIndex = this.getWinningNextMove(appState, appState.cpuSymbol);
+		// if not, prevent human from winning
 		if (!~cellIndex) {
-			cellIndex = getRandomNullIndex(appState.boardState)!;
+			cellIndex = this.getWinningNextMove(appState, appState.playerSymbol);
+		}
+		// Choose a random next option
+		if (!~cellIndex) {
+			cellIndex = getRandomNullIndex(appState.boardState);
 		}
 		return cellIndex;
 	}
@@ -97,24 +95,20 @@ export class AIEngine {
 	 * MASTER will actively block winning options for the Player
 	 * and actively play for winning its self
 	 * @param appState - The current application state.
+	 * @returns A number representing the selected index or -1.
 	 */
-	private [TTTModel.IntelligenceLevel.HARD](
-		appState: TTTModel.AppState
-	): number {
-		let cellIndex: number;
+	private [TTTModel.IntelligenceLevel.HARD](appState: TTTModel.AppState): number {
 		// check if AI can win
-		cellIndex = this.isWinningNextMove(appState, appState.cpuSymbol);
+		let cellIndex = this.getWinningNextMove(appState, appState.cpuSymbol);
 		// if not, prevent human from winning
 		if (!~cellIndex) {
-			cellIndex = this.isWinningNextMove(appState, appState.playerSymbol);
+			cellIndex = this.getWinningNextMove(appState, appState.playerSymbol);
 		}
 		// Choose a random next option
-		// TODO Find the next best option, threaten to win
+		// TODO choose the best next option
 		if (!~cellIndex) {
-			// cellIndex = this.calculateBestMove(appState);
-			cellIndex = getRandomNullIndex(appState.boardState)!;
+			cellIndex = getRandomNullIndex(appState.boardState);
 		}
-
 		return cellIndex;
 	}
 
@@ -122,10 +116,14 @@ export class AIEngine {
 	 * Updates the AI player's move based on the current application state.
 	 * @param appState - The current application state.
 	 * @returns A Promise that resolves to the selected index.
+	 * @throws {Error} - Throws an error if no empty cell is available for the CPU's move.
 	 */
 	public async update(appState: TTTModel.AppState): Promise<number> {
 		await delay(500);
 		const index = this[appState.intelligenceLevel](appState) as number;
+		if (!~index) {
+			throw new Error('Next move not possible.');
+		}
 		return index;
 	}
 }
