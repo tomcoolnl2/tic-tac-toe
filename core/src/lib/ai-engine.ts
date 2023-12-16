@@ -33,7 +33,7 @@ export class AIEngine {
 	 * AI strategy for the Intelligence Level "EASY."
 	 * It will randomly select a empty cell index for the next move.
 	 * @param appState - The current application state.
-	 * @returns A number representing the selected index.
+	 * @returns A number representing the selected index or -1.
 	 */
 	private [TTTModel.IntelligenceLevel.EASY](appState: TTTModel.AppState): number {
 		return getRandomNullIndex(appState.boardState);
@@ -74,7 +74,7 @@ export class AIEngine {
 	 * NOVICE will lookout for easy winning combinations
 	 * and prevent the Player from winning on the next turn.
 	 * @param appState - The current application state.
-	 * @returns A number representing the selected index.
+	 * @returns A number representing the selected index or -1.
 	 */
 	private [TTTModel.IntelligenceLevel.MEDIUM](appState: TTTModel.AppState): number {
 		// check if AI can win
@@ -95,7 +95,7 @@ export class AIEngine {
 	 * MASTER will actively block winning options for the Player
 	 * and actively play for winning its self
 	 * @param appState - The current application state.
-	 * @returns A number representing the selected index.
+	 * @returns A number representing the selected index or -1.
 	 */
 	private [TTTModel.IntelligenceLevel.HARD](appState: TTTModel.AppState): number {
 		// check if AI can win
