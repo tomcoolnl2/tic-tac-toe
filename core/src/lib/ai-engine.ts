@@ -105,6 +105,7 @@ export class AIEngine {
 			cellIndex = this.getWinningNextMove(appState, appState.playerSymbol);
 		}
 		// Choose a random next option
+		// TODO choose the best next option
 		if (!~cellIndex) {
 			cellIndex = getRandomNullIndex(appState.boardState);
 		}
@@ -120,7 +121,7 @@ export class AIEngine {
 	public async update(appState: TTTModel.AppState): Promise<number> {
 		await delay(500);
 		const index = this[appState.intelligenceLevel](appState) as number;
-		if (~index) {
+		if (!~index) {
 			throw new Error('Next move not possible.');
 		}
 		return index;

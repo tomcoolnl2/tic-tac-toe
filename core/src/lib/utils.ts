@@ -16,10 +16,7 @@ export const delay = (ms = 500) => {
  */
 export const getNullIndices = (boardState: AppState['boardState']): number[] => {
 	return boardState.reduce((indices: number[], value: PlayerSymbol | null, index: number) => {
-		if (value === null) {
-			indices.push(index);
-		}
-		return indices;
+		return value === null ? [...indices, index] : indices;
 	}, []);
 };
 
@@ -30,11 +27,5 @@ export const getNullIndices = (boardState: AppState['boardState']): number[] => 
  */
 export const getRandomNullIndex = (boardState: AppState['boardState']): number => {
 	const nullIndices = getNullIndices(boardState);
-
-	if (nullIndices.length === 0) {
-		return -1;
-	}
-
-	const randomIndex = nullIndices[(Math.random() * nullIndices.length) << 0];
-	return randomIndex;
+	return nullIndices.length ? nullIndices[(Math.random() * nullIndices.length) << 0] : -1;
 };
