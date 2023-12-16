@@ -26,6 +26,7 @@ export const ChooseDifficulty: React.FC<Props> = React.memo(
 		return (
 			!isContentLoading && (
 				<FlexBox direction="column" alignItems="center" className="choose-difficulty">
+					<Divider invisible margin="vertical-s" />
 					<FlexBox>
 						{options.reverse().map((level, i) => (
 							<React.Fragment key={level}>
