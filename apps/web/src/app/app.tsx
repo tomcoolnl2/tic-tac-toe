@@ -56,15 +56,10 @@ export const App: React.FC = () => {
 	return (
 		<TTTUI.Theme theme={theme}>
 			<div className={`screen ${appState.appScreen}`}>
-				<div
-					className={classNames('screen-inner', { landscape })}
-					onAnimationEnd={flipScreenSide}
-				>
+				<div className={classNames('screen-inner', { landscape })} onAnimationEnd={flipScreenSide}>
 					<TTTUI.Error.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
 						<div className="screen-front">
-							{appState.appScreen === TTTModel.AppScreen.LOADING && (
-								<TTTUI.LoadingScreen />
-							)}
+							{appState.appScreen === TTTModel.AppScreen.LOADING && <TTTUI.LoadingScreen />}
 							{appContent && appState.appScreen === TTTModel.AppScreen.LOGIN && (
 								<TTTUI.LoginScreen
 									content={appContent.loginScreen}
@@ -83,12 +78,7 @@ export const App: React.FC = () => {
 							)}
 						</div>
 						<div className="screen-back">
-							{appContent && (
-								<TTTUI.GameScreen
-									content={appContent.gameScreen}
-									landscape={landscape}
-								/>
-							)}
+							{appContent && <TTTUI.GameScreen content={appContent.gameScreen} landscape={landscape} />}
 						</div>
 					</TTTUI.Error.ErrorBoundary>
 				</div>

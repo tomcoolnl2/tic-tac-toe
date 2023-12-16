@@ -1,13 +1,12 @@
-
 .login-form {
-    width: 280px;
+	width: 280px;
 }
 
 .error-message {
-    opacity: 0.8;
-    border-radius: 4px;
-    text-align: center;
-    border: 2px solid red;
-    padding: 10px;
-    background: rgba(255,0,0,.2)
+	opacity: 0.8;
+	border-radius: 4px;
+	text-align: center;
+	border: 2px solid var(--error-primary);
+	padding: 10px;
+	background: var(--error-secondary);
 }

@@ -5,6 +5,7 @@ import { AppStore } from '@tic-tac-toe/core';
 import useSound from 'use-sound';
 import startGameSfx from '../sound/start.wav';
 import { sleep } from '../utils';
+import { GameScreen } from '../screens';
 
 export interface UseInterfaceHandlers {
 	flipScreenSide: React.AnimationEventHandler;
@@ -16,6 +17,7 @@ export interface UseInterfaceHandlers {
 	handleResumeGame: () => void;
 	handleQuitGame: () => void;
 	handleNextRound: () => void;
+	forceGameOver: () => void;
 	handleMuteSound: (muted: boolean) => Promise<void>;
 }
 
@@ -188,6 +190,18 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 	}, [appState, handleResetTimer, playStartGameSfx, validateFirstTurn]);
 
 	/**
+	 * Force the game to be over
+	 * E/g/ when time runs out!
+	 */
+	const forceGameOver = React.useCallback(async () => {
+		AppStore.nextState({
+			...appState,
+			gameStatus: TTTModel.GameStatus.LOST,
+			appModalScreen: TTTModel.AppModalScreen.GAME_OVER,
+		});
+	}, [appState]);
+
+	/**
 	 * Mute the sounds.
 	 * @param {boolean} muted - Mute/unmute the sounds
 	 */
@@ -227,6 +241,7 @@ export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceH
 		handleResumeGame,
 		handleQuitGame,
 		handleNextRound,
+		forceGameOver,
 		handleMuteSound,
 	};
 }

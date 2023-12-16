@@ -14,10 +14,12 @@ interface Props {
 export const GameScreen: React.FC<Props> = React.memo(({ content, landscape }) => {
 	//
 	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
-	const { handlePauseGame } = useInterfaceHandlers(appState);
+	const { handlePauseGame, forceGameOver } = useInterfaceHandlers(appState);
 
-	const { scores, playerSymbol, cpuSymbol, solutionCells, intelligenceLevel, muted } =
-		React.useMemo(() => appState, [appState]);
+	const { scores, playerSymbol, cpuSymbol, solutionCells, intelligenceLevel, muted } = React.useMemo(
+		() => appState,
+		[appState]
+	);
 
 	const pauseGame = React.useCallback(() => {
 		handlePauseGame(AppModalScreen.PAUSED);
@@ -37,16 +39,12 @@ export const GameScreen: React.FC<Props> = React.memo(({ content, landscape }) =
 					<GridItem>
 						<Difficulty intelligenceLevel={intelligenceLevel} />
 						<Divider margin="bottom" />
-						<Timer />
+						<Timer forceGameOver={forceGameOver} />
 					</GridItem>
 					<GridItem>
 						<FlexBox className="game-controls" justifyContent="flex-end">
 							<Icon name="icon-pause" handleOnClick={pauseGame} testId="pause-icon" />
-							<Icon
-								name="icon-repeat"
-								handleOnClick={openRestartModal}
-								testId="restart-icon"
-							/>
+							<Icon name="icon-repeat" handleOnClick={openRestartModal} testId="restart-icon" />
 						</FlexBox>
 					</GridItem>
 				</Grid>
