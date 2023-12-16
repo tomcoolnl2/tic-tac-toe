@@ -22,17 +22,7 @@ export interface UseInterfaceHandlers {
  * Event handlers for interface interactions
  *
  * @param {TTTModel.AppState} appState - The current application state
- * @returns {{
- *  flipScreenSide: React.AnimationEventHandler,
- *  openModalScreen: (appModalScreen: TTTModel.AppModalScreen) => void,
- *  closeModalScreen: () => void,
- *  handleNextScreen: (appScreen: TTTModel.AppScreen) => void,
- *  handleStartGame: () => void,
- *  handlePauseGame: (appModalScreen: TTTModel.AppModalScreen | null) => void,
- *  handleResumeGame: () => void,
- *  handleQuitGame: () => void,
- *  handleNextRound: () => void
- * }} - Returns a set of event handlers for use in React components
+ * @returns {UseInterfaceHandlers} - Returns a set of event handlers for use in React components
  */
 export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceHandlers {
 	//
