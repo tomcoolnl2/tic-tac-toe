@@ -5,3 +5,4 @@ export * from './lib/screens';
 export * as Error from './lib/error';
 export * as Hooks from './lib/hooks';
 export * as Context from './lib/context';
+export * as Utils from './lib/utils';

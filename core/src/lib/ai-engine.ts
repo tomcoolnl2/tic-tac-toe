@@ -1,7 +1,6 @@
 import * as TTTModel from '@tic-tac-toe/model';
-import { delay, getNullIndices, getRandomNullIndex } from './utils';
+import { getNullIndices, getRandomNullIndex, sleep } from './utils';
 import { GameEngine } from './game-engine';
-
 /**
  * The AIEngine class is responsible for managing AI player behavior in the game.
  */
@@ -119,7 +118,7 @@ export class AIEngine {
 	 * @throws {Error} - Throws an error if no empty cell is available for the CPU's move.
 	 */
 	public async update(appState: TTTModel.AppState): Promise<number> {
-		await delay(500);
+		await sleep(500);
 		const index = this[appState.intelligenceLevel](appState) as number;
 		if (!~index) {
 			throw new Error('Next move not possible.');

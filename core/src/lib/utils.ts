@@ -1,13 +1,11 @@
 import { AppState, PlayerSymbol } from '@tic-tac-toe/model';
 
 /**
- * Delays the execution asynchronously for a specified duration.
- * @param {number} [ms=500] - The duration in milliseconds to delay the execution.
- * @returns {Promise<void>} - A promise that resolves after the specified delay.
+ * Asynchronously pauses the execution for a specified duration.
+ * @param {number} [ms=500] - The duration in milliseconds to wait before resolving the promise.
+ * @returns {Promise<void>} A promise that resolves after the specified duration.
  */
-export const delay = (ms = 500) => {
-	return new Promise((resolve) => setTimeout(resolve, ms));
-};
+export const sleep = (ms = 500): Promise<void> => new Promise((r) => setTimeout(r, ms));
 
 /**
  * Gets the indices of null (empty) cells in the game board state.

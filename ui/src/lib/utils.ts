@@ -18,7 +18,7 @@ export const getDataSetAttribute =
 
 /**
  * Asynchronously pauses the execution for a specified duration.
- * @param {number} ms - The duration in milliseconds to wait before resolving the promise.
+ * @param {number} [ms=500] - The duration in milliseconds to wait before resolving the promise.
  * @returns {Promise<void>} A promise that resolves after the specified duration.
  */
-export const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
+export const sleep = (ms = 500): Promise<void> => new Promise((r) => setTimeout(r, ms));
