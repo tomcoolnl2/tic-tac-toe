@@ -1,12 +1,12 @@
 projects:
-  tictactoe:
-    schemaPath: apps/web/graphql/schema.json
-    includes:
-      - database/src/lib/graphql/**/*.ts
-    excludes:
-      - ./amplify/**
-    extensions:
-      amplify:
-        codeGenTarget: typescript
-        generatedFileName: database/src/lib/graphql/api.ts
-        docsFilePath: database/src/lib/graphql
+    tictactoe:
+        schemaPath: apps/web/graphql/schema.json
+        includes:
+            - database/src/lib/graphql/**/*.ts
+        excludes:
+            - ./amplify/**
+        extensions:
+            amplify:
+                codeGenTarget: typescript
+                generatedFileName: database/src/lib/graphql/api.ts
+                docsFilePath: database/src/lib/graphql
