@@ -11,6 +11,7 @@
 		"src/**/*.spec.ts",
 		"src/**/*.test.tsx",
 		"src/**/*.spec.tsx",
-		"src/**/*.d.ts"
+		"src/**/*.d.ts",
+		"../core/src/tests/useBehaviorSubjectState.unit.test.ts"
 	]
 }

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-import { AppStore } from '@tic-tac-toe/core';
+import { AppStore, useBehaviorSubjectState } from '@tic-tac-toe/core';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
 import * as TTTModel from '@tic-tac-toe/model';
 import * as TTTUI from '@tic-tac-toe/ui';
@@ -10,7 +10,7 @@ export const App: React.FC = () => {
 	const theme = React.useMemo(() => (window as any)?.electron?.theme ?? 'web', []);
 
 	const { useAuthContext, useContentContext } = TTTUI.Context;
-	const { useBehaviorSubjectState, useScreenOrientation, useInterfaceHandlers } = TTTUI.Hooks;
+	const { useScreenOrientation, useInterfaceHandlers } = TTTUI.Hooks;
 
 	const { signedIn, authError, handleSignIn, handleSignOut, setAuthError } = useAuthContext();
 	const { appContent, isContentLoading, setLanguage } = useContentContext();
@@ -82,10 +82,7 @@ export const App: React.FC = () => {
 			{appContent && appState.appModalScreen !== null && (
 				<TTTUI.Modal>
 					{appState.appModalScreen === TTTModel.AppModalScreen.PAUSED && (
-						<TTTUI.ResumeModalScreen
-							content={appContent.resumeGameModal}
-							handleResumeGame={handleResumeGame}
-						/>
+						<TTTUI.PausedModalScreen content={appContent.resumeGameModal} />
 					)}
 					{appState.appModalScreen === TTTModel.AppModalScreen.RESTART && (
 						<TTTUI.RestartModalScreen

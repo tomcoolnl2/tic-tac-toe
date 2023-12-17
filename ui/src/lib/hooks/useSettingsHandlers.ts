@@ -1,8 +1,7 @@
 import React from 'react';
 import * as TTTModel from '@tic-tac-toe/model';
-import { AppStore } from '@tic-tac-toe/core';
+import { AppStore, useBehaviorSubjectState } from '@tic-tac-toe/core';
 import { useContentContext } from '../context';
-import { useBehaviorSubjectState } from '../hooks';
 
 interface UseSettingsHandlers {
 	handleAvatarChange: (event: React.ChangeEvent<HTMLInputElement>) => void;

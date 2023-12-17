@@ -1,11 +1,10 @@
 import React from 'react';
 import * as Rx from 'rxjs';
 import * as TTTModel from '@tic-tac-toe/model';
-import { AppStore } from '@tic-tac-toe/core';
+import { AppStore, useBehaviorSubjectState } from '@tic-tac-toe/core';
 import useSound from 'use-sound';
 import startGameSfx from '../sound/start.wav';
 import { sleep } from '../utils';
-import { useBehaviorSubjectState } from '../hooks';
 
 export interface UseInterfaceHandlers {
 	flipScreenSide: React.AnimationEventHandler;

@@ -1,10 +1,9 @@
 import React from 'react';
 import { generateClient } from 'aws-amplify/api';
-import { AppStore } from '@tic-tac-toe/core';
+import { AppStore, useBehaviorSubjectState } from '@tic-tac-toe/core';
 import { saveNewGame as saveNewGameMutation } from '../graphql/mutations';
 import { listSaveGames as listSaveGamesQuery } from '../graphql/queries';
 import type { SaveGame, SaveGameInput } from '../graphql/api';
-import { useBehaviorSubjectState } from 'ui/src/lib/hooks';
 
 export interface UseSaveGameManager {
 	processing: boolean;

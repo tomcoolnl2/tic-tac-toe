@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { renderHook, act } from '@testing-library/react-hooks';
-import { useBehaviorSubjectState } from '../../../lib/hooks';
+import { useBehaviorSubjectState } from '../';
 
 describe('useBehaviorSubjectState', () => {
 	const originalError = console.error;
@@ -17,9 +17,7 @@ describe('useBehaviorSubjectState', () => {
 		const initialValue = 'initial';
 		const behaviorSubject = new BehaviorSubject(initialValue);
 
-		const { result } = renderHook(() =>
-			useBehaviorSubjectState(behaviorSubject)
-		);
+		const { result } = renderHook(() => useBehaviorSubjectState(behaviorSubject));
 
 		const [state, setState] = result.current;
 
@@ -46,9 +44,7 @@ describe('useBehaviorSubjectState', () => {
 	it('should unsubscribe from BehaviorSubject on unmount', () => {
 		const behaviorSubject = new BehaviorSubject('value');
 
-		const { unmount } = renderHook(() =>
-			useBehaviorSubjectState(behaviorSubject)
-		);
+		const { unmount } = renderHook(() => useBehaviorSubjectState(behaviorSubject));
 
 		// Access the behaviorSubject instance and check its subscriptions
 		const subscriptions = behaviorSubject.observers.length;

@@ -1,10 +1,10 @@
 import React from 'react';
-import { AppStore } from '@tic-tac-toe/core';
+import { AppStore, useBehaviorSubjectState } from '@tic-tac-toe/core';
 import { AppModalScreen, type AppState } from '@tic-tac-toe/model';
 import type { AppGameContent } from '../context/content/model';
 import { Divider, FlexBox, Grid, GridItem } from '../core';
 import { AppLogo, Cell, Difficulty, Icon, ScoreBoardItem, Timer } from '../components';
-import { useBehaviorSubjectState, useInterfaceHandlers } from '../hooks';
+import { useInterfaceHandlers } from '../hooks';
 
 interface Props {
 	content: AppGameContent;

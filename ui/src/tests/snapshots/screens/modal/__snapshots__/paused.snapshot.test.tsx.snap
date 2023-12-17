@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ResumeModalScreen component matches snapshot 1`] = `
+exports[`PausedModalScreen component matches snapshot 1`] = `
 <h1>
   Game is Paused
 </h1>

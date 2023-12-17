@@ -1,7 +1,7 @@
 import React from 'react';
-import { AppStore } from '@tic-tac-toe/core';
+import { AppStore, useBehaviorSubjectState } from '@tic-tac-toe/core';
 import { AppState, GameStatus, TimerStatus } from '@tic-tac-toe/model';
-import { useBehaviorSubjectState, useTimer } from '../../hooks';
+import { useTimer } from '../../hooks';
 import { Button } from '../button/button';
 import './timer.scss';
 

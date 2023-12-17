@@ -1,8 +1,8 @@
 import React from 'react';
 import { AppState, Locale } from '@tic-tac-toe/model';
+import { AppStore, useBehaviorSubjectState } from '@tic-tac-toe/core';
+import { useSettingsHandlers } from '../../hooks';
 import './language-selector.scss';
-import { useBehaviorSubjectState, useSettingsHandlers } from '../../hooks';
-import { AppStore } from '@tic-tac-toe/core';
 
 export const LanguageSelector: React.FC = React.memo(() => {
 	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);

@@ -1,5 +1,5 @@
-import React from 'react';
-import rxjs from 'rxjs';
+import * as React from 'react';
+import * as rxjs from 'rxjs';
 
 /**
  * Use an rxjs BehaviorSubject to read and write state for a React component.
