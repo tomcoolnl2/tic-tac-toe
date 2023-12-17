@@ -1,12 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
-<<<<<<< .merge_file_W0a2uT
 import { AppStore, useBehaviorSubjectState } from '@tic-tac-toe/core';
-=======
->>>>>>> .merge_file_RrPeCj
 import { isDevEnvironment } from '@tic-tac-toe/debug';
 import { useAuthContext } from '@tic-tac-toe/auth';
-import { AppStore } from '@tic-tac-toe/core';
 import { useContentContext } from '@tic-tac-toe/content';
 import * as TTTModel from '@tic-tac-toe/model';
 import * as TTTUI from '@tic-tac-toe/ui';
@@ -15,13 +11,7 @@ export const App: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const theme = React.useMemo(() => (window as any)?.electron?.theme ?? 'web', []);
 
-<<<<<<< .merge_file_W0a2uT
-	const { useAuthContext, useContentContext } = TTTUI.Context;
 	const { useScreenOrientation, useInterfaceHandlers } = TTTUI.Hooks;
-=======
-	const { useBehaviorSubjectState, useScreenOrientation, useInterfaceHandlers } = TTTUI.Hooks;
->>>>>>> .merge_file_RrPeCj
-
 	const { signedIn, authError, handleSignIn, handleSignOut, setAuthError } = useAuthContext();
 	const { appContent, isContentLoading, setLanguage } = useContentContext();
 	const [appState] = useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
