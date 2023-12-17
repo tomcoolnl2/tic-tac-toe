@@ -10,6 +10,8 @@ describe('Cell component snapshot test', () => {
 				index={0}
 				solutionCells={[0, 0, 0]}
 				disabled={false}
+				muted={false}
+				playTurnSfx={jest.fn}
 			/>
 		);
 		expect(asFragment()).toMatchSnapshot();
