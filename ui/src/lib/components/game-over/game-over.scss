@@ -1,27 +1,26 @@
-
 .game-over {
-    position: relative;
+	position: relative;
 
-    .text-player-x {
-        color: var(--theme-primary);
-    }
-    
-    .text-player-o {
-        color: var(--sunshine-gold);
-    }
-    
-    .text-light {
-        color: var(--light-primary);
-    }
-    
-    .text-player-o, .text-player-x {
-        padding-left: 50px;
-    }
-    
-    .avatar {
-        position: absolute;
-        left: 0;
-        top: 30px;
-    }
+	.text-player-x {
+		color: var(--theme-primary);
+	}
+
+	.text-player-o {
+		color: var(--sunshine-gold);
+	}
+
+	.text-light {
+		color: var(--light-primary);
+	}
+
+	.text-player-o,
+	.text-player-x {
+		padding-left: 50px;
+	}
+
+	.avatar {
+		position: absolute;
+		left: 0;
+		top: 22px;
+	}
 }
-
