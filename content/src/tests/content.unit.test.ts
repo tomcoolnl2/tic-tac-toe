@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom';
 import fetchMock from 'jest-fetch-mock';
 import { Locale } from '@tic-tac-toe/model';
-import { fetchContentfulData } from '../../../lib/context/content/api';
-import { ContentfulError } from '../../../lib/context/content/error';
+import { fetchContentfulData } from '../lib/api';
+import { ContentfulError } from '../lib/error';
 
 describe('fetchContentfulData function', () => {
 	beforeEach(() => {

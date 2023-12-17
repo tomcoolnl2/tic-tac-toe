@@ -1,5 +1,5 @@
 import React from 'react';
-import type { AppScreenContent } from '../../context/content/model';
+import type { AppScreenContent } from '../../../../../content/src/lib/model';
 import { Divider, Grid } from '../../core';
 import { Button } from '../../components';
 
@@ -9,11 +9,7 @@ interface Props {
 	handleResumeGame: () => void;
 }
 
-export const RestartModalScreen: React.FC<Props> = ({
-	content,
-	handleQuitGame,
-	handleResumeGame,
-}) => {
+export const RestartModalScreen: React.FC<Props> = ({ content, handleQuitGame, handleResumeGame }) => {
 	return (
 		<>
 			<h1>{content.title}</h1>

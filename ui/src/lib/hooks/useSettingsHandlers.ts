@@ -1,9 +1,16 @@
 import React from 'react';
 import * as TTTModel from '@tic-tac-toe/model';
 import { AppStore } from '@tic-tac-toe/core';
-import { useContentContext } from '../context';
+import { useContentContext } from '@tic-tac-toe/content';
 
-export function useSettingsHandlers(appState: TTTModel.AppState) {
+interface UseSettingsHandlers {
+	handleAvatarChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	handleDifficultyChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	handleLanguageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export function useSettingsHandlers(appState: TTTModel.AppState): UseSettingsHandlers {
+	//
 	const { setLanguage } = useContentContext();
 
 	const handleAvatarChange = React.useCallback(
