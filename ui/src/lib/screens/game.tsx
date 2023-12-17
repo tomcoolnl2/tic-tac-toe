@@ -3,7 +3,7 @@ import { AppStore } from '@tic-tac-toe/core';
 import { AppModalScreen, type AppState } from '@tic-tac-toe/model';
 import type { AppGameContent } from '../context/content/model';
 import { Divider, FlexBox, Grid, GridItem } from '../core';
-import { AppLogo, Cell, Difficulty, Icon, Mute, ScoreBoardItem, Timer } from '../components';
+import { AppLogo, Cell, Difficulty, Icon, ScoreBoardItem, Timer } from '../components';
 import { useBehaviorSubjectState, useInterfaceHandlers } from '../hooks';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 export const GameScreen: React.FC<Props> = React.memo(({ content, landscape }) => {
 	//
 	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
-	const { handlePauseGame, forceGameOver } = useInterfaceHandlers(appState);
+	const { handlePauseGame, forceGameOver } = useInterfaceHandlers();
 
 	const { scores, playerSymbol, cpuSymbol, solutionCells, intelligenceLevel, muted } = React.useMemo(
 		() => appState,

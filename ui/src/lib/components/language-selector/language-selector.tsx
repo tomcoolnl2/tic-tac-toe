@@ -6,7 +6,7 @@ import { AppStore } from '@tic-tac-toe/core';
 
 export const LanguageSelector: React.FC = React.memo(() => {
 	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
-	const { handleLanguageChange } = useSettingsHandlers(appState);
+	const { handleLanguageChange } = useSettingsHandlers();
 	const { language } = appState;
 	return (
 		<div className="language-selector">

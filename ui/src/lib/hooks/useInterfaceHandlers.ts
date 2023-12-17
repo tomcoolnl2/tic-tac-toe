@@ -5,7 +5,7 @@ import { AppStore } from '@tic-tac-toe/core';
 import useSound from 'use-sound';
 import startGameSfx from '../sound/start.wav';
 import { sleep } from '../utils';
-import { GameScreen } from '../screens';
+import { useBehaviorSubjectState } from '../hooks';
 
 export interface UseInterfaceHandlers {
 	flipScreenSide: React.AnimationEventHandler;
@@ -23,12 +23,11 @@ export interface UseInterfaceHandlers {
 
 /**
  * Event handlers for interface interactions
- *
- * @param {TTTModel.AppState} appState - The current application state
  * @returns {UseInterfaceHandlers} - Returns a set of event handlers for use in React components
  */
-export function useInterfaceHandlers(appState: TTTModel.AppState): UseInterfaceHandlers {
+export function useInterfaceHandlers(): UseInterfaceHandlers {
 	//
+	const [appState] = useBehaviorSubjectState(AppStore.state$);
 	const [playStartGameSfx] = useSound(startGameSfx);
 
 	/**

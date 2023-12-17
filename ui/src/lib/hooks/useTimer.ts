@@ -1,8 +1,8 @@
 import React from 'react';
 import { GameDuration, TimerStatus } from '@tic-tac-toe/model';
 
-const MAX_TIME = 60; // secs
-const DANGER_TIME = 10;
+const MAX_TIME = 60; // 1 min
+const DANGER_TIME = 10; // 10 secs
 
 export const useTimer = () => {
 	//
