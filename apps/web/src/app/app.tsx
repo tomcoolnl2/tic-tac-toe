@@ -16,7 +16,7 @@ export const App: React.FC = () => {
 	const { appContent, isContentLoading, setLanguage } = useContentContext();
 	const [appState] = useBehaviorSubjectState<TTTModel.AppState>(AppStore.state$);
 	const { flipScreenSide, handleResumeGame, handleQuitGame, handleNextRound, handleNextScreen } =
-		useInterfaceHandlers(appState);
+		useInterfaceHandlers();
 
 	const orientation = useScreenOrientation();
 	const landscape = React.useMemo(() => {
@@ -26,6 +26,7 @@ export const App: React.FC = () => {
 	React.useEffect(() => {
 		if (isDevEnvironment()) {
 			console.info('appContent', appContent);
+			console.info('appState', appState);
 		}
 		if (appContent) {
 			document.title = appContent.appTitle;
@@ -33,13 +34,7 @@ export const App: React.FC = () => {
 		if (appState.language) {
 			setLanguage(appState.language);
 		}
-	}, [appContent, appState.language, setLanguage]);
-
-	React.useEffect(() => {
-		if (isDevEnvironment()) {
-			console.info('appState', appState);
-		}
-	}, [appState]);
+	}, [appContent, appState, setLanguage]);
 
 	React.useEffect(() => {
 		let appScreen: TTTModel.AppScreen;
@@ -56,6 +51,7 @@ export const App: React.FC = () => {
 	return (
 		<TTTUI.Theme theme={theme}>
 			<div className={`screen ${appState.appScreen}`}>
+				{/* <TTTUI.Button onClick={handleAddSaveGame}>Save Game</TTTUI.Button> */}
 				<div className={classNames('screen-inner', { landscape })} onAnimationEnd={flipScreenSide}>
 					<TTTUI.Error.ErrorBoundary fallback={<TTTUI.ErrorScreen />}>
 						<div className="screen-front">

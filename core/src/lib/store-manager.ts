@@ -42,13 +42,18 @@ class Store {
 	/**
 	 * Gets the initial application state.
 	 */
-	public get initialState(): TTTModel.AppState {
+	public get initialSaveGameState(): TTTModel.SaveGame {
 		return {
-			language: TTTModel.Locale.EN,
-			appScreen: TTTModel.AppScreen.LOADING,
-			appScreenSide: null,
-			appModalScreen: null,
 			muted: false,
+			...this.initialGameState,
+		};
+	}
+
+	/**
+	 * Gets the initial application state.
+	 */
+	public get initialGameState(): TTTModel.GameState {
+		return {
 			intelligenceLevel: TTTModel.IntelligenceLevel.EASY,
 			bitBoards: [0x0, 0x0],
 			boardState: Array.from({ length: 9 }, () => null),
@@ -58,6 +63,19 @@ class Store {
 			gameStatus: TTTModel.GameStatus.STOPPED,
 			solutionCells: null,
 			scores: [0, 0, 0],
+		};
+	}
+
+	/**
+	 * Gets the initial application state.
+	 */
+	public get initialState(): TTTModel.AppState {
+		return {
+			language: TTTModel.Locale.EN,
+			appScreen: TTTModel.AppScreen.LOADING,
+			appScreenSide: null,
+			appModalScreen: null,
+			...this.initialSaveGameState,
 		};
 	}
 

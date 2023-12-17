@@ -1,18 +1,24 @@
-export interface AppState {
+export interface GameState {
+	gameStatus: GameStatus;
+	intelligenceLevel: IntelligenceLevel;
+	bitBoards: [number, number];
+	boardState: (PlayerSymbol | null)[];
+	currentPlayer: PlayerSymbol;
+	playerSymbol: PlayerSymbol;
+	cpuSymbol: PlayerSymbol;
+	scores: [number, number, number];
+	solutionCells: [number, number, number] | null;
+}
+
+export interface SaveGame extends GameState {
+	muted: boolean;
+}
+
+export interface AppState extends GameState, SaveGame {
 	language: Locale;
 	appScreen: AppScreen;
 	appScreenSide: AppScreenAnimation | null;
 	appModalScreen: AppModalScreen | null;
-	muted: boolean;
-	intelligenceLevel: IntelligenceLevel;
-	bitBoards: [number, number];
-	boardState: BoardState;
-	currentPlayer: PlayerSymbol;
-	playerSymbol: PlayerSymbol;
-	cpuSymbol: PlayerSymbol;
-	gameStatus: GameStatus;
-	solutionCells: [number, number, number] | null;
-	scores: [number, number, number];
 }
 
 export enum Locale {
@@ -65,8 +71,6 @@ export enum TimerStatus {
 	DANGER = 'danger',
 	RUNOUT = 'runout',
 }
-
-export type BoardState = Array<PlayerSymbol | null>;
 
 export interface LoggerState {
 	appState: AppState;

@@ -2,9 +2,54 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY {
 	globalAuthRule: AuthRule = { allow: public }
-} # FOR TESTING ONLY!
-type Todo @model {
+}
+
+type Query {
+	# Define your queries here if needed
+	getSaveGame(id: ID!): SaveGame
+	listSaveGames: [SaveGame!]! # New query to fetch multiple SaveGame items
+}
+
+type Mutation {
+	# Define your mutations here if needed
+	saveNewGame(input: SaveGameInput!): SaveGame
+}
+
+type SaveGame {
 	id: ID!
-	name: String!
-	description: String
+	intelligenceLevel: IntelligenceLevel!
+	bitBoards: [Int!]!
+	boardState: [PlayerSymbol]!
+	currentPlayer: PlayerSymbol!
+	playerSymbol: PlayerSymbol!
+	cpuSymbol: PlayerSymbol!
+	scores: [Int!]!
+	muted: Boolean!
+}
+
+input SaveGameInput {
+	intelligenceLevel: IntelligenceLevel!
+	bitBoards: [Int!]!
+	boardState: [PlayerSymbol]!
+	currentPlayer: PlayerSymbol!
+	playerSymbol: PlayerSymbol!
+	cpuSymbol: PlayerSymbol!
+	scores: [Int!]!
+	muted: Boolean!
+}
+
+enum PlayerSymbol {
+	X
+	O
+}
+
+enum IntelligenceLevel {
+	EASY
+	MEDIUM
+	HARD
+}
+
+schema {
+	query: Query
+	mutation: Mutation
 }
