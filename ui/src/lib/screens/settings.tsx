@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppStore, useBehaviorSubjectState } from '@tic-tac-toe/core';
 import { type AppState, IntelligenceLevel, PlayerSymbol } from '@tic-tac-toe/model';
-import type { AppScreenContent } from '../context/content/model';
+import type { AppScreenContent } from '../../../../content/src/lib/model';
 import { BaseScreen } from './base/base';
 import { Button, ChooseDifficulty, LanguageSelector, Logout, Mute, SymbolChoice } from '../components';
 import { Divider } from '../core';

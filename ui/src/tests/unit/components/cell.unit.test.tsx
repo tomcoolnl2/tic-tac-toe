@@ -11,6 +11,8 @@ describe('Test rendering of the cell with a specific player symbol', () => {
 			index: 0,
 			solutionCells: [0, 0, 0],
 			disabled: false,
+			muted: false,
+			playTurnSfx: jest.fn,
 		};
 		const { getByTestId } = render(<Cell {...props} />);
 
@@ -26,6 +28,8 @@ describe('Test rendering of the cell with null player symbol', () => {
 			index: 1,
 			solutionCells: [0, 0, 0],
 			disabled: false,
+			muted: false,
+			playTurnSfx: jest.fn,
 		};
 		const { getByTestId } = render(<Cell {...props} />);
 
@@ -41,6 +45,8 @@ describe('Test click event handler', () => {
 			index: 2,
 			solutionCells: [0, 0, 0],
 			disabled: false,
+			muted: false,
+			playTurnSfx: jest.fn,
 		};
 
 		const mockUpdate = jest.fn();

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as TTTModel from '@tic-tac-toe/model';
-import { AppStore, useBehaviorSubjectState } from '@tic-tac-toe/core';
-import { useContentContext } from '../context';
+import { AppStore } from '@tic-tac-toe/core';
+import { useContentContext } from '@tic-tac-toe/content';
 
 interface UseSettingsHandlers {
 	handleAvatarChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -9,13 +9,8 @@ interface UseSettingsHandlers {
 	handleLanguageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-/**
- * Custom hook for managing settings-related event handlers and state changes.
- * @returns Object containing handlers for avatar, difficulty, and language changes.
- */
-export function useSettingsHandlers(): UseSettingsHandlers {
-	// Get application state and content context
-	const [appState] = useBehaviorSubjectState(AppStore.state$);
+export function useSettingsHandlers(appState: TTTModel.AppState): UseSettingsHandlers {
+	//
 	const { setLanguage } = useContentContext();
 
 	/**
