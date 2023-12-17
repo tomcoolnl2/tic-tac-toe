@@ -1,4 +1,4 @@
-import { BoardState } from '@tic-tac-toe/model';
+import { PlayerSymbol } from '@tic-tac-toe/model';
 import { getNullIndices, getRandomNullIndex, sleep } from '../lib/utils';
 
 describe('"getNullIndices" function', () => {
@@ -12,7 +12,7 @@ describe('"getNullIndices" function', () => {
 
 	// Test case for a partially filled board
 	test('should return indices of null cells in a partially filled board', () => {
-		const partiallyFilledBoard = ['X', null, 'O', 'O', null, 'X', 'X', null, 'O'] as BoardState;
+		const partiallyFilledBoard = [0, null, 1, 1, null, 0, 0, null, 1];
 		const nullIndices = getNullIndices(partiallyFilledBoard);
 		expect(nullIndices).toEqual(expect.arrayContaining([1, 4, 7])); // Indices 1, 4, and 7 should be null
 		expect(nullIndices.length).toBe(3); // There should be 3 null cells in this board
@@ -20,8 +20,8 @@ describe('"getNullIndices" function', () => {
 
 	// Test case for a completely filled board
 	test('should return an empty array for a fully filled board', () => {
-		const filledBoard = ['X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X']; // Completely filled board
-		const nullIndices = getNullIndices(filledBoard as unknown as BoardState);
+		const filledBoard = [0, 1, 0, 1, 0, 1, 0, 1, 0]; // Completely filled board
+		const nullIndices = getNullIndices(filledBoard);
 		expect(nullIndices).toEqual([]); // There should be no null cells in this board
 		expect(nullIndices.length).toBe(0); // Length of the array should be 0
 	});
@@ -51,7 +51,7 @@ describe('"getRandomNullIndex" function', () => {
 
 	// Test case for a partially filled board
 	test('should return a valid random null index for a partially filled board', () => {
-		const partiallyFilledBoard = ['X', null, 'O', 'O', null, 'X', 'X', null, 'O'] as BoardState; // Example partially filled board
+		const partiallyFilledBoard = [0, null, 1, 1, null, 0, 0, null, 1]; // Example partially filled board
 		const randomIndex = getRandomNullIndex(partiallyFilledBoard);
 		const nullIndices = getNullIndices(partiallyFilledBoard);
 		expect(randomIndex).toBeGreaterThanOrEqual(0); // Random index should be a valid number
@@ -60,8 +60,8 @@ describe('"getRandomNullIndex" function', () => {
 
 	// Test case for a fully filled board
 	test('should return null for a fully filled board', () => {
-		const filledBoard = ['X', 'O', 'X', 'O', 'X', 'O', 'X', 'O', 'X']; // Completely filled board
-		const randomIndex = getRandomNullIndex(filledBoard as unknown as BoardState);
+		const filledBoard = [1, 0, 1, 0, 1, 0, 1, 0, 1]; // Completely filled board
+		const randomIndex = getRandomNullIndex(filledBoard);
 		expect(randomIndex).toBe(-1);
 	});
 });
