@@ -1,9 +1,5 @@
 import { Locale } from '@tic-tac-toe/model';
-import {
-	CF_SPACE_ID,
-	CF_LOCALIZED_PROPERTIES_ID,
-	CF_CONTENT_DELIVERY_API_ACCESS_TOKEN,
-} from '@tic-tac-toe/constants';
+import { CF_SPACE_ID, CF_LOCALIZED_PROPERTIES_ID, CF_CONTENT_DELIVERY_API_ACCESS_TOKEN } from '@tic-tac-toe/constants';
 import { AppContent } from './model';
 import { ContentfulError } from './error';
 
