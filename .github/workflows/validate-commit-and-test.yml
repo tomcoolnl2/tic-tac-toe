@@ -43,8 +43,8 @@ jobs:
             - name: Run Cypress tests
               run: |
                   mkdir -p apps/web/src
-                  touch apps/web/src/amplifyconfiguration.json
-                  echo '{}' > apps/web/src/amplifyconfiguration.json
+                  touch apps/web/graphql/amplifyconfiguration.json
+                  echo '{}' > apps/web/graphql/amplifyconfiguration.json
                   yarn e2e:web
 
             - name: Save test results
