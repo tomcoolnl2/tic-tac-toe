@@ -1,3 +1,5 @@
 node_modules
 
 amplify-codegen-temp/models/models
+
+apps/web/models/models

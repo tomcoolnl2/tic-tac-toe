@@ -5,13 +5,11 @@ input AMPLIFY {
 }
 
 type Query {
-	# Define your queries here if needed
 	getSaveGame(id: ID!): SaveGame
-	listSaveGames: [SaveGame!]! # New query to fetch multiple SaveGame items
+	listSaveGames: [SaveGame!]!
 }
 
 type Mutation {
-	# Define your mutations here if needed
 	saveNewGame(input: SaveGameInput!): SaveGame
 }
 
@@ -20,7 +18,6 @@ type SaveGame {
 	intelligenceLevel: IntelligenceLevel!
 	bitBoards: [Int!]!
 	boardState: [PlayerSymbol]!
-	currentPlayer: PlayerSymbol!
 	playerSymbol: PlayerSymbol!
 	cpuSymbol: PlayerSymbol!
 	scores: [Int!]!
@@ -31,7 +28,6 @@ input SaveGameInput {
 	intelligenceLevel: IntelligenceLevel!
 	bitBoards: [Int!]!
 	boardState: [PlayerSymbol]!
-	currentPlayer: PlayerSymbol!
 	playerSymbol: PlayerSymbol!
 	cpuSymbol: PlayerSymbol!
 	scores: [Int!]!

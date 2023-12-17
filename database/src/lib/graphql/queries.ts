@@ -2,10 +2,10 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-import * as APITypes from './api';
+import * as APITypes from "./api";
 type GeneratedQuery<InputType, OutputType> = string & {
-	__generatedQueryInput: InputType;
-	__generatedQueryOutput: OutputType;
+  __generatedQueryInput: InputType;
+  __generatedQueryOutput: OutputType;
 };
 
 export const getSaveGame = /* GraphQL */ `query GetSaveGame($id: ID!) {
@@ -14,7 +14,6 @@ export const getSaveGame = /* GraphQL */ `query GetSaveGame($id: ID!) {
     intelligenceLevel
     bitBoards
     boardState
-    currentPlayer
     playerSymbol
     cpuSymbol
     scores
@@ -22,14 +21,16 @@ export const getSaveGame = /* GraphQL */ `query GetSaveGame($id: ID!) {
     __typename
   }
 }
-` as GeneratedQuery<APITypes.GetSaveGameQueryVariables, APITypes.GetSaveGameQuery>;
+` as GeneratedQuery<
+  APITypes.GetSaveGameQueryVariables,
+  APITypes.GetSaveGameQuery
+>;
 export const listSaveGames = /* GraphQL */ `query ListSaveGames {
   listSaveGames {
     id
     intelligenceLevel
     bitBoards
     boardState
-    currentPlayer
     playerSymbol
     cpuSymbol
     scores
@@ -37,4 +38,7 @@ export const listSaveGames = /* GraphQL */ `query ListSaveGames {
     __typename
   }
 }
-` as GeneratedQuery<APITypes.ListSaveGamesQueryVariables, APITypes.ListSaveGamesQuery>;
+` as GeneratedQuery<
+  APITypes.ListSaveGamesQueryVariables,
+  APITypes.ListSaveGamesQuery
+>;

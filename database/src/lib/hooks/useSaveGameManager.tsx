@@ -1,27 +1,70 @@
 import React from 'react';
 import { generateClient } from 'aws-amplify/api';
 import { AppStore, useBehaviorSubjectState } from '@tic-tac-toe/core';
+import { PlayerSymbol as ModelPlayerSymbol } from '@tic-tac-toe/model';
 import { saveNewGame as saveNewGameMutation } from '../graphql/mutations';
 import { listSaveGames as listSaveGamesQuery } from '../graphql/queries';
-import type { SaveGame, SaveGameInput } from '../graphql/api';
+import { type SaveGameInput, PlayerSymbol as GeneratedPlayerSymbol } from '../graphql/api';
 
 export interface UseSaveGameManager {
 	processing: boolean;
+	saveGames: SaveGameInput[];
 	listSaveGames: () => Promise<void>;
 	addSaveGame: () => Promise<void>;
 	deleteSaveGame: () => Promise<void>;
-	formatSaveGameFromAppState: () => void;
+	snapshotSaveGame: () => void;
 }
 
-const initialState = AppStore.initialSaveGameState as SaveGameInput;
 const client = generateClient();
 
 export function useSaveGameManager(): UseSaveGameManager {
 	//
 	const [appState] = useBehaviorSubjectState(AppStore.state$);
-	const [saveGame, setSaveGame] = React.useState<SaveGameInput>(initialState);
-	const [saveGames, setSaveGames] = React.useState<SaveGame[] | SaveGameInput[]>([]);
+	const [saveGames, setSaveGames] = React.useState<SaveGameInput[]>([]);
 	const [processing, setProcessing] = React.useState<boolean>(false);
+
+	const convertSaveGameFromAppState = (symbol: ModelPlayerSymbol): GeneratedPlayerSymbol => {
+		switch (symbol) {
+			case ModelPlayerSymbol.X:
+				return GeneratedPlayerSymbol.X;
+			case ModelPlayerSymbol.O:
+				return GeneratedPlayerSymbol.O;
+			default:
+				return GeneratedPlayerSymbol.X;
+		}
+	};
+
+	const snapshotSaveGame = React.useCallback(() => {
+		//
+		const { intelligenceLevel, boardState, bitBoards, scores, muted } = appState;
+		let { playerSymbol, cpuSymbol } = appState;
+
+		playerSymbol = convertSaveGameFromAppState(playerSymbol as ModelPlayerSymbol);
+		cpuSymbol = convertSaveGameFromAppState(cpuSymbol as ModelPlayerSymbol);
+
+		const convertedBoardState = boardState.map((symbol) =>
+			symbol === null ? symbol : convertSaveGameFromAppState(symbol)
+		);
+
+		console.log({
+			intelligenceLevel,
+			bitBoards,
+			boardState: convertedBoardState,
+			playerSymbol,
+			cpuSymbol,
+			scores,
+			muted,
+		});
+		return {
+			intelligenceLevel,
+			bitBoards,
+			boardState: convertedBoardState,
+			playerSymbol,
+			cpuSymbol,
+			scores,
+			muted,
+		};
+	}, [appState]);
 
 	const listSaveGames = React.useCallback(async () => {
 		setProcessing(true);
@@ -30,10 +73,10 @@ export function useSaveGameManager(): UseSaveGameManager {
 				query: listSaveGamesQuery,
 			});
 			console.log('listSaveGamesData', listSaveGamesData);
-			// const saves = listSaveGamesData.data.listSaveGames;
-			// setSaveGames(saves);
+			const saves = listSaveGamesData.data.listSaveGames;
+			setSaveGames(saves);
 		} catch (err) {
-			console.log('error fetching todos');
+			console.log('error fetching listSaveGamesData');
 		} finally {
 			setProcessing(false);
 		}
@@ -42,19 +85,19 @@ export function useSaveGameManager(): UseSaveGameManager {
 	const addSaveGame = React.useCallback(async () => {
 		setProcessing(true);
 		try {
-			const input = { ...saveGame };
-			setSaveGames([...saveGames, input]);
-			setSaveGame(initialState);
+			const input = snapshotSaveGame();
 			await client.graphql({
 				query: saveNewGameMutation,
 				variables: { input },
 			});
+			const saveGames = await listSaveGames();
+			console.log('saveGames', saveGames);
 		} catch (err) {
 			console.log('error creating saveGame:', err);
 		} finally {
 			setProcessing(false);
 		}
-	}, [saveGame, saveGames]);
+	}, [listSaveGames, snapshotSaveGame]);
 
 	const deleteSaveGame = React.useCallback(async () => {
 		setProcessing(true);
@@ -62,39 +105,12 @@ export function useSaveGameManager(): UseSaveGameManager {
 		setProcessing(false);
 	}, []);
 
-	const formatSaveGameFromAppState = React.useCallback(() => {
-		const {
-			gameStatus,
-			intelligenceLevel,
-			bitBoards,
-			boardState,
-			currentPlayer,
-			playerSymbol,
-			cpuSymbol,
-			scores,
-			solutionCells,
-			muted,
-		} = appState;
-
-		return {
-			gameStatus,
-			intelligenceLevel,
-			bitBoards,
-			boardState,
-			currentPlayer,
-			playerSymbol,
-			cpuSymbol,
-			scores,
-			solutionCells,
-			muted,
-		} as SaveGameInput;
-	}, [appState]);
-
 	return {
 		processing,
+		saveGames,
+		snapshotSaveGame,
 		listSaveGames,
 		addSaveGame,
 		deleteSaveGame,
-		formatSaveGameFromAppState,
 	};
 }

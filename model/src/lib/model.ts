@@ -2,7 +2,7 @@ export interface GameState {
 	gameStatus: GameStatus;
 	intelligenceLevel: IntelligenceLevel;
 	bitBoards: [number, number];
-	boardState: (PlayerSymbol | null)[];
+	boardState: BoardState;
 	currentPlayer: PlayerSymbol;
 	playerSymbol: PlayerSymbol;
 	cpuSymbol: PlayerSymbol;
@@ -44,8 +44,8 @@ export enum AppModalScreen {
 }
 
 export enum PlayerSymbol {
-	X,
-	O,
+	X = 0,
+	O = 1,
 }
 
 export enum IntelligenceLevel {
@@ -71,6 +71,8 @@ export enum TimerStatus {
 	DANGER = 'danger',
 	RUNOUT = 'runout',
 }
+
+export type BoardState = Array<PlayerSymbol | null>;
 
 export interface LoggerState {
 	appState: AppState;

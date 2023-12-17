@@ -6,7 +6,6 @@ export type SaveGameInput = {
 	intelligenceLevel: IntelligenceLevel;
 	bitBoards: Array<number>;
 	boardState: Array<PlayerSymbol | null>;
-	currentPlayer: PlayerSymbol;
 	playerSymbol: PlayerSymbol;
 	cpuSymbol: PlayerSymbol;
 	scores: Array<number>;
@@ -30,7 +29,6 @@ export type SaveGame = {
 	intelligenceLevel: IntelligenceLevel;
 	bitBoards: Array<number>;
 	boardState: Array<PlayerSymbol | null>;
-	currentPlayer: PlayerSymbol;
 	playerSymbol: PlayerSymbol;
 	cpuSymbol: PlayerSymbol;
 	scores: Array<number>;
@@ -48,7 +46,6 @@ export type SaveNewGameMutation = {
 		intelligenceLevel: IntelligenceLevel;
 		bitBoards: Array<number>;
 		boardState: Array<PlayerSymbol | null>;
-		currentPlayer: PlayerSymbol;
 		playerSymbol: PlayerSymbol;
 		cpuSymbol: PlayerSymbol;
 		scores: Array<number>;
@@ -67,7 +64,6 @@ export type GetSaveGameQuery = {
 		intelligenceLevel: IntelligenceLevel;
 		bitBoards: Array<number>;
 		boardState: Array<PlayerSymbol | null>;
-		currentPlayer: PlayerSymbol;
 		playerSymbol: PlayerSymbol;
 		cpuSymbol: PlayerSymbol;
 		scores: Array<number>;
@@ -84,7 +80,6 @@ export type ListSaveGamesQuery = {
 		intelligenceLevel: IntelligenceLevel;
 		bitBoards: Array<number>;
 		boardState: Array<PlayerSymbol | null>;
-		currentPlayer: PlayerSymbol;
 		playerSymbol: PlayerSymbol;
 		cpuSymbol: PlayerSymbol;
 		scores: Array<number>;

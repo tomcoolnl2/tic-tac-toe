@@ -14,7 +14,6 @@ export const saveNewGame = /* GraphQL */ `mutation SaveNewGame($input: SaveGameI
     intelligenceLevel
     bitBoards
     boardState
-    currentPlayer
     playerSymbol
     cpuSymbol
     scores
