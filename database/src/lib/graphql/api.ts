@@ -3,86 +3,89 @@
 //  This file was automatically generated and should not be edited.
 
 export type SaveGameInput = {
-	intelligenceLevel: IntelligenceLevel;
-	bitBoards: Array<number>;
-	boardState: Array<PlayerSymbol | null>;
-	playerSymbol: PlayerSymbol;
-	cpuSymbol: PlayerSymbol;
-	scores: Array<number>;
-	muted: boolean;
+  intelligenceLevel: IntelligenceLevel,
+  bitBoards: Array< number >,
+  boardState: Array< PlayerSymbol | null >,
+  playerSymbol: PlayerSymbol,
+  cpuSymbol: PlayerSymbol,
+  scores: Array< number >,
+  muted: boolean,
 };
 
 export enum IntelligenceLevel {
-	EASY = 'EASY',
-	MEDIUM = 'MEDIUM',
-	HARD = 'HARD',
+  EASY = "EASY",
+  MEDIUM = "MEDIUM",
+  HARD = "HARD",
 }
+
 
 export enum PlayerSymbol {
-	X = 'X',
-	O = 'O',
+  X = "X",
+  O = "O",
 }
 
+
 export type SaveGame = {
-	__typename: 'SaveGame';
-	id: string;
-	intelligenceLevel: IntelligenceLevel;
-	bitBoards: Array<number>;
-	boardState: Array<PlayerSymbol | null>;
-	playerSymbol: PlayerSymbol;
-	cpuSymbol: PlayerSymbol;
-	scores: Array<number>;
-	muted: boolean;
+  __typename: "SaveGame",
+  id: string,
+  intelligenceLevel: IntelligenceLevel,
+  bitBoards: Array< number >,
+  boardState: Array< PlayerSymbol | null >,
+  playerSymbol: PlayerSymbol,
+  cpuSymbol: PlayerSymbol,
+  scores: Array< number >,
+  muted: boolean,
 };
 
 export type SaveNewGameMutationVariables = {
-	input: SaveGameInput;
+  input: SaveGameInput,
 };
 
 export type SaveNewGameMutation = {
-	saveNewGame?: {
-		__typename: 'SaveGame';
-		id: string;
-		intelligenceLevel: IntelligenceLevel;
-		bitBoards: Array<number>;
-		boardState: Array<PlayerSymbol | null>;
-		playerSymbol: PlayerSymbol;
-		cpuSymbol: PlayerSymbol;
-		scores: Array<number>;
-		muted: boolean;
-	} | null;
+  saveNewGame?:  {
+    __typename: "SaveGame",
+    id: string,
+    intelligenceLevel: IntelligenceLevel,
+    bitBoards: Array< number >,
+    boardState: Array< PlayerSymbol | null >,
+    playerSymbol: PlayerSymbol,
+    cpuSymbol: PlayerSymbol,
+    scores: Array< number >,
+    muted: boolean,
+  } | null,
 };
 
 export type GetSaveGameQueryVariables = {
-	id: string;
+  id: string,
 };
 
 export type GetSaveGameQuery = {
-	getSaveGame?: {
-		__typename: 'SaveGame';
-		id: string;
-		intelligenceLevel: IntelligenceLevel;
-		bitBoards: Array<number>;
-		boardState: Array<PlayerSymbol | null>;
-		playerSymbol: PlayerSymbol;
-		cpuSymbol: PlayerSymbol;
-		scores: Array<number>;
-		muted: boolean;
-	} | null;
+  getSaveGame?:  {
+    __typename: "SaveGame",
+    id: string,
+    intelligenceLevel: IntelligenceLevel,
+    bitBoards: Array< number >,
+    boardState: Array< PlayerSymbol | null >,
+    playerSymbol: PlayerSymbol,
+    cpuSymbol: PlayerSymbol,
+    scores: Array< number >,
+    muted: boolean,
+  } | null,
 };
 
-export type ListSaveGamesQueryVariables = {};
+export type ListSaveGamesQueryVariables = {
+};
 
 export type ListSaveGamesQuery = {
-	listSaveGames: Array<{
-		__typename: 'SaveGame';
-		id: string;
-		intelligenceLevel: IntelligenceLevel;
-		bitBoards: Array<number>;
-		boardState: Array<PlayerSymbol | null>;
-		playerSymbol: PlayerSymbol;
-		cpuSymbol: PlayerSymbol;
-		scores: Array<number>;
-		muted: boolean;
-	}>;
+  listSaveGames:  Array< {
+    __typename: "SaveGame",
+    id: string,
+    intelligenceLevel: IntelligenceLevel,
+    bitBoards: Array< number >,
+    boardState: Array< PlayerSymbol | null >,
+    playerSymbol: PlayerSymbol,
+    cpuSymbol: PlayerSymbol,
+    scores: Array< number >,
+    muted: boolean,
+  } >,
 };
