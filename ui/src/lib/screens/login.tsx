@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppLoginContent } from '../context/content/model';
+import { AppLoginContent } from '../../../../content/src/lib/model';
 import { Divider } from '../core';
 import { Button, Input, LanguageSelector } from '../components';
 import { BaseScreen } from './base/base';
@@ -12,12 +12,7 @@ interface Props {
 	handleSubmit: (userName: string, password: string) => Promise<void>;
 }
 
-export const LoginScreen: React.FC<Props> = ({
-	content,
-	authError,
-	setAuthError,
-	handleSubmit,
-}) => {
+export const LoginScreen: React.FC<Props> = ({ content, authError, setAuthError, handleSubmit }) => {
 	const [userName, setUserName] = React.useState<string>('');
 	const [password, setPassword] = React.useState<string>('');
 	const [isAuthenticating, setIsAuthenticating] = React.useState<boolean>(false);
@@ -84,12 +79,7 @@ export const LoginScreen: React.FC<Props> = ({
 						<Divider invisible margin="bottom" className="landscape-hidden" />
 					</>
 				) : null}
-				<Button
-					variant="primary"
-					onClick={handleLoginSubmit}
-					testId="submit"
-					loading={isAuthenticating}
-				>
+				<Button variant="primary" onClick={handleLoginSubmit} testId="submit" loading={isAuthenticating}>
 					{content.cta1}
 				</Button>
 			</form>

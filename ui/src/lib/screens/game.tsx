@@ -2,7 +2,7 @@ import React from 'react';
 import useSound from 'use-sound';
 import { AppStore } from '@tic-tac-toe/core';
 import { AppModalScreen, type AppState } from '@tic-tac-toe/model';
-import type { AppGameContent } from '../context/content/model';
+import type { AppGameContent } from '../../../../content/src/lib/model';
 import { Divider, FlexBox, Grid, GridItem } from '../core';
 import { AppLogo, Cell, Difficulty, Icon, ScoreBoardItem, Timer } from '../components';
 import { useBehaviorSubjectState, useInterfaceHandlers } from '../hooks';

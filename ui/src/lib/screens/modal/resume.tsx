@@ -1,5 +1,5 @@
 import React from 'react';
-import type { AppScreenContent } from '../../context/content/model';
+import type { AppScreenContent } from '../../../../../content/src/lib/model';
 import { Divider, Grid } from '../../core';
 import { Button } from '../../components';
 

@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
-import * as TTTUI from '@tic-tac-toe/ui';
 import { AuthProvider } from '@tic-tac-toe/auth';
+import { ContentProvider } from '@tic-tac-toe/content';
 import { App } from './app/app';
 
 import { Amplify } from 'aws-amplify';
@@ -14,9 +14,9 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
 	<StrictMode>
 		<AuthProvider>
-			<TTTUI.Context.ContentProvider>
+			<ContentProvider>
 				<App />
-			</TTTUI.Context.ContentProvider>
+			</ContentProvider>
 		</AuthProvider>
 	</StrictMode>
 );
