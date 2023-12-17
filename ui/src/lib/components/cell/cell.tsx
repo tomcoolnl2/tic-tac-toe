@@ -1,12 +1,10 @@
 import * as Rx from 'rxjs';
 import React from 'react';
-import useSound from 'use-sound';
+import { PlayFunction } from 'use-sound/dist/types';
 import { AppStore } from '@tic-tac-toe/core';
 import { AppState, PlayerSymbol } from '@tic-tac-toe/model';
 import { getDataSetAttribute, getEventTargetElement } from '../../utils';
 import { Avatar } from '../avatar/avatar';
-
-import turnSfx from '../../sound/turn.wav';
 import './cell.scss';
 
 export interface Props {
@@ -15,11 +13,11 @@ export interface Props {
 	solutionCells: AppState['solutionCells'];
 	disabled: boolean;
 	muted: boolean;
+	playTurnSfx: PlayFunction;
 }
 
-export const Cell: React.FC<Props> = React.memo(({ type, index, solutionCells, disabled, muted }) => {
+export const Cell: React.FC<Props> = React.memo(({ type, index, solutionCells, disabled, muted, playTurnSfx }) => {
 	//
-	const [playTurnSfx] = useSound(turnSfx);
 	const cellRef = React.useRef(null);
 	const getIndex = getDataSetAttribute('index');
 

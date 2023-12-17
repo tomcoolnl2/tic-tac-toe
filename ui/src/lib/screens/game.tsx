@@ -1,10 +1,12 @@
 import React from 'react';
+import useSound from 'use-sound';
 import { AppStore } from '@tic-tac-toe/core';
 import { AppModalScreen, type AppState } from '@tic-tac-toe/model';
 import type { AppGameContent } from '../context/content/model';
 import { Divider, FlexBox, Grid, GridItem } from '../core';
-import { AppLogo, Cell, Difficulty, Icon, Mute, ScoreBoardItem, Timer } from '../components';
+import { AppLogo, Cell, Difficulty, Icon, ScoreBoardItem, Timer } from '../components';
 import { useBehaviorSubjectState, useInterfaceHandlers } from '../hooks';
+import turnSfx from '../sound/turn.wav';
 
 interface Props {
 	content: AppGameContent;
@@ -15,6 +17,7 @@ export const GameScreen: React.FC<Props> = React.memo(({ content, landscape }) =
 	//
 	const [appState] = useBehaviorSubjectState<AppState>(AppStore.state$);
 	const { handlePauseGame, forceGameOver } = useInterfaceHandlers(appState);
+	const [playTurnSfx] = useSound(turnSfx);
 
 	const { scores, playerSymbol, cpuSymbol, solutionCells, intelligenceLevel, muted } = React.useMemo(
 		() => appState,
@@ -59,6 +62,7 @@ export const GameScreen: React.FC<Props> = React.memo(({ content, landscape }) =
 							solutionCells={solutionCells}
 							disabled={appState.currentPlayer === appState.cpuSymbol}
 							muted={muted}
+							playTurnSfx={playTurnSfx}
 						/>
 					))}
 				</Grid>
