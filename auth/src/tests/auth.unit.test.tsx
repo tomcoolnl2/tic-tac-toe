@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom';
-import { render, act } from '@testing-library/react';
-import { signIn, signOut, getCurrentUser } from 'aws-amplify/auth';
-import { AuthProvider, useAuthContext } from '../../../lib/context/auth/auth';
+import { render } from '@testing-library/react';
+import { AuthProvider, useAuthContext } from '../lib/auth';
 
 jest.mock('aws-amplify/auth', () => ({
 	signIn: jest.fn(),
@@ -24,9 +23,7 @@ describe('AuthProvider', () => {
 			return (
 				<div>
 					<span data-testid="signedIn">{context.signedIn.toString()}</span>
-					<span data-testid="authError">
-						{context.authError ? context.authError.message : ''}
-					</span>
+					<span data-testid="authError">{context.authError ? context.authError.message : ''}</span>
 				</div>
 			);
 		};
