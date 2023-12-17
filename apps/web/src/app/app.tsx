@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
-import { AppStore } from '@tic-tac-toe/core';
 import { isDevEnvironment } from '@tic-tac-toe/debug';
+import { useAuthContext } from '@tic-tac-toe/auth';
+import { AppStore } from '@tic-tac-toe/core';
 import * as TTTModel from '@tic-tac-toe/model';
 import * as TTTUI from '@tic-tac-toe/ui';
 
@@ -9,7 +10,7 @@ export const App: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const theme = React.useMemo(() => (window as any)?.electron?.theme ?? 'web', []);
 
-	const { useAuthContext, useContentContext } = TTTUI.Context;
+	const { useContentContext } = TTTUI.Context;
 	const { useBehaviorSubjectState, useScreenOrientation, useInterfaceHandlers } = TTTUI.Hooks;
 
 	const { signedIn, authError, handleSignIn, handleSignOut, setAuthError } = useAuthContext();

@@ -11,7 +11,10 @@
 		"src/**/*.spec.ts",
 		"src/**/*.test.tsx",
 		"src/**/*.spec.tsx",
-		"src/**/*.d.ts",
-		"../auth/src/tests/auth.unit.test.tsx"
+		"src/**/*.test.js",
+		"src/**/*.spec.js",
+		"src/**/*.test.jsx",
+		"src/**/*.spec.jsx",
+		"src/**/*.d.ts"
 	]
 }
