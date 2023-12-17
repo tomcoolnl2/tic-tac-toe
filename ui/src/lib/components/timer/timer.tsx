@@ -18,8 +18,7 @@ export const Timer: React.FC<Props> = ({ forceGameOver }) => {
 		if (status === TimerStatus.RUNOUT) {
 			forceGameOver();
 		}
-		console.log('status', status);
-	}, [appState.gameStatus, status, forceGameOver]);
+	}, [status, forceGameOver]);
 
 	React.useEffect(() => {
 		switch (appState.gameStatus) {
